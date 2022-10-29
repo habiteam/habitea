@@ -1,0 +1,14 @@
+$color-primary: #59644b;
+$color-danger: indianred;
+$color-warning: orange;
+$color-info: dodgerblue;
+$color-success: limegreen;
+
+:export {
+  primary: $color-primary;
+  danger: $color-danger;
+  warning: $color-warning;
+  info: $color-info;
+  success: $color-success;
+  default: black;
+}
