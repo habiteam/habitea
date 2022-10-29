@@ -3,6 +3,7 @@ $color-danger: indianred;
 $color-warning: orange;
 $color-info: dodgerblue;
 $color-success: limegreen;
+$color-default: black;
 
 :export {
   primary: $color-primary;
@@ -10,5 +11,5 @@ $color-success: limegreen;
   warning: $color-warning;
   info: $color-info;
   success: $color-success;
-  default: black;
+  default: $color-default;
 }

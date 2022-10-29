@@ -1,11 +1,11 @@
+import { faFaceAngry } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFaceAngry } from '@fortawesome/free-solid-svg-icons';
-import Button from '../common/components/Button/Button';
+import Button from '../../common/components/Button/Button';
+import Input from '../../common/components/Input/Input';
 
-export default function Home() {
+export default function App() {
   return (
-    <main>
-      <p>Lorem ipsum</p>
+    <>
       <Button fillType="outline" color="warning">
         Click this bad boi&nbsp;
         <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
@@ -19,6 +19,15 @@ export default function Home() {
       <Button fillType="filled">
         <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
       </Button>
-    </main>
+
+      <div>separator</div>
+      <Input
+        onChange={(text) => {
+          console.log(text);
+        }}
+        title="Title"
+        id="id"
+      ></Input>
+    </>
   );
 }

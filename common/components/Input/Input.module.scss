@@ -1,0 +1,85 @@
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 0px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  vertical-align: top;
+
+  label {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition: transform 200ms ease-in-out;
+    font-size: 1.4rem;
+    transform: translate(8px, 2px) scale(1);
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 1;
+    color: gray;
+    transform-origin: left top;
+  }
+
+  .input__container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 24px;
+    cursor: text;
+    transition: all 200ms ease-in-out;
+
+    input {
+      width: 100%;
+      font-size: 1.4rem;
+      display: block;
+      color: black;
+      border: 0px;
+      margin: 0px;
+      padding: 4px 8px;
+
+      &:focus,
+      &:focus-visible {
+        outline: 0px;
+      }
+    }
+
+    fieldset {
+      position: absolute;
+      border-radius: inherit;
+      border: 1px solid green;
+      inset: -5px 0 0;
+      pointer-events: none;
+      margin: 0px;
+      padding: 0px 16px;
+
+      legend {
+        font-size: 0.7rem;
+        padding: 0px;
+        visibility: hidden;
+        white-space: nowrap;
+        max-width: 0.01px;
+        transition: all 200ms ease-in-out;
+      }
+    }
+  }
+
+  &--focused {
+    label {
+      transform: translate(19px, -5px) scale(0.5);
+    }
+
+    .input__container {
+      border-radius: 8px;
+
+      fieldset {
+        legend {
+          padding: 0px 2px;
+          visibility: hidden;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
