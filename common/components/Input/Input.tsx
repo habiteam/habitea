@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import buttonStyles from './Input.module.scss';
 import { InputPropsSchema } from './Input.schema';
+import colors from '../../../styles/colors.module.scss';
 
 export default function Input(props: InputPropsSchema) {
   const [isFocused, setIsFocused] = useState(false);
@@ -8,6 +9,11 @@ export default function Input(props: InputPropsSchema) {
 
   return (
     <div
+      style={
+        {
+          '--color': colors[props.color ?? 'default'],
+        } as React.CSSProperties
+      }
       className={`${buttonStyles.wrapper} ${
         isFocused || hasValue ? buttonStyles['wrapper--focused'] : ''
       }`}
@@ -29,7 +35,9 @@ export default function Input(props: InputPropsSchema) {
               setHasValue(false);
             }
 
-            props.onChange(event.target.value);
+            if (props.onChange) {
+              props.onChange(event.target.value);
+            }
           }}
         ></input>
         <fieldset>

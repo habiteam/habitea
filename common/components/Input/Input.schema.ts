@@ -5,5 +5,5 @@ export interface InputPropsSchema {
   title: string;
   disabled?: boolean;
   color?: Color;
-  onChange: (text: string) => void;
+  onChange?: (text: string) => void;
 }

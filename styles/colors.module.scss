@@ -1,9 +1,9 @@
 $color-primary: #59644b;
-$color-danger: indianred;
-$color-warning: orange;
-$color-info: dodgerblue;
-$color-success: limegreen;
-$color-default: black;
+$color-danger: #ff6961;
+$color-warning: #ffbb01;
+$color-info: #779dca;
+$color-success: #a9d099;
+$color-default: #000;
 
 :export {
   primary: $color-primary;

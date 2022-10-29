@@ -1,4 +1,6 @@
 .wrapper {
+  --color: black;
+
   display: inline-flex;
   flex-direction: column;
   position: relative;
@@ -28,7 +30,7 @@
     align-items: center;
     border-radius: 24px;
     cursor: text;
-    transition: all 200ms ease-in-out;
+    transition: all 400ms ease-in-out;
 
     input {
       width: 100%;
@@ -48,7 +50,7 @@
     fieldset {
       position: absolute;
       border-radius: inherit;
-      border: 1px solid green;
+      border: 1px solid var(--color);
       inset: -5px 0 0;
       pointer-events: none;
       margin: 0px;
@@ -67,7 +69,8 @@
 
   &--focused {
     label {
-      transform: translate(19px, -5px) scale(0.5);
+      transform: translate(19px, -6px) scale(0.5);
+      color: var(--color);
     }
 
     .input__container {
