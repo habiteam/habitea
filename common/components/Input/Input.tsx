@@ -19,6 +19,7 @@ export default function Input(props: InputPropsSchema) {
       }`}
     >
       <label htmlFor={props.id}>{props.title}</label>
+
       <div className={buttonStyles.input__container}>
         <input
           id={props.id}
@@ -40,6 +41,7 @@ export default function Input(props: InputPropsSchema) {
             }
           }}
         ></input>
+
         <fieldset>
           <legend>
             <span>{props.title}</span>
