@@ -2,9 +2,9 @@
 
 .card {
   width: 100%;
-  padding: 16px;
   border-radius: 12px;
   background-color: #fff;
+  overflow: hidden;
 
   &--outlined {
     border: 1px solid #938f99;
@@ -21,7 +21,7 @@
     }
 
     &--color-#{$name}.card--filled {
-      background-color: mix($color, #fff, 15%);
+      background-color: mix($color, #fff, 14%);
     }
   }
 }
