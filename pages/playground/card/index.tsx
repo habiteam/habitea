@@ -19,6 +19,8 @@ export default function Playground() {
     cardAppearance: 'outlined',
     cardColor: 'default',
 
+    buttonsColor: 'default',
+
     hasAvatar: true,
     hasHeaderActions: true,
     hasMedia: true,
@@ -87,7 +89,7 @@ export default function Playground() {
 
             {form.hasActions && (
               <CardFooter
-                buttonColor={form.cardColor}
+                buttonColor={form.buttonsColor}
                 actions={cardFooterActions}
               ></CardFooter>
             )}
@@ -141,6 +143,7 @@ export default function Playground() {
                 </option>
               ))}
             </select>
+
             <label>Color: </label>
             <select
               name="cardColor"
@@ -153,6 +156,20 @@ export default function Playground() {
                 </option>
               ))}
             </select>
+
+            <label>Buttons color: </label>
+            <select
+              name="buttonsColor"
+              value={form.buttonsColor}
+              onChange={handleChange}
+            >
+              {colors.map((color, i) => (
+                <option key={i} value={color}>
+                  {color}
+                </option>
+              ))}
+            </select>
+
             <div>
               <input
                 type="checkbox"
