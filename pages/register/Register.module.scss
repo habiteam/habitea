@@ -1,0 +1,25 @@
+.register {
+  &__form {
+    & > div {
+      width: calc(50% - 12px);
+      margin: 12px 12px 0 0;
+    }
+  }
+
+  &__form-container {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+  }
+
+  &__image {
+    z-index: -1;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
+    img {
+      object-fit: cover;
+    }
+  }
+}
