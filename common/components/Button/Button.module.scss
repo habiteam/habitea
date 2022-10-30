@@ -1,14 +1,5 @@
 @import '../../../styles/colors.module.scss';
 
-$colors: (
-  'primary': $color-primary,
-  'danger': $color-danger,
-  'info': $color-info,
-  'success': $color-success,
-  'warning': $color-warning,
-  'default': black,
-);
-
 .button {
   padding: 4px 8px;
   font-size: 2rem;
@@ -29,7 +20,7 @@ $colors: (
   }
 }
 
-@each $k, $v in $colors {
+@each $k, $v in $colors-map {
   .button--#{$k}.button--filled {
     background-color: #{$v};
 
@@ -39,7 +30,7 @@ $colors: (
   }
 
   .button--#{$k}.button--outline {
-    border-color: darken($v, 10%);
+    border-color: darken($v, 20%);
     color: #{$v};
 
     &:hover {

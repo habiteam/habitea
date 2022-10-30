@@ -4,6 +4,18 @@ $color-warning: #ffbb01;
 $color-info: #779dca;
 $color-success: #a9d099;
 $color-default: #000;
+$color-inactive: #79747e;
+$color-disabled: #e3dfe3;
+$color-disabled-text: #989598;
+
+$colors-map: (
+  'primary': $color-primary,
+  'danger': $color-danger,
+  'info': $color-info,
+  'success': $color-success,
+  'warning': $color-warning,
+  'default': black,
+);
 
 :export {
   primary: $color-primary;

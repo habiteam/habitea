@@ -2,6 +2,7 @@ import { faFaceAngry } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../../common/components/Button/Button';
 import Input from '../../common/components/Input/Input';
+import Link from '../../common/components/Link/Link';
 
 export default function App() {
   return (
@@ -78,6 +79,38 @@ export default function App() {
         <Input title="Title" id="id" color="danger"></Input>
         <Input title="Title" id="id" color="info"></Input>
         <Input title="Title" id="id" color="success"></Input>
+      </div>
+
+      <div>
+        <h1>Links</h1>
+        <Link href="app">
+          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+        </Link>
+
+        <Link href="app" color="primary">
+          Click this bad boi&nbsp;
+          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+        </Link>
+
+        <Link href="app" color="warning">
+          Click this bad boi&nbsp;
+          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+        </Link>
+
+        <Link href="app" color="danger">
+          Click this bad boi&nbsp;
+          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+        </Link>
+
+        <Link href="app" color="info">
+          Click this bad boi&nbsp;
+          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+        </Link>
+
+        <Link href="app" color="success">
+          Click this bad boi&nbsp;
+          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+        </Link>
       </div>
     </>
   );

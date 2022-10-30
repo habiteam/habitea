@@ -1,0 +1,23 @@
+@import '../../../styles/colors.module.scss';
+
+@each $name, $color in $colors-map {
+  .link--#{$name} {
+    color: #{$color};
+    font-size: 1.6rem;
+    padding: 4px 8px;
+    border-radius: 24px;
+    transition: all 400ms;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      background-color: mix($color, #fff, 15%);
+    }
+
+    &:active,
+    &:focus,
+    &:focus-visible {
+      border-radius: 8px;
+    }
+  }
+}
