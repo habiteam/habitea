@@ -11,12 +11,29 @@ import CardMedia from '../../../common/components/Card/CardMedia/CardMedia';
 import { Color } from '../../../common/constants/Color';
 
 export default function Playground() {
-  const [form, setForm] = useState<any>({});
+  const [form, setForm] = useState<any>({
+    cardWidth: 300,
+    cardTitle: 'Title',
+    cardSubtitle: '',
+    cardContent: '',
+    cardAppearance: 'outlined',
+    cardColor: 'default',
+
+    hasAvatar: true,
+    hasHeaderActions: true,
+    hasMedia: true,
+    hasContent: true,
+    hasActions: true,
+  });
 
   const handleChange = (event: any) => {
     const name = event.target.name;
-    const value = event.target.value;
-    setForm((values: any) => ({ ...values, [name]: value }));
+
+    if (event.target.type === 'checkbox') {
+      setForm((values: any) => ({ ...values, [name]: event.target.checked }));
+    } else {
+      setForm((values: any) => ({ ...values, [name]: event.target.value }));
+    }
   };
 
   const appearances: CardAppearance[] = ['outlined', 'filled', 'elevated'];
@@ -58,8 +75,8 @@ export default function Playground() {
             <CardHeader
               title={form.cardTitle}
               subTitle={form.cardSubtitle}
-              image="/cat.jpg"
-              actions={[]}
+              image={form.hasAvatar ? '/cat.jpg' : undefined}
+              actions={form.hasHeaderActions ? [] : undefined}
             ></CardHeader>
 
             {form.hasMedia && (
@@ -137,6 +154,24 @@ export default function Playground() {
               ))}
             </select>
             <div>
+              <input
+                type="checkbox"
+                id="hasAvatar"
+                name="hasAvatar"
+                checked={form.hasAvatar}
+                onChange={handleChange}
+              ></input>
+              <label>Avatar</label>
+
+              <input
+                type="checkbox"
+                id="hasHeaderActions"
+                name="hasHeaderActions"
+                checked={form.hasHeaderActions}
+                onChange={handleChange}
+              ></input>
+              <label>Header Actions</label>
+
               <input
                 type="checkbox"
                 id="hasMedia"
