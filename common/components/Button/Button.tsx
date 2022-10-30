@@ -12,6 +12,7 @@ import { ButtonPropSchema } from './Button.schema';
 export default function Button(props: ButtonPropSchema) {
   return (
     <button
+      onClick={props.onClick}
       className={`${styles.button}
          ${styles[`button--${props.color ?? 'default'}`]}
          ${styles[`button--${props.fillType}`]}
