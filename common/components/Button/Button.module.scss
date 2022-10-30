@@ -5,15 +5,14 @@
   font-size: 1.6rem;
   background: none;
   color: white;
-  border: 1px solid;
-  border-color: transparent;
+  border: 2px solid transparent;
   border-radius: 24px;
   transition: all 400ms;
 
   &:active,
   &:focus,
   &:focus-visible {
-    border-radius: 8px; //todo
+    border-radius: 8px;
   }
 
   &:hover {
@@ -35,16 +34,24 @@
   .button--#{$k}.button--filled {
     background-color: #{$v};
 
-    &:hover {
-      background-color: darken($v, 10%);
+    @if $k == 'default' {
+      &:hover {
+        background-color: lighten($v, 30%);
+      }
+    } @else {
+      &:hover {
+        background-color: darken($v, 10%);
+      }
     }
+
   }
 
   .button--#{$k}.button--outlined {
-    border-color: darken($v, 20%);
     color: #{$v};
+    border-color: #{$v};
 
     &:hover {
+      border-color: darken($v, 20%);
       background-color: #{$v};
       color: white;
     }
