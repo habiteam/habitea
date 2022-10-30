@@ -65,7 +65,7 @@ export default function Page() {
                 actions={[{ text: 'Login', fillType: 'filled' }]}
               ></CardFooter>
               <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                Do&aps;t have an account?
+                Don&apos;t have an account?
                 <Link href="/register" color="info">
                   Sign up now!
                 </Link>
