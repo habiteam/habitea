@@ -9,7 +9,6 @@
     transition: all 400ms;
 
     &:hover,
-    &:focus,
     &:focus-visible {
       background-color: mix($color, #fff, 15%);
     }
