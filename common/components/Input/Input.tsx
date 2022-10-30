@@ -22,6 +22,7 @@ export default function Input(props: InputPropsSchema) {
 
       <div className={buttonStyles.input__container}>
         <input
+          // TODO name property?
           id={props.id}
           onFocus={() => {
             setIsFocused(true);
@@ -40,6 +41,7 @@ export default function Input(props: InputPropsSchema) {
               props.onChange(event.target.value);
             }
           }}
+          type={props.type ?? 'text'}
         ></input>
 
         <fieldset>

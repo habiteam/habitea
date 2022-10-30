@@ -1,4 +1,5 @@
 import Head from 'next/head';
+// import style from './Home.module.scss';
 
 export default function Home() {
   return (
@@ -9,7 +10,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>asd</main>
+      <main>
+        <h1>Hello world</h1>
+      </main>
     </div>
   );
 }
