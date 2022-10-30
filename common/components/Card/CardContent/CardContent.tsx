@@ -1,5 +1,8 @@
 import styles from './CardContent.module.scss';
-import { CardContentPropSchema } from './CardContent.schema';
+
+export interface CardContentPropSchema {
+  children?: React.ReactNode;
+}
 
 export default function CardContent(props: CardContentPropSchema) {
   return <div className={styles['card-content']}>{props.children}</div>;

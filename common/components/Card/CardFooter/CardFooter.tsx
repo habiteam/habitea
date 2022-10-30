@@ -1,6 +1,16 @@
-import Button from '../../Button/Button';
+import Button, { ButtonPropSchema } from '../../Button/Button';
 import styles from './CardFooter.module.scss';
-import { CardFooterPropSchema } from './CardFooter.schema';
+import { Color } from '../../../constants/Color';
+
+export interface CardFooterActionsSchema
+  extends Omit<ButtonPropSchema, 'children'> {
+  text: string;
+}
+
+export interface CardFooterPropSchema {
+  buttonColor?: Color;
+  actions: CardFooterActionsSchema[];
+}
 
 export default function CardFooter(props: CardFooterPropSchema) {
   return (

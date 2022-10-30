@@ -1,5 +1,15 @@
+import React from 'react';
 import styles from './Card.module.scss';
-import { CardPropSchema } from './Card.schema';
+import { Color } from '../../constants/Color';
+
+export type CardAppearance = 'outlined' | 'elevated' | 'filled';
+
+export interface CardPropSchema {
+  children: React.ReactNode;
+  appearance?: CardAppearance;
+  maxWidth?: string;
+  color?: Color;
+}
 
 export default function Card(props: CardPropSchema) {
   return (

@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import buttonStyles from './Input.module.scss';
-import { InputPropsSchema } from './Input.schema';
 import colors from '../../../styles/colors.module.scss';
+import { Color } from '../../constants/Color';
+
+export interface InputPropsSchema {
+  id: string;
+  title: string;
+  disabled?: boolean;
+  color?: Color;
+  type?: 'text' | 'password';
+  onChange?: (text: string) => void;
+}
 
 export default function Input(props: InputPropsSchema) {
   const [isFocused, setIsFocused] = useState(false);

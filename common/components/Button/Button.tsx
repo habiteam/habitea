@@ -1,5 +1,14 @@
+import React from 'react';
 import styles from './Button.module.scss';
-import { ButtonPropSchema } from './Button.schema';
+import { Color } from '../../constants/Color';
+
+export interface ButtonPropSchema {
+  children?: React.ReactNode;
+  fillType: 'regular' | 'filled' | 'outlined';
+  onClick?: () => void;
+  disabled?: boolean;
+  color?: Color;
+}
 
 /**
  * TODO disabled
@@ -12,9 +21,9 @@ export default function Button(props: ButtonPropSchema) {
     <button
       onClick={props.onClick}
       className={`${styles.button}
-         ${styles[`button--${props.color ?? 'default'}`]}
-         ${styles[`button--${props.fillType}`]}
-         `}
+        ${styles[`button--${props.color ?? 'default'}`]}
+        ${styles[`button--${props.fillType}`]}
+        `}
     >
       {props.children}
     </button>
