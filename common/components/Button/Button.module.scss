@@ -22,6 +22,16 @@
 }
 
 @each $k, $v in $colors-map {
+  .button--#{$k}.button--regular {
+    color: #{$v};
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: mix($v, #fff, 25%);
+    }
+  }
+
   .button--#{$k}.button--filled {
     background-color: #{$v};
 

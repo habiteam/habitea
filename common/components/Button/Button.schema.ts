@@ -3,7 +3,7 @@ import { Color } from '../../constants/Color';
 
 export interface ButtonPropSchema {
   children: React.ReactNode;
-  fillType: 'filled' | 'outlined';
+  fillType: 'regular' | 'filled' | 'outlined';
   onClick?: () => void;
   disabled?: boolean;
   color?: Color;

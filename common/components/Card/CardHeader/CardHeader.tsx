@@ -27,7 +27,10 @@ export default function CardHeader(props: CardHeaderPropSchema) {
       </div>
       {props.actions && (
         <div>
-          <Button fillType="outlined">
+          <Button
+            fillType="regular"
+            color={props.actionsButtonColor ?? 'default'}
+          >
             <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
           </Button>
         </div>
