@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
 import React from 'react';
 import Button from '../../common/components/Button/Button';
-import { CardFooterActionsSchema } from '../../common/components/Card/CardFooter/CardFooter';
 import Input from '../../common/components/Input/Input';
 import Link from '../../common/components/Link/Link';
 import { Color } from '../../common/constants/Color';
@@ -16,12 +15,6 @@ export default function Playground() {
     'danger',
     'info',
     'success',
-  ];
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const cardFooterActions: CardFooterActionsSchema[] = [
-    { text: 'Cancel', fillType: 'regular' },
-    { text: 'Save', fillType: 'filled' },
   ];
 
   return (
