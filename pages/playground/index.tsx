@@ -1,116 +1,93 @@
 import { faFaceAngry } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Head from 'next/head';
+import React from 'react';
 import Button from '../../common/components/Button/Button';
+import Card from '../../common/components/Card/Card';
 import Input from '../../common/components/Input/Input';
 import Link from '../../common/components/Link/Link';
+import { Color } from '../../common/constants/Color';
 
 export default function Playground() {
+  const colors: Color[] = [
+    'default',
+    'primary',
+    'warning',
+    'danger',
+    'info',
+    'success',
+  ];
+
   return (
     <>
+      <Head>
+        <title>Habitea - Playground</title>
+      </Head>
+
       <div>
-        <h1>Outlined Buttons</h1>
-        <Button fillType="outline">
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="outline" color="primary">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="outline" color="warning">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="outline" color="danger">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="outline" color="info">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="outline" color="success">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
+        <h2>Outlined Buttons</h2>
+        {colors.map((color, i) => (
+          <Button key={i} fillType="outline" color={color}>
+            Click this bad boi&nbsp;
+            <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+          </Button>
+        ))}
       </div>
 
       <div>
-        <h1>Filled Buttons</h1>
-        <Button fillType="filled">
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="filled" color="primary">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="filled" color="warning">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="filled" color="danger">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="filled" color="info">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
-
-        <Button fillType="filled" color="success">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Button>
+        <h2>Filled Buttons</h2>
+        {colors.map((color, i) => (
+          <Button key={i} fillType="filled" color={color}>
+            Click this bad boi&nbsp;
+            <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+          </Button>
+        ))}
       </div>
 
       <div>
-        <h1>Inputs</h1>
-        <Input title="Title" id="id"></Input>
-        <Input title="Title" id="id" color="primary"></Input>
-        <Input title="Title" id="id" color="warning"></Input>
-        <Input title="Title" id="id" color="danger"></Input>
-        <Input title="Title" id="id" color="info"></Input>
-        <Input title="Title" id="id" color="success"></Input>
+        <h2>Inputs</h2>
+        {colors.map((color, i) => (
+          <Input key={i} title="Title" id="id" color={color}></Input>
+        ))}
       </div>
 
       <div>
-        <h1>Links</h1>
-        <Link href="app">
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Link>
+        <h2>Links</h2>
+        {colors.map((color, i) => (
+          <Link key={i} href="app" color={color}>
+            Click this bad boi&nbsp;
+            <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+          </Link>
+        ))}
+      </div>
 
-        <Link href="app" color="primary">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Link>
+      <h2>Cards</h2>
+      <div
+        style={{
+          margin: '32px',
+        }}
+      >
+        <Card maxWidth="360px">Content HERE!</Card>
 
-        <Link href="app" color="warning">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Link>
+        {colors.map((color, i) => (
+          <div
+            key={i}
+            style={{
+              marginTop: '32px',
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '32px',
+            }}
+          >
+            <Card maxWidth="360px" appearance="elevated" color={color}>
+              Content HERE!
+            </Card>
 
-        <Link href="app" color="danger">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Link>
-
-        <Link href="app" color="info">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Link>
-
-        <Link href="app" color="success">
-          Click this bad boi&nbsp;
-          <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
-        </Link>
+            <Card maxWidth="360px" appearance="filled" color={color}>
+              Content HERE!
+            </Card>
+          </div>
+        ))}
       </div>
     </>
   );
