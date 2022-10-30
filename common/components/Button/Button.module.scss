@@ -29,7 +29,7 @@
     }
   }
 
-  .button--#{$k}.button--outline {
+  .button--#{$k}.button--outlined {
     border-color: darken($v, 20%);
     color: #{$v};
 

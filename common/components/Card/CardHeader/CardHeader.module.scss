@@ -1,0 +1,28 @@
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 0 0 12px;
+
+  &__image {
+    margin: 0 16px 0 0;
+    border-radius: 9999px;
+  }
+
+  &__content {
+    flex: 1 1 auto;
+
+    span {
+      display: block;
+    }
+  }
+
+  &__title {
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  &__subtitle {
+    font-size: 1.4rem;
+    line-height: 1.43;
+  }
+}

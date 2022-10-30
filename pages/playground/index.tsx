@@ -4,6 +4,7 @@ import Head from 'next/head';
 import React from 'react';
 import Button from '../../common/components/Button/Button';
 import Card from '../../common/components/Card/Card';
+import CardHeader from '../../common/components/Card/CardHeader/CardHeader';
 import Input from '../../common/components/Input/Input';
 import Link from '../../common/components/Link/Link';
 import { Color } from '../../common/constants/Color';
@@ -27,7 +28,7 @@ export default function Playground() {
       <div>
         <h2>Outlined Buttons</h2>
         {colors.map((color, i) => (
-          <Button key={i} fillType="outline" color={color}>
+          <Button key={i} fillType="outlined" color={color}>
             Click this bad boi&nbsp;
             <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
           </Button>
@@ -67,7 +68,15 @@ export default function Playground() {
           margin: '32px',
         }}
       >
-        <Card maxWidth="360px">Content HERE!</Card>
+        <Card maxWidth="360px">
+          <CardHeader
+            title="Title"
+            subTitle="12.12.2012"
+            image="/cat.jpg"
+            actions={[]}
+          ></CardHeader>
+          Content HERE!
+        </Card>
 
         {colors.map((color, i) => (
           <div
@@ -80,10 +89,22 @@ export default function Playground() {
             }}
           >
             <Card maxWidth="360px" appearance="elevated" color={color}>
+              <CardHeader
+                title="Title"
+                subTitle="12.12.2012"
+                image="/cat.jpg"
+                actions={[]}
+              ></CardHeader>
               Content HERE!
             </Card>
 
             <Card maxWidth="360px" appearance="filled" color={color}>
+              <CardHeader
+                title="Title"
+                subTitle="12.12.2012"
+                image="/cat.jpg"
+                actions={[]}
+              ></CardHeader>
               Content HERE!
             </Card>
           </div>

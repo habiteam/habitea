@@ -17,7 +17,7 @@
 
   @each $name, $color in $colors-map {
     &--color-#{$name}.card--elevated {
-      background-color: mix($color, #fff, 5%);
+      background-color: mix($color, #fff, 6%);
     }
 
     &--color-#{$name}.card--filled {
