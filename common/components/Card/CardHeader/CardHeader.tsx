@@ -3,7 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import Button from '../../Button/Button';
 import styles from './CardHeader.module.scss';
-import { CardHeaderPropSchema } from './CardHeader.schema';
+import { Color } from '../../../constants/Color';
+
+export interface CardHeaderPropSchema {
+  title: string;
+  image?: string;
+  subTitle?: string;
+  actions?: any[];
+  actionsButtonColor?: Color;
+}
 
 export default function CardHeader(props: CardHeaderPropSchema) {
   return (

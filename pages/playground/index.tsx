@@ -3,12 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
 import React from 'react';
 import Button from '../../common/components/Button/Button';
-import Card from '../../common/components/Card/Card';
-import CardContent from '../../common/components/Card/CardContent/CardContent';
-import CardFooter from '../../common/components/Card/CardFooter/CardFooter';
-import { CardFooterActionsSchema } from '../../common/components/Card/CardFooter/CardFooter.schema';
-import CardHeader from '../../common/components/Card/CardHeader/CardHeader';
-import CardMedia from '../../common/components/Card/CardMedia/CardMedia';
+import { CardFooterActionsSchema } from '../../common/components/Card/CardFooter/CardFooter';
 import Input from '../../common/components/Input/Input';
 import Link from '../../common/components/Link/Link';
 import { Color } from '../../common/constants/Color';
@@ -23,6 +18,7 @@ export default function Playground() {
     'success',
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const cardFooterActions: CardFooterActionsSchema[] = [
     { text: 'Cancel', fillType: 'regular' },
     { text: 'Save', fillType: 'filled' },

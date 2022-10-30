@@ -1,6 +1,10 @@
 import Image from 'next/image';
 import styles from './CardMedia.module.scss';
-import { CardMediaPropSchema } from './CardMedia.schema';
+
+export interface CardMediaPropSchema {
+  alt: string;
+  image: string;
+}
 
 export default function CardMedia(props: CardMediaPropSchema) {
   return (

@@ -1,6 +1,15 @@
 import NextLink from 'next/link';
+import React from 'react';
+import { UrlObject } from 'url';
 import styles from './Link.module.scss';
-import { LinkPropSchema } from './Link.schema';
+import { Color } from '../../constants/Color';
+
+export interface LinkPropSchema {
+  children: React.ReactNode;
+  href: string | UrlObject;
+  disabled?: boolean;
+  color?: Color;
+}
 
 export default function Link(props: LinkPropSchema) {
   return (
