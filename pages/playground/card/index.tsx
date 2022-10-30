@@ -11,19 +11,15 @@ import CardMedia from '../../../common/components/Card/CardMedia/CardMedia';
 import { Color } from '../../../common/constants/Color';
 
 export default function Playground() {
-  const [cardWidth, setCardWidth] = useState<number>(360);
-  const [cardContent, setCardContent] = useState<string>(
-    ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod quis ligula vel rutrum. Integer sed ex aliquet mi bibendum convallis. Praesent fermentum ante in sapien posuere luctus. Sed sit amet nunc at ante hendrerit commodo in ac augue.Duis eu libero eget odio ornare aliquam.',
-  );
-  const [cardColor, setCardColor] = useState<Color>('danger');
-  const [cardAppearance, setCardAppearance] =
-    useState<CardAppearance>('elevated');
+  const [form, setForm] = useState<any>({});
 
-  const [hasMedia, setHasMedia] = useState<boolean>(true);
-  const [hasContent, setHasContent] = useState<boolean>(true);
-  const [hasActions, setHasActions] = useState<boolean>(true);
+  const handleChange = (event: any) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setForm((values: any) => ({ ...values, [name]: value }));
+  };
 
-  const appearances: CardAppearance[] = ['filled', 'outlined', 'elevated'];
+  const appearances: CardAppearance[] = ['outlined', 'filled', 'elevated'];
 
   const colors: Color[] = [
     'default',
@@ -55,26 +51,26 @@ export default function Playground() {
         <div style={{ flex: 4 }}>
           {' '}
           <Card
-            maxWidth={`${cardWidth}px`}
-            color={cardColor}
-            appearance={cardAppearance}
+            maxWidth={`${form.cardWidth}px`}
+            color={form.cardColor}
+            appearance={form.cardAppearance}
           >
             <CardHeader
-              title="Title"
-              subTitle="12.12.2012"
+              title={form.cardTitle}
+              subTitle={form.cardSubtitle}
               image="/cat.jpg"
               actions={[]}
             ></CardHeader>
 
-            {hasMedia && (
+            {form.hasMedia && (
               <CardMedia image="/dog.jpg" alt="cat image"></CardMedia>
             )}
 
-            {hasContent && <CardContent>{cardContent}</CardContent>}
+            {form.hasContent && <CardContent>{form.cardContent}</CardContent>}
 
-            {hasActions && (
+            {form.hasActions && (
               <CardFooter
-                buttonColor={cardColor}
+                buttonColor={form.cardColor}
                 actions={cardFooterActions}
               ></CardFooter>
             )}
@@ -87,22 +83,40 @@ export default function Playground() {
           <form style={{ display: 'flex', flexDirection: 'column' }}>
             <label>Width (px): </label>
             <input
-              value={cardWidth}
-              onChange={(e) => setCardWidth(parseInt(e.target.value))}
+              type="number"
+              name="cardWidth"
+              value={form.cardWidth}
+              onChange={handleChange}
+            ></input>
+
+            <label>Title: </label>
+            <input
+              type="text"
+              name="cardTitle"
+              value={form.cardTitle}
+              onChange={handleChange}
+            ></input>
+
+            <label>Subtitle: </label>
+            <input
+              type="text"
+              name="cardSubtitle"
+              value={form.cardSubtitle}
+              onChange={handleChange}
             ></input>
 
             <label>Content: </label>
             <textarea
-              value={cardContent}
-              onChange={(e) => setCardContent(e.target.value)}
+              name="cardContent"
+              value={form.cardContent}
+              onChange={handleChange}
             ></textarea>
 
             <label>Appearance: </label>
             <select
-              value={cardAppearance}
-              onChange={(e) =>
-                setCardAppearance(e.target.value as CardAppearance)
-              }
+              name="cardAppearance"
+              value={form.cardAppearance}
+              onChange={handleChange}
             >
               {appearances.map((appearance, i) => (
                 <option key={i} value={appearance}>
@@ -112,8 +126,9 @@ export default function Playground() {
             </select>
             <label>Color: </label>
             <select
-              value={cardColor}
-              onChange={(e) => setCardColor(e.target.value as Color)}
+              name="cardColor"
+              value={form.cardColor}
+              onChange={handleChange}
             >
               {colors.map((color, i) => (
                 <option key={i} value={color}>
@@ -125,27 +140,27 @@ export default function Playground() {
               <input
                 type="checkbox"
                 id="hasMedia"
-                name="Media"
-                checked={hasMedia}
-                onChange={() => setHasMedia(!hasMedia)}
+                name="hasMedia"
+                checked={form.hasMedia}
+                onChange={handleChange}
               ></input>
               <label>Media</label>
 
               <input
                 type="checkbox"
                 id="hasContent"
-                name="Content"
-                checked={hasContent}
-                onChange={() => setHasContent(!hasContent)}
+                name="hasContent"
+                checked={form.hasContent}
+                onChange={handleChange}
               ></input>
               <label>Content</label>
 
               <input
                 type="checkbox"
                 id="hasActions"
-                name="Actions"
-                checked={hasActions}
-                onChange={() => setHasActions(!hasActions)}
+                name="hasActions"
+                checked={form.hasActions}
+                onChange={handleChange}
               ></input>
               <label>Actions</label>
             </div>
