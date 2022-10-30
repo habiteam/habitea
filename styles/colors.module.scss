@@ -14,7 +14,7 @@ $colors-map: (
   'info': $color-info,
   'success': $color-success,
   'warning': $color-warning,
-  'default': black,
+  'default': $color-default,
 );
 
 :export {
