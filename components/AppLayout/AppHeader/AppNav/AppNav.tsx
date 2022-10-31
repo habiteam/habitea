@@ -1,28 +1,46 @@
+import {
+  faAddressCard as faAddressCardRegular,
+  faFolder as faFolderRegular,
+} from '@fortawesome/free-regular-svg-icons';
+import {
+  faAddressCard as faAddressCardSolid,
+  faFolder as faFolderSolid,
+} from '@fortawesome/free-solid-svg-icons';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import {
   MOBILE_BREAKPOINT,
   screenWidth,
 } from '../../../../common/atoms/screenWidth';
-import Link from '../../../../common/components/Link/Link';
+import NavLink, {
+  NavLinkPropSchema,
+} from '../../../../common/components/NavLink/NavLink';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {
   const width = useAtomValue(screenWidth);
 
-  const navLinks = [
-    { title: 'Dashboard', href: '/app/dashboard' },
-    { title: 'Categories', href: '/app/categories' },
+  const navLinks: NavLinkPropSchema[] = [
+    {
+      icon: faAddressCardRegular,
+      activeIcon: faAddressCardSolid,
+      text: 'Dashboard',
+      href: '/app/dashboard',
+    },
+    {
+      icon: faFolderRegular,
+      activeIcon: faFolderSolid,
+      text: 'Categories',
+      href: '/app/categories',
+    },
   ];
 
   return (
     <nav className={styles.nav}>
       {width > MOBILE_BREAKPOINT ? (
-        <div className={styles['fade-in']}>
+        <div className={styles['nav-desktop']}>
           {navLinks.map((link, index) => (
-            <Link key={index} href={link.href} color="primary">
-              {link.title}
-            </Link>
+            <NavLink key={index} {...link} color="primary"></NavLink>
           ))}
 
           <Image
