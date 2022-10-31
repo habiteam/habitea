@@ -1,0 +1,25 @@
+.nav {
+}
+
+.nav-avatar {
+  border-radius: 9999px;
+}
+
+.fade-in {
+  height: 64px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  animation: fade 300ms ease-in-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

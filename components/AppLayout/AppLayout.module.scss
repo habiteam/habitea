@@ -1,0 +1,8 @@
+@import '../../styles/colors.module';
+
+.layout {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: mix($color-primary, #fff, 12%);
+}
