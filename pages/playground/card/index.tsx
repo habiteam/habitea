@@ -1,5 +1,5 @@
-import { atom, useAtom } from 'jotai';
 import Head from 'next/head';
+import { useState } from 'react';
 
 import Card, { CardAppearance } from '../../../common/components/Card/Card';
 import CardContent from '../../../common/components/Card/CardContent/CardContent';
@@ -11,24 +11,22 @@ import CardMedia from '../../../common/components/Card/CardMedia/CardMedia';
 import { Color } from '../../../common/constants/Color';
 
 export default function Playground() {
-  const [form, setForm] = useAtom(
-    atom({
-      cardWidth: 300,
-      cardTitle: 'Title',
-      cardSubtitle: '',
-      cardContent: '',
-      cardAppearance: 'outlined',
-      cardColor: 'default',
+  const [form, setForm] = useState({
+    cardWidth: 300,
+    cardTitle: 'Title',
+    cardSubtitle: '',
+    cardContent: '',
+    cardAppearance: 'outlined',
+    cardColor: 'default',
 
-      buttonsColor: 'default',
+    buttonsColor: 'default',
 
-      hasAvatar: true,
-      hasHeaderActions: true,
-      hasMedia: true,
-      hasContent: true,
-      hasActions: true,
-    }),
-  );
+    hasAvatar: true,
+    hasHeaderActions: true,
+    hasMedia: true,
+    hasContent: true,
+    hasActions: true,
+  });
 
   const handleChange = (event: any) => {
     const { name } = event.target;
