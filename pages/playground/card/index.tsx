@@ -38,7 +38,7 @@ export default function Playground() {
     }
   };
 
-  const appearances: CardAppearance[] = ['outlined', 'filled', 'elevated'];
+  const appearances: CardAppearance[] = ['outlined', 'filled'];
 
   const colors: Color[] = [
     'default',
@@ -80,7 +80,27 @@ export default function Playground() {
               title={form.cardTitle}
               subTitle={form.cardSubtitle}
               image={form.hasAvatar ? '/cat.jpg' : undefined}
-              actions={form.hasHeaderActions ? [] : undefined}
+              actions={
+                form.hasHeaderActions
+                  ? [
+                      {
+                        text: 'Button',
+                        onClick: () => {
+                          console.log('used');
+                        },
+                      },
+                      {
+                        text: 'Button',
+                        onClick: () => {
+                          console.log('used');
+                        },
+                      },
+                      { text: 'Link', href: '/app' },
+                      { text: 'Link', href: '/app' },
+                    ]
+                  : undefined
+              }
+              actionsMenuColor="primary"
             ></CardHeader>
 
             {form.hasMedia && (

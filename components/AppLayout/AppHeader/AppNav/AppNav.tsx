@@ -4,23 +4,28 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import {
   faAddressCard as faAddressCardSolid,
+  faBars,
   faFolder as faFolderSolid,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
+import { useState } from 'react';
 import {
   MOBILE_BREAKPOINT,
   screenWidth,
 } from '../../../../common/atoms/screenWidth';
-import NavLink, {
-  NavLinkPropSchema,
-} from '../../../../common/components/NavLink/NavLink';
+import Button from '../../../../common/components/Button/Button';
+import DropdownMenu from '../../../../common/components/DropdownMenu/DropdownMenu';
+import NavLink from '../../../../common/components/NavLink/NavLink';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {
   const width = useAtomValue(screenWidth);
 
-  const navLinks: NavLinkPropSchema[] = [
+  const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
+
+  const navLinks = [
     {
       icon: faAddressCardRegular,
       activeIcon: faAddressCardSolid,
@@ -52,7 +57,22 @@ export default function AppNav() {
           ></Image>
         </div>
       ) : (
-        <></>
+        <div className={styles['nav-mobile']}>
+          <Button
+            fillType="regular"
+            color="primary"
+            onClick={() => setIsActionMenuOpened(!isActionMenuOpened)}
+            size="lg"
+          >
+            <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
+          </Button>
+          <DropdownMenu
+            items={navLinks}
+            color="primary"
+            isOpen={isActionMenuOpened}
+            onClose={() => setIsActionMenuOpened(false)}
+          ></DropdownMenu>
+        </div>
       )}
     </nav>
   );

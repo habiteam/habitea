@@ -14,6 +14,11 @@
   animation: fade 300ms ease-in-out;
 }
 
+.nav-mobile {
+  padding: 23px 0 0;
+  animation: fade 300ms ease-in-out;
+}
+
 @keyframes fade {
   from {
     opacity: 0;

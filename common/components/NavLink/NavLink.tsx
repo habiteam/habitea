@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import React from 'react';
 import { UrlObject } from 'url';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import styles from './NavLink.module.scss';

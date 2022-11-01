@@ -1,19 +1,26 @@
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
+import { useState } from 'react';
 import Button from '../../Button/Button';
 import styles from './CardHeader.module.scss';
 import { Color } from '../../../constants/Color';
+import DropdownMenu, {
+  DropdownMenuItem,
+} from '../../DropdownMenu/DropdownMenu';
 
 export interface CardHeaderPropSchema {
   title: string;
   image?: string;
   subTitle?: string;
-  actions?: any[];
+  actions?: DropdownMenuItem[];
   actionsButtonColor?: Color;
+  actionsMenuColor?: Color;
 }
 
 export default function CardHeader(props: CardHeaderPropSchema) {
+  const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
+
   return (
     <div className={styles['card-header']}>
       {props.image && (
@@ -38,9 +45,16 @@ export default function CardHeader(props: CardHeaderPropSchema) {
           <Button
             fillType="regular"
             color={props.actionsButtonColor ?? 'default'}
+            onClick={() => setIsActionMenuOpened(!isActionMenuOpened)}
           >
             <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
           </Button>
+          <DropdownMenu
+            items={props.actions}
+            color={props.actionsMenuColor}
+            isOpen={isActionMenuOpened}
+            onClose={() => setIsActionMenuOpened(false)}
+          ></DropdownMenu>
         </div>
       )}
     </div>
