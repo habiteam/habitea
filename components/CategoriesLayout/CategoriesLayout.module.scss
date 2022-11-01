@@ -10,4 +10,10 @@
     border-radius: 4px;
     background-color: mix($color-primary, #fff, 10%);
   }
+
+  .categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 }

@@ -1,0 +1,27 @@
+@import '../../../styles/colors.module.scss';
+
+.chip {
+  max-width: 360px;
+  width: max-content;
+  padding: 6px 8px;
+  font-size: 1.4rem;
+  line-height: 1.43;
+  font-weight: 500;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @each $name, $color in $colors-map {
+    &--#{$name} {
+      color: mix($color, #000, 20%);
+      outline: 1px solid mix($color, #2e2e2e, 30%);
+    }
+  }
+}
