@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { atom, useAtom } from 'jotai';
 import buttonStyles from './Input.module.scss';
 import colors from '../../../styles/colors.module.scss';
 import { Color } from '../../constants/Color';
@@ -13,8 +13,8 @@ export interface InputPropsSchema {
 }
 
 export default function Input(props: InputPropsSchema) {
-  const [isFocused, setIsFocused] = useState(false);
-  const [hasValue, setHasValue] = useState(false);
+  const [isFocused, setIsFocused] = useAtom(atom(false));
+  const [hasValue, setHasValue] = useAtom(atom(false));
 
   return (
     <div
