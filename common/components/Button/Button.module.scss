@@ -1,13 +1,21 @@
 @import '../../../styles/colors.module.scss';
 
 .button {
-  padding: 4px 8px;
-  font-size: 1.6rem;
   background: none;
   color: white;
   border: 2px solid transparent;
   border-radius: 24px;
   transition: all 400ms;
+
+  &--md {
+    font-size: 1.6rem;
+    padding: 4px 8px;
+  }
+
+  &--lg {
+    font-size: 2rem;
+    padding: 4px 12px;
+  }
 
   &:active,
   &:focus,
@@ -28,6 +36,12 @@
     &:active,
     &:focus-visible {
       background-color: mix($v, #fff, 25%);
+      color: mix($v, #000, 50%);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: mix($v, #999, 30%);
     }
   }
 
@@ -44,6 +58,10 @@
       }
     }
 
+    &:disabled {
+      background-color: mix($v, #999, 30%);
+      cursor: not-allowed;
+    }
   }
 
   .button--#{$k}.button--outlined {
@@ -54,6 +72,14 @@
       border-color: darken($v, 20%);
       background-color: #{$v};
       color: white;
+    }
+
+    &:disabled {
+      border-color: mix($v, #999, 30);
+      color: mix($v, #999, 30);
+      background-color: transparent;
+
+      cursor: not-allowed;
     }
   }
 }

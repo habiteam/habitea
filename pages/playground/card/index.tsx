@@ -73,6 +73,8 @@ export default function Playground() {
             maxWidth={`${form.cardWidth}px`}
             color={form.cardColor as Color}
             appearance={form.cardAppearance as CardAppearance}
+            rounded
+            elevated
           >
             <CardHeader
               title={form.cardTitle}

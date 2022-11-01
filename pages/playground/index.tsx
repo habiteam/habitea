@@ -22,7 +22,22 @@ export default function Playground() {
       <Head>
         <title>Habitea - Playground</title>
       </Head>
-
+      <div>
+        <h2>Regular Buttons</h2>
+        {colors.map((color, i) => (
+          <Button
+            key={i}
+            onClick={() => {
+              console.log(color);
+            }}
+            fillType="regular"
+            color={color}
+          >
+            Click this bad boi&nbsp;
+            <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+          </Button>
+        ))}
+      </div>
       <div>
         <h2>Outlined Buttons</h2>
         {colors.map((color, i) => (
@@ -52,6 +67,57 @@ export default function Playground() {
             color={color}
           >
             Click this bad boi&nbsp;
+            <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+          </Button>
+        ))}
+      </div>
+      <div>
+        <h2>Disabled Regular Buttons</h2>
+        {colors.map((color, i) => (
+          <Button
+            key={i}
+            onClick={() => {
+              console.log(color);
+            }}
+            fillType="regular"
+            disabled
+            color={color}
+          >
+            Click this disabled boi&nbsp;
+            <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+          </Button>
+        ))}
+      </div>
+      <div>
+        <h2>Disabled Outlined Buttons</h2>
+        {colors.map((color, i) => (
+          <Button
+            key={i}
+            onClick={() => {
+              console.log(color);
+            }}
+            fillType="outlined"
+            color={color}
+            disabled
+          >
+            Click this disabled boi&nbsp;
+            <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
+          </Button>
+        ))}
+      </div>
+      <div>
+        <h2>Disabled Filled Buttons</h2>
+        {colors.map((color, i) => (
+          <Button
+            key={i}
+            onClick={() => {
+              console.log(color);
+            }}
+            fillType="filled"
+            color={color}
+            disabled
+          >
+            Click this disabled boi&nbsp;
             <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>
           </Button>
         ))}

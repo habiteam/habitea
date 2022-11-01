@@ -15,6 +15,7 @@ export default function AppLayout(props: AppLayoutProps) {
     setWidth(window.innerWidth);
 
     const handleResizeWindow = () => setWidth(window.innerWidth);
+    console.log('usefx');
 
     window.addEventListener('resize', handleResizeWindow);
 
