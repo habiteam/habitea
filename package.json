@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "npx prettier --write . && next lint --fix"
+    "lint:fix": "npx prettier --write . && next lint --fix",
+    "clear": "rm -r .next"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
