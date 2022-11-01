@@ -1,6 +1,8 @@
 import {
+  faCode,
   faHandshake,
   faMound,
+  faMusic,
   faPersonBiking,
   faPersonRunning,
   faPlus,
@@ -20,10 +22,12 @@ export default function CategoriesLayout(props: AppLayoutProps) {
   for (let i = 0; i < 10; i += 1) {
     chips.push(
       <>
-        <Chip text="Running" icon={faPersonRunning} color="primary"></Chip>
+        <Chip text="Running" icon={faPersonRunning} color="default"></Chip>
         <Chip text="Bike" icon={faPersonBiking} color="primary"></Chip>
-        <Chip text="Poop" icon={faMound} color="primary"></Chip>
-        <Chip text="Meetings" icon={faHandshake} color="primary"></Chip>
+        <Chip text="Poop" icon={faMound} color="warning"></Chip>
+        <Chip text="Meetings" icon={faHandshake} color="danger"></Chip>
+        <Chip text="Music" icon={faMusic} color="success"></Chip>
+        <Chip text="Coding" icon={faCode} color="info"></Chip>
       </>,
     );
   }
