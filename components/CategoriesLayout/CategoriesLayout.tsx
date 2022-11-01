@@ -21,7 +21,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
         <div className={styles['categories-list']}>
           <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
           <Chip
-            text="Jazda na rowerze"
+            text="Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze"
             icon={faPersonBiking}
             color="primary"
           ></Chip>

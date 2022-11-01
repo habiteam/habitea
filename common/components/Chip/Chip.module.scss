@@ -12,6 +12,11 @@
   align-items: center;
   gap: 8px;
 
+  .chip-icon {
+    width: 18px;
+    height: 18px;
+  }
+
   span {
     white-space: nowrap;
     overflow: hidden;
@@ -20,8 +25,8 @@
 
   @each $name, $color in $colors-map {
     &--#{$name} {
-      color: mix($color, #000, 20%);
-      outline: 1px solid mix($color, #2e2e2e, 30%);
+      color: mix($color, #000, 30%);
+      outline: 1px solid mix($color, #2e2e2e, 40%);
     }
   }
 }

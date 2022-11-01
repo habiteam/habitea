@@ -19,7 +19,12 @@ export default function Chip(props: ChipPropSchema) {
         styles[`chip--${props.color ?? 'default'}`],
       )}
     >
-      {props.icon && <FontAwesomeIcon icon={props.icon}></FontAwesomeIcon>}
+      {props.icon && (
+        <FontAwesomeIcon
+          icon={props.icon}
+          className={styles['chip-icon']}
+        ></FontAwesomeIcon>
+      )}
       <span>{props.text}</span>
     </div>
   );
