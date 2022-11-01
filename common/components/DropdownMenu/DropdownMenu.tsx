@@ -3,12 +3,14 @@ import classNames from 'classnames';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Image from 'next/image';
 import styles from './DropdownMenu.module.scss';
 import { Color } from '../../constants/Color';
 
 export interface DropdownMenuItem {
   text: string;
   icon?: IconDefinition;
+  image?: string;
   disabled?: boolean;
   href?: string;
   onClick?: () => void;
@@ -24,6 +26,15 @@ export interface DropdownMenuProps {
 function DropdownItem(props: { item: DropdownMenuItem }) {
   return (
     <>
+      {props.item.image && (
+        <Image
+          className={styles['dropdown-item-avatar']}
+          src={props.item.image}
+          alt={props.item.text}
+          width={16}
+          height={16}
+        ></Image>
+      )}
       {props.item.icon && (
         <FontAwesomeIcon icon={props.item.icon}></FontAwesomeIcon>
       )}

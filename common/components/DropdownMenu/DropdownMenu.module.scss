@@ -17,10 +17,16 @@
   margin: 8px 0;
 
   li {
-    padding: 8px 16px;
+    padding: 16px 12px;
     display: flex;
-    gap: 8px;
+    gap: 12px;
     align-items: center;
+    min-width: 200px;
+
+    > svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   @each $name, $color in $colors-map {
@@ -35,4 +41,8 @@
       }
     }
   }
+}
+
+.dropdown-item-avatar {
+  border-radius: 9999px;
 }

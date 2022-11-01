@@ -67,7 +67,10 @@ export default function AppNav() {
             <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
           </Button>
           <DropdownMenu
-            items={navLinks}
+            items={[
+              ...navLinks,
+              { text: 'Others', image: '/cat.jpg', href: '/app/options' },
+            ]}
             color="primary"
             isOpen={isActionMenuOpened}
             onClose={() => setIsActionMenuOpened(false)}
