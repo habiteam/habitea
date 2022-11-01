@@ -3,6 +3,7 @@ import {
   faMound,
   faPersonBiking,
   faPersonRunning,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import React, { ReactElement } from 'react';
 import Chip from '../../common/components/Chip/Chip';
@@ -21,12 +22,77 @@ export default function CategoriesLayout(props: AppLayoutProps) {
         <div className={styles['categories-list']}>
           <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
           <Chip
-            text="Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze Jazda na rowerze"
+            text="Jazda na rowerze"
             icon={faPersonBiking}
             color="primary"
           ></Chip>
           <Chip text="Sraka" icon={faMound} color="primary"></Chip>
           <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
+          <Chip
+            text="Jazda na rowerze"
+            icon={faPersonBiking}
+            color="primary"
+          ></Chip>
+          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
+          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          <Chip text="Add new category" icon={faPlus} color="primary"></Chip>
         </div>
         <div>{props.children}</div>
       </div>

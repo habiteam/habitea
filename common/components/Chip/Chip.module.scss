@@ -2,7 +2,7 @@
 
 .chip {
   max-width: 360px;
-  width: max-content;
+  overflow: auto;
   padding: 6px 8px;
   font-size: 1.4rem;
   line-height: 1.43;

@@ -1,11 +1,7 @@
 import { getCategoriesLayout } from '../../../components/CategoriesLayout/CategoriesLayout';
 
 export default function Categories() {
-  return (
-    <>
-      <h2>Categories</h2>
-    </>
-  );
+  return <></>;
 }
 
 Categories.getLayout = getCategoriesLayout;
