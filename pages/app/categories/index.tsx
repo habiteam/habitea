@@ -1,4 +1,4 @@
-import { getAppLayout } from '../../../components/AppLayout/AppLayout';
+import { getCategoriesLayout } from '../../../components/CategoriesLayout/CategoriesLayout';
 
 export default function Categories() {
   return (
@@ -8,4 +8,4 @@ export default function Categories() {
   );
 }
 
-Categories.getLayout = getAppLayout;
+Categories.getLayout = getCategoriesLayout;

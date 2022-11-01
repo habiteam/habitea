@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
 import React, { ReactElement, useEffect } from 'react';
-import { screenWidth } from '../../common/atoms/screenWidth';
+import { screenWidth } from '../../common/atoms/screen-width';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
 

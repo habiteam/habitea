@@ -17,11 +17,11 @@
   margin: 8px 0;
 
   li {
-    padding: 16px 12px;
+    padding: 16px 20px 16px 12px;
     display: flex;
     gap: 12px;
     align-items: center;
-    min-width: 200px;
+    white-space: nowrap;
 
     > svg {
       width: 16px;
