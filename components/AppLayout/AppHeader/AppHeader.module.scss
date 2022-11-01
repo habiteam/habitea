@@ -1,0 +1,19 @@
+@import '../../../styles/colors.module';
+
+.header {
+  height: 80px;
+  padding: 0 0 0 40px;
+  display: flex;
+  align-items: center;
+  background-color: mix($color-primary, #fff, 6%);
+}
+
+.header-logo {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: $color-primary;
+}
+
+.header-spacer {
+  flex-grow: 1;
+}

@@ -1,0 +1,29 @@
+.nav {
+  padding: 0 40px;
+}
+
+.nav,
+.nav-desktop {
+  height: 80px;
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  animation: fade 300ms ease-in-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.nav-avatar {
+  border-radius: 9999px;
+}

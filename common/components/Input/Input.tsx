@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import buttonStyles from './Input.module.scss';
 import colors from '../../../styles/colors.module.scss';
 import { Color } from '../../constants/Color';

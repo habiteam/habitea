@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "npx prettier --write . && next lint --fix"
+    "lint:fix": "npx prettier --write . && next lint --fix",
+    "clear": "rm -r .next"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -15,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "firebase": "^9.13.0",
+    "jotai": "^1.9.0",
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Card, { CardAppearance } from '../../../common/components/Card/Card';
 import CardContent from '../../../common/components/Card/CardContent/CardContent';
@@ -11,7 +11,7 @@ import CardMedia from '../../../common/components/Card/CardMedia/CardMedia';
 import { Color } from '../../../common/constants/Color';
 
 export default function Playground() {
-  const [form, setForm] = useState<any>({
+  const [form, setForm] = useState({
     cardWidth: 300,
     cardTitle: 'Title',
     cardSubtitle: '',
@@ -29,7 +29,7 @@ export default function Playground() {
   });
 
   const handleChange = (event: any) => {
-    const name = event.target.name;
+    const { name } = event.target;
 
     if (event.target.type === 'checkbox') {
       setForm((values: any) => ({ ...values, [name]: event.target.checked }));
@@ -71,8 +71,8 @@ export default function Playground() {
           {' '}
           <Card
             maxWidth={`${form.cardWidth}px`}
-            color={form.cardColor}
-            appearance={form.cardAppearance}
+            color={form.cardColor as Color}
+            appearance={form.cardAppearance as CardAppearance}
           >
             <CardHeader
               title={form.cardTitle}
@@ -89,7 +89,7 @@ export default function Playground() {
 
             {form.hasActions && (
               <CardFooter
-                buttonColor={form.buttonsColor}
+                buttonColor={form.buttonsColor as Color}
                 actions={cardFooterActions}
               ></CardFooter>
             )}
