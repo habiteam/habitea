@@ -15,83 +15,25 @@ export interface AppLayoutProps {
 }
 
 export default function CategoriesLayout(props: AppLayoutProps) {
+  const chips = [];
+
+  for (let i = 0; i < 10; i += 1) {
+    chips.push(
+      <>
+        <Chip text="Running" icon={faPersonRunning} color="primary"></Chip>
+        <Chip text="Bike" icon={faPersonBiking} color="primary"></Chip>
+        <Chip text="Poop" icon={faMound} color="primary"></Chip>
+        <Chip text="Meetings" icon={faHandshake} color="primary"></Chip>
+      </>,
+    );
+  }
+
   return (
     <div className={styles.layout}>
       <h1>Categories</h1>
       <div className={styles['categories-wrapper']}>
         <div className={styles['categories-list']}>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
-          <Chip text="Bieganie" icon={faPersonRunning} color="primary"></Chip>
-          <Chip
-            text="Jazda na rowerze"
-            icon={faPersonBiking}
-            color="primary"
-          ></Chip>
-          <Chip text="Sraka" icon={faMound} color="primary"></Chip>
-          <Chip text="Spotkania" icon={faHandshake} color="primary"></Chip>
+          {chips}
           <Chip text="Add new category" icon={faPlus} color="primary"></Chip>
         </div>
         <div>{props.children}</div>
