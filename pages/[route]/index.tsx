@@ -6,6 +6,7 @@ import CardContent from '../../common/components/Card/CardContent/CardContent';
 import CardFooter from '../../common/components/Card/CardFooter/CardFooter';
 import Input from '../../common/components/Input/Input';
 import Link from '../../common/components/Link/Link';
+import bgImg from '../../public/backgrounds/bg-desk-light.jpg';
 
 export async function getStaticPaths() {
   return {
@@ -24,8 +25,9 @@ export default function Page() {
     <main>
       <Image
         className={styles['background-image']}
-        src="/register.jpg"
+        src={bgImg}
         alt="register"
+        placeholder="blur"
         fill
       ></Image>
       <div className={styles['form-wrapper']}>
