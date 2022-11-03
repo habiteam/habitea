@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   background-color: mix($color-primary, #fff, 10%);
+  position: sticky;
+  top: 0;
 }
 
 .header-logo {

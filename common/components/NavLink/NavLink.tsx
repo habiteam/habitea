@@ -4,6 +4,7 @@ import { UrlObject } from 'url';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
 import styles from './NavLink.module.scss';
 import { Color } from '../../constants/Color';
 
@@ -21,11 +22,16 @@ export default function NavLink(props: NavLinkPropSchema) {
   return (
     <NextLink href={props.href} legacyBehavior>
       <a
-        className={`${styles.link} ${
-          styles[`link--${props.color ?? 'default'}`]
-        } ${router.pathname === props.href ? styles['link--active'] : ''}`}
+        className={classNames(
+          styles.link,
+          styles[`link--${props.color ?? 'default'}`],
+          router.pathname.indexOf(props.href as string) !== -1
+            ? styles['link--active']
+            : '',
+        )}
       >
-        {router.pathname === props.href && props.activeIcon ? (
+        {router.pathname.indexOf(props.href as string) !== -1 &&
+        props.activeIcon ? (
           <FontAwesomeIcon
             className={styles['link-icon']}
             icon={props.activeIcon}

@@ -1,12 +1,12 @@
 import '../styles/globals.scss';
-import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import { Provider } from 'jotai';
+import { initIcons } from '../common/utils/fontawesome-icons';
 
-config.autoAddCss = false;
+initIcons();
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
