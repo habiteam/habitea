@@ -1,0 +1,10 @@
+@import '../../../styles/colors.module.scss';
+
+.dialog {
+  &::backdrop {
+    background-color: adjust-color(
+      mix($color-primary, #2e2e2e, 10%),
+      $alpha: -0.3
+    );
+  }
+}

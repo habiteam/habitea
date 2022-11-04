@@ -26,7 +26,7 @@ export default function AppLayout(props: AppLayoutProps) {
   return (
     <div className={styles.layout}>
       <AppHeader />
-      <main>{props.children}</main>
+      <div>{props.children}</div>
     </div>
   );
 }

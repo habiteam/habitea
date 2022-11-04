@@ -8,7 +8,7 @@
   gap: 16px;
   min-height: calc(100vh - 80px);
 
-  .categories-list-container {
+  aside {
     @include scrollbar();
     margin: 0px;
     padding: 0px;
@@ -16,14 +16,13 @@
     max-width: 280px;
     flex: 4;
 
-    .categories-headline {
+    .headline {
       margin: 0 0 14px 20px;
       font-size: 1.4rem;
       line-height: 1.43;
     }
 
-    .categories-list-create-button,
-    .categories-list-item {
+    .add-button {
       font-size: 1.4rem;
       line-height: 2rem;
       padding: 14px 20px;
@@ -33,9 +32,6 @@
       gap: 18px;
       align-items: center;
       cursor: pointer;
-    }
-
-    .categories-list-create-button {
       background-color: mix($color-info, #fff, 25%);
       width: calc(100% - 16px);
       color: mix($color-info, #2e2e2e, 10%);
@@ -53,45 +49,17 @@
       }
     }
 
-    .categories-list {
+    .list {
       margin: 16px 0 0 0;
       padding: 0px 8px 0px 0px;
       list-style-type: none;
       max-height: calc(100vh - 244px);
       overflow: auto;
       scrollbar-gutter: stable;
-
-      .categories-list-item {
-        border-radius: 24px;
-        color: mix($color-primary, #3f3f3f, 10%);
-        transition: all 400ms ease-in-out;
-
-        span {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        &:hover {
-          color: mix($color-primary, #000, 10%);
-          background-color: mix($color-primary, #fff, 10%);
-        }
-
-        &--active {
-          border-radius: 12px;
-          color: mix($color-primary, #000, 10%);
-          background-color: mix($color-primary, #fff, 40%);
-
-          &:hover,
-          &:focus-visible {
-            background-color: mix($color-primary, #fff, 50%);
-          }
-        }
-      }
     }
   }
 
-  .category-wrapper {
+  main {
     flex: 20;
     padding: 24px;
     border-radius: 12px;

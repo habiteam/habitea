@@ -44,13 +44,13 @@ function DropdownItem(props: { item: DropdownMenuItem }) {
 }
 
 export default function DropdownMenu(props: DropdownMenuProps) {
-  const dialogRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        dialogRef.current &&
-        !dialogRef.current.contains(event.target as Node)
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
       ) {
         props.onClose();
       }
@@ -60,14 +60,14 @@ export default function DropdownMenu(props: DropdownMenuProps) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dialogRef]);
+  }, [dropdownRef]);
 
   return (
     <>
       {props.isOpen && (
         <div className={styles.dropdown}>
           <ul
-            ref={dialogRef}
+            ref={dropdownRef}
             className={classNames(
               styles['dropdown-list'],
               styles[`dropdown-list--${props.color ?? 'default'}`],

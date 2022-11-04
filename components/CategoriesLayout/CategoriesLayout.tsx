@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
+import Dialog from '../../common/components/Dialog/Dialog';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import { activityCategoriesMock } from './categories.mocks';
+import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
 
 export interface AppLayoutProps {
@@ -14,49 +16,32 @@ export interface AppLayoutProps {
 }
 
 export default function CategoriesLayout(props: AppLayoutProps) {
-  const router = useRouter();
-  const categoriesRender: any[] = [];
-
-  activityCategoriesMock.forEach((category, i) => {
-    const href = `/app/categories/${category.id}`;
-
-    categoriesRender.push(
-      <li key={i}>
-        <Link
-          className={classNames(
-            styles['categories-list-item'],
-            router.asPath.indexOf(href) !== -1
-              ? styles['categories-list-item--active']
-              : '',
-          )}
-          href={href}
-        >
-          {category.icon && (
-            <FontAwesomeIcon
-              icon={findIconDefinition({
-                prefix: 'fas',
-                iconName: category.icon,
-              })}
-              width={14}
-            ></FontAwesomeIcon>
-          )}
-          <span>{category.name}</span>
-        </Link>
-      </li>,
-    );
-  });
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState<boolean>(false);
 
   return (
     <div className={styles.layout}>
-      <div className={styles['categories-list-container']}>
-        <div className={styles['categories-headline']}>Categories</div>
-        <button className={styles['categories-list-create-button']}>
+      <aside>
+        <div className={styles.headline}>Categories</div>
+        <button
+          className={styles['add-button']}
+          onClick={() => setIsCreateDialogOpen(true)}
+        >
           <FontAwesomeIcon icon={faPlus} width={14}></FontAwesomeIcon>
           Add category
         </button>
-        <ul className={styles['categories-list']}> {categoriesRender}</ul>
-      </div>
-      <div className={styles['category-wrapper']}>{props.children}</div>
+        <Dialog
+          open={isCreateDialogOpen}
+          handleClose={() => setIsCreateDialogOpen(false)}
+        ></Dialog>
+        <ul className={styles.list}>
+          {activityCategoriesMock.map((category, i) => (
+            <li key={i}>
+              <CategoriesItem {...category}></CategoriesItem>
+            </li>
+          ))}
+        </ul>
+      </aside>
+      <main>{props.children}</main>
     </div>
   );
 }
