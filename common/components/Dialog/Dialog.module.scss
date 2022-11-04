@@ -1,6 +1,14 @@
 @import '../../../styles/colors.module.scss';
 
 .dialog {
+  max-width: clamp(30%, 500px, 40%);
+  min-height: min(50%, 300px);
+  border-radius: 32px;
+  border: none;
+  background-color: mix($color-primary, #fff, 10%);
+  padding: 24px;
+  color: #4f4a45;
+
   &::backdrop {
     background-color: adjust-color(
       mix($color-primary, #2e2e2e, 10%),

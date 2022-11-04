@@ -32,7 +32,12 @@ export default function CategoriesLayout(props: AppLayoutProps) {
         <Dialog
           open={isCreateDialogOpen}
           handleClose={() => setIsCreateDialogOpen(false)}
-        ></Dialog>
+        >
+          Basic dialog title Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Nulla quam ut laudantium. Expedita, repudiandae id reprehenderit
+          veniam, reiciendis minus eligendi deserunt tempore pariatur numquam
+          quae delectus error, repellendus quia minima.
+        </Dialog>
         <ul className={styles.list}>
           {activityCategoriesMock.map((category, i) => (
             <li key={i}>

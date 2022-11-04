@@ -49,9 +49,7 @@ export default function Dialog(props: DialogPropsSchema) {
 
   return (
     <dialog ref={dialogRef} className={styles.dialog}>
-      <button onClick={props.handleClose}>X</button>
       {props.children}
-      <form method="dialog"></form>
     </dialog>
   );
 }
