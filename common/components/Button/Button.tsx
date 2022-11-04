@@ -7,7 +7,7 @@ export interface ButtonPropSchema {
   children?: React.ReactNode;
   fillType: 'regular' | 'filled' | 'outlined';
   size?: 'md' | 'lg';
-  onClick?: () => void;
+  onClick?: (event?: any) => void;
   disabled?: boolean;
   color?: Color;
 }

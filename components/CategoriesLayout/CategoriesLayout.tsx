@@ -1,9 +1,5 @@
-import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { ReactElement, useState } from 'react';
 import Dialog from '../../common/components/Dialog/Dialog';
 import { getAppLayout } from '../AppLayout/AppLayout';

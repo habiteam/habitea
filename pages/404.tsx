@@ -1,3 +1,3 @@
 export default function Custom404() {
-  return <div>Error</div>;
+  return <div>nasza 404 </div>;
 }

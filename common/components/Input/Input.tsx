@@ -9,7 +9,9 @@ export interface InputPropsSchema {
   disabled?: boolean;
   color?: Color;
   type?: 'text' | 'password';
-  onChange?: (text: string) => void;
+  name?: string;
+  value?: string;
+  onChange?: (e: string) => void;
 }
 
 export default function Input(props: InputPropsSchema) {
@@ -31,7 +33,8 @@ export default function Input(props: InputPropsSchema) {
 
       <div className={buttonStyles.input__container}>
         <input
-          // TODO name property?
+          name={props.name}
+          value={props.value}
           id={props.id}
           onFocus={() => {
             setIsFocused(true);
