@@ -56,7 +56,7 @@ export function Notification(props: NotificationPropsSchema) {
       onMouseLeave={handleTimer}
     >
       <div className={styles.content}>
-        <>{props.id}</>
+        <>{props.message}</>
         <Button onClick={handleClose} fillType="regular" color={props.type}>
           <FontAwesomeIcon icon={faXmark}></FontAwesomeIcon>
         </Button>
