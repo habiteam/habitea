@@ -11,23 +11,6 @@ export interface AppLayoutProps {
 }
 
 export default function AppLayout(props: AppLayoutProps) {
-  const router = useRouter();
-
-  /**
-   * TODO need review
-   * Can we remove delay before redirect?
-   * Do we need useEffect?
-   * Should this be done in AppLayout?
-   * Is there a better way?
-   * Why are we still here?
-   * Just to suffer?
-   */
-  useEffect(() => {
-    if (!auth.currentUser) {
-      router.push('/login');
-    }
-  }, []);
-
   const setWidth = useSetAtom(screenWidth);
 
   useEffect(() => {

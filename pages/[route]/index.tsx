@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import styles from './SignInForm.module.scss';
@@ -161,13 +160,7 @@ export function LoginForm({ router }: { router: NextRouter }) {
 
 export default function Page() {
   const router = useRouter();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      router.push('/app');
-    }
-  });
+
   const right = { translateX: '-430px' };
   const left = { translateX: '430px' };
 

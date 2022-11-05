@@ -1,22 +1,8 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import Head from 'next/head';
-import { auth } from '../common/services/firebase';
+import Link from '../common/components/Link/Link';
 // import style from './Home.module.scss';
 
 export default function Home() {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      // const { uid } = user;
-      console.log(user);
-      // ...
-    } else {
-      // User is signed out
-      console.log('Not logged in');
-      // ...
-    }
-  });
   return (
     <div>
       <Head>
@@ -27,6 +13,7 @@ export default function Home() {
 
       <main>
         <h1>Hello world</h1>
+        <Link href="/login">Login</Link>
       </main>
     </div>
   );
