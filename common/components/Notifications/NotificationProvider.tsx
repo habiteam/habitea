@@ -13,8 +13,8 @@ export function NotificationProvider(props: NotificationProviderPropSchema) {
   return (
     <>
       <div className={styles.list}>
-        {notificationList.map((notification, i) => (
-          <Notification key={i} {...notification} />
+        {notificationList.map((notification) => (
+          <Notification key={notification.id} {...notification} />
         ))}
       </div>
       {props.children}

@@ -5,7 +5,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { NotificationPropsSchema } from './Notification.schema';
 import styles from './Notification.module.scss';
-import { Color } from '../../constants/Color';
 import Button from '../Button/Button';
 import notifications from '../../atoms/notifications';
 
