@@ -20,7 +20,7 @@
     white-space: nowrap;
     overflow: hidden;
     z-index: 1;
-    color: gray;
+    color: #757575;
     transform-origin: left top;
   }
 
@@ -51,7 +51,7 @@
     fieldset {
       position: absolute;
       border-radius: inherit;
-      border: 1px solid var(--color);
+      border: 1px solid #757575;
       inset: -5px 0 0;
       pointer-events: none;
       margin: 0px;
@@ -68,10 +68,10 @@
     }
   }
 
-  &--focused {
+  &--focused,
+  &--touched {
     label {
       transform: translate(19px, -6px) scale(0.8);
-      color: var(--color);
     }
 
     .input__container {
@@ -83,6 +83,18 @@
           visibility: hidden;
           max-width: 100%;
         }
+      }
+    }
+  }
+
+  &--focused {
+    label {
+      color: var(--color);
+    }
+
+    .input__container {
+      fieldset {
+        border: 1px solid var(--color);
       }
     }
   }

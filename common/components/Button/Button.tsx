@@ -4,6 +4,7 @@ import styles from './Button.module.scss';
 import { Color } from '../../constants/Color';
 
 export interface ButtonPropSchema {
+  text?: string;
   children?: React.ReactNode;
   fillType: 'regular' | 'filled' | 'outlined';
   size?: 'md' | 'lg';
@@ -28,6 +29,7 @@ export default function Button(props: ButtonPropSchema) {
         styles[`button--${props.size ?? 'md'}`],
       )}
     >
+      {props.text}
       {props.children}
     </button>
   );

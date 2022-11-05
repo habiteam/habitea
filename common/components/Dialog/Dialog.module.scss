@@ -1,11 +1,31 @@
 @import '../../../styles/colors.module.scss';
 
 .dialog {
-  max-width: clamp(30%, 500px, 40%);
+  max-width: clamp(30%, 456px, 70%);
+  width: 100%;
   min-height: min(50%, 300px);
   border-radius: 32px;
   background-color: mix($color-primary, #fff, 10%);
   padding: 24px;
   color: #4f4a45;
   transform-origin: top;
+  display: flex;
+  flex-direction: column;
+}
+
+.headline {
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 3.2rem;
+  margin: 0px 0px 16px;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.actions {
+  margin: 24px 0px 0px;
+  display: flex;
+  justify-content: flex-end;
 }

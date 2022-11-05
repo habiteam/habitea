@@ -2,6 +2,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, useState } from 'react';
 import Dialog from '../../common/components/Dialog/Dialog';
+import Input from '../../common/components/Input/Input';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import { activityCategoriesMock } from './categories.mocks';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
@@ -27,13 +28,63 @@ export default function CategoriesLayout(props: AppLayoutProps) {
         </button>
 
         <Dialog
+          title="Create new category"
           open={isCreateDialogOpen}
           handleClose={() => setIsCreateDialogOpen(false)}
+          actions={[
+            {
+              text: 'Cancel',
+              fillType: 'regular',
+              color: 'primary',
+              onClick: () => {
+                setIsCreateDialogOpen(false);
+              },
+            },
+            {
+              text: 'Create',
+              fillType: 'regular',
+              color: 'primary',
+              onClick: () => {
+                setIsCreateDialogOpen(false);
+              },
+            },
+          ]}
         >
-          Basic dialog title Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Nulla quam ut laudantium. Expedita, repudiandae id reprehenderit
-          veniam, reiciendis minus eligendi deserunt tempore pariatur numquam
-          quae delectus error, repellendus quia minima.
+          <form className={styles.form}>
+            <Input title="Name" id="name" autoFocus color="primary"></Input>
+            <Input title="Description" id="description" color="primary"></Input>
+            <Input
+              title="Goal"
+              id="goal"
+              style={{ width: 'calc(50% - 6px)' }}
+              color="primary"
+            ></Input>
+            <Input
+              title="Goal Unit"
+              id="goalUnit"
+              style={{ width: 'calc(50% - 6px)' }}
+              color="primary"
+            ></Input>
+            <Input
+              title="Goal Type"
+              id="goalType"
+              style={{ width: 'calc(50% - 6px)' }}
+              color="primary"
+            ></Input>
+            <Input title="Repeats" id="repeats" color="primary"></Input>
+            <Input
+              title="Valid from"
+              id="validFrom"
+              style={{ width: 'calc(50% - 6px)' }}
+              color="primary"
+            ></Input>
+            <Input
+              title="Valid to"
+              id="validTo"
+              style={{ width: 'calc(50% - 6px)' }}
+              color="primary"
+            ></Input>
+          </form>
         </Dialog>
 
         <ul className={styles.list}>
