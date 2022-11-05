@@ -25,6 +25,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
           <FontAwesomeIcon icon={faPlus} width={14}></FontAwesomeIcon>
           Add category
         </button>
+
         <Dialog
           open={isCreateDialogOpen}
           handleClose={() => setIsCreateDialogOpen(false)}
@@ -34,6 +35,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
           veniam, reiciendis minus eligendi deserunt tempore pariatur numquam
           quae delectus error, repellendus quia minima.
         </Dialog>
+
         <ul className={styles.list}>
           {activityCategoriesMock.map((category, i) => (
             <li key={i}>
