@@ -108,7 +108,7 @@ export function LoginForm({ router }: { router: NextRouter }) {
   }
 
   function loginUser() {
-    signInWithEmailAndPassword(auth, loginData.password, loginData.password)
+    signInWithEmailAndPassword(auth, loginData.email, loginData.password)
       .then((user) => {
         console.log(user);
       })
