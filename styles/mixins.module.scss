@@ -28,6 +28,6 @@
 @mixin container() {
   padding: 12px;
   @media (min-width: $breakpoint-md) {
-    padding: 40px;
+    padding: 32px;
   }
 }

@@ -5,10 +5,10 @@ export interface OverlayPropsSchema {
   onClick?: () => void;
 }
 
-const Overlay = ({ children, onClick }: OverlayPropsSchema) => (
-  <div className={styles.overlay} onClick={onClick}>
-    {children}
-  </div>
-);
-
-export default Overlay;
+export default function Overlay({ children, onClick }: OverlayPropsSchema) {
+  return (
+    <div className={styles.overlay} onClick={onClick}>
+      {children}
+    </div>
+  );
+}

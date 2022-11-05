@@ -1,11 +1,16 @@
 @import '../../styles/colors.module';
 @import '../../styles/mixins.module';
+@import '../../styles/breakpoints.module';
 
 .layout {
   width: 100%;
   display: flex;
   gap: 16px;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 104px);
+
+  @media (min-width: $breakpoint-md) {
+    min-height: calc(100vh - 144px);
+  }
 
   aside {
     @include scrollbar();
