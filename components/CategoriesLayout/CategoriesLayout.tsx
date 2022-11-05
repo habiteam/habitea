@@ -51,7 +51,13 @@ export default function CategoriesLayout(props: AppLayoutProps) {
           ]}
         >
           <form className={styles.form}>
-            <Input title="Name" id="name" autoFocus color="primary"></Input>
+            <Input
+              title="Name"
+              id="name"
+              required
+              autoFocus
+              color="primary"
+            ></Input>
             <Input title="Description" id="description" color="primary"></Input>
             <Input
               title="Goal"

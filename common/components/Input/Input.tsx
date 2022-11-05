@@ -33,13 +33,17 @@ export default function Input(props: InputPropsSchema) {
         [buttonStyles['wrapper--touched']]: hasValue,
       })}
     >
-      <label htmlFor={props.id}>{props.title}</label>
+      <label htmlFor={props.id}>
+        {props.title}
+        {props.required && '*'}
+      </label>
 
       <div className={buttonStyles.input__container}>
         <input
           name={props.name}
           value={props.value}
           id={props.id}
+          required={props.required}
           onFocus={() => {
             setIsFocused(true);
           }}
