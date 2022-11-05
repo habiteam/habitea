@@ -1,6 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { useTransition, animated } from 'react-spring';
 import styles from './SignInForm.module.scss';
 import Card from '../../common/components/Card/Card';
 import CardContent from '../../common/components/Card/CardContent/CardContent';
@@ -164,6 +165,16 @@ export function LoginForm({ router }: { router: NextRouter }) {
 export default function Page() {
   const router = useRouter();
 
+  const right = { translateX: '-430px' };
+  const left = { translateX: '430px' };
+
+  const transition = useTransition(router.asPath === '/register', {
+    from: router.asPath === '/register' ? right : left,
+    enter: { translateX: '0px' },
+    leave: router.asPath === '/register' ? left : right,
+    exitBeforeEnter: true,
+  });
+
   return (
     <main>
       <Image
@@ -176,13 +187,17 @@ export default function Page() {
       <div className={styles['form-wrapper']}>
         <Card maxWidth="560px" elevated color="primary">
           <CardContent>
-            <form className={styles.form}>
-              {router.asPath === '/register' ? (
-                <RegisterForm router={router} />
+            {transition((style, item) =>
+              item ? (
+                <animated.form style={style} className={styles.form}>
+                  <RegisterForm router={router} />
+                </animated.form>
               ) : (
-                <LoginForm router={router} />
-              )}
-            </form>
+                <animated.form style={style} className={styles.form}>
+                  <LoginForm router={router} />
+                </animated.form>
+              ),
+            )}
           </CardContent>
         </Card>
       </div>
