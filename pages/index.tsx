@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import classNames from 'classnames';
+import Router from 'next/router';
 import styles from './Home.module.scss';
 import heroBgImg from '../public/backgrounds/bg-main.jpg';
+import { auth } from '../common/services/firebase';
 
 export default function Home() {
   return (
@@ -30,7 +32,13 @@ export default function Home() {
             “Until you make the unconscious conscious, it will direct your life
             and you will call it fate.”
           </span>
-          <button className={classNames(styles.cta)} color="default">
+          <button
+            onClick={() => {
+              Router.push(auth.currentUser ? '/app' : '/register');
+            }}
+            className={classNames(styles.cta)}
+            color="default"
+          >
             <strong>Get started</strong>
           </button>
         </div>
