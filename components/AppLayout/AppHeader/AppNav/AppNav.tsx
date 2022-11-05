@@ -9,8 +9,10 @@ import {
   faGear,
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
+import { signOut } from 'firebase/auth';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
+import Router from 'next/router';
 import { useState } from 'react';
 import {
   MOBILE_BREAKPOINT,
@@ -18,6 +20,7 @@ import {
 } from '../../../../common/atoms/screen-width';
 import DropdownMenu from '../../../../common/components/DropdownMenu/DropdownMenu';
 import NavLink from '../../../../common/components/NavLink/NavLink';
+import { auth } from '../../../../common/services/firebase';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {
@@ -46,7 +49,15 @@ export default function AppNav() {
       text: 'Sign out',
       icon: faArrowRightFromBracket,
       onClick: () => {
-        console.log('Sign out');
+        signOut(auth)
+          .then(() => {
+            // Sign-out successful.
+            console.log('sajonara');
+            Router.push('/');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       },
     },
   ];

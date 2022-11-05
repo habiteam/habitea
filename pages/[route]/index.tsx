@@ -1,6 +1,10 @@
 import { NextRouter, useRouter } from 'next/router';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import styles from './SignInForm.module.scss';
 import Card from '../../common/components/Card/Card';
 import CardContent from '../../common/components/Card/CardContent/CardContent';
@@ -9,6 +13,7 @@ import Link from '../../common/components/Link/Link';
 import bgImg from '../../public/backgrounds/bg-desk-light.jpg';
 import Button from '../../common/components/Button/Button';
 import { EmailAuthData } from '../../common/schemas/email-auth-data';
+import { auth } from '../../common/services/firebase';
 
 export async function getStaticPaths() {
   return {
@@ -37,19 +42,17 @@ export function RegisterForm({ router }: { router: NextRouter }) {
   }
 
   function registerUser() {
-    fetch('/api/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(registerData),
-      headers: {
-        'content-type': 'application/json',
-      },
-    }).then((response: Response) => {
-      if (response.status === 200) {
-        router.push('/login');
-      } else {
-        console.log(response); // TODO: notification system (probably some form snackbar or toast)
-      }
-    });
+    createUserWithEmailAndPassword(
+      auth,
+      registerData.email,
+      registerData.password,
+    )
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -96,7 +99,6 @@ export function LoginForm({ router }: { router: NextRouter }) {
     email: '',
     password: '',
   });
-
   function handleFormChange(event: React.ChangeEvent<HTMLInputElement>) {
     setLoginData((values: EmailAuthData) => ({
       ...values,
@@ -105,19 +107,13 @@ export function LoginForm({ router }: { router: NextRouter }) {
   }
 
   function loginUser() {
-    fetch('/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(loginData),
-      headers: {
-        'content-type': 'application/json',
-      },
-    }).then((response: Response) => {
-      if (response.status === 200) {
-        router.push('/app');
-      } else {
-        console.log(response); // TODO: notification system (probably some form snackbar or toast)
-      }
-    });
+    signInWithEmailAndPassword(auth, loginData.password, loginData.password)
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -163,7 +159,6 @@ export function LoginForm({ router }: { router: NextRouter }) {
 
 export default function Page() {
   const router = useRouter();
-
   return (
     <main>
       <Image
