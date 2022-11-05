@@ -1,2 +1,85 @@
-// .lp {
-// }
+@import '/styles/mixins.module.scss';
+@import '/styles/colors.module.scss';
+@import '/styles/breakpoints.module.scss';
+
+$color-emph: $color-warning;
+.background-image {
+  z-index: -1;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+.hero {
+  height: 100vh;
+  position: relative;
+  background-image: linear-gradient(339deg, #ff6a00b5, #8eea0c29);
+  @include container();
+}
+.hello {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  @media (min-width: $breakpoint-md) {
+    position: absolute;
+    left: 12%;
+    top: 22%;
+    max-width: 640px;
+    height: auto;
+    text-align: left;
+  }
+  animation: fade 300ms ease-in-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.emph {
+  text-shadow: 2px 2px $color-emph;
+}
+.title {
+  font-size: 42px;
+}
+.subtitle {
+  font-size: 32px;
+}
+.quote {
+  font-size: 19px;
+  font-style: italic;
+  margin-bottom: 24px;
+  font-family: 'Cantarell', sans-serif;
+}
+@media (min-width: $breakpoint-md) {
+  .title {
+    font-size: 66px;
+  }
+  .subtitle {
+    font-size: 42px;
+  }
+  .quote {
+    font-size: 22px;
+  }
+}
+
+.cta {
+  margin-top: 12px;
+  border: 2px solid $color-emph;
+  background-color: $color-emph;
+  color: white;
+  transition: all 400ms;
+  font-size: 32px;
+  &:hover {
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+  }
+  // animation: shine 4s ease-in-out infinite;
+}

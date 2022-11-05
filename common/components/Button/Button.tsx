@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
 import styles from './Button.module.scss';
 import { Color } from '../../constants/Color';
@@ -11,6 +11,7 @@ export interface ButtonPropSchema {
   onClick?: (event?: any) => void;
   disabled?: boolean;
   color?: Color;
+  style?: CSSProperties;
 }
 
 /**
@@ -28,6 +29,7 @@ export default function Button(props: ButtonPropSchema) {
         styles[`button--${props.fillType}`],
         styles[`button--${props.size ?? 'md'}`],
       )}
+      style={props.style}
     >
       {props.text}
       {props.children}

@@ -176,7 +176,7 @@ export default function Page() {
       <Image
         className={styles['background-image']}
         src={bgImg}
-        alt="register"
+        alt="background image"
         placeholder="blur"
         fill
       ></Image>
