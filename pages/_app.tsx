@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         // https://firebase.google.com/docs/reference/js/firebase.User
         // We gonna probably save user shit here to atom not push to certain path
         console.log(user);
-        router.push('/app');
+        // router.push('/app');
       }
     });
 
