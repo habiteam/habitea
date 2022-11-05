@@ -1,12 +1,13 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { registerUser } from '../../../common/services/firebase';
+import { auth } from '../../../common/services/firebase';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
-    registerUser(req.body.email, req.body.password)
+    createUserWithEmailAndPassword(auth, req.body.email, req.body.password)
       .then((userCredential) => {
         res.status(200).json(userCredential);
       })

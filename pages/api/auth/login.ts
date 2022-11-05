@@ -1,12 +1,13 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { loginUser } from '../../../common/services/firebase';
+import { auth } from '../../../common/services/firebase';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
-    loginUser(req.body.email, req.body.password)
+    signInWithEmailAndPassword(auth, req.body.email, req.body.password)
       .then((userCredential) => {
         res.status(200).json(userCredential);
       })

@@ -3,15 +3,16 @@ import buttonStyles from './Input.module.scss';
 import colors from '../../../styles/colors.module.scss';
 import { Color } from '../../constants/Color';
 
-export interface InputPropsSchema {
-  id: string;
+export interface InputPropsSchema
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   title: string;
   disabled?: boolean;
   color?: Color;
   type?: 'text' | 'password';
-  name?: string;
   value?: string;
-  onChange?: (e: string) => void;
 }
 
 export default function Input(props: InputPropsSchema) {
@@ -50,7 +51,7 @@ export default function Input(props: InputPropsSchema) {
             }
 
             if (props.onChange) {
-              props.onChange(event.target.value);
+              props.onChange(event);
             }
           }}
           type={props.type ?? 'text'}
