@@ -1,9 +1,14 @@
 @import '../../styles/colors.module';
+@import '../../styles/mixins.module';
 
 .layout {
   position: fixed;
   width: 100%;
   height: 100vh;
   background-color: mix(mix($color-primary, #fff, 19%), #dfdfdf, 20%);
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.main {
+  @include container();
 }

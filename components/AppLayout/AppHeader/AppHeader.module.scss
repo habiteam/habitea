@@ -1,8 +1,9 @@
 @import '../../../styles/colors.module';
+@import '../../../styles/mixins.module';
 
 .header {
   height: 80px;
-  padding: 0 0 0 40px;
+  @include container();
   display: flex;
   align-items: center;
   background-color: mix($color-primary, #fff, 10%);
