@@ -1,14 +1,19 @@
 import { animated, easings, useTransition } from 'react-spring';
+import Button, { ButtonPropSchema } from '../Button/Button';
 import Overlay from '../Overlay/Overlay';
 import styles from './Dialog.module.scss';
 
 export interface DialogPropsSchema {
+  title?: string;
+  actions?: ButtonPropSchema[];
   children: React.ReactNode;
   open: boolean;
   handleClose?: () => void;
 }
 
 export default function Dialog({
+  title,
+  actions,
   children,
   open,
   handleClose,
@@ -31,7 +36,16 @@ export default function Dialog({
                 className={styles.dialog}
                 style={style}
               >
+                {title && <div className={styles.headline}>{title}</div>}
                 {children}
+                <div className={styles.spacer}></div>
+                {actions && (
+                  <div className={styles.actions}>
+                    {actions.map((action, i) => (
+                      <Button key={i} {...action}></Button>
+                    ))}
+                  </div>
+                )}
               </animated.div>
             </Overlay>
           ),

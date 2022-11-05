@@ -65,3 +65,14 @@
     background-color: mix($color-primary, #fff, 3%);
   }
 }
+
+.form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  & > div {
+    width: 100%;
+  }
+}
