@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { initIcons } from '../common/utils/fontawesome-icons';
 import { auth } from '../common/services/firebase';
+import { NotificationProvider } from '../common/components/Notifications/NotificationProvider';
 
 initIcons();
 
@@ -38,5 +39,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
 
-  return <Provider>{getLayout(<Component {...pageProps} />)}</Provider>;
+  return (
+    <Provider>
+      <NotificationProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </NotificationProvider>
+    </Provider>
+  );
 }
