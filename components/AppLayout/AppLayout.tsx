@@ -1,6 +1,8 @@
 import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/router';
 import React, { ReactElement, useEffect } from 'react';
 import { screenWidth } from '../../common/atoms/screen-width';
+import { auth } from '../../common/services/firebase';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
 
@@ -9,6 +11,23 @@ export interface AppLayoutProps {
 }
 
 export default function AppLayout(props: AppLayoutProps) {
+  const router = useRouter();
+
+  /**
+   * TODO need review
+   * Can we remove delay before redirect?
+   * Do we need useEffect?
+   * Should this be done in AppLayout?
+   * Is there a better way?
+   * Why are we still here?
+   * Just to suffer?
+   */
+  useEffect(() => {
+    if (!auth.currentUser) {
+      router.push('/login');
+    }
+  }, []);
+
   const setWidth = useSetAtom(screenWidth);
 
   useEffect(() => {
@@ -26,7 +45,7 @@ export default function AppLayout(props: AppLayoutProps) {
   return (
     <div className={styles.layout}>
       <AppHeader />
-      <div>{props.children}</div>
+      <div className={styles.main}>{props.children}</div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default function Home() {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      const { uid } = user;
+      // const { uid } = user;
       console.log(user);
       // ...
     } else {
