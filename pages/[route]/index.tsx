@@ -165,8 +165,7 @@ export default function Page() {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      // router.push('/app');
-      console.log('user logged in - redirect');
+      router.push('/app');
     }
   });
   const right = { translateX: '-430px' };
