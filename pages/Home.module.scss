@@ -5,16 +5,14 @@
 $color-emph: $color-warning;
 .background-image {
   z-index: -1;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
+
   object-fit: cover;
 }
 .hero {
+  @include container();
   height: 100vh;
   position: relative;
   background-image: linear-gradient(339deg, #ff6a00b5, #8eea0c29);
-  @include container();
 }
 .hello {
   display: flex;
@@ -23,39 +21,32 @@ $color-emph: $color-warning;
   height: 100vh;
   text-align: center;
   @media (min-width: $breakpoint-md) {
-    position: absolute;
-    left: 12%;
-    top: 22%;
     max-width: 640px;
-    height: auto;
+    top: 22%;
+    left: 12%;
     text-align: left;
   }
-  animation: fade 300ms ease-in-out;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
+  @media (min-width: $breakpoint-lg) {
+    height: auto;
+    position: absolute;
   }
 }
-.emph {
-  text-shadow: 2px 2px $color-emph;
-}
+
 .title {
   font-size: 42px;
 }
 .subtitle {
   font-size: 32px;
+  text-decoration: underline;
+  text-decoration-color: $color-emph;
 }
 .quote {
   font-size: 19px;
   font-style: italic;
   margin-bottom: 24px;
   font-family: 'Cantarell', sans-serif;
+  font-weight: 600;
+  text-shadow: 2px 2px $color-emph;
 }
 @media (min-width: $breakpoint-md) {
   .title {
@@ -77,8 +68,9 @@ $color-emph: $color-warning;
   transition: all 400ms;
   font-size: 32px;
   &:hover {
-    background-color: transparent;
-    color: black;
+    background-color: black;
+    text-shadow: 2px 2px $color-emph;
+
     cursor: pointer;
   }
   // animation: shine 4s ease-in-out infinite;

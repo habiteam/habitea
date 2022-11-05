@@ -25,12 +25,12 @@ export default function Home() {
         ></Image>
         <div className={styles.hello}>
           <h1 className={classNames(styles.title)}>Habitea</h1>
-          <h2 className={classNames(styles.emph, styles.subtitle)}>
+          <h2 className={classNames(styles.subtitle)}>
             Get in control of your habits
           </h2>
           <span className={styles.quote}>
-            “Until you make the unconscious conscious, it will direct your life
-            and you will call it fate.”
+            “Until you make the unconscious conscious, it will direct
+            your&nbsp;life and you will call it fate.”
           </span>
           <button
             onClick={() => {
