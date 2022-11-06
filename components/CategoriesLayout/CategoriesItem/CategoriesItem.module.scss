@@ -30,6 +30,7 @@
 
     &:hover,
     &:focus-visible {
+      color: var(--c-text-dark);
       background-color: var(--c-primary);
     }
   }

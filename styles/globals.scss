@@ -9,15 +9,6 @@ body {
   --c-primary-light-bg: #fdfaf8;
   --c-primary-dark: rgb(60, 51, 42);
 
-  &.kale {
-    --c-primary: #47bd08;
-    --c-primary-active: #b4e59c;
-    --c-primary-dark-bg: #dfe3dc;
-    --c-primary-medium-bg: #eff9e6;
-    --c-primary-light-bg: #fbfdf8;
-    --c-primary-dark: rgb(47, 60, 42);
-  }
-
   &.coffee {
     --c-primary: #71341f;
     --c-primary-active: #e5c19c;
@@ -25,6 +16,24 @@ body {
     --c-primary-medium-bg: #c4b2a8;
     --c-primary-light-bg: #fffdfc;
     --c-primary-dark: rgb(136 101 76);
+  }
+
+  &.milky {
+    --c-primary: #766850;
+    --c-primary-active: #e5c19c;
+    --c-primary-dark-bg: #e3e3e3;
+    --c-primary-medium-bg: #ffe9c5;
+    --c-primary-light-bg: #fffdfc;
+    --c-primary-dark: #997f56;
+  }
+
+  &.kale {
+    --c-primary: #47bd08;
+    --c-primary-active: #b4e59c;
+    --c-primary-dark-bg: #dfe3dc;
+    --c-primary-medium-bg: #eff9e6;
+    --c-primary-light-bg: #fbfdf8;
+    --c-primary-dark: rgb(47, 60, 42);
   }
 
   &.mint {
@@ -36,15 +45,6 @@ body {
     --c-primary-dark: rgb(42 51 60);
   }
 
-  &.pinku {
-    --c-primary: #de14ca;
-    --c-primary-active: #e59cda;
-    --c-primary-dark-bg: #e3dce3;
-    --c-primary-medium-bg: #f9e6f8;
-    --c-primary-light-bg: #fcf8fd;
-    --c-primary-dark: rgb(60, 42, 58);
-  }
-
   &.blackberry {
     --c-primary: #a160dd;
     --c-primary-active: #bc9ce5;
@@ -52,6 +52,15 @@ body {
     --c-primary-medium-bg: #efe6f9;
     --c-primary-light-bg: #fbf8fd;
     --c-primary-dark: rgb(50, 42, 60);
+  }
+
+  &.pinku {
+    --c-primary: #de14ca;
+    --c-primary-active: #e59cda;
+    --c-primary-dark-bg: #e3dce3;
+    --c-primary-medium-bg: #f9e6f8;
+    --c-primary-light-bg: #fcf8fd;
+    --c-primary-dark: rgb(60, 42, 58);
   }
 
   &.beetroot {

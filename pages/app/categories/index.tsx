@@ -1,22 +1,11 @@
-import { useSetAtom } from 'jotai';
-import { v4 } from 'uuid';
-import notifications from '../../../common/atoms/notifications';
 import { getCategoriesLayout } from '../../../components/CategoriesLayout/CategoriesLayout';
+import styles from './Categories.module.scss';
 
 export default function Categories() {
-  const setNotificationsAtom = useSetAtom(notifications);
-
-  function addNotification() {
-    setNotificationsAtom((values) => [
-      ...values,
-      { id: v4(), message: 'Jakieś info', type: 'info' },
-    ]);
-  }
-
   return (
-    <>
-      <button onClick={addNotification}>Add notif</button>
-    </>
+    <div className={styles.categories}>
+      <div>Select or create new category</div>
+    </div>
   );
 }
 
