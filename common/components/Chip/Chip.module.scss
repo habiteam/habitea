@@ -28,4 +28,8 @@
       outline: 1px solid mix($color, #2e2e2e, 40%);
     }
   }
+  &--primary {
+    color: var(--c-primary-dark);
+    outline: 1px solid var(--c-primary-dark-bg);
+  }
 }

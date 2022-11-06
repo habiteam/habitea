@@ -8,8 +8,5 @@
   height: 100%;
   display: grid;
   place-items: center;
-  background-color: adjust-color(
-    mix($color-primary, #2e2e2e, 10%),
-    $alpha: -0.3
-  );
+  background-color: #00000080;
 }

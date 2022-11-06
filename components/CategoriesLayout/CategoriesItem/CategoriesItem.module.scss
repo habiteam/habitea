@@ -11,7 +11,7 @@
   align-items: center;
   cursor: pointer;
   border-radius: 24px;
-  color: mix($color-primary, #3f3f3f, 10%);
+  color: black;
   transition: all 400ms ease-in-out;
 
   span {
@@ -21,18 +21,18 @@
   }
 
   &:hover {
-    color: mix($color-primary, #000, 10%);
-    background-color: mix($color-primary, #fff, 10%);
+    color: black;
+    background-color: var(--c-primary-medium-bg);
   }
 
   &--active {
     border-radius: 12px;
-    color: mix($color-primary, #000, 10%);
-    background-color: mix($color-primary, #fff, 40%);
+    color: black;
+    background-color: var(--c-primary-active);
 
     &:hover,
     &:focus-visible {
-      background-color: mix($color-primary, #fff, 50%);
+      background-color: var(--c-primary);
     }
   }
 }

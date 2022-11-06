@@ -1,10 +1,9 @@
-import { useSetAtom } from 'jotai';
-import { useRouter } from 'next/router';
+import { useAtom, useSetAtom } from 'jotai';
 import React, { ReactElement, useEffect } from 'react';
 import { screenWidth } from '../../common/atoms/screen-width';
-import { auth } from '../../common/services/firebase';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
+import themeAtom from '../../common/atoms/theme';
 
 export interface AppLayoutProps {
   children: React.ReactNode;
@@ -12,6 +11,19 @@ export interface AppLayoutProps {
 
 export default function AppLayout(props: AppLayoutProps) {
   const setWidth = useSetAtom(screenWidth);
+
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  useEffect(() => {
+    document.body.className = theme;
+    // localStorage.setItem('theme', theme);
+  }, [theme]);
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
 
   useEffect(() => {
     setWidth(window.innerWidth);

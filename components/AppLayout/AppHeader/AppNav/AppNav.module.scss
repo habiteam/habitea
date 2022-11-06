@@ -33,7 +33,7 @@
   &:hover,
   &--active {
     cursor: pointer;
-    outline: 1px solid $color-primary;
+    outline: 1px solid var(--c-primary);
   }
 
   &--active {

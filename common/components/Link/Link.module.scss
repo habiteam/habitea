@@ -21,4 +21,12 @@
       }
     }
   }
+  &--primary {
+    color: var(--c-primary);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--c-primary-light-bg);
+    }
+  }
 }

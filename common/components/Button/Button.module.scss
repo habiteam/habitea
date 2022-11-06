@@ -83,3 +83,50 @@
     }
   }
 }
+.button--primary.button--regular {
+  color: var(--c-primary);
+
+  &:hover,
+  &:active,
+  &:focus-visible {
+    background-color: var(--c-primary-light-bg);
+    color: var(--c-primary-dark);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: transparent;
+    color: #999;
+  }
+}
+
+.button--primary.button--filled {
+  background-color: var(--c-primary);
+
+  &:hover {
+    background-color: var(--c-primary-dark);
+  }
+
+  &:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+}
+
+.button--primary.button--outlined {
+  color: var(--c-primary);
+  border-color: var(--c-primary);
+
+  &:hover {
+    border-color: var(--c-primary-dark);
+    background-color: var(--c-primary);
+    color: white;
+  }
+
+  &:disabled {
+    border-color: #999;
+    color: #999;
+    background-color: transparent;
+
+    cursor: not-allowed;
+  }
+}

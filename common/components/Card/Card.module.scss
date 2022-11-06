@@ -26,4 +26,11 @@
       background-color: mix($color, #fff, 14%);
     }
   }
+  &--color-primary.card--elevated {
+    background-color: var(--c-primary-light-bg);
+  }
+
+  &--color-primary.card--filled {
+    background-color: var(--c-primary-medium-bg);
+  }
 }

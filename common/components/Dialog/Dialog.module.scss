@@ -5,7 +5,7 @@
   width: 100%;
   min-height: min(50%, 300px);
   border-radius: 32px;
-  background-color: mix($color-primary, #fff, 10%);
+  background-color: var(--c-primary-medium-bg);
   padding: 24px;
   color: #4f4a45;
   transform-origin: top;

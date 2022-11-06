@@ -67,7 +67,7 @@
     flex: 20;
     padding: 24px;
     border-radius: 12px;
-    background-color: mix($color-primary, #fff, 3%);
+    background-color: var(--c-primary-light-bg);
   }
 }
 

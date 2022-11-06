@@ -25,4 +25,9 @@
       }
     }
   }
+  &--primary {
+    .bar {
+      background-color: var(--c-primary);
+    }
+  }
 }

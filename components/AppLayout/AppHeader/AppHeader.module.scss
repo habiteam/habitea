@@ -6,7 +6,7 @@
   @include container();
   display: flex;
   align-items: center;
-  background-color: mix($color-primary, #fff, 10%);
+  background-color: var(--c-primary-medium-bg);
   position: sticky;
   top: 0;
 }
@@ -14,7 +14,7 @@
 .header-logo {
   font-size: 2.4rem;
   font-weight: 500;
-  color: $color-primary;
+  color: var(--c-primary);
 }
 
 .header-spacer {

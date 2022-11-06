@@ -66,4 +66,30 @@
       }
     }
   }
+  &--primary {
+    &:hover,
+    &:focus-visible {
+      .link-icon {
+        background-color: var(--c-primary-dark-bg);
+      }
+    }
+
+    &.link--active {
+      .link-icon {
+        background-color: var(--c-primary-light-bg);
+        border-radius: 8px;
+      }
+
+      .link-text {
+        color: var(--c-primary-dark);
+      }
+
+      &:hover,
+      &:focus-visible {
+        .link-icon {
+          background-color: var(--c-primary);
+        }
+      }
+    }
+  }
 }

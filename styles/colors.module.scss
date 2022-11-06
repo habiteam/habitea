@@ -9,12 +9,12 @@ $color-disabled: #e3dfe3;
 $color-disabled-text: #989598;
 
 $colors-map: (
-  'primary': $color-primary,
+  // 'primary': $color-primary,
   'danger': $color-danger,
   'info': $color-info,
   'success': $color-success,
   'warning': $color-warning,
-  'default': $color-default,
+  'default': $color-default
 );
 
 :export {
