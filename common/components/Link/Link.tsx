@@ -2,7 +2,7 @@ import NextLink from 'next/link';
 import React from 'react';
 import { UrlObject } from 'url';
 import styles from './Link.module.scss';
-import { Color } from '../../constants/Color';
+import { Color } from '../../constants/Palette';
 
 export interface LinkPropSchema {
   children: React.ReactNode;

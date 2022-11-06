@@ -1,4 +1,4 @@
-import { Color } from '../../constants/Color';
+import { Color } from '../../constants/Palette';
 
 export interface NotificationPropsSchema {
   id: string;

@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
-import Button from '../../../common/components/Button/Button';
 import { getAppLayout } from '../../../components/AppLayout/AppLayout';
 import themeAtom from '../../../common/atoms/theme';
+import ThemeSelector from '../../../components/ThemeSelector/ThemeSelector';
 
 export default function Options() {
   const [theme, setTheme] = useAtom(themeAtom);
@@ -10,24 +9,13 @@ export default function Options() {
   return (
     <>
       <h2>Options</h2>
-      <h3>Select theme</h3>
-      <select
-        name="theme"
-        id=""
+      <ThemeSelector
         value={theme}
-        onChange={(e) => {
-          localStorage.setItem('theme', e.target.value);
-          setTheme(e.target.value);
+        onSelect={(value) => {
+          localStorage.setItem('theme', value);
+          setTheme(value);
         }}
-      >
-        <option value="habitea">Habit tea</option>
-        <option value="coffee">Habit coffe</option>
-        <option value="blackberry">Blackberry juice</option>
-        <option value="kale">Kale smoothie</option>
-        <option value="mint">Spearmint</option>
-        <option value="pinku">Bubblegum</option>
-        <option value="beetroot">Borsch</option>
-      </select>
+      ></ThemeSelector>
     </>
   );
 }

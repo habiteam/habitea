@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
 import styles from './Button.module.scss';
-import { Color } from '../../constants/Color';
+import { Color } from '../../constants/Palette';
 
 export interface ButtonPropSchema {
   text?: string;

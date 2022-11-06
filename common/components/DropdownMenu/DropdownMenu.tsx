@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import styles from './DropdownMenu.module.scss';
-import { Color } from '../../constants/Color';
+import { Color } from '../../constants/Palette';
 
 export interface DropdownMenuItem {
   text: string;

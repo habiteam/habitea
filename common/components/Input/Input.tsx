@@ -2,7 +2,7 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import buttonStyles from './Input.module.scss';
 import colors from '../../../styles/colors.module.scss';
-import { Color } from '../../constants/Color';
+import { Color } from '../../constants/Palette';
 
 export interface InputPropsSchema
   extends React.DetailedHTMLProps<

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Button from '../../Button/Button';
 import styles from './CardHeader.module.scss';
-import { Color } from '../../../constants/Color';
+import { Color } from '../../../constants/Palette';
 import DropdownMenu, {
   DropdownMenuItem,
 } from '../../DropdownMenu/DropdownMenu';

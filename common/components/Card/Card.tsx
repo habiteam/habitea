@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './Card.module.scss';
-import { Color } from '../../constants/Color';
+import { Color } from '../../constants/Palette';
 
 export type CardAppearance = 'outlined' | 'filled';
 
