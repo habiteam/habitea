@@ -22,9 +22,11 @@ export default function Options() {
       >
         <option value="habitea">Habit tea</option>
         <option value="coffee">Habit coffe</option>
+        <option value="blackberry">Blackberry juice</option>
         <option value="kale">Kale smoothie</option>
         <option value="mint">Spearmint</option>
         <option value="pinku">Bubblegum</option>
+        <option value="beetroot">Borsch</option>
       </select>
     </>
   );

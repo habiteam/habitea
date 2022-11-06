@@ -22,12 +22,9 @@ export default function Input(props: InputPropsSchema) {
 
   return (
     <div
-      style={
-        {
-          ...props.style,
-          '--color': colors[props.color ?? 'default'],
-        } as React.CSSProperties
-      }
+      style={{
+        ...props.style,
+      }}
       className={classNames(buttonStyles.wrapper, {
         [buttonStyles['wrapper--focused']]: isFocused,
         [buttonStyles['wrapper--touched']]: hasValue,

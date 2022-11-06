@@ -110,7 +110,7 @@ export function LoginForm({ router }: { router: NextRouter }) {
   function loginUser() {
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
       .then((user) => {
-        console.log(user);
+        router.push('/app');
       })
       .catch((error) => {
         console.error(error);
