@@ -1,7 +1,7 @@
 @import '../../../styles/colors.module.scss';
 
 .dialog {
-  max-width: clamp(30%, 456px, 70%);
+  max-width: clamp(10%, 456px, 70%);
   width: 100%;
   min-height: min(50%, 300px);
   border-radius: 32px;

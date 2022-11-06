@@ -15,9 +15,9 @@ export interface Theme {
 export const THEMES: Theme[] = [
   { name: 'Habi tea', value: 'habitea', primary: '#be5c07' },
   { name: 'Habi coffee', value: 'coffee', primary: '#71341f' },
-  { name: 'Blackberry juice', value: 'blackberry', primary: '#7c14de' },
+  { name: 'Blackberry juice', value: 'blackberry', primary: '#a160dd' },
   { name: 'Kale smoothie', value: 'kale', primary: '#47bd08' },
   { name: 'Spearmint', value: 'mint', primary: '#14c3de' },
   { name: 'Bubblegum', value: 'pinku', primary: '#de14ca' },
-  { name: 'Borsch', value: 'beetroot', primary: '#de1414' },
+  { name: 'Borsch', value: 'beetroot', primary: '#d65a5a' },
 ];
