@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import buttonStyles from './Input.module.scss';
-import colors from '../../../styles/colors.module.scss';
+import styles from './Input.module.scss';
 import { Color } from '../../constants/Palette';
 
 export interface InputPropsSchema
@@ -25,9 +24,9 @@ export default function Input(props: InputPropsSchema) {
       style={{
         ...props.style,
       }}
-      className={classNames(buttonStyles.wrapper, {
-        [buttonStyles['wrapper--focused']]: isFocused,
-        [buttonStyles['wrapper--touched']]: hasValue,
+      className={classNames(styles.wrapper, {
+        [styles['wrapper--focused']]: isFocused,
+        [styles['wrapper--touched']]: hasValue,
       })}
     >
       <label htmlFor={props.id}>
@@ -35,7 +34,7 @@ export default function Input(props: InputPropsSchema) {
         {props.required && '*'}
       </label>
 
-      <div className={buttonStyles.input__container}>
+      <div className={styles.input__container}>
         <input
           name={props.name}
           value={props.value}
