@@ -1,29 +1,56 @@
-import { useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import styles from './Select.module.scss';
 import { Color } from '../../constants/Palette';
 
-export interface InputPropsSchema
-  extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+export interface SelectPropsSchema {
   title: string;
   disabled?: boolean;
   color?: Color;
   type?: 'text' | 'password';
   options: { [key: string]: string };
+  id: string;
+  name?: string;
+  onChange?: (key: string) => void;
+  style?: CSSProperties | undefined;
+  required?: boolean;
 }
 
-export default function Select(props: InputPropsSchema) {
+export default function Select(props: SelectPropsSchema) {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);
-  // const [optionsVisible, setOptionsVisible] = useState(false);
   const [selectValue, setSelectValue] = useState('');
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        // props.onClose();
+        setIsFocused(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+
+    function handleTabPress(event: KeyboardEvent) {
+      if (event.code === 'Tab') {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
+          setIsFocused(false);
+        }
+      }
+    }
+    document.addEventListener('keyup', handleTabPress);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keyup', handleTabPress);
+    };
+  }, [ref]);
 
   return (
     <>
       <div
+        ref={ref}
         style={{
           ...props.style,
         }}
@@ -43,23 +70,14 @@ export default function Select(props: InputPropsSchema) {
             value={selectValue}
             id={props.id}
             required={props.required}
-            onClick={() => {
+            onFocus={() => {
               setIsFocused(true);
             }}
-            onBlur={() => {
-              // 😬️😬️😬️ hackish: closing options too quickly prevents onClick from trigering on option item
-              setTimeout(() => {
-                setIsFocused(false);
-              }, 250);
-            }}
-            onChange={(event) => {
+            onChange={() => {
               if (selectValue.length > 0) {
                 setHasValue(true);
               } else {
                 setHasValue(false);
-              }
-              if (props.onChange) {
-                props.onChange(event);
               }
             }}
             type={props.type ?? 'text'}
@@ -77,11 +95,12 @@ export default function Select(props: InputPropsSchema) {
               [styles['options--visible']]: isFocused,
             })}
           >
-            {/* TODO make options keyboard accessible */}
             {Object.keys(props.options).map((key, i) => (
-              <div
+              <button
                 onClick={() => {
-                  console.log(props.options[key]);
+                  if (props.onChange) {
+                    props.onChange(key);
+                  }
                   setSelectValue(props.options[key]);
                   setIsFocused(false);
                   setHasValue(true);
@@ -90,7 +109,7 @@ export default function Select(props: InputPropsSchema) {
                 key={i}
               >
                 {props.options[key]}
-              </div>
+              </button>
             ))}
           </div>
         </div>

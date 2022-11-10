@@ -117,13 +117,17 @@
 .option {
   font-size: 1.6rem;
   padding: 12px 16px;
+  width: 100%;
   background-color: var(--c-primary-light-bg);
+  border: none;
   &:not(:last-child) {
     border-bottom: 1px dashed var(--c-primary-dark-bg);
   }
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background-color: var(--c-primary-medium-bg);
     cursor: pointer;
+    outline: none;
   }
 }

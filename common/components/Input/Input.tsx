@@ -13,6 +13,7 @@ export interface InputPropsSchema
   color?: Color;
   type?: 'text' | 'password';
   value?: string;
+  id: string;
 }
 
 export default function Input(props: InputPropsSchema) {

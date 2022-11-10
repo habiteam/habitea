@@ -29,7 +29,7 @@ export async function getStaticProps() {
   };
 }
 
-export function RegisterForm({ router }: { router: NextRouter }) {
+export function RegisterForm() {
   const [registerData, setRegisterData] = useState<EmailAuthData>({
     email: '',
     password: '',
