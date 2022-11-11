@@ -1,0 +1,31 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  max-height: 304px;
+  overflow: auto;
+}
+
+.item {
+  border: 0;
+  background-color: transparent;
+  padding: 8px 24px;
+  text-align: start;
+  margin: 0px 16px 0px 0px;
+  transition: all 400ms ease-in-out;
+  border-radius: 24px;
+
+  &:hover {
+    background-color: var(--c-primary-medium-bg);
+    cursor: pointer;
+  }
+}
+
+.item.item--selected {
+  background-color: var(--c-primary-active);
+  border-radius: 8px;
+
+  &:hover {
+    color: var(--c-text-dark);
+    background-color: var(--c-primary);
+  }
+}
