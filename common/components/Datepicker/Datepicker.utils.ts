@@ -20,18 +20,18 @@ export function getMonthName(monthNumber: number) {
 }
 
 export const months: DatepickerSelectItem[] = [
-  { label: 'Jan', value: 0 },
-  { label: 'Feb', value: 1 },
-  { label: 'Mar', value: 2 },
-  { label: 'Apr', value: 3 },
+  { label: 'January', value: 0 },
+  { label: 'February', value: 1 },
+  { label: 'March', value: 2 },
+  { label: 'April', value: 3 },
   { label: 'May', value: 4 },
-  { label: 'Jun', value: 5 },
-  { label: 'Jul', value: 6 },
-  { label: 'Aug', value: 7 },
-  { label: 'Sep', value: 8 },
-  { label: 'Oct', value: 9 },
-  { label: 'Nov', value: 10 },
-  { label: 'Dec', value: 11 },
+  { label: 'June', value: 5 },
+  { label: 'July', value: 6 },
+  { label: 'August', value: 7 },
+  { label: 'September', value: 8 },
+  { label: 'October', value: 9 },
+  { label: 'November', value: 10 },
+  { label: 'December', value: 11 },
 ];
 
 export const years = (): DatepickerSelectItem[] => {
