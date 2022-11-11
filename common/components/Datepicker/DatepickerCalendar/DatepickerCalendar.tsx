@@ -28,7 +28,7 @@ export function DatepickerCalendar({
   selectedDate,
   onChange,
 }: DatepickerCalendarPropSchema) {
-  const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const weekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
   const emptiesBefore: any[] = [];
   const days: any[] = [];

@@ -7,7 +7,7 @@ export default function App() {
     <>
       <h2>
         Welcome {auth.currentUser?.displayName ?? auth.currentUser?.email}
-        <Datepicker></Datepicker>
+        <Datepicker onSelect={(date) => console.log(date)}></Datepicker>
       </h2>
     </>
   );

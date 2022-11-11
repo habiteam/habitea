@@ -36,7 +36,7 @@ export const months: DatepickerSelectItem[] = [
 
 export const years = (): DatepickerSelectItem[] => {
   const list = [];
-  for (let i = 1930; i < 2230; i += 1) {
+  for (let i = 1922; i < 2122; i += 1) {
     list.push({ label: i.toString(), value: i });
   }
   return list;

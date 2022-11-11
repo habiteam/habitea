@@ -14,9 +14,10 @@ export type DatepickerView = 'Calendar' | 'Months' | 'Years';
 
 export interface DatepickerPropSchema {
   date?: string;
+  onSelect: (date: string) => void;
 }
 
-export default function Datepicker({ date }: DatepickerPropSchema) {
+export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
   const viewDate = date ? new Date(date) : new Date();
 
   const [currentlyViewed, setCurrentlyViewed] =
@@ -89,6 +90,7 @@ export default function Datepicker({ date }: DatepickerPropSchema) {
           selectedDate={selectedDate}
           onChange={(value) => {
             setSelectedDate(value);
+            onSelect(`${value.year}-${value.month}-${value.day}`);
           }}
         ></DatepickerCalendar>
       )}
