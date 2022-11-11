@@ -90,7 +90,7 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
           selectedDate={selectedDate}
           onChange={(value) => {
             setSelectedDate(value);
-            onSelect(`${value.year}-${value.month}-${value.day}`);
+            onSelect(`${value.year}-${value.month + 1}-${value.day}`);
           }}
         ></DatepickerCalendar>
       )}
