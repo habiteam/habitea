@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated, easings } from 'react-spring';
 import styles from './Datepicker.module.scss';
 import {
   DatepickerCalendar,
@@ -41,7 +41,7 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
     enter: { opacity: 1, scale: 1 },
     leave: { opacity: 0.2, scale: 1.1 },
     exitBeforeEnter: true,
-    config: { duration: 400 },
+    config: { duration: 150, easing: easings.easeInOutQuad },
   };
 
   const monthTransition = useTransition(
