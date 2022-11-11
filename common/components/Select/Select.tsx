@@ -20,8 +20,26 @@ export default function Select(props: SelectPropsSchema) {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);
   const [selectValue, setSelectValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   const ref = useRef<HTMLDivElement>(null);
+
+  function getHighlightedText(text: string) {
+    const parts = text.split(new RegExp(`(${searchValue})`, 'gi'));
+    return (
+      <span>
+        {parts.map((part, i) =>
+          part.toLowerCase() === searchValue.toLowerCase() ? (
+            <span key={i} className={styles.highlighted}>
+              {part}
+            </span>
+          ) : (
+            part
+          ),
+        )}
+      </span>
+    );
+  }
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -67,13 +85,16 @@ export default function Select(props: SelectPropsSchema) {
         <div className={styles.input__container}>
           <input
             name={props.name}
-            value={selectValue}
+            value={isFocused ? searchValue : selectValue}
             id={props.id}
+            autoComplete="off"
             required={props.required}
             onFocus={() => {
               setIsFocused(true);
             }}
-            onChange={() => {
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+
               if (selectValue.length > 0) {
                 setHasValue(true);
               } else {
@@ -95,22 +116,29 @@ export default function Select(props: SelectPropsSchema) {
               [styles['options--visible']]: isFocused,
             })}
           >
-            {Object.keys(props.options).map((key, i) => (
-              <button
-                onClick={() => {
-                  if (props.onChange) {
-                    props.onChange(key);
-                  }
-                  setSelectValue(props.options[key]);
-                  setIsFocused(false);
-                  setHasValue(true);
-                }}
-                className={classNames(styles.option)}
-                key={i}
-              >
-                {props.options[key]}
-              </button>
-            ))}
+            {Object.keys(props.options)
+              .filter(
+                (key) =>
+                  props.options[key]
+                    .toLocaleLowerCase()
+                    .indexOf(searchValue.toLocaleLowerCase()) !== -1,
+              )
+              .map((key, i) => (
+                <button
+                  onClick={() => {
+                    if (props.onChange) {
+                      props.onChange(key);
+                    }
+                    setSelectValue(props.options[key]);
+                    setIsFocused(false);
+                    setHasValue(true);
+                  }}
+                  className={classNames(styles.option)}
+                  key={i}
+                >
+                  {getHighlightedText(props.options[key])}
+                </button>
+              ))}
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Datepicker from '../../common/components/Datepicker/Datepicker';
 import { auth } from '../../common/services/firebase';
 import { getAppLayout } from '../../components/AppLayout/AppLayout';
 
@@ -6,6 +7,7 @@ export default function App() {
     <>
       <h2>
         Welcome {auth.currentUser?.displayName ?? auth.currentUser?.email}
+        <Datepicker></Datepicker>
       </h2>
     </>
   );

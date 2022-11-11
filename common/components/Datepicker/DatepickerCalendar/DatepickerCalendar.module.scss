@@ -1,0 +1,46 @@
+@import '../../../../styles/colors.module';
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1.2rem;
+}
+
+.row {
+  display: flex;
+  gap: 4px;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  transition: all 400ms ease-in-out;
+  border: 0;
+  background-color: transparent;
+
+  &--clickable {
+    &:hover {
+      background-color: var(--c-primary-medium-bg);
+      cursor: pointer;
+    }
+  }
+
+  &--selected {
+    background-color: var(--c-primary-active);
+    border-radius: 8px;
+
+    &:hover {
+      color: var(--c-text-dark);
+      background-color: var(--c-primary);
+    }
+  }
+
+  &--inactive {
+    color: $color-disabled-text;
+  }
+}

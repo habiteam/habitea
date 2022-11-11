@@ -1,0 +1,33 @@
+@import '../../../styles/mixins.module';
+
+.datepicker {
+  @include scrollbar();
+  width: 304px;
+}
+
+.buttons-container {
+  display: flex;
+  padding: 12px;
+  gap: 56px;
+  justify-content: center;
+
+  button {
+    padding: 8px 12px;
+    background-color: transparent;
+    border: 0;
+    border-radius: 24px;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 600;
+    transition: all 400ms ease-in-out;
+
+    &:active {
+      border-radius: 8px;
+    }
+
+    &:hover {
+      background-color: var(--c-primary-medium-bg);
+      cursor: pointer;
+    }
+  }
+}

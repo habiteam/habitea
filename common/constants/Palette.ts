@@ -18,6 +18,7 @@ export const THEMES: Theme[] = [
   { name: 'Coffee with milk', value: 'milky', primary: '#766850' },
   { name: 'Kale smoothie', value: 'kale', primary: '#47bd08' },
   { name: 'Spearmint', value: 'mint', primary: '#14c3de' },
+  { name: 'Blue Lemonade', value: 'raspberry', primary: '#1c5575' },
   { name: 'Blackberry juice', value: 'blackberry', primary: '#a160dd' },
   { name: 'Bubblegum', value: 'pinku', primary: '#de14ca' },
   { name: 'Borsch', value: 'beetroot', primary: '#d65a5a' },

@@ -120,6 +120,11 @@
   width: 100%;
   background-color: var(--c-primary-light-bg);
   border: none;
+
+  .highlighted {
+    color: var(--c-primary);
+  }
+
   &:not(:last-child) {
     border-bottom: 1px dashed var(--c-primary-dark-bg);
   }
