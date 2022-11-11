@@ -12,12 +12,15 @@ export interface DatepickerSelectPropSchema {
   selectedValue: string | number;
 }
 
-// TODO: styling
 export function DatepickerSelect({
   list,
   onSelect,
   selectedValue,
 }: DatepickerSelectPropSchema) {
+  setTimeout(() => {
+    document.getElementById(selectedValue.toLocaleString())?.scrollIntoView();
+  }, 0);
+
   return (
     <div className={styles.list}>
       {list?.map((item, i) => (
@@ -25,6 +28,7 @@ export function DatepickerSelect({
           className={classNames(styles.item, {
             [styles['item--selected']]: item.value === selectedValue,
           })}
+          id={item.value.toLocaleString()}
           key={i}
           onClick={() => onSelect(item.value)}
         >
