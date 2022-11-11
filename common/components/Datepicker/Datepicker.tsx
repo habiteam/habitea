@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { useTransition, animated } from 'react-spring';
 import styles from './Datepicker.module.scss';
 import {
   DatepickerCalendar,
@@ -35,6 +36,27 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
 
   const [view, setView] = useState<DatepickerView>('Calendar');
 
+  const commonTransitionStyles = {
+    from: { opacity: 0.2, scale: 0.9 },
+    enter: { opacity: 1, scale: 1 },
+    leave: { opacity: 0.2, scale: 1.1 },
+    exitBeforeEnter: true,
+    config: { duration: 400 },
+  };
+
+  const monthTransition = useTransition(
+    view === 'Months',
+    commonTransitionStyles,
+  );
+  const yearTransition = useTransition(
+    view === 'Years',
+    commonTransitionStyles,
+  );
+  const calendarTransition = useTransition(
+    view === 'Calendar',
+    commonTransitionStyles,
+  );
+
   const monthButton = (
     <button key="monthButton" onClick={() => setView('Months')}>
       {getMonthName(currentlyViewed.month)}
@@ -62,37 +84,58 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
   return (
     <div className={styles.datepicker}>
       <div className={styles['buttons-container']}>{buttons[view]}</div>
-      {view === 'Months' && (
-        <DatepickerSelect
-          list={months}
-          selectedValue={currentlyViewed.month}
-          onSelect={(value) => {
-            setCurrentlyViewed((prev) => ({ ...prev, month: value as number }));
-            setView('Calendar');
-          }}
-        ></DatepickerSelect>
+      {monthTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <DatepickerSelect
+                list={months}
+                selectedValue={currentlyViewed.month}
+                onSelect={(value) => {
+                  setCurrentlyViewed((prev) => ({
+                    ...prev,
+                    month: value as number,
+                  }));
+                  setView('Calendar');
+                }}
+              ></DatepickerSelect>
+            </animated.div>
+          ),
       )}
 
-      {view === 'Years' && (
-        <DatepickerSelect
-          list={years()}
-          selectedValue={currentlyViewed.year}
-          onSelect={(value) => {
-            setCurrentlyViewed((prev) => ({ ...prev, year: value as number }));
-            setView('Calendar');
-          }}
-        ></DatepickerSelect>
+      {yearTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <DatepickerSelect
+                list={years()}
+                selectedValue={currentlyViewed.year}
+                onSelect={(value) => {
+                  setCurrentlyViewed((prev) => ({
+                    ...prev,
+                    year: value as number,
+                  }));
+                  setView('Calendar');
+                }}
+              ></DatepickerSelect>
+            </animated.div>
+          ),
       )}
 
-      {view === 'Calendar' && (
-        <DatepickerCalendar
-          currentlyViewed={currentlyViewed}
-          selectedDate={selectedDate}
-          onChange={(value) => {
-            setSelectedDate(value);
-            onSelect(`${value.year}-${value.month + 1}-${value.day}`);
-          }}
-        ></DatepickerCalendar>
+      {calendarTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <DatepickerCalendar
+                currentlyViewed={currentlyViewed}
+                selectedDate={selectedDate}
+                onChange={(value) => {
+                  setSelectedDate(value);
+                  onSelect(`${value.year}-${value.month + 1}-${value.day}`);
+                }}
+              ></DatepickerCalendar>
+            </animated.div>
+          ),
       )}
     </div>
   );
