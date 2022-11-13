@@ -127,12 +127,7 @@
   }
 
   &--selected {
-    color: var(--c-text-dark);
-    background-color: var(--c-primary-active);
-
-    .highlighted {
-      color: var(--c-primary-dark);
-    }
+    background-color: var(--c-primary-dark-bg);
   }
 
   &:not(:last-child) {
