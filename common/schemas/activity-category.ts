@@ -12,11 +12,12 @@ export interface ActivityCategory {
   icon?: IconName;
   description?: string;
   status: ActivityCategoryStatus;
-  goalValue: number;
+  goalValue: string | number;
   goalType: ActivityCategoryGoalType;
   repeatType: ActivityCategoryRepeatType;
   unit: string;
   createdDate: string;
+  createdBy: string;
   validFrom?: string;
   validTo?: string;
 }

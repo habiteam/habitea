@@ -32,7 +32,7 @@ export default function Dialog({
           item && (
             <Overlay onClick={handleClose}>
               <animated.div
-                onClick={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
                 className={styles.dialog}
                 style={style}
               >

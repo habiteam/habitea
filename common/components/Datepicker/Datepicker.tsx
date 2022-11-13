@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { useTransition, animated, easings } from 'react-spring';
 import styles from './Datepicker.module.scss';
 import {
@@ -71,7 +71,7 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
 
   const calendarButton = (
     <button key="calendarButton" onClick={() => setView('Calendar')}>
-      <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon>
+      <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>
     </button>
   );
 

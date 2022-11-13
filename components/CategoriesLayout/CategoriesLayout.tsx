@@ -1,7 +1,7 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import Dialog from '../../common/components/Dialog/Dialog';
 import Input from '../../common/components/Input/Input';
@@ -13,6 +13,11 @@ import {
   MOBILE_BREAKPOINT,
   screenWidth,
 } from '../../common/atoms/screen-width';
+import Select from '../../common/components/Select/Select';
+import Textarea from '../../common/components/Textarea/Textarea';
+import { ActivityCategory } from '../../common/schemas/activity-category';
+import { ActivityCategoriesService } from '../../common/services/activity-categories';
+import { auth } from '../../common/services/firebase';
 
 export interface AppLayoutProps {
   children: React.ReactNode;
@@ -25,6 +30,36 @@ export function CreateDialog({
   isCreateDialogOpen: boolean;
   setIsCreateDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const [form, setForm] = useState<Partial<ActivityCategory>>({
+    name: '',
+    description: '',
+    status: 'ACTIVE',
+    goalValue: '1',
+    goalType: 'MIN',
+    repeatType: 'DAILY',
+    unit: '',
+  });
+
+  function handleFormChange(event: any) {
+    setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  }
+
+  function handleSelectFormChange(value: any, name: string) {
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  useEffect(() => {
+    setForm({
+      name: '',
+      description: '',
+      status: 'ACTIVE',
+      goalValue: '1',
+      goalType: 'MIN',
+      repeatType: 'DAILY',
+      unit: '',
+    });
+  }, [isCreateDialogOpen]);
+
   return (
     <Dialog
       title="Create new category"
@@ -44,6 +79,7 @@ export function CreateDialog({
           fillType: 'regular',
           color: 'primary',
           onClick: () => {
+            ActivityCategoriesService.create(form);
             setIsCreateDialogOpen(false);
           },
         },
@@ -53,39 +89,70 @@ export function CreateDialog({
         <Input
           title="Name"
           id="name"
+          name="name"
+          value={form.name}
+          onChange={handleFormChange}
           required
           autoFocus
           color="primary"
         ></Input>
-        <Input title="Description" id="description" color="primary"></Input>
+        <Textarea
+          title="Description"
+          id="description"
+          name="description"
+          value={form.description}
+          onChange={handleFormChange}
+          color="primary"
+          rows={6}
+        ></Textarea>
         <Input
           title="Goal"
-          id="goal"
+          id="goalValue"
+          name="goalValue"
+          value={form.goalValue?.toLocaleString()}
+          onChange={handleFormChange}
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
         ></Input>
         <Input
-          title="Goal Unit"
-          id="goalUnit"
+          title="Unit"
+          id="unit"
+          name="unit"
+          value={form.unit}
+          onChange={handleFormChange}
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
         ></Input>
-        <Input
+        <Select
           title="Goal Type"
           id="goalType"
+          name="goalType"
+          value={form.goalType}
+          onChange={(val) => handleSelectFormChange(val, 'goalType')}
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
-        ></Input>
-        <Input title="Repeats" id="repeats" color="primary"></Input>
+          options={{ MIN: 'Minimum', MAX: 'Maximum' }}
+        ></Select>
+        <Select
+          title="Repeats"
+          id="repeatType"
+          name="repeatType"
+          value={form.repeatType}
+          onChange={(val) => handleSelectFormChange(val, 'repeatType')}
+          color="primary"
+          options={{ DAILY: 'Daily', WEEKLY: 'Weekly', MONTHLY: 'Monthly' }}
+        ></Select>
         <Input
           title="Valid from"
           id="validFrom"
+          name="validFrom"
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
         ></Input>
         <Input
           title="Valid to"
           id="validTo"
+          name="validTo"
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
         ></Input>
@@ -96,8 +163,23 @@ export function CreateDialog({
 
 export default function CategoriesLayout(props: AppLayoutProps) {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState<boolean>(false);
+  const [categoryList, setcategoryList] = useState<any[]>([]);
   const router = useRouter();
   const width = useAtomValue(screenWidth);
+
+  function updateCategoriesList() {
+    if (auth.currentUser) {
+      ActivityCategoriesService.getByUserId(auth.currentUser.uid).then(
+        (response) => {
+          setcategoryList(response);
+        },
+      );
+    }
+  }
+
+  useEffect(() => {
+    updateCategoriesList();
+  }, []);
 
   return (
     <div className={styles.layout}>
@@ -114,11 +196,14 @@ export default function CategoriesLayout(props: AppLayoutProps) {
 
           <CreateDialog
             isCreateDialogOpen={isCreateDialogOpen}
-            setIsCreateDialogOpen={setIsCreateDialogOpen}
+            setIsCreateDialogOpen={(value) => {
+              updateCategoriesList();
+              setIsCreateDialogOpen(value);
+            }}
           ></CreateDialog>
 
           <ul className={styles.list}>
-            {activityCategoriesMock.map((category, i) => (
+            {categoryList.map((category, i) => (
               <li key={i}>
                 <CategoriesItem {...category}></CategoriesItem>
               </li>

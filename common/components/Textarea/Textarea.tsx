@@ -1,22 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import styles from './Input.module.scss';
+import styles from './Textarea.module.scss';
 import { Color } from '../../constants/Palette';
 
-export interface InputPropsSchema
+export interface TextareaPropsSchema
   extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
   > {
   title: string;
   disabled?: boolean;
   color?: Color;
-  type?: 'text' | 'password';
   value?: string;
   id: string;
 }
 
-export default function Input(props: InputPropsSchema) {
+export default function Textarea(props: TextareaPropsSchema) {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);
 
@@ -41,8 +40,8 @@ export default function Input(props: InputPropsSchema) {
         {props.required && '*'}
       </label>
 
-      <div className={styles.input__container}>
-        <input
+      <div className={styles.textarea__container}>
+        <textarea
           name={props.name}
           value={props.value}
           id={props.id}
@@ -64,8 +63,8 @@ export default function Input(props: InputPropsSchema) {
               props.onChange(event);
             }
           }}
-          type={props.type ?? 'text'}
-        ></input>
+          rows={props.rows}
+        ></textarea>
 
         <fieldset>
           <legend>

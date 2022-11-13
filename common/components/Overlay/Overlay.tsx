@@ -7,7 +7,7 @@ export interface OverlayPropsSchema {
 
 export default function Overlay({ children, onClick }: OverlayPropsSchema) {
   return (
-    <div className={styles.overlay} onClick={onClick}>
+    <div className={styles.overlay} onMouseDown={onClick}>
       {children}
     </div>
   );

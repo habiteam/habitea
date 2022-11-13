@@ -14,6 +14,7 @@ export interface SelectPropsSchema {
   onChange?: (key: string) => void;
   style?: CSSProperties | undefined;
   required?: boolean;
+  value?: string;
 }
 
 export default function Select(props: SelectPropsSchema) {
@@ -40,6 +41,13 @@ export default function Select(props: SelectPropsSchema) {
       </span>
     );
   }
+
+  useEffect(() => {
+    if (props.value && props.value?.length > 0) {
+      setSelectValue(props.options[props.value]);
+      setHasValue(true);
+    }
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -124,7 +132,8 @@ export default function Select(props: SelectPropsSchema) {
                     .indexOf(searchValue.toLocaleLowerCase()) !== -1,
               )
               .map((key, i) => (
-                <button
+                // TODO: cant be button (button in forms sends it)
+                <div
                   onClick={() => {
                     if (props.onChange) {
                       props.onChange(key);
@@ -133,11 +142,14 @@ export default function Select(props: SelectPropsSchema) {
                     setIsFocused(false);
                     setHasValue(true);
                   }}
-                  className={classNames(styles.option)}
+                  className={classNames(styles.option, {
+                    [styles['option--selected']]:
+                      selectValue === props.options[key],
+                  })}
                   key={i}
                 >
                   {getHighlightedText(props.options[key])}
-                </button>
+                </div>
               ))}
           </div>
         </div>

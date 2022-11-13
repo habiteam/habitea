@@ -22,7 +22,7 @@
     transform-origin: left top;
   }
 
-  .input__container {
+  .textarea__container {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -30,7 +30,7 @@
     cursor: text;
     transition: all 400ms ease-in-out;
 
-    input {
+    textarea {
       width: 100%;
       font-size: 1.6rem;
       display: block;
@@ -72,7 +72,7 @@
       transform: translate(19px, -6px) scale(0.8);
     }
 
-    .input__container {
+    .textarea__container {
       border-radius: 8px;
 
       fieldset {
@@ -90,60 +90,20 @@
       color: var(--c-primary);
     }
 
-    .input__container {
+    .textarea__container {
       fieldset {
         border: 1px solid var(--c-primary);
       }
     }
   }
 }
-.options-wrapper {
-  position: relative;
-  z-index: 2;
-}
-.options {
-  width: 100%;
-  position: absolute;
-  display: none;
-  border: 1px solid var(--c-primary);
-  border-radius: 8px;
-  margin-top: 4px;
-  overflow: hidden;
-  &--visible {
-    display: block;
-  }
-}
 
-.option {
-  font-size: 1.6rem;
-  padding: 12px 16px;
-  width: 100%;
-  background-color: var(--c-primary-light-bg);
-  border: none;
-  color: var(--c-text-light);
-
-  .highlighted {
-    color: var(--c-primary);
-  }
-
-  &--selected {
-    color: var(--c-text-dark);
-    background-color: var(--c-primary-active);
-
-    .highlighted {
-      color: var(--c-primary-dark);
+@media (prefers-color-scheme: dark) {
+  .wrapper {
+    .textarea__container {
+      textarea {
+        color: white;
+      }
     }
-  }
-
-  &:not(:last-child) {
-    border-bottom: 1px dashed var(--c-primary-dark-bg);
-  }
-
-  &:hover,
-  &:focus-visible {
-    color: var(--c-text-light);
-    background-color: var(--c-primary-medium-bg);
-    cursor: pointer;
-    outline: none;
   }
 }
