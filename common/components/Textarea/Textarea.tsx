@@ -30,7 +30,7 @@ export default function Textarea(props: TextareaPropsSchema) {
       style={{
         ...props.style,
       }}
-      className={classNames(styles.wrapper, {
+      className={classNames(props.className, styles.wrapper, {
         [styles['wrapper--focused']]: isFocused,
         [styles['wrapper--touched']]: hasValue,
       })}

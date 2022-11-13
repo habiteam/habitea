@@ -12,8 +12,10 @@ import { ActivityCategory } from '../schemas/activity-category';
 import { generateUUID } from '../utils/uuid';
 
 export class ActivityCategoriesService {
+  static readonly collectionName = 'ActivityCategories';
+
   static create(category: Partial<ActivityCategory>) {
-    setDoc(doc(database, 'activityCategories', generateUUID()), {
+    setDoc(doc(database, this.collectionName, generateUUID()), {
       ...category,
       id: generateUUID(),
       createdDate: Timestamp.now(),
@@ -30,7 +32,7 @@ export class ActivityCategoriesService {
   // }
 
   static async getByUserId(userId: string) {
-    const categoriesRef = collection(database, 'activityCategories');
+    const categoriesRef = collection(database, this.collectionName);
     const q = query(categoriesRef, where('createdBy', '==', userId));
 
     const querySnapshot = await getDocs(q);

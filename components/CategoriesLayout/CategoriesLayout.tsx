@@ -6,7 +6,6 @@ import { useAtomValue } from 'jotai';
 import Dialog from '../../common/components/Dialog/Dialog';
 import Input from '../../common/components/Input/Input';
 import { getAppLayout } from '../AppLayout/AppLayout';
-import { activityCategoriesMock } from './categories.mocks';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
 import {
@@ -18,6 +17,7 @@ import Textarea from '../../common/components/Textarea/Textarea';
 import { ActivityCategory } from '../../common/schemas/activity-category';
 import { ActivityCategoriesService } from '../../common/services/activity-categories';
 import { auth } from '../../common/services/firebase';
+import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 
 export interface AppLayoutProps {
   children: React.ReactNode;
@@ -32,6 +32,7 @@ export function CreateDialog({
 }) {
   const [form, setForm] = useState<Partial<ActivityCategory>>({
     name: '',
+    icon: 'person-running',
     description: '',
     status: 'ACTIVE',
     goalValue: '1',
@@ -51,6 +52,7 @@ export function CreateDialog({
   useEffect(() => {
     setForm({
       name: '',
+      icon: 'person-running',
       description: '',
       status: 'ACTIVE',
       goalValue: '1',
@@ -86,15 +88,22 @@ export function CreateDialog({
       ]}
     >
       <form className={styles.form}>
+        <CategoryIconSelector
+          value={form.icon ?? 'person-running'}
+          style={{ width: 'calc(10% - 6px)' }}
+          onSelect={(icon) => setForm((prev) => ({ ...prev, icon }))}
+        ></CategoryIconSelector>
         <Input
           title="Name"
           id="name"
           name="name"
           value={form.name}
           onChange={handleFormChange}
+          style={{ width: 'calc(90% - 6px)' }}
           required
           autoFocus
           color="primary"
+          className={styles.control}
         ></Input>
         <Textarea
           title="Description"
@@ -104,6 +113,7 @@ export function CreateDialog({
           onChange={handleFormChange}
           color="primary"
           rows={6}
+          className={styles.control}
         ></Textarea>
         <Input
           title="Goal"
@@ -113,6 +123,7 @@ export function CreateDialog({
           onChange={handleFormChange}
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
+          className={styles.control}
         ></Input>
         <Input
           title="Unit"
@@ -122,6 +133,7 @@ export function CreateDialog({
           onChange={handleFormChange}
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
+          className={styles.control}
         ></Input>
         <Select
           title="Goal Type"
@@ -132,6 +144,7 @@ export function CreateDialog({
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
           options={{ MIN: 'Minimum', MAX: 'Maximum' }}
+          className={styles.control}
         ></Select>
         <Select
           title="Repeats"
@@ -141,6 +154,7 @@ export function CreateDialog({
           onChange={(val) => handleSelectFormChange(val, 'repeatType')}
           color="primary"
           options={{ DAILY: 'Daily', WEEKLY: 'Weekly', MONTHLY: 'Monthly' }}
+          className={styles.control}
         ></Select>
         <Input
           title="Valid from"
@@ -148,6 +162,7 @@ export function CreateDialog({
           name="validFrom"
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
+          className={styles.control}
         ></Input>
         <Input
           title="Valid to"
@@ -155,6 +170,7 @@ export function CreateDialog({
           name="validTo"
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
+          className={styles.control}
         ></Input>
       </form>
     </Dialog>

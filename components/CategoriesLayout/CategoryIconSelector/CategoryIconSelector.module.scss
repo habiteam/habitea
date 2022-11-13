@@ -1,0 +1,56 @@
+.selector-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .selector-button {
+    font-size: 1.6rem;
+    padding: 12px;
+    border-radius: 24px;
+    color: var(--c-primary-unfocused);
+    border: 1px solid var(--c-primary-unfocused);
+    transition: all 200ms ease-in-out;
+
+    &--focued {
+      color: var(--c-text-light);
+      border-radius: 8px;
+      border: 1px solid var(--c-primary);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.wrapper {
+  position: relative;
+  max-width: 360px;
+}
+
+.icons {
+  position: absolute;
+  margin: 8px 0 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+  width: 408px;
+  background-color: var(--c-primary-light-bg);
+  z-index: 2;
+
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 15%), 0px 1px 3px rgba(0, 0, 0, 30%);
+
+  .icon--selectable {
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 2rem;
+
+    &:hover {
+      background-color: var(--c-primary-medium-bg);
+      cursor: pointer;
+    }
+  }
+}

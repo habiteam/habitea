@@ -15,6 +15,7 @@ export interface SelectPropsSchema {
   style?: CSSProperties | undefined;
   required?: boolean;
   value?: string;
+  className?: string | undefined;
 }
 
 export default function Select(props: SelectPropsSchema) {
@@ -80,7 +81,7 @@ export default function Select(props: SelectPropsSchema) {
         style={{
           ...props.style,
         }}
-        className={classNames(styles.wrapper, {
+        className={classNames(props.className, styles.wrapper, {
           [styles['wrapper--focused']]: isFocused,
           [styles['wrapper--touched']]: hasValue,
         })}
