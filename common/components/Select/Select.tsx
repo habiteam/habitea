@@ -133,9 +133,9 @@ export default function Select(props: SelectPropsSchema) {
                     .indexOf(searchValue.toLocaleLowerCase()) !== -1,
               )
               .map((key, i) => (
-                // TODO: cant be button (button in forms sends it)
-                <div
-                  onClick={() => {
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
                     if (props.onChange) {
                       props.onChange(key);
                     }
@@ -150,7 +150,7 @@ export default function Select(props: SelectPropsSchema) {
                   key={i}
                 >
                   {getHighlightedText(props.options[key])}
-                </div>
+                </button>
               ))}
           </div>
         </div>
