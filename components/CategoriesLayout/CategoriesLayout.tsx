@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
+import { onAuthStateChanged } from 'firebase/auth';
 import Dialog from '../../common/components/Dialog/Dialog';
 import Input from '../../common/components/Input/Input';
 import { getAppLayout } from '../AppLayout/AppLayout';
@@ -194,7 +195,12 @@ export default function CategoriesLayout(props: AppLayoutProps) {
   }
 
   useEffect(() => {
-    updateCategoriesList();
+    const unsubscribe = onAuthStateChanged(auth, (user) =>
+      updateCategoriesList(),
+    );
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
