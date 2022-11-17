@@ -6,8 +6,12 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
+  GithubAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import styles from './SignInForm.module.scss';
 import Card from '../../common/components/Card/Card';
 import CardContent from '../../common/components/Card/CardContent/CardContent';
@@ -59,30 +63,6 @@ export function RegisterForm({ router }: { router: NextRouter }) {
       });
   }
 
-  function goolgeSignIn() {
-    const provider = new GoogleAuthProvider();
-
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const { user } = result;
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const { email } = error.customData;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-  }
-
   return (
     <>
       <h1>Register</h1>
@@ -103,6 +83,7 @@ export function RegisterForm({ router }: { router: NextRouter }) {
       <div className={styles['cta-wrapper']}>
         <Button
           fillType="filled"
+          color="primary"
           size="lg"
           onClick={(e: Event) => {
             e.preventDefault();
@@ -111,17 +92,8 @@ export function RegisterForm({ router }: { router: NextRouter }) {
         >
           Sign up
         </Button>
-        <Button
-          fillType={'filled'}
-          size="lg"
-          onClick={(e: Event) => {
-            e.preventDefault();
-            goolgeSignIn();
-          }}
-        >
-          Sign in with googoo
-        </Button>
       </div>
+
       <span className={styles['form-footer']}>
         Already have an account?
         <Link href="/login" color="info">
@@ -194,7 +166,7 @@ export function LoginForm({ router }: { router: NextRouter }) {
     </>
   );
 }
-
+// TODO code order, cleanup, and refactor
 export default function Page() {
   const router = useRouter();
 
@@ -208,6 +180,62 @@ export default function Page() {
     exitBeforeEnter: true,
   });
 
+  /**
+   * @see https://firebase.google.com/docs/auth/web/google-signin
+   */
+  function goolgeSignIn() {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const { user } = result;
+        // ...
+        console.log(result, token);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const { email } = error.customData;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
+  /**
+   * TODO doesn't seem to work too good, needs more love
+   * @see https://firebase.google.com/docs/auth/web/github-auth
+   */
+  function githubSignIn() {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        // The signed-in user info.
+        const { user } = result;
+        // ...
+        console.log(result, token);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const { email } = error.customData;
+        // The AuthCredential type that was used.
+        const credential = GithubAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
+
   return (
     <main>
       <Image
@@ -217,20 +245,45 @@ export default function Page() {
         placeholder="blur"
         fill
       ></Image>
-      <div className={styles['form-wrapper']}>
+      <div className={styles['page-content-wrapper']}>
         <Card maxWidth="560px" elevated color="primary">
           <CardContent>
-            {transition((style, item) =>
-              item ? (
-                <animated.form style={style} className={styles.form}>
-                  <RegisterForm router={router} />
-                </animated.form>
-              ) : (
-                <animated.form style={style} className={styles.form}>
-                  <LoginForm router={router} />
-                </animated.form>
-              ),
-            )}
+            <div className={styles['form-wrapper']}>
+              <Button
+                fillType={'outlined'}
+                size="lg"
+                onClick={(e: Event) => {
+                  e.preventDefault();
+                  goolgeSignIn();
+                }}
+              >
+                {/* TODO stop typescript from being a whiny bitch */}
+                <FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon>&nbsp; Sign
+                in with Googoo
+              </Button>
+              <Button
+                fillType={'outlined'}
+                size="lg"
+                onClick={(e: Event) => {
+                  e.preventDefault();
+                  githubSignIn();
+                }}
+              >
+                <FontAwesomeIcon icon={faGithub}></FontAwesomeIcon>&nbsp; Sign
+                in with Github
+              </Button>
+              {transition((style, item) =>
+                item ? (
+                  <animated.form style={style} className={styles.form}>
+                    <RegisterForm router={router} />
+                  </animated.form>
+                ) : (
+                  <animated.form style={style} className={styles.form}>
+                    <LoginForm router={router} />
+                  </animated.form>
+                ),
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>
