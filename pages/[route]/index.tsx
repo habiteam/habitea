@@ -5,6 +5,8 @@ import { useTransition, animated } from 'react-spring';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import styles from './SignInForm.module.scss';
 import Card from '../../common/components/Card/Card';
@@ -57,6 +59,30 @@ export function RegisterForm({ router }: { router: NextRouter }) {
       });
   }
 
+  function goolgeSignIn() {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const { user } = result;
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const { email } = error.customData;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
+
   return (
     <>
       <h1>Register</h1>
@@ -84,6 +110,16 @@ export function RegisterForm({ router }: { router: NextRouter }) {
           }}
         >
           Sign up
+        </Button>
+        <Button
+          fillType={'filled'}
+          size="lg"
+          onClick={(e: Event) => {
+            e.preventDefault();
+            goolgeSignIn();
+          }}
+        >
+          Sign in with googoo
         </Button>
       </div>
       <span className={styles['form-footer']}>
