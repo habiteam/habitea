@@ -18,7 +18,20 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@commonComponents/*": ["common/components/*"],
+      "@atoms/*": ["common/atoms/*"],
+      "@constants/*": ["common/constants/*"],
+      "@schemas/*": ["common/schemas/*"],
+      "@services/*": ["common/services/*"],
+      "@utils/*": ["common/utils/*"],
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@public/*": ["public/*"],
+    }
   },
   "include": [
     "next-env.d.ts",

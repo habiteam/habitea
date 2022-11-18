@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { Color } from '@constants/Palette';
 import styles from './Textarea.module.scss';
-import { Color } from '../../constants/Palette';
 
 export interface TextareaPropsSchema
   extends React.DetailedHTMLProps<

@@ -2,9 +2,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import classNames from 'classnames';
 import Router from 'next/router';
+import heroBgImg from '@public/backgrounds/bg-main.jpg';
+import { auth } from '@services/firebase';
 import styles from './Home.module.scss';
-import heroBgImg from '../public/backgrounds/bg-main.jpg';
-import { auth } from '../common/services/firebase';
 
 export default function Home() {
   return (

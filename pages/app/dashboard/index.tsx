@@ -1,5 +1,5 @@
-import Select from '../../../common/components/Select/Select';
-import { getAppLayout } from '../../../components/AppLayout/AppLayout';
+import Select from '@commonComponents/Select/Select';
+import { getAppLayout } from '@components/AppLayout/AppLayout';
 
 export default function Dashboard() {
   return (

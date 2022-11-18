@@ -1,7 +1,7 @@
 import { CSSProperties, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
+import { Color } from '@constants/Palette';
 import styles from './Select.module.scss';
-import { Color } from '../../constants/Palette';
 
 export interface SelectPropsSchema {
   title: string;

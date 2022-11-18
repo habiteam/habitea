@@ -3,10 +3,10 @@ import { useAtom } from 'jotai';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
+import notifications from '@atoms/notifications';
+import Button from '@commonComponents/Button/Button';
 import { NotificationPropsSchema } from './Notification.schema';
 import styles from './Notification.module.scss';
-import Button from '../Button/Button';
-import notifications from '../../atoms/notifications';
 
 export function Notification(props: NotificationPropsSchema) {
   const [, setNotificationList] = useAtom(notifications);

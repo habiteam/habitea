@@ -4,8 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { onAuthStateChanged } from 'firebase/auth';
-import Dialog from '../../common/components/Dialog/Dialog';
-import Input from '../../common/components/Input/Input';
+import Dialog from '@commonComponents/Dialog/Dialog';
+import Input from '@commonComponents/Input/Input';
+import Select from '@commonComponents/Select/Select';
+import Textarea from '@commonComponents/Textarea/Textarea';
+import { ActivityCategory } from '@schemas/activity-category';
+import { ActivityCategoriesService } from '@services/activity-categories';
+import { auth } from '@services/firebase';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -13,11 +18,6 @@ import {
   MOBILE_BREAKPOINT,
   screenWidth,
 } from '../../common/atoms/screen-width';
-import Select from '../../common/components/Select/Select';
-import Textarea from '../../common/components/Textarea/Textarea';
-import { ActivityCategory } from '../../common/schemas/activity-category';
-import { ActivityCategoriesService } from '../../common/services/activity-categories';
-import { auth } from '../../common/services/firebase';
 import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 
 export interface AppLayoutProps {

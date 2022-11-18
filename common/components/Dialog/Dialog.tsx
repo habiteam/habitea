@@ -1,6 +1,6 @@
 import { animated, easings, useTransition } from 'react-spring';
-import Button, { ButtonPropSchema } from '../Button/Button';
-import Overlay from '../Overlay/Overlay';
+import Overlay from '@commonComponents/Overlay/Overlay';
+import Button, { ButtonPropSchema } from '@commonComponents/Button/Button';
 import styles from './Dialog.module.scss';
 
 export interface DialogPropsSchema {

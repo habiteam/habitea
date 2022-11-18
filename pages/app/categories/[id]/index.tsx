@@ -1,4 +1,4 @@
-import { getCategoriesLayout } from '../../../../components/CategoriesLayout/CategoriesLayout';
+import { getCategoriesLayout } from '@components/CategoriesLayout/CategoriesLayout';
 
 export default function Categories() {
   return <>Selected category</>;

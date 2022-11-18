@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { Color } from '@constants/Palette';
 import styles from './Input.module.scss';
-import { Color } from '../../constants/Palette';
 
 export interface InputPropsSchema
   extends React.DetailedHTMLProps<

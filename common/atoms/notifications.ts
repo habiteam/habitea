@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
-import { NotificationPropsSchema } from '../components/Notifications/Notification.schema';
+import { NotificationPropsSchema } from '@commonComponents/Notifications/Notification.schema';
 
-export const notifications = atom<NotificationPropsSchema[]>([]);
+export default atom<NotificationPropsSchema[]>([]);
 
 // export function addNotification() {
 //   setNotificationsAtom((values) => [

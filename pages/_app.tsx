@@ -6,9 +6,9 @@ import { ReactElement, ReactNode, useEffect } from 'react';
 import { Provider } from 'jotai';
 import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
-import { initIcons } from '../common/utils/fontawesome-icons';
-import { auth } from '../common/services/firebase';
-import { NotificationProvider } from '../common/components/Notifications/NotificationProvider';
+import { auth } from '@services/firebase';
+import { NotificationProvider } from '@commonComponents/Notifications/NotificationProvider';
+import { initIcons } from '@utils/fontawesome-icons';
 
 initIcons();
 

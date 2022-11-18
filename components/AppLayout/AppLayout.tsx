@@ -1,9 +1,9 @@
 import { useAtom, useSetAtom } from 'jotai';
 import React, { ReactElement, useEffect } from 'react';
-import { screenWidth } from '../../common/atoms/screen-width';
+import { screenWidth } from '@atoms/screen-width';
+import themeAtom from '@atoms/theme';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
-import themeAtom from '../../common/atoms/theme';
 
 export interface AppLayoutProps {
   children: React.ReactNode;

@@ -7,9 +7,9 @@ import {
   Timestamp,
   where,
 } from 'firebase/firestore';
-import { auth, database } from './firebase';
-import { ActivityCategory } from '../schemas/activity-category';
-import { generateUUID } from '../utils/uuid';
+import { ActivityCategory } from '@schemas/activity-category';
+import { generateUUID } from '@utils/uuid';
+import { auth, database } from '@services/firebase';
 
 export class ActivityCategoriesService {
   static readonly collectionName = 'ActivityCategories';

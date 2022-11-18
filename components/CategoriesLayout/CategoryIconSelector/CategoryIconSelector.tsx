@@ -5,7 +5,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { CSSProperties, useState } from 'react';
-import { SELECTABLE_ICONS } from '../../../common/utils/fontawesome-icons';
+import { SELECTABLE_ICONS } from '@utils/fontawesome-icons';
 import styles from './CategoryIconSelector.module.scss';
 
 export interface CategoryIconSelectorPropSchema {

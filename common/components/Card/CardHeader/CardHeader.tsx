@@ -2,12 +2,12 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { useState } from 'react';
-import Button from '../../Button/Button';
-import styles from './CardHeader.module.scss';
-import { Color } from '../../../constants/Palette';
+import { Color } from '@constants/Palette';
+import Button from '@commonComponents/Button/Button';
 import DropdownMenu, {
   DropdownMenuItem,
-} from '../../DropdownMenu/DropdownMenu';
+} from '@commonComponents/DropdownMenu/DropdownMenu';
+import styles from './CardHeader.module.scss';
 
 export interface CardHeaderPropSchema {
   title: string;

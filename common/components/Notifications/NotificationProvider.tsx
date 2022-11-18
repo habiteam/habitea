@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { useTransition, animated, config } from 'react-spring';
+import notifications from '@atoms/notifications';
 import styles from './NotificationProvider.module.scss';
-import { notifications } from '../../atoms/notifications';
 import { Notification } from './Notification';
 
 export interface NotificationProviderPropSchema {

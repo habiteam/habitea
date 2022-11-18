@@ -14,13 +14,10 @@ import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import Router from 'next/router';
 import { useState } from 'react';
-import {
-  MOBILE_BREAKPOINT,
-  screenWidth,
-} from '../../../../common/atoms/screen-width';
-import DropdownMenu from '../../../../common/components/DropdownMenu/DropdownMenu';
-import NavLink from '../../../../common/components/NavLink/NavLink';
-import { auth } from '../../../../common/services/firebase';
+import DropdownMenu from '@commonComponents/DropdownMenu/DropdownMenu';
+import NavLink from '@commonComponents/NavLink/NavLink';
+import { auth } from '@services/firebase';
+import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen-width';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {

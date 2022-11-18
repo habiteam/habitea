@@ -1,4 +1,4 @@
-import { getCategoriesLayout } from '../../../components/CategoriesLayout/CategoriesLayout';
+import { getCategoriesLayout } from '@components/CategoriesLayout/CategoriesLayout';
 import styles from './Categories.module.scss';
 
 export default function Categories() {

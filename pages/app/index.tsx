@@ -1,6 +1,6 @@
-import Datepicker from '../../common/components/Datepicker/Datepicker';
-import { auth } from '../../common/services/firebase';
-import { getAppLayout } from '../../components/AppLayout/AppLayout';
+import Datepicker from '@commonComponents/Datepicker/Datepicker';
+import { auth } from '@services/firebase';
+import { getAppLayout } from '@components/AppLayout/AppLayout';
 
 export default function App() {
   return (

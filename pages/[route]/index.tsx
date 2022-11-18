@@ -12,15 +12,15 @@ import {
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import Card from '@commonComponents/Card/Card';
+import Input from '@commonComponents/Input/Input';
+import CardContent from '@commonComponents/Card/CardContent/CardContent';
+import Link from '@commonComponents/Link/Link';
+import Button from '@commonComponents/Button/Button';
+import bgImg from '@public/backgrounds/bg-desk-light.jpg';
+import { auth } from '@services/firebase';
 import styles from './SignInForm.module.scss';
-import Card from '../../common/components/Card/Card';
-import CardContent from '../../common/components/Card/CardContent/CardContent';
-import Input from '../../common/components/Input/Input';
-import Link from '../../common/components/Link/Link';
-import bgImg from '../../public/backgrounds/bg-desk-light.jpg';
-import Button from '../../common/components/Button/Button';
 import { EmailAuthData } from '../../common/schemas/email-auth-data';
-import { auth } from '../../common/services/firebase';
 
 export async function getStaticPaths() {
   return {
