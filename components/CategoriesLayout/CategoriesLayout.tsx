@@ -180,7 +180,7 @@ export function CreateDialog({
 
 export default function CategoriesLayout(props: AppLayoutProps) {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState<boolean>(false);
-  const [categoryList, setcategoryList] = useState<any[]>([]);
+  const [categoryList, setCategoryList] = useState<any[]>([]);
   const router = useRouter();
   const width = useAtomValue(screenWidth);
 
@@ -188,7 +188,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
     if (auth.currentUser) {
       ActivityCategoriesService.getByUserId(auth.currentUser.uid).then(
         (response) => {
-          setcategoryList(response);
+          setCategoryList(response);
         },
       );
     }

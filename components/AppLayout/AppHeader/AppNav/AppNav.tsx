@@ -7,6 +7,8 @@ import {
   faArrowRightFromBracket,
   faFolder as faFolderSolid,
   faGear,
+  faHouse,
+  faHouseUser,
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import { signOut } from 'firebase/auth';
@@ -26,6 +28,12 @@ export default function AppNav() {
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
 
   const navLinks = [
+    {
+      icon: faHouse,
+      activeIcon: faHouseUser,
+      text: 'Home',
+      href: '/app/home',
+    },
     {
       icon: faAddressCardRegular,
       activeIcon: faAddressCardSolid,

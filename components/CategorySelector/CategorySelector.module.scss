@@ -1,0 +1,68 @@
+.category-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  color: var(--c-primary-unfocused);
+  background: transparent;
+  border-radius: 8px;
+  border: 2px solid var(--c-primary-unfocused);
+  font-size: 1.6rem;
+  transition: all 400ms ease-in-out;
+  position: relative;
+  padding: 20px;
+  cursor: pointer;
+
+  ::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    border-radius: 10px;
+    scale: 0.2;
+    width: 20px;
+    height: 20px;
+    outline: 1px solid transparent;
+    transition: all 400ms ease-in-out;
+  }
+
+  &:hover:not(.category--selected) {
+    ::before {
+      outline: 1px solid var(--c-primary-unfocused);
+    }
+  }
+
+  &--selected {
+    color: var(--c-primary);
+    border-color: var(--c-primary);
+
+    ::before {
+      content: '\2713';
+      border-radius: 4px;
+      background-color: var(--c-primary);
+      outline: 1px solid var(--c-primary);
+    }
+  }
+
+  &:hover,
+  &--selected {
+    ::before {
+      scale: 1;
+      color: var(--c-text-dark);
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+  }
+
+  svg {
+    font-size: 3.2rem;
+    margin: 8px;
+  }
+}

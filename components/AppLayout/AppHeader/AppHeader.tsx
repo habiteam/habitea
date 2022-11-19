@@ -6,7 +6,7 @@ import AppNavbar from './AppNav/AppNav';
 export default function AppHeader() {
   return (
     <header className={styles.header}>
-      <Link href="/app">
+      <Link href="/app/home">
         <span className={styles['header-logo']}>Habitea</span>
       </Link>
 
