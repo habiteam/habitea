@@ -237,13 +237,12 @@ export default function Page() {
   }
 
   return (
-    <main>
+    <main className={styles.main}>
       <Image
         className={styles['background-image']}
         src={bgImg}
         alt="background image"
         placeholder="blur"
-        fill
       ></Image>
       <div className={styles['page-content-wrapper']}>
         <Card maxWidth="560px" elevated color="primary">
