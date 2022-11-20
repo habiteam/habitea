@@ -8,7 +8,7 @@ export interface InputPropsSchema
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  title?: string;
+  title: string;
   disabled?: boolean;
   color?: Color;
   type?: 'text' | 'password' | 'number';

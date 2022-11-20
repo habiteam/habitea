@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { CSSProperties, useState } from 'react';
 import { SELECTABLE_ICONS } from '@utils/fontawesome-icons';
+import Input from '@commonComponents/Input/Input';
 import styles from './CategoryIconSelector.module.scss';
 
 export interface CategoryIconSelectorPropSchema {
@@ -18,6 +19,7 @@ export default function CategoryIconSelector(
   props: CategoryIconSelectorPropSchema,
 ) {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
+  const [iconsFilter, setIconsFilter] = useState<string>('');
 
   return (
     <div style={props.style}>
@@ -34,22 +36,34 @@ export default function CategoryIconSelector(
         ></FontAwesomeIcon>
       </div>
       {isMenuOpened && (
-        <div className={classNames(styles.icons)}>
-          {SELECTABLE_ICONS.map((icon, i) => (
-            <FontAwesomeIcon
-              key={i}
-              className={classNames(styles['icon--selectable'])}
-              icon={findIconDefinition({
-                prefix: 'fas',
-                iconName: icon,
-              })}
-              width={20}
-              onClick={() => {
-                props.onSelect(icon);
-                setIsMenuOpened(!isMenuOpened);
-              }}
-            ></FontAwesomeIcon>
-          ))}
+        <div className={styles['icons-wrapper']}>
+          <Input
+            title="Search"
+            id={'iconsFilter'}
+            onChange={(e) => {
+              setIconsFilter(e.target.value);
+            }}
+          ></Input>
+          <div className={classNames(styles.icons)}>
+            {SELECTABLE_ICONS.map((icon, i) =>
+              iconsFilter === '' ||
+              icon.match(new RegExp(iconsFilter, 'gi')) ? (
+                <FontAwesomeIcon
+                  key={i}
+                  className={classNames(styles['icon--selectable'])}
+                  icon={findIconDefinition({
+                    prefix: 'fas',
+                    iconName: icon,
+                  })}
+                  width={20}
+                  onClick={() => {
+                    props.onSelect(icon);
+                    setIsMenuOpened(!isMenuOpened);
+                  }}
+                ></FontAwesomeIcon>
+              ) : null,
+            )}
+          </div>
         </div>
       )}
     </div>
