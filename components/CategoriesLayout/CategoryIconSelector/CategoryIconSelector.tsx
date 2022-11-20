@@ -33,27 +33,25 @@ export default function CategoryIconSelector(
           onClick={() => setIsMenuOpened(!isMenuOpened)}
         ></FontAwesomeIcon>
       </div>
-      <div className={classNames(styles.wrapper)}>
-        {isMenuOpened && (
-          <div className={classNames(styles.icons)}>
-            {SELECTABLE_ICONS.map((icon, i) => (
-              <FontAwesomeIcon
-                key={i}
-                className={classNames(styles['icon--selectable'])}
-                icon={findIconDefinition({
-                  prefix: 'fas',
-                  iconName: icon,
-                })}
-                width={20}
-                onClick={() => {
-                  props.onSelect(icon);
-                  setIsMenuOpened(!isMenuOpened);
-                }}
-              ></FontAwesomeIcon>
-            ))}
-          </div>
-        )}
-      </div>
+      {isMenuOpened && (
+        <div className={classNames(styles.icons)}>
+          {SELECTABLE_ICONS.map((icon, i) => (
+            <FontAwesomeIcon
+              key={i}
+              className={classNames(styles['icon--selectable'])}
+              icon={findIconDefinition({
+                prefix: 'fas',
+                iconName: icon,
+              })}
+              width={20}
+              onClick={() => {
+                props.onSelect(icon);
+                setIsMenuOpened(!isMenuOpened);
+              }}
+            ></FontAwesomeIcon>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
