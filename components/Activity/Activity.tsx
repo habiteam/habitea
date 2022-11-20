@@ -40,7 +40,7 @@ export default function Activity() {
             onClick: () => {
               ActivitiesService.create({
                 value,
-                categoryId: selectedCategoryId,
+                categoryRef: selectedCategoryId,
               });
               setOpenActivityModal(false);
             },

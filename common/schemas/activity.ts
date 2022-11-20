@@ -1,5 +1,5 @@
 export interface Activity {
-  categoryId: string;
+  categoryRef: string;
   value: string;
   createdDate: string;
   createdBy: string;

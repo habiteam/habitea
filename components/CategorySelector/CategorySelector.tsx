@@ -26,7 +26,6 @@ export default function CategorySelector({
     if (auth.currentUser) {
       ActivityCategoriesService.getByUserId(auth.currentUser.uid).then(
         (response) => {
-          console.log(response);
           setCategoryList(response);
         },
       );
