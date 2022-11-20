@@ -65,7 +65,7 @@ export default function Activity() {
             type="number"
             onChange={(e) => setValue(e.target.value)}
             color="primary"
-            style={{ width: 'calc(20% - 6px)' }}
+            style={{ width: '200px' }}
           ></Input>
         </div>
       </FullscreenDialog>

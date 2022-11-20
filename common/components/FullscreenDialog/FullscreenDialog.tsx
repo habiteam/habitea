@@ -43,6 +43,17 @@ export default function FullscreenDialog({
       width: `calc(100% + 0px)`,
       height: `calc(100% + 0px)`,
     },
+    leave: {
+      opacity: 0,
+      top: anchorRef?.current?.offsetTop
+        ? `${anchorRef?.current?.offsetTop}px`
+        : '50%',
+      left: anchorRef?.current?.offsetLeft
+        ? `${anchorRef?.current?.offsetLeft}px`
+        : '50%',
+      width: `calc(0% + ${anchorRef?.current?.clientWidth ?? 0}px)`,
+      height: `calc(0% + ${anchorRef?.current?.clientHeight ?? 0}px)`,
+    },
 
     config: { duration: 400, easing: easings.easeInCubic },
   });
