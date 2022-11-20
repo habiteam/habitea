@@ -15,7 +15,7 @@ import {
   ActivityCategoryRepeatTypeOptions,
   ActivityUnitTypeOptions,
 } from '@constants/dictionaries';
-import ResponsiveDialog from '@commonComponents/ResponsiveDialogResolver/ResponsiveDialogResolver';
+import ResponsiveDialog from '@commonComponents/ResponsiveDialog/ResponsiveDialog';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
