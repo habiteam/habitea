@@ -1,20 +1,10 @@
-import Button, { ButtonPropSchema } from '@commonComponents/Button/Button';
+import Button from '@commonComponents/Button/Button';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DialogPropsSchema } from '@schemas/dialog-props';
 import classNames from 'classnames';
-import { useAtomValue } from 'jotai';
-import { useEffect, RefObject } from 'react';
 import { easings, useTransition, animated } from 'react-spring';
 import styles from './FullscreenDialog.module.scss';
-
-export interface FullscreenDialogPropsSchema {
-  title?: string;
-  actions?: ButtonPropSchema[];
-  children: React.ReactNode;
-  open: boolean;
-  handleClose?: () => void;
-  anchorRef?: RefObject<HTMLElement>;
-}
 
 export default function FullscreenDialog({
   title,
@@ -23,7 +13,7 @@ export default function FullscreenDialog({
   open,
   handleClose,
   anchorRef,
-}: FullscreenDialogPropsSchema) {
+}: DialogPropsSchema) {
   const transition = useTransition(open, {
     from: {
       opacity: 0,

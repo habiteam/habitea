@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { onAuthStateChanged } from 'firebase/auth';
-import Dialog from '@commonComponents/Dialog/Dialog';
 import Input from '@commonComponents/Input/Input';
 import Select from '@commonComponents/Select/Select';
 import Textarea from '@commonComponents/Textarea/Textarea';
@@ -16,6 +15,7 @@ import {
   ActivityCategoryRepeatTypeOptions,
   ActivityUnitTypeOptions,
 } from '@constants/dictionaries';
+import ResponsiveDialog from '@commonComponents/ResponsiveDialogResolver/ResponsiveDialogResolver';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -68,7 +68,7 @@ export function CreateDialog({
   }, [isCreateDialogOpen]);
 
   return (
-    <Dialog
+    <ResponsiveDialog
       title="Create new category"
       open={isCreateDialogOpen}
       handleClose={() => setIsCreateDialogOpen(false)}
@@ -189,7 +189,7 @@ export function CreateDialog({
           className={styles.control}
         ></Input>
       </form>
-    </Dialog>
+    </ResponsiveDialog>
   );
 }
 

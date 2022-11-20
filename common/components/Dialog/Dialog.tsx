@@ -1,15 +1,8 @@
 import { animated, easings, useTransition } from 'react-spring';
 import Overlay from '@commonComponents/Overlay/Overlay';
-import Button, { ButtonPropSchema } from '@commonComponents/Button/Button';
+import Button from '@commonComponents/Button/Button';
+import { DialogPropsSchema } from '@schemas/dialog-props';
 import styles from './Dialog.module.scss';
-
-export interface DialogPropsSchema {
-  title?: string;
-  actions?: ButtonPropSchema[];
-  children: React.ReactNode;
-  open: boolean;
-  handleClose?: () => void;
-}
 
 export default function Dialog({
   title,
