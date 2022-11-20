@@ -19,10 +19,7 @@ import {
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
-import {
-  MOBILE_BREAKPOINT,
-  screenWidth,
-} from '../../common/atoms/screen-width';
+import { MOBILE_BREAKPOINT, screenWidth } from '../../common/atoms/screen';
 import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 
 export interface AppLayoutProps {

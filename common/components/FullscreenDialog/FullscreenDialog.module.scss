@@ -10,7 +10,6 @@
   &-header {
     display: flex;
     height: 80px;
-    border-bottom: 1px solid var(--c-primary-unfocused);
     align-items: center;
     padding: 32px;
 
@@ -24,10 +23,9 @@
   }
 
   &-footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    border-top: 1px solid var(--c-primary-unfocused);
     padding: 32px;
   }
 }

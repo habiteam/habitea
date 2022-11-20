@@ -19,7 +19,7 @@ import { useState } from 'react';
 import DropdownMenu from '@commonComponents/DropdownMenu/DropdownMenu';
 import NavLink from '@commonComponents/NavLink/NavLink';
 import { auth } from '@services/firebase';
-import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen-width';
+import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {

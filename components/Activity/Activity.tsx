@@ -3,24 +3,28 @@ import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialo
 import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
 import { ActivitiesService } from '@services/activities';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Activity() {
   const [openActivityModal, setOpenActivityModal] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
   const [value, setValue] = useState<string>('');
+  const buttonRef = useRef(null);
 
   return (
     <>
-      <Button
-        fillType="filled"
-        color="info"
-        onClick={() => setOpenActivityModal(true)}
-      >
-        Start Activity
-      </Button>
+      <div style={{ width: 'max-content' }} ref={buttonRef}>
+        <Button
+          fillType="filled"
+          color="info"
+          onClick={() => setOpenActivityModal(true)}
+        >
+          Start Activity
+        </Button>
+      </div>
 
       <FullscreenDialog
+        anchorRef={buttonRef}
         title="Start Activity"
         open={openActivityModal}
         handleClose={() => setOpenActivityModal(false)}

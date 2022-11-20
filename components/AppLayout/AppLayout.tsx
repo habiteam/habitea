@@ -1,6 +1,6 @@
 import { useAtom, useSetAtom } from 'jotai';
 import React, { ReactElement, useEffect } from 'react';
-import { screenWidth } from '@atoms/screen-width';
+import { screenHeight, screenWidth } from '@atoms/screen';
 import themeAtom from '@atoms/theme';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
@@ -11,6 +11,7 @@ export interface AppLayoutProps {
 
 export default function AppLayout(props: AppLayoutProps) {
   const setWidth = useSetAtom(screenWidth);
+  const setHeight = useSetAtom(screenHeight);
 
   const [theme, setTheme] = useAtom(themeAtom);
 
@@ -25,10 +26,15 @@ export default function AppLayout(props: AppLayoutProps) {
     }
   }, []);
 
-  useEffect(() => {
+  function setWidthAndHeight() {
     setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  }
 
-    const handleResizeWindow = () => setWidth(window.innerWidth);
+  useEffect(() => {
+    setWidthAndHeight();
+
+    const handleResizeWindow = () => setWidthAndHeight();
 
     window.addEventListener('resize', handleResizeWindow);
 
