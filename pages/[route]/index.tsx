@@ -19,6 +19,7 @@ import Link from '@commonComponents/Link/Link';
 import Button from '@commonComponents/Button/Button';
 import bgImg from '@public/backgrounds/bg-desk-light.jpg';
 import { auth } from '@services/firebase';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import styles from './SignInForm.module.scss';
 import { EmailAuthData } from '../../common/schemas/email-auth-data';
 
@@ -190,11 +191,11 @@ export default function Page() {
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        const token = credential ? credential.accessToken : null;
         // The signed-in user info.
         const { user } = result;
         // ...
-        console.log(result, token);
+        console.log(result, token ?? 'Could not get token');
       })
       .catch((error) => {
         // Handle Errors here.
@@ -217,12 +218,12 @@ export default function Page() {
       .then((result) => {
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         const credential = GithubAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        const token = credential ? credential.accessToken : null;
 
         // The signed-in user info.
         const { user } = result;
         // ...
-        console.log(result, token);
+        console.log(result, token ?? 'Could not get token');
       })
       .catch((error) => {
         // Handle Errors here.
@@ -256,9 +257,8 @@ export default function Page() {
                   goolgeSignIn();
                 }}
               >
-                {/* TODO stop typescript from being a whiny bitch */}
-                <FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon>&nbsp; Sign
-                in with Googoo
+                <FontAwesomeIcon icon={faGoogle as IconProp}></FontAwesomeIcon>
+                &nbsp; Sign in with Googoo
               </Button>
               <Button
                 fillType={'outlined'}
@@ -268,8 +268,8 @@ export default function Page() {
                   githubSignIn();
                 }}
               >
-                <FontAwesomeIcon icon={faGithub}></FontAwesomeIcon>&nbsp; Sign
-                in with Github
+                <FontAwesomeIcon icon={faGithub as IconProp}></FontAwesomeIcon>
+                &nbsp; Sign in with Github
               </Button>
               {transition((style, item) =>
                 item ? (
