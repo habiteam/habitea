@@ -5,7 +5,10 @@ import { ActivityCategoriesService } from '@services/activity-categories';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
+import {
+  findIconDefinition,
+  IconName,
+} from '@fortawesome/fontawesome-svg-core';
 import styles from './CategorySelector.module.scss';
 
 export interface CategorySelectorPropsSchema {
@@ -23,6 +26,7 @@ export default function CategorySelector({
     if (auth.currentUser) {
       ActivityCategoriesService.getByUserId(auth.currentUser.uid).then(
         (response) => {
+          console.log(response);
           setCategoryList(response);
         },
       );
@@ -52,7 +56,7 @@ export default function CategorySelector({
             <FontAwesomeIcon
               icon={findIconDefinition({
                 prefix: 'fas',
-                iconName: category.icon,
+                iconName: category.icon as IconName,
               })}
               width={48}
             ></FontAwesomeIcon>

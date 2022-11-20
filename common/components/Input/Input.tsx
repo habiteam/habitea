@@ -8,10 +8,10 @@ export interface InputPropsSchema
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  title: string;
+  title?: string;
   disabled?: boolean;
   color?: Color;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'number';
   value?: string;
   id: string;
 }
@@ -37,7 +37,7 @@ export default function Input(props: InputPropsSchema) {
       })}
     >
       <label htmlFor={props.id}>
-        {props.title}
+        {props?.title}
         {props.required && '*'}
       </label>
 

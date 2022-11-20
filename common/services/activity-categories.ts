@@ -12,12 +12,11 @@ import { generateUUID } from '@utils/uuid';
 import { auth, database } from '@services/firebase';
 
 export class ActivityCategoriesService {
-  static readonly collectionName = 'ActivityCategories';
+  static readonly collectionName = 'activityCategories';
 
   static create(category: Partial<ActivityCategory>) {
     setDoc(doc(database, this.collectionName, generateUUID()), {
       ...category,
-      id: generateUUID(),
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
     });
@@ -36,6 +35,9 @@ export class ActivityCategoriesService {
     const q = query(categoriesRef, where('createdBy', '==', userId));
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((response) => response.data());
+    return querySnapshot.docs.map((response) => ({
+      ...response.data(),
+      id: response.id,
+    }));
   }
 }

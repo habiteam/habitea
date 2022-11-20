@@ -11,6 +11,11 @@ import Textarea from '@commonComponents/Textarea/Textarea';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { auth } from '@services/firebase';
+import {
+  ActivityCategoryGoalTypeOptions,
+  ActivityCategoryRepeatTypeOptions,
+  ActivityUnitTypeOptions,
+} from '@constants/dictionaries';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -39,6 +44,7 @@ export function CreateDialog({
     goalValue: '1',
     goalType: 'MIN',
     repeatType: 'DAILY',
+    unitType: 'QUANTITY',
     unit: '',
   });
 
@@ -59,6 +65,7 @@ export function CreateDialog({
       goalValue: '1',
       goalType: 'MIN',
       repeatType: 'DAILY',
+      unitType: 'QUANTITY',
       unit: '',
     });
   }, [isCreateDialogOpen]);
@@ -116,16 +123,17 @@ export function CreateDialog({
           rows={6}
           className={styles.control}
         ></Textarea>
-        <Input
-          title="Goal"
-          id="goalValue"
-          name="goalValue"
-          value={form.goalValue?.toLocaleString()}
-          onChange={handleFormChange}
+        <Select
+          title="Unit type"
+          id="unitType"
+          name="unitType"
+          value={form.unitType}
+          onChange={(val) => handleSelectFormChange(val, 'unitType')}
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
+          options={ActivityUnitTypeOptions}
           className={styles.control}
-        ></Input>
+        ></Select>
         <Input
           title="Unit"
           id="unit"
@@ -136,25 +144,35 @@ export function CreateDialog({
           color="primary"
           className={styles.control}
         ></Input>
-        <Select
-          title="Goal Type"
-          id="goalType"
-          name="goalType"
-          value={form.goalType}
-          onChange={(val) => handleSelectFormChange(val, 'goalType')}
+        <Input
+          title="Goal"
+          id="goalValue"
+          name="goalValue"
+          value={form.goalValue?.toLocaleString()}
+          onChange={handleFormChange}
           style={{ width: 'calc(50% - 6px)' }}
           color="primary"
-          options={{ MIN: 'Minimum', MAX: 'Maximum' }}
           className={styles.control}
-        ></Select>
+        ></Input>
         <Select
           title="Repeats"
           id="repeatType"
           name="repeatType"
           value={form.repeatType}
           onChange={(val) => handleSelectFormChange(val, 'repeatType')}
+          style={{ width: 'calc(50% - 6px)' }}
           color="primary"
-          options={{ DAILY: 'Daily', WEEKLY: 'Weekly', MONTHLY: 'Monthly' }}
+          options={ActivityCategoryRepeatTypeOptions}
+          className={styles.control}
+        ></Select>
+        <Select
+          title="Goal Type"
+          id="goalType"
+          name="goalType"
+          value={form.goalType}
+          onChange={(val) => handleSelectFormChange(val, 'goalType')}
+          color="primary"
+          options={ActivityCategoryGoalTypeOptions}
           className={styles.control}
         ></Select>
         <Input

@@ -1,7 +1,6 @@
 import { auth } from '@services/firebase';
 import { getAppLayout } from '@components/AppLayout/AppLayout';
-import Button from '@commonComponents/Button/Button';
-import Router from 'next/router';
+import Activity from '@components/Activity/Activity';
 
 export default function Home() {
   return (
@@ -11,13 +10,7 @@ export default function Home() {
         Welcome {auth.currentUser?.displayName ?? auth.currentUser?.email}
       </h2>
 
-      <Button
-        fillType="filled"
-        color="info"
-        onClick={() => Router.push('/app/activity')}
-      >
-        Start Activity
-      </Button>
+      <Activity></Activity>
     </>
   );
 }

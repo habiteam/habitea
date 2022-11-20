@@ -1,10 +1,10 @@
+import {
+  ActivityCategoryGoalType,
+  ActivityCategoryRepeatType,
+  ActivityCategoryStatus,
+  ActivityUnitType,
+} from '@constants/dictionaries';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-
-export type ActivityCategoryStatus = 'ACTIVE' | 'ARCHIVED';
-
-export type ActivityCategoryGoalType = 'MIN' | 'MAX' | 'RANGE';
-
-export type ActivityCategoryRepeatType = 'DAILY' | 'WEEKLY' | 'MONTHLY';
 
 export interface ActivityCategory {
   id: string;
@@ -16,6 +16,7 @@ export interface ActivityCategory {
   goalType: ActivityCategoryGoalType;
   repeatType: ActivityCategoryRepeatType;
   unit: string;
+  unitType: ActivityUnitType;
   createdDate: string;
   createdBy: string;
   validFrom?: string;
