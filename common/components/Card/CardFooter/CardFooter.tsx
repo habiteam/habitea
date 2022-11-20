@@ -1,4 +1,4 @@
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import Button, { ButtonPropSchema } from '@commonComponents/Button/Button';
 import styles from './CardFooter.module.scss';
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import styles from './Input.module.scss';
 
 export interface InputPropsSchema

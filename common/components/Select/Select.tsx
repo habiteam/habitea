@@ -1,6 +1,6 @@
 import { CSSProperties, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import styles from './Select.module.scss';
 
 export interface SelectPropsSchema {

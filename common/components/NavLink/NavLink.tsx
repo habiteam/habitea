@@ -5,7 +5,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import styles from './NavLink.module.scss';
 
 export interface NavLinkPropSchema {

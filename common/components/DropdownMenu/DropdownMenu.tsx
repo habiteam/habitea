@@ -4,7 +4,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import styles from './DropdownMenu.module.scss';
 
 export interface DropdownMenuItem {

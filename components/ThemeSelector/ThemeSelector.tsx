@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { THEMES } from '@constants/Palette';
+import { THEMES } from '@constants/palette';
 import styles from './ThemeSelector.module.scss';
 
 export interface ThemeSelectorPropsSchema {

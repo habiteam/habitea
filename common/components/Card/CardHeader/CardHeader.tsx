@@ -2,7 +2,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import Button from '@commonComponents/Button/Button';
 import DropdownMenu, {
   DropdownMenuItem,

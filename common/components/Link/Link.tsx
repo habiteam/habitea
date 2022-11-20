@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import React from 'react';
 import { UrlObject } from 'url';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import styles from './Link.module.scss';
 
 export interface LinkPropSchema {

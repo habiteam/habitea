@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import styles from './Button.module.scss';
 
 export interface ButtonPropSchema {

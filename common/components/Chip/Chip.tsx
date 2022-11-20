@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Color } from '@constants/Palette';
+import { Color } from '@constants/palette';
 import styles from './Chip.module.scss';
 
 export interface ChipPropSchema {
