@@ -1,6 +1,6 @@
 import { NextRouter, useRouter } from 'next/router';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTransition, animated } from 'react-spring';
 import {
   createUserWithEmailAndPassword,
@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,6 +21,11 @@ import Button from '@commonComponents/Button/Button';
 import bgImg from '@public/backgrounds/bg-desk-light.jpg';
 import { auth } from '@services/firebase';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FirebaseError } from 'firebase/app';
+import { useSetAtom } from 'jotai';
+import notifications from '@atoms/notifications';
+import { v4 } from 'uuid';
+import getErrorMessage from '@utils/firebase-error';
 import styles from './SignInForm.module.scss';
 import { EmailAuthData } from '../../common/schemas/email-auth-data';
 
@@ -49,6 +55,8 @@ export function RegisterForm({ router }: { router: NextRouter }) {
     }));
   }
 
+  const setNotificationAtom = useSetAtom(notifications);
+
   function registerUser() {
     createUserWithEmailAndPassword(
       auth,
@@ -56,11 +64,16 @@ export function RegisterForm({ router }: { router: NextRouter }) {
       registerData.password,
     )
       .then((user) => {
-        // TODO handle register
-        console.log(user);
+        setNotificationAtom((prev) => [
+          ...prev,
+          { id: v4(), message: 'User registered', type: 'success' },
+        ]);
       })
       .catch((error) => {
-        console.error(error);
+        setNotificationAtom((prev) => [
+          ...prev,
+          { id: v4(), message: getErrorMessage(error), type: 'danger' },
+        ]);
       });
   }
 
@@ -117,13 +130,16 @@ export function LoginForm({ router }: { router: NextRouter }) {
     }));
   }
 
+  const setNotificationAtom = useSetAtom(notifications);
+
   function loginUser() {
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
-      .then((user) => {
-        router.push('/app');
-      })
-      .catch((error) => {
-        console.error(error);
+      .then((user) => {})
+      .catch((error: FirebaseError) => {
+        setNotificationAtom((prev) => [
+          ...prev,
+          { id: v4(), message: getErrorMessage(error), type: 'danger' },
+        ]);
       });
   }
 
@@ -167,9 +183,21 @@ export function LoginForm({ router }: { router: NextRouter }) {
     </>
   );
 }
-// TODO code order, cleanup, and refactor
 export default function Page() {
   const router = useRouter();
+  const setNotificationAtom = useSetAtom(notifications);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        console.log(user);
+        router.push('/app/home');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const right = { translateX: '-430px' };
   const left = { translateX: '430px' };
@@ -198,18 +226,13 @@ export default function Page() {
         console.log(result, token ?? 'Could not get token');
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const { email } = error.customData;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
+        setNotificationAtom((prev) => [
+          ...prev,
+          { id: v4(), message: getErrorMessage(error), type: 'danger' },
+        ]);
       });
   }
   /**
-   * TODO doesn't seem to work too good, needs more love
    * @see https://firebase.google.com/docs/auth/web/github-auth
    */
   function githubSignIn() {
@@ -226,14 +249,10 @@ export default function Page() {
         console.log(result, token ?? 'Could not get token');
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const { email } = error.customData;
-        // The AuthCredential type that was used.
-        const credential = GithubAuthProvider.credentialFromError(error);
-        // ...
+        setNotificationAtom((prev) => [
+          ...prev,
+          { id: v4(), message: getErrorMessage(error), type: 'danger' },
+        ]);
       });
   }
 

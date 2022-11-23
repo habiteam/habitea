@@ -2,6 +2,9 @@ import { useAtom, useSetAtom } from 'jotai';
 import React, { ReactElement, useEffect } from 'react';
 import { screenHeight, screenWidth } from '@atoms/screen';
 import themeAtom from '@atoms/theme';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useRouter } from 'next/router';
+import { auth } from '@services/firebase';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
 
@@ -14,10 +17,19 @@ export default function AppLayout(props: AppLayoutProps) {
   const setHeight = useSetAtom(screenHeight);
 
   const [theme, setTheme] = useAtom(themeAtom);
+  const router = useRouter();
 
   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push('/login');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+  useEffect(() => {
     document.body.className = theme;
-    // localStorage.setItem('theme', theme);
   }, [theme]);
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');

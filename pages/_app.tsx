@@ -21,22 +21,6 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const router = useRouter();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        // We gonna probably save user shit here to atom not push to certain path
-        console.log(user);
-        // router.push('/app');
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
 
   return (
