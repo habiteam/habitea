@@ -9,6 +9,14 @@ const nextConfig = {
       permanent: true,
     },
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
 };
-
+// TODO remotePatterns for github and other auth providers
 module.exports = nextConfig;

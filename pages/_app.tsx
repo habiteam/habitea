@@ -2,11 +2,8 @@ import '../styles/globals.scss';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { ReactElement, ReactNode, useEffect } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Provider } from 'jotai';
-import { useRouter } from 'next/router';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@services/firebase';
 import { NotificationProvider } from '@commonComponents/Notifications/NotificationProvider';
 import { initIcons } from '@utils/fontawesome-icons';
 

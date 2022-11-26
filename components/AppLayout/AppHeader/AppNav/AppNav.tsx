@@ -20,12 +20,15 @@ import DropdownMenu from '@commonComponents/DropdownMenu/DropdownMenu';
 import NavLink from '@commonComponents/NavLink/NavLink';
 import { auth } from '@services/firebase';
 import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen';
+import userAtom from '@atoms/user';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {
   const width = useAtomValue(screenWidth);
 
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
+
+  const user = useAtomValue(userAtom);
 
   const navLinks = [
     {
@@ -80,7 +83,7 @@ export default function AppNav() {
 
         <div style={{ height: '40px' }}>
           <Image
-            src="/cat.jpg"
+            src={user?.photoURL ?? '/cat.jpg'}
             alt="Card header image"
             width={40}
             height={40}

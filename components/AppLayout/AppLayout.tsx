@@ -5,6 +5,7 @@ import themeAtom from '@atoms/theme';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { auth } from '@services/firebase';
+import userAtom from '@atoms/user';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
 
@@ -36,6 +37,18 @@ export default function AppLayout(props: AppLayoutProps) {
     if (savedTheme) {
       setTheme(savedTheme);
     }
+  }, []);
+
+  const setUser = useSetAtom(userAtom);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   function setWidthAndHeight() {
