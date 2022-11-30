@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Input from '@commonComponents/Input/Input';
-import { getSecondsFromDuration, toDurationFormat } from '@utils/duration';
+import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 
 export interface DurationInputPropsSchema
   extends React.DetailedHTMLProps<
@@ -13,7 +13,7 @@ export interface DurationInputPropsSchema
 }
 
 export default function DurationInput(props: DurationInputPropsSchema) {
-  const [value, setValue] = useState<string>('00:00:00');
+  const [value, setValue] = useState<string>(props.value ?? '00:00:00');
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
@@ -21,7 +21,7 @@ export default function DurationInput(props: DurationInputPropsSchema) {
 
   function onBlur(event: any) {
     setValue(
-      toDurationFormat(Math.max(0, getSecondsFromDuration(event.target.value))),
+      toDurationString(Math.max(0, getSecondsFromDuration(event.target.value))),
     );
   }
 

@@ -7,10 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import Input from '@commonComponents/Input/Input';
 import Select from '@commonComponents/Select/Select';
 import Textarea from '@commonComponents/Textarea/Textarea';
-import {
-  ActivityCategory,
-  ActivityCategoryCreateFormType,
-} from '@schemas/activity-category';
+import { ActivityCategoryCreateFormType } from '@schemas/activity-category';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { auth } from '@services/firebase';
 import {
@@ -20,7 +17,7 @@ import {
 } from '@constants/dictionaries';
 import ResponsiveDialog from '@commonComponents/ResponsiveDialog/ResponsiveDialog';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
-import { getSecondsFromDuration, toDurationFormat } from '@utils/duration';
+import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import notifications from '@atoms/notifications';
 import { generateUUID } from '@utils/uuid';
 import { getAppLayout } from '../AppLayout/AppLayout';
@@ -85,7 +82,7 @@ export function CreateDialog({
 
     // fallback safety for duration
     if (tempForm.duration) {
-      tempForm.duration = toDurationFormat(
+      tempForm.duration = toDurationString(
         Math.max(0, getSecondsFromDuration(tempForm.duration)),
       );
     }
