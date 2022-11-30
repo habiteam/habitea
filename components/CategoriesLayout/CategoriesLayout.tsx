@@ -2,12 +2,15 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, useState, useEffect } from 'react';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { onAuthStateChanged } from 'firebase/auth';
 import Input from '@commonComponents/Input/Input';
 import Select from '@commonComponents/Select/Select';
 import Textarea from '@commonComponents/Textarea/Textarea';
-import { ActivityCategory } from '@schemas/activity-category';
+import {
+  ActivityCategory,
+  ActivityCategoryCreateFormType,
+} from '@schemas/activity-category';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { auth } from '@services/firebase';
 import {
@@ -17,6 +20,9 @@ import {
 } from '@constants/dictionaries';
 import ResponsiveDialog from '@commonComponents/ResponsiveDialog/ResponsiveDialog';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
+import { getSecondsFromDuration, toDurationFormat } from '@utils/duration';
+import notifications from '@atoms/notifications';
+import { generateUUID } from '@utils/uuid';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -27,6 +33,21 @@ export interface AppLayoutProps {
   children: React.ReactNode;
 }
 
+const defaultCreateValues: ActivityCategoryCreateFormType = {
+  name: '',
+  icon: 'person-running',
+  description: '',
+  status: 'ACTIVE',
+  goalValue: '1',
+  goalType: 'MIN',
+  repeatType: 'DAILY',
+  unit: '',
+  unitType: 'QUANTITY',
+  duration: '00:00:00',
+  validFrom: '',
+  validTo: '',
+};
+
 export function CreateDialog({
   isCreateDialogOpen,
   setIsCreateDialogOpen,
@@ -34,17 +55,10 @@ export function CreateDialog({
   isCreateDialogOpen: boolean;
   setIsCreateDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [form, setForm] = useState<Partial<ActivityCategory>>({
-    name: '',
-    icon: 'person-running',
-    description: '',
-    status: 'ACTIVE',
-    goalValue: '1',
-    goalType: 'MIN',
-    repeatType: 'DAILY',
-    unitType: 'QUANTITY',
-    unit: '',
-  });
+  const [form, setForm] =
+    useState<ActivityCategoryCreateFormType>(defaultCreateValues);
+
+  const setNotificationsAtom = useSetAtom(notifications);
 
   function handleFormChange(event: any) {
     setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -54,19 +68,34 @@ export function CreateDialog({
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
+  const createCategory = () => {
+    const tempForm = form;
+
+    if (tempForm.name.length === 0) {
+      setNotificationsAtom((values) => [
+        ...values,
+        {
+          id: generateUUID(),
+          message: "Can't create category without a name",
+          type: 'danger',
+        },
+      ]);
+      return;
+    }
+
+    // fallback safety for duration
+    if (tempForm.duration) {
+      tempForm.duration = toDurationFormat(
+        Math.max(0, getSecondsFromDuration(tempForm.duration)),
+      );
+    }
+
+    ActivityCategoriesService.create(form);
+    setIsCreateDialogOpen(false);
+  };
+
   useEffect(() => {
-    setForm({
-      name: '',
-      icon: 'person-running',
-      description: '',
-      status: 'ACTIVE',
-      goalValue: '1',
-      goalType: 'MIN',
-      repeatType: 'DAILY',
-      unitType: 'QUANTITY',
-      unit: '',
-      duration: '00:00:00',
-    });
+    setForm(defaultCreateValues);
   }, [isCreateDialogOpen]);
 
   return (
@@ -87,10 +116,7 @@ export function CreateDialog({
           text: 'Create',
           fillType: 'regular',
           color: 'primary',
-          onClick: () => {
-            ActivityCategoriesService.create(form);
-            setIsCreateDialogOpen(false);
-          },
+          onClick: createCategory,
         },
       ]}
     >

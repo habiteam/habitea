@@ -1,6 +1,6 @@
-/* eslint-disable no-restricted-globals */
 import { useState } from 'react';
 import Input from '@commonComponents/Input/Input';
+import { getSecondsFromDuration, toDurationFormat } from '@utils/duration';
 
 export interface DurationInputPropsSchema
   extends React.DetailedHTMLProps<
@@ -12,34 +12,6 @@ export interface DurationInputPropsSchema
   id: string;
 }
 
-function getSeconds(value: string): number {
-  const [hours, minutes, seconds] = value.split(':').map(Number);
-
-  if (!isNaN(hours) && isNaN(minutes) && isNaN(seconds)) {
-    return hours;
-  }
-
-  if (!isNaN(hours) && !isNaN(minutes) && isNaN(seconds)) {
-    return hours * 60 + minutes;
-  }
-
-  if (!isNaN(hours) && !isNaN(minutes) && !isNaN(seconds)) {
-    return hours * 60 * 60 + minutes * 60 + seconds;
-  }
-
-  return 0;
-}
-
-function toHHMMSSFormat(value: number): string {
-  const hours = Math.floor(value / 3600);
-  const minutes = Math.floor(value / 60) % 60;
-  const seconds = value % 60;
-
-  return [hours, minutes, seconds]
-    .map((element) => element.toString().padStart(2, '0'))
-    .join(':');
-}
-
 export default function DurationInput(props: DurationInputPropsSchema) {
   const [value, setValue] = useState<string>('00:00:00');
 
@@ -48,7 +20,9 @@ export default function DurationInput(props: DurationInputPropsSchema) {
   }
 
   function onBlur(event: any) {
-    setValue(toHHMMSSFormat(Math.max(0, getSeconds(event.target.value))));
+    setValue(
+      toDurationFormat(Math.max(0, getSecondsFromDuration(event.target.value))),
+    );
   }
 
   return (

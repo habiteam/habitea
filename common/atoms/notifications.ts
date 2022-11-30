@@ -3,9 +3,12 @@ import { NotificationPropsSchema } from '@commonComponents/Notifications/Notific
 
 export default atom<NotificationPropsSchema[]>([]);
 
+// import notifications from '@atoms/notifications';
+// import { generateUUID } from '@utils/uuid';
+//
 // export function addNotification() {
 //   setNotificationsAtom((values) => [
 //     ...values,
-//     { id: v4(), message: 'Jakieś info', type: 'info' },
+//     { id: generateUUID(), message: 'Jakieś info', type: 'info' },
 //   ]);
 // }
