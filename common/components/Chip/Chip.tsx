@@ -7,16 +7,18 @@ import styles from './Chip.module.scss';
 
 export interface ChipPropSchema {
   text: string;
+  fillType?: 'filled' | 'outlined';
   color?: Color;
   icon?: IconDefinition;
 }
 
 export default function Chip(props: ChipPropSchema) {
   return (
-    <div
+    <span
       className={classNames(
         styles.chip,
         styles[`chip--${props.color ?? 'default'}`],
+        styles[`chip--${props.fillType ?? 'outlined'}`],
       )}
     >
       {props.icon && (
@@ -26,6 +28,6 @@ export default function Chip(props: ChipPropSchema) {
         ></FontAwesomeIcon>
       )}
       <span>{props.text}</span>
-    </div>
+    </span>
   );
 }

@@ -4,13 +4,10 @@
   max-width: 360px;
   overflow: auto;
   padding: 6px 8px;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   line-height: 1.43;
-  font-weight: 500;
+  letter-spacing: 0.15rem;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 
   .chip-icon {
     width: 12px;
@@ -23,9 +20,14 @@
   }
 
   @each $name, $color in $colors-map {
-    &--#{$name} {
+    &--#{$name}.chip--outlined {
       color: mix($color, #000, 30%);
       outline: 1px solid mix($color, #2e2e2e, 40%);
+    }
+
+    &--#{$name}.chip--filled {
+      color: #fff;
+      background-color: $color;
     }
   }
   &--primary {

@@ -24,7 +24,7 @@ export default function CategorySelector({
 
   function updateCategoriesList() {
     if (auth.currentUser) {
-      ActivityCategoriesService.getByUserId(auth.currentUser.uid).then(
+      ActivityCategoriesService.getActiveByUserId(auth.currentUser.uid).then(
         (response) => {
           setCategoryList(response);
         },

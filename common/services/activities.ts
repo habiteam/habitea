@@ -1,3 +1,4 @@
+import { DatabaseCollection } from '@constants/collections';
 import { Activity } from '@schemas/activity';
 import { generateUUID } from '@utils/uuid';
 import {
@@ -12,12 +13,15 @@ import {
 import { auth, database } from './firebase';
 
 export class ActivitiesService {
-  static readonly collectionName = 'activities';
+  static readonly collectionName = DatabaseCollection.Activities;
 
   static create(activity: Partial<Activity>) {
     setDoc(doc(database, this.collectionName, generateUUID()), {
       ...activity,
-      categoryRef: doc(database, `activityCategories/${activity.categoryRef}`),
+      categoryRef: doc(
+        database,
+        `${DatabaseCollection.ActivityCategories}/${activity.categoryRef}`,
+      ),
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
     });
@@ -33,7 +37,11 @@ export class ActivitiesService {
 
   static async getByCategory(categoryId: string) {
     const activitiesRef = collection(database, this.collectionName);
-    const categoryRef = doc(database, 'activityCategories', categoryId);
+    const categoryRef = doc(
+      database,
+      DatabaseCollection.ActivityCategories,
+      categoryId,
+    );
     const q = query(activitiesRef, where('categoryRef', '==', categoryRef));
 
     const querySnapshot = await getDocs(q);

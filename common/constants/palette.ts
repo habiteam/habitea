@@ -4,7 +4,8 @@ export type Color =
   | 'info'
   | 'default'
   | 'warning'
-  | 'danger';
+  | 'danger'
+  | 'inactive';
 
 export interface Theme {
   name: string;

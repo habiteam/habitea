@@ -24,6 +24,12 @@ export function getSecondsFromDuration(value: string): number {
   return 0;
 }
 
+export function getDurationFromString(value: string): Duration {
+  const [hours, minutes, seconds] = value.split(':').map(Number);
+
+  return { hours, minutes, seconds };
+}
+
 // seconds to duration string HH:MM:SS
 export function toDurationString(value: number): string {
   const hours = Math.floor(value / 3600);

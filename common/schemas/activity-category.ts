@@ -9,7 +9,7 @@ import { IconName } from '@fortawesome/fontawesome-svg-core';
 export interface ActivityCategory {
   id: string;
   name: string;
-  icon?: IconName;
+  icon: IconName;
   description?: string;
   status: ActivityCategoryStatus;
   goalValue: string | number;

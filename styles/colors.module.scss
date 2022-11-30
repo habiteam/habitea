@@ -4,7 +4,7 @@ $color-warning: #ffbb01;
 $color-info: #779dca;
 $color-success: #75a561;
 $color-default: #000;
-$color-inactive: #79747e;
+$color-inactive: #7e7874;
 $color-disabled: #e3dfe3;
 $color-disabled-text: #989598;
 
@@ -14,7 +14,8 @@ $colors-map: (
   'info': $color-info,
   'success': $color-success,
   'warning': $color-warning,
-  'default': $color-default
+  'default': $color-default,
+  'inactive': $color-inactive
 );
 
 :export {
@@ -24,4 +25,5 @@ $colors-map: (
   info: $color-info;
   success: $color-success;
   default: $color-default;
+  inactive: $color-inactive;
 }
