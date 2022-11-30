@@ -44,7 +44,7 @@ export default function Category() {
     <>
       {category && (
         <div className={classNames(styles.header)}>
-          {width <= MOBILE_BREAKPOINT && (
+          {width <= MOBILE_BREAKPOINT ? (
             <Button
               fillType="regular"
               onClick={() => router.push('/app/categories')}
@@ -54,17 +54,17 @@ export default function Category() {
                 width={16}
               ></FontAwesomeIcon>
             </Button>
+          ) : (
+            <div className={classNames(styles.icon)}>
+              <FontAwesomeIcon
+                icon={findIconDefinition({
+                  prefix: 'fas',
+                  iconName: category.icon,
+                })}
+                width={16}
+              ></FontAwesomeIcon>
+            </div>
           )}
-
-          <div className={classNames(styles.icon)}>
-            <FontAwesomeIcon
-              icon={findIconDefinition({
-                prefix: 'fas',
-                iconName: category.icon,
-              })}
-              width={16}
-            ></FontAwesomeIcon>
-          </div>
 
           <div className={classNames(styles.heading)}>
             <div className={classNames(styles.title)}>
