@@ -21,6 +21,6 @@ export const ActivityCategoryRepeatTypeOptions: Record<
 };
 
 export const ActivityUnitTypeOptions: Record<ActivityUnitType, string> = {
-  TIME: 'Time',
   QUANTITY: 'Quantity',
+  TIME: 'Time',
 };

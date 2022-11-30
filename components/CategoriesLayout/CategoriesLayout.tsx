@@ -16,6 +16,7 @@ import {
   ActivityUnitTypeOptions,
 } from '@constants/dictionaries';
 import ResponsiveDialog from '@commonComponents/ResponsiveDialog/ResponsiveDialog';
+import DurationInput from '@commonComponents/DurationInput/DurationInput';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -64,6 +65,7 @@ export function CreateDialog({
       repeatType: 'DAILY',
       unitType: 'QUANTITY',
       unit: '',
+      duration: '00:00:00',
     });
   }, [isCreateDialogOpen]);
 
@@ -98,6 +100,7 @@ export function CreateDialog({
           style={{ width: 'calc(10% - 6px)' }}
           onSelect={(icon) => setForm((prev) => ({ ...prev, icon }))}
         ></CategoryIconSelector>
+
         <Input
           title="Name"
           id="name"
@@ -110,6 +113,7 @@ export function CreateDialog({
           color="primary"
           className={styles.control}
         ></Input>
+
         <Textarea
           title="Description"
           id="description"
@@ -120,6 +124,7 @@ export function CreateDialog({
           rows={6}
           className={styles.control}
         ></Textarea>
+
         <Select
           title="Unit type"
           id="unitType"
@@ -131,16 +136,29 @@ export function CreateDialog({
           options={ActivityUnitTypeOptions}
           className={styles.control}
         ></Select>
-        <Input
-          title="Unit"
-          id="unit"
-          name="unit"
-          value={form.unit}
-          onChange={handleFormChange}
-          style={{ width: 'calc(50% - 6px)' }}
-          color="primary"
-          className={styles.control}
-        ></Input>
+
+        {form.unitType === 'QUANTITY' ? (
+          <Input
+            title="Unit"
+            id="unit"
+            name="unit"
+            value={form.unit}
+            onChange={handleFormChange}
+            style={{ width: 'calc(50% - 6px)' }}
+            color="primary"
+            className={styles.control}
+          ></Input>
+        ) : (
+          <DurationInput
+            id="duration"
+            name="duration"
+            title="Duration"
+            value={form.duration}
+            style={{ width: 'calc(50% - 6px)' }}
+            onChange={handleFormChange}
+          ></DurationInput>
+        )}
+
         <Input
           title="Goal"
           id="goalValue"
@@ -151,6 +169,7 @@ export function CreateDialog({
           color="primary"
           className={styles.control}
         ></Input>
+
         <Select
           title="Repeats"
           id="repeatType"
@@ -162,6 +181,7 @@ export function CreateDialog({
           options={ActivityCategoryRepeatTypeOptions}
           className={styles.control}
         ></Select>
+
         <Select
           title="Goal Type"
           id="goalType"
@@ -172,6 +192,7 @@ export function CreateDialog({
           options={ActivityCategoryGoalTypeOptions}
           className={styles.control}
         ></Select>
+
         <Input
           title="Valid from"
           id="validFrom"
@@ -180,6 +201,7 @@ export function CreateDialog({
           color="primary"
           className={styles.control}
         ></Input>
+
         <Input
           title="Valid to"
           id="validTo"

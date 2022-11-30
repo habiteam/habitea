@@ -2,6 +2,7 @@ import { getAppLayout } from '@components/AppLayout/AppLayout';
 import Activity from '@components/Activity/Activity';
 import userAtom from '@atoms/user';
 import { useAtomValue } from 'jotai';
+import DurationInput from '@commonComponents/DurationInput/DurationInput';
 
 export default function Home() {
   const user = useAtomValue(userAtom);

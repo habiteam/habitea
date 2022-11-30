@@ -15,6 +15,7 @@ export interface ActivityCategory {
   goalValue: string | number;
   goalType: ActivityCategoryGoalType;
   repeatType: ActivityCategoryRepeatType;
+  duration: string;
   unit: string;
   unitType: ActivityUnitType;
   createdDate: string;

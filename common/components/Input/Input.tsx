@@ -50,7 +50,11 @@ export default function Input(props: InputPropsSchema) {
           onFocus={() => {
             setIsFocused(true);
           }}
-          onBlur={() => {
+          onBlur={(event) => {
+            if (props.onBlur) {
+              props.onBlur(event);
+            }
+
             setIsFocused(false);
           }}
           onChange={(event) => {
