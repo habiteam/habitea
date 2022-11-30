@@ -2,10 +2,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
   background-color: var(--c-primary-light-bg);
   color: var(--c-primary-unfocused);
+  scrollbar-gutter: stable;
 
   &-header {
     display: flex;
@@ -19,13 +21,11 @@
   }
 
   &-content {
+    flex-grow: 1;
     padding: 32px;
   }
 
   &-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
     padding: 32px;
   }
