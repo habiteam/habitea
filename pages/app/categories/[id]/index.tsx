@@ -1,6 +1,9 @@
+import notifications from '@atoms/notifications';
+import { categoryListReloader } from '@atoms/reloaders';
 import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen';
 import Button from '@commonComponents/Button/Button';
 import Chip from '@commonComponents/Chip/Chip';
+import Dialog from '@commonComponents/Dialog/Dialog';
 import DropdownMenu, {
   DropdownMenuItem,
 } from '@commonComponents/DropdownMenu/DropdownMenu';
@@ -17,8 +20,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { getDurationFromString } from '@utils/duration';
+import { generateUUID } from '@utils/uuid';
 import classNames from 'classnames';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from './Category.module.scss';
@@ -39,8 +43,11 @@ export default function Category() {
   const router = useRouter();
   const [category, setCategory] = useState<ActivityCategory>();
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const width = useAtomValue(screenWidth);
+  const setNotification = useSetAtom(notifications);
+  const setCategoryListReloader = useSetAtom(categoryListReloader);
 
   const actions: DropdownMenuItem[] = [
     {
@@ -50,8 +57,19 @@ export default function Category() {
     {
       icon: faTrash,
       text: 'Delete',
+      onClick: () => setDeleteDialogOpen(true),
     },
   ];
+
+  const deleteCategory = () => {
+    ActivityCategoriesService.deleteById(category?.id as string);
+    router.push('/app/categories');
+    setNotification((values) => [
+      ...values,
+      { id: generateUUID(), message: 'Category deleted', type: 'info' },
+    ]);
+    setCategoryListReloader(generateUUID());
+  };
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -141,6 +159,27 @@ export default function Category() {
           )}
         </div>
       )}
+      <Dialog
+        title="Delete category"
+        open={deleteDialogOpen}
+        handleClose={() => setDeleteDialogOpen(false)}
+        actions={[
+          {
+            text: 'Cancel',
+            fillType: 'regular',
+            color: 'primary',
+            onClick: () => setDeleteDialogOpen(false),
+          },
+          {
+            text: 'Confirm',
+            fillType: 'filled',
+            color: 'primary',
+            onClick: deleteCategory,
+          },
+        ]}
+      >
+        <span>Are you sure you want to delete this category?</span>
+      </Dialog>
     </>
   );
 }

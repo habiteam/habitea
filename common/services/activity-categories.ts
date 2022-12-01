@@ -7,6 +7,7 @@ import {
   setDoc,
   Timestamp,
   where,
+  deleteDoc,
 } from 'firebase/firestore';
 import { ActivityCategory } from '@schemas/activity-category';
 import { generateUUID } from '@utils/uuid';
@@ -24,11 +25,15 @@ export class ActivityCategoriesService {
     });
   }
 
+  static deleteById(categoryId: string) {
+    deleteDoc(doc(database, this.collectionName, categoryId));
+  }
+
   static async getById(categoryId: string) {
     const d = await doc(database, this.collectionName, categoryId);
     const q = await getDoc(d);
 
-    return q.exists() ? q.data() : null;
+    return q.exists() ? { ...q.data(), id: categoryId } : null;
   }
 
   static async getByUserId(userId: string) {

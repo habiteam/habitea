@@ -20,6 +20,7 @@ import DurationInput from '@commonComponents/DurationInput/DurationInput';
 import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import notifications from '@atoms/notifications';
 import { generateUUID } from '@utils/uuid';
+import { categoryListReloader } from '@atoms/reloaders';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -243,6 +244,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
   const [categoryList, setCategoryList] = useState<any[]>([]);
   const router = useRouter();
   const width = useAtomValue(screenWidth);
+  const categoryListReloaderValue = useAtomValue(categoryListReloader);
 
   function updateCategoriesList() {
     if (auth.currentUser) {
@@ -262,6 +264,12 @@ export default function CategoriesLayout(props: AppLayoutProps) {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    if (categoryListReloaderValue) {
+      updateCategoriesList();
+    }
+  }, [categoryListReloaderValue]);
 
   return (
     <div className={styles.layout}>
