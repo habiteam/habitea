@@ -2,12 +2,12 @@
 
 .chip {
   max-width: 360px;
-  overflow: auto;
   padding: 6px 8px;
-  font-size: 1.2rem;
-  line-height: 1.43;
+  font-size: 1rem;
+  height: 27px;
   letter-spacing: 0.15rem;
   border-radius: 8px;
+  display: inline-block;
 
   .chip-icon {
     width: 12px;

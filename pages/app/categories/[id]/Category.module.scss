@@ -1,7 +1,9 @@
 @import '../../../../styles/colors.module.scss';
+@import '../../../../styles/mixins.module.scss';
 
 .header {
   height: 80px;
+  width: 100%;
   background-color: var(--c-primary-light-bg);
   display: flex;
   align-items: center;
@@ -19,11 +21,19 @@
     border-radius: 9999px;
   }
 
+  .heading {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
   .title {
-    margin-bottom: 8px;
+    @include scrollbar();
+
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 16px;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
 
     h1 {
       display: inline-block;
@@ -31,6 +41,8 @@
       font-style: normal;
       font-weight: 400;
       font-size: 2rem;
+      white-space: nowrap;
+      overflow: auto;
     }
   }
 

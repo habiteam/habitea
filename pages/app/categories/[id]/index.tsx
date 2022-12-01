@@ -4,7 +4,10 @@ import Chip from '@commonComponents/Chip/Chip';
 import { getCategoriesLayout } from '@components/CategoriesLayout/CategoriesLayout';
 import { ActivityCategoryRepeatTypeOptions } from '@constants/dictionaries';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeftLong,
+  faEllipsisVertical,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivityCategoriesService } from '@services/activity-categories';
@@ -79,6 +82,18 @@ export default function Category() {
               {getCategoryGoalString(category)}
             </div>
           </div>
+
+          {width <= MOBILE_BREAKPOINT ? (
+            <Button
+              fillType="regular"
+              onClick={() => router.push('/app/categories')}
+            >
+              <FontAwesomeIcon
+                icon={faEllipsisVertical}
+                width={16}
+              ></FontAwesomeIcon>
+            </Button>
+          ) : null}
         </div>
       )}
     </>
