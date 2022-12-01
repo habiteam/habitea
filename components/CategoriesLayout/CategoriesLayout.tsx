@@ -36,7 +36,7 @@ const defaultCreateValues: ActivityCategoryCreateFormType = {
   icon: 'person-running',
   description: '',
   status: 'ACTIVE',
-  goalValue: '1',
+  goalValue: '0',
   goalType: 'MIN',
   repeatType: 'DAILY',
   unit: '',
@@ -162,37 +162,41 @@ export function CreateDialog({
         ></Select>
 
         {form.unitType === 'QUANTITY' ? (
-          <Input
-            title="Unit"
-            id="unit"
-            name="unit"
-            value={form.unit}
-            onChange={handleFormChange}
-            style={{ width: 'calc(50% - 6px)' }}
-            color="primary"
-            className={styles.control}
-          ></Input>
+          <>
+            <Input
+              title="Unit"
+              id="unit"
+              name="unit"
+              value={form.unit}
+              onChange={handleFormChange}
+              style={{ width: 'calc(50% - 6px)' }}
+              color="primary"
+              className={styles.control}
+            ></Input>
+            <Input
+              title="Goal"
+              id="goalValue"
+              name="goalValue"
+              value={form.goalValue?.toLocaleString()}
+              onChange={handleFormChange}
+              style={{ width: 'calc(50% - 6px)' }}
+              color="primary"
+              className={styles.control}
+            ></Input>
+          </>
         ) : (
-          <DurationInput
-            id="duration"
-            name="duration"
-            title="Duration"
-            value={form.duration}
-            style={{ width: 'calc(50% - 6px)' }}
-            onChange={handleFormChange}
-          ></DurationInput>
+          <>
+            <div style={{ width: 'calc(50% - 6px)' }}></div>
+            <DurationInput
+              id="duration"
+              name="duration"
+              title="Duration"
+              value={form.duration}
+              style={{ width: 'calc(50% - 6px)' }}
+              onChange={handleFormChange}
+            ></DurationInput>
+          </>
         )}
-
-        <Input
-          title="Goal"
-          id="goalValue"
-          name="goalValue"
-          value={form.goalValue?.toLocaleString()}
-          onChange={handleFormChange}
-          style={{ width: 'calc(50% - 6px)' }}
-          color="primary"
-          className={styles.control}
-        ></Input>
 
         <Select
           title="Repeats"
