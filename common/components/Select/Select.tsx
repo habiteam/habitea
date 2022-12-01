@@ -57,7 +57,7 @@ export default function Select(props: SelectPropsSchema) {
         setIsFocused(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
 
     function handleTabPress(event: KeyboardEvent) {
       if (event.code === 'Tab') {
@@ -69,7 +69,7 @@ export default function Select(props: SelectPropsSchema) {
     document.addEventListener('keyup', handleTabPress);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
       document.removeEventListener('keyup', handleTabPress);
     };
   }, [ref]);

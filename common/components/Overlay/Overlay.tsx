@@ -2,12 +2,12 @@ import styles from './Overlay.module.scss';
 
 export interface OverlayPropsSchema {
   children: React.ReactNode;
-  onClick?: () => void;
+  onMouseDown?: () => void;
 }
 
-export default function Overlay({ children, onClick }: OverlayPropsSchema) {
+export default function Overlay({ children, onMouseDown }: OverlayPropsSchema) {
   return (
-    <div className={styles.overlay} onClick={onClick}>
+    <div className={styles.overlay} onMouseDown={onMouseDown}>
       {children}
     </div>
   );
