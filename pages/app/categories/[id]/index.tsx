@@ -1,12 +1,17 @@
 import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen';
 import Button from '@commonComponents/Button/Button';
 import Chip from '@commonComponents/Chip/Chip';
+import DropdownMenu, {
+  DropdownMenuItem,
+} from '@commonComponents/DropdownMenu/DropdownMenu';
 import { getCategoriesLayout } from '@components/CategoriesLayout/CategoriesLayout';
 import { ActivityCategoryRepeatTypeOptions } from '@constants/dictionaries';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowLeftLong,
   faEllipsisVertical,
+  faPenToSquare,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActivityCategory } from '@schemas/activity-category';
@@ -33,7 +38,20 @@ function getCategoryGoalString(category: ActivityCategory): string {
 export default function Category() {
   const router = useRouter();
   const [category, setCategory] = useState<ActivityCategory>();
+  const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
+
   const width = useAtomValue(screenWidth);
+
+  const actions: DropdownMenuItem[] = [
+    {
+      icon: faPenToSquare,
+      text: 'Edit',
+    },
+    {
+      icon: faTrash,
+      text: 'Delete',
+    },
+  ];
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -50,6 +68,7 @@ export default function Category() {
           {width <= MOBILE_BREAKPOINT ? (
             <Button
               fillType="regular"
+              color="default"
               onClick={() => router.push('/app/categories')}
             >
               <FontAwesomeIcon
@@ -84,16 +103,42 @@ export default function Category() {
           </div>
 
           {width <= MOBILE_BREAKPOINT ? (
-            <Button
-              fillType="regular"
-              onClick={() => router.push('/app/categories')}
-            >
-              <FontAwesomeIcon
-                icon={faEllipsisVertical}
-                width={16}
-              ></FontAwesomeIcon>
-            </Button>
-          ) : null}
+            <div>
+              <Button
+                fillType="regular"
+                color="default"
+                onClick={() => setIsActionMenuOpened(true)}
+              >
+                <FontAwesomeIcon
+                  icon={faEllipsisVertical}
+                  width={16}
+                ></FontAwesomeIcon>
+              </Button>
+              <DropdownMenu
+                items={actions}
+                color="primary"
+                isOpen={isActionMenuOpened}
+                onClose={() => setIsActionMenuOpened(false)}
+              ></DropdownMenu>
+            </div>
+          ) : (
+            actions.map(
+              (action, i) =>
+                action.icon && (
+                  <Button
+                    key={i}
+                    fillType="regular"
+                    color="default"
+                    onClick={action.onClick}
+                  >
+                    <FontAwesomeIcon
+                      icon={action.icon}
+                      width={16}
+                    ></FontAwesomeIcon>
+                  </Button>
+                ),
+            )
+          )}
         </div>
       )}
     </>

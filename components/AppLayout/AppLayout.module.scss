@@ -1,5 +1,3 @@
-@import '../../styles/mixins.module';
-
 .layout {
   position: fixed;
   width: 100%;
@@ -7,7 +5,4 @@
   background-color: var(--c-primary-dark-bg);
   overflow-x: hidden;
   overflow-y: auto;
-}
-.main {
-  @include container();
 }

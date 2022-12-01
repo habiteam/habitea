@@ -3,22 +3,30 @@
 @import '../../styles/breakpoints.module';
 
 .layout {
+  padding: 0px;
   width: 100%;
   display: flex;
   gap: 16px;
-  min-height: calc(100vh - 104px);
+  min-height: calc(100vh - 80px);
 
   @media (min-width: $breakpoint-md) {
-    min-height: calc(100vh - 144px);
+    padding: 32px;
+    main {
+      border-radius: 12px;
+    }
   }
 
   aside {
     @include scrollbar();
     margin: 0px;
-    padding: 0px;
+    padding: 12px;
     min-width: 176px;
     max-width: 280px;
     flex: 4;
+
+    @media (min-width: $breakpoint-md) {
+      padding: 0px;
+    }
 
     .headline {
       margin: 0 0 14px 20px;
@@ -65,9 +73,13 @@
 
   main {
     flex: 20;
-    border-radius: 12px;
+    border-radius: 0;
     background-color: var(--c-text-dark);
     overflow: hidden;
+
+    @media (min-width: $breakpoint-md) {
+      border-radius: 12px;
+    }
   }
 }
 
