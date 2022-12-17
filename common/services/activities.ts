@@ -27,15 +27,7 @@ export class ActivitiesService {
     });
   }
 
-  static async get() {
-    const querySnapshot = await getDocs(
-      collection(database, this.collectionName),
-    );
-
-    return querySnapshot.docs.map((response) => response.data());
-  }
-
-  static async getByCategory(categoryId: string) {
+  static async getByCategory(categoryId: string): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const categoryRef = doc(
       database,
@@ -46,7 +38,7 @@ export class ActivitiesService {
 
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) => ({
-      ...response.data(),
+      ...(response.data() as Activity),
       id: response.id,
     }));
   }

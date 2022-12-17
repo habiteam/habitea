@@ -1,7 +1,14 @@
 import { getAppLayout } from '@components/AppLayout/AppLayout';
 import Tabs from '@commonComponents/Tabs/Tabs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classnames from 'classnames';
+import userAtom from '@atoms/user';
+import { useAtomValue } from 'jotai';
+import Image from 'next/image';
+import { ActivityCategoriesService } from '@services/activity-categories';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@services/firebase';
+import { ActivityCategory } from '@schemas/activity-category';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
@@ -19,10 +26,39 @@ export default function Dashboard() {
   };
 
   const [currentTab, setCurrentTab] = useState('Categories');
+  const user = useAtomValue(userAtom);
+  const [habits, setHabits] = useState<ActivityCategory[]>([]);
+
+  useEffect(() => {
+    if (user) {
+      ActivityCategoriesService.getActiveByUserId(user?.uid as string).then(
+        (categories) => {
+          setHabits(categories as ActivityCategory[]);
+        },
+      );
+    }
+  }, [user]);
 
   return (
     <div className={classnames(styles.container)}>
-      <h2>Dashboard</h2>
+      <div className={classnames(styles.summary)}>
+        <Image
+          src={user?.photoURL ?? '/cat.jpg'}
+          alt="Card header image"
+          width={96}
+          height={96}
+          className={classnames(styles.avatar)}
+        ></Image>
+        <div className={classnames(styles['user-info'])}>
+          <h2>{user?.displayName ?? user?.email}</h2>
+          <span>Tracking {habits.length} habits</span>
+          <span>Current habit progress: 69%</span>
+        </div>
+      </div>
+      <p>Here you can see your progress and manage your goals.</p>
+      <p>Click on the tabs to see more.</p>
+      <br />
+      <br />
       <Tabs
         tabs={[
           { key: 'Categories', title: 'Categories' },
@@ -35,11 +71,6 @@ export default function Dashboard() {
         }}
       ></Tabs>
       {tabContent(currentTab)}
-      <svg viewBox="0 0 15 15">
-        <clipPath id="menu" clipPathUnits="objectBoundingBox">
-          <path d="m 15 6 q 0 9 -10 9 m 0 0 l 10 0 l 0 -9" />
-        </clipPath>
-      </svg>
     </div>
   );
 }

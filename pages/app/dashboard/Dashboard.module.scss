@@ -2,3 +2,20 @@
   background-color: var(--c-primary-light-bg);
   padding: 32px;
 }
+.summary {
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.user-info {
+  margin-left: 16px;
+  span {
+    display: block;
+  }
+}
+.avatar {
+  border-radius: 50%;
+}

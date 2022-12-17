@@ -159,6 +159,7 @@ export default function Category() {
           )}
         </div>
       )}
+      <div>debug</div>
       <Dialog
         title="Delete category"
         open={deleteDialogOpen}
