@@ -6,28 +6,15 @@ import userAtom from '@atoms/user';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import { ActivityCategoriesService } from '@services/activity-categories';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@services/firebase';
 import { ActivityCategory } from '@schemas/activity-category';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
-  const tabContent = (tab: string) => {
-    switch (tab) {
-      case 'Categories':
-        return <div>Tab 1 content</div>;
-      case 'Calendar':
-        return <div>Tab 2 content</div>;
-      case 'Journal':
-        return <div>Tab 3 content</div>;
-      default:
-        return <div>Tab 1 content</div>;
-    }
-  };
-
   const [currentTab, setCurrentTab] = useState('Categories');
   const user = useAtomValue(userAtom);
   const [habits, setHabits] = useState<ActivityCategory[]>([]);
+  // TODO delete this - testing firebase rules
+  const [all, setAll] = useState<ActivityCategory[]>([]);
 
   useEffect(() => {
     if (user) {
@@ -36,8 +23,35 @@ export default function Dashboard() {
           setHabits(categories as ActivityCategory[]);
         },
       );
+      // TODO delete this - testing firebase rules
+      ActivityCategoriesService.getAll().then((categories) => {
+        setAll(categories as ActivityCategory[]);
+      });
     }
   }, [user]);
+
+  const tabContent = (tab: string) => {
+    switch (tab) {
+      case 'Categories':
+        return (
+          <div>
+            <h2>Dumping all categories</h2>
+            {all.map((habit) => (
+              <div key={habit.id}>
+                <h3>{habit.name}</h3>
+              </div>
+            ))}
+            <span>If you can see other users categories, this is bad</span>
+          </div>
+        );
+      case 'Calendar':
+        return <div>Tab 2 content</div>;
+      case 'Journal':
+        return <div>Tab 3 content</div>;
+      default:
+        return <div>Tab 1 content</div>;
+    }
+  };
 
   return (
     <div className={classnames(styles.container)}>

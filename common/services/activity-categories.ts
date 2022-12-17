@@ -39,6 +39,23 @@ export class ActivityCategoriesService {
       : null;
   }
 
+  /**
+   * Should not work when firebase rules are correctly set to only allow users to read their own data
+   * TODO: Firebase rules
+   * TODO: Delete this method
+   * @returns Promise<ActivityCategory[]>
+   */
+  static async getAll(): Promise<ActivityCategory[]> {
+    const categoriesRef = collection(database, this.collectionName);
+    const q = query(categoriesRef);
+
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((response) => ({
+      ...(response.data() as ActivityCategory),
+      id: response.id,
+    }));
+  }
+
   static async getByUserId(userId: string): Promise<ActivityCategory[]> {
     const categoriesRef = collection(database, this.collectionName);
     const q = query(categoriesRef, where('createdBy', '==', userId));
