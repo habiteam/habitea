@@ -24,9 +24,14 @@ export default function Dashboard() {
         },
       );
       // TODO delete this - testing firebase rules
-      ActivityCategoriesService.getAll().then((categories) => {
-        setAll(categories as ActivityCategory[]);
-      });
+      ActivityCategoriesService.getAll()
+        .then((categories) => {
+          setAll(categories as ActivityCategory[]);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAll([]);
+        });
     }
   }, [user]);
 
@@ -42,6 +47,8 @@ export default function Dashboard() {
               </div>
             ))}
             <span>If you can see other users categories, this is bad</span>
+            <br />
+            <span>If you see nothing, that&apos;s good</span>
           </div>
         );
       case 'Calendar':
