@@ -1,6 +1,11 @@
+@import '../../../styles/breakpoints.module.scss';
+
 .container {
   background-color: var(--c-primary-light-bg);
-  padding: 32px;
+  padding: 12px;
+  @media (min-width: $breakpoint-md) {
+    padding: 32px;
+  }
 }
 .summary {
   background-color: white;
@@ -18,4 +23,8 @@
 }
 .avatar {
   border-radius: 50%;
+}
+.tab {
+  padding: 16px;
+  background-color: white;
 }

@@ -34,7 +34,7 @@ export default function Dashboard() {
     switch (tab) {
       case 'Categories':
         return (
-          <div>
+          <div className={styles.tab}>
             <h2>Dumping all categories</h2>
             {all.map((habit) => (
               <div key={habit.id}>
@@ -45,11 +45,11 @@ export default function Dashboard() {
           </div>
         );
       case 'Calendar':
-        return <div>Tab 2 content</div>;
+        return <div className={styles.tab}>Tab 2 content</div>;
       case 'Journal':
-        return <div>Tab 3 content</div>;
+        return <div className={styles.tab}>Tab 3 content</div>;
       default:
-        return <div>Tab 1 content</div>;
+        return <div className={styles.tab}>Tab 1 content</div>;
     }
   };
 
