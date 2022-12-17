@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useEffect } from 'react';
+import { animated, config, useSpring } from 'react-spring';
 import styles from './Tabs.module.scss';
 
 export interface TabSchema {
@@ -19,14 +20,23 @@ export default function Tabs({
   activeTab,
   setActiveTab,
 }: TabsPropsSchema) {
+  const [tabTransition, setTabTransition] = useSpring(
+    () => ({
+      from: { width: '0px', left: '0px' },
+      to: { width: '0px', left: '0px' },
+      config: config.gentle,
+    }),
+    [],
+  );
+
   const onTabChange = (key: string) => {
     setActiveTab(key);
     const activeTabEl = document.querySelector(`#${key}`) as HTMLDivElement;
-    const activeTabBg = document.querySelector(
-      `.${styles['active-tab-bg']}`,
-    ) as HTMLDivElement;
-    activeTabBg.style.width = `${activeTabEl.clientWidth}px`;
-    activeTabBg.style.left = `${activeTabEl.offsetLeft}px`;
+
+    setTabTransition({
+      width: `${activeTabEl.clientWidth}px`,
+      left: `${activeTabEl.offsetLeft}px`,
+    });
   };
 
   useEffect(() => {
@@ -35,7 +45,10 @@ export default function Tabs({
 
   return (
     <div className={classNames(styles.tabs)}>
-      <div className={classNames(styles['active-tab-bg'])}></div>
+      <animated.div
+        style={tabTransition}
+        className={classNames(styles['active-tab-bg'])}
+      ></animated.div>
       {tabs.map((tab) => (
         <div
           key={tab.key}
