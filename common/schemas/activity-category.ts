@@ -5,6 +5,7 @@ import {
   ActivityUnitType,
 } from '@constants/dictionaries';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
+import { Timestamp } from 'firebase/firestore';
 
 export interface ActivityCategory {
   id: string;
@@ -18,7 +19,7 @@ export interface ActivityCategory {
   unit: string;
   unitType: ActivityUnitType;
   duration: string;
-  createdDate: string;
+  createdDate: Timestamp;
   createdBy: string;
   validFrom?: string;
   validTo?: string;

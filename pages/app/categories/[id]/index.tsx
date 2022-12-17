@@ -175,7 +175,9 @@ export default function Category() {
       )}
       <div>
         {activities?.map((el, i) => (
-          <>{el.value}</>
+          <div key={el.id}>
+            date: {el.activityDate.toDate().toString()}, value: {el.value}
+          </div>
         ))}
       </div>
       <Dialog
