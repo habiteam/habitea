@@ -8,6 +8,7 @@
   background-color: var(--c-primary-light-bg);
   color: var(--c-primary-unfocused);
   scrollbar-gutter: stable;
+  z-index: 1000;
 
   &-header {
     display: flex;

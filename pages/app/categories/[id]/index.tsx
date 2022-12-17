@@ -8,7 +8,10 @@ import DropdownMenu, {
   DropdownMenuItem,
 } from '@commonComponents/DropdownMenu/DropdownMenu';
 import { getCategoriesLayout } from '@components/CategoriesLayout/CategoriesLayout';
-import { ActivityCategoryRepeatTypeOptions } from '@constants/dictionaries';
+import {
+  ActivityCategoryRepeatType,
+  ActivityCategoryRepeatTypeOptions,
+} from '@constants/dictionaries';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowLeftLong,
@@ -17,7 +20,9 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
+import { ActivitiesService } from '@services/activities';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { getDurationFromString } from '@utils/duration';
 import { generateUUID } from '@utils/uuid';
@@ -42,6 +47,7 @@ function getCategoryGoalString(category: ActivityCategory): string {
 export default function Category() {
   const router = useRouter();
   const [category, setCategory] = useState<ActivityCategory>();
+  const [activities, setActivities] = useState<Activity[]>();
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -75,7 +81,15 @@ export default function Category() {
     if (!router.isReady) return;
 
     ActivityCategoriesService.getById(router.query.id as string).then(
-      (response) => setCategory(response as ActivityCategory),
+      (response) => {
+        setCategory(response as ActivityCategory);
+        ActivitiesService.getByCategoryForPeriod(
+          router.query.id as string,
+          response?.repeatType as ActivityCategoryRepeatType,
+        ).then((responseActivities) => {
+          setActivities(responseActivities);
+        });
+      },
     );
   }, [router.asPath]);
 
@@ -159,7 +173,11 @@ export default function Category() {
           )}
         </div>
       )}
-      <div>debug</div>
+      <div>
+        {activities?.map((el, i) => (
+          <>{el.value}</>
+        ))}
+      </div>
       <Dialog
         title="Delete category"
         open={deleteDialogOpen}
