@@ -10,15 +10,18 @@ export interface ChipPropSchema {
   fillType?: 'filled' | 'outlined';
   color?: Color;
   icon?: IconDefinition;
+  onClick?: () => void;
 }
 
 export default function Chip(props: ChipPropSchema) {
   return (
     <span
+      onClick={props.onClick}
       className={classNames(
         styles.chip,
         styles[`chip--${props.color ?? 'default'}`],
         styles[`chip--${props.fillType ?? 'outlined'}`],
+        { [styles[`chip--clickable`]]: props.onClick },
       )}
     >
       {props.icon && (

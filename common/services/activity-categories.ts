@@ -8,11 +8,13 @@ import {
   Timestamp,
   where,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import { ActivityCategory } from '@schemas/activity-category';
 import { generateUUID } from '@utils/uuid';
 import { auth, database } from '@services/firebase';
 import { DatabaseCollection } from '@constants/collections';
+import { ActivityCategoryStatus } from '@constants/dictionaries';
 
 export class ActivityCategoriesService {
   static readonly collectionName = DatabaseCollection.ActivityCategories;
@@ -22,6 +24,15 @@ export class ActivityCategoriesService {
       ...category,
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
+    });
+  }
+
+  static patchStatus(
+    categoryId: string,
+    newStatus: ActivityCategoryStatus,
+  ): void {
+    updateDoc(doc(database, this.collectionName, categoryId), {
+      status: newStatus,
     });
   }
 

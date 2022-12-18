@@ -52,6 +52,7 @@ export default function Category() {
   const [activities, setActivities] = useState<Activity[]>();
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [statusDialogOpen, setStatusDialogOpen] = useState(false);
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState<boolean>(false);
   const user = useAtomValue(userAtom);
 
@@ -71,16 +72,6 @@ export default function Category() {
       onClick: () => setDeleteDialogOpen(true),
     },
   ];
-
-  const deleteCategory = (): void => {
-    ActivityCategoriesService.deleteById(category?.id as string);
-    router.push('/app/categories');
-    setNotification((values) => [
-      ...values,
-      { id: generateUUID(), message: 'Category deleted', type: 'danger' },
-    ]);
-    setCategoryListReloader(generateUUID());
-  };
 
   const updateCategory = (): void => {
     if (!router.isReady || !user) return;
@@ -103,6 +94,29 @@ export default function Category() {
           });
       },
     );
+  };
+
+  const updateCategoryStatus = (): void => {
+    ActivityCategoriesService.patchStatus(
+      router.query.id as string,
+      category?.status === 'ACTIVE' ? 'ARCHIVED' : 'ACTIVE',
+    );
+    setNotification((values) => [
+      ...values,
+      { id: generateUUID(), message: 'Category status updated', type: 'info' },
+    ]);
+    updateCategory();
+    setStatusDialogOpen(false);
+  };
+
+  const deleteCategory = (): void => {
+    ActivityCategoriesService.deleteById(category?.id as string);
+    router.push('/app/categories');
+    setNotification((values) => [
+      ...values,
+      { id: generateUUID(), message: 'Category deleted', type: 'danger' },
+    ]);
+    setCategoryListReloader(generateUUID());
   };
 
   useEffect(() => {
@@ -143,6 +157,7 @@ export default function Category() {
                 text={category.status}
                 color={category.status === 'ACTIVE' ? 'info' : 'inactive'}
                 fillType="filled"
+                onClick={() => setStatusDialogOpen(true)}
               ></Chip>
             </div>
             <div className={classNames(styles.subtitle)}>
@@ -197,6 +212,29 @@ export default function Category() {
         ))}
       </div>
       <div>{/* TODO display nice info */}</div>
+
+      <Dialog
+        title="Change category status"
+        open={statusDialogOpen}
+        handleClose={() => setStatusDialogOpen(false)}
+        actions={[
+          {
+            text: 'Cancel',
+            fillType: 'regular',
+            color: 'primary',
+            onClick: () => setStatusDialogOpen(false),
+          },
+          {
+            text: 'Confirm',
+            fillType: 'filled',
+            color: 'primary',
+            onClick: updateCategoryStatus,
+          },
+        ]}
+      >
+        <span>Are you sure you want to change this category status?</span>
+      </Dialog>
+
       <Dialog
         title="Delete category"
         open={deleteDialogOpen}
