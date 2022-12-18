@@ -13,8 +13,6 @@ export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Categories');
   const user = useAtomValue(userAtom);
   const [habits, setHabits] = useState<ActivityCategory[]>([]);
-  // TODO delete this - testing firebase rules
-  const [all, setAll] = useState<ActivityCategory[]>([]);
 
   useEffect(() => {
     if (user) {
@@ -23,34 +21,13 @@ export default function Dashboard() {
           setHabits(categories as ActivityCategory[]);
         },
       );
-      // TODO delete this - testing firebase rules
-      ActivityCategoriesService.getAll()
-        .then((categories) => {
-          setAll(categories as ActivityCategory[]);
-        })
-        .catch((err) => {
-          console.log(err);
-          setAll([]);
-        });
     }
   }, [user]);
 
   const tabContent = (tab: string) => {
     switch (tab) {
       case 'Categories':
-        return (
-          <div className={styles.tab}>
-            <h2>Dumping all categories</h2>
-            {all.map((habit) => (
-              <div key={habit.id}>
-                <h3>{habit.name}</h3>
-              </div>
-            ))}
-            <span>If you can see other users categories, this is bad</span>
-            <br />
-            <span>If you see nothing, that&apos;s good</span>
-          </div>
-        );
+        return <div className={styles.tab}>Tab 1 content</div>;
       case 'Calendar':
         return <div className={styles.tab}>Tab 2 content</div>;
       case 'Journal':
