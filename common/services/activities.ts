@@ -30,14 +30,21 @@ export class ActivitiesService {
     });
   }
 
-  static async getByCategory(categoryId: string): Promise<Activity[]> {
+  static async getByCategory(
+    categoryId: string,
+    userId: string,
+  ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const categoryRef = doc(
       database,
       DatabaseCollection.ActivityCategories,
       categoryId,
     );
-    const q = query(activitiesRef, where('categoryRef', '==', categoryRef));
+    const q = query(
+      activitiesRef,
+      where('createdBy', '==', userId),
+      where('categoryRef', '==', categoryRef),
+    );
 
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) => ({
@@ -49,6 +56,7 @@ export class ActivitiesService {
   static async getByCategoryForPeriod(
     categoryId: string,
     period: ActivityCategoryRepeatType,
+    userId: string,
   ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const categoryRef = doc(
@@ -56,13 +64,12 @@ export class ActivitiesService {
       DatabaseCollection.ActivityCategories,
       categoryId,
     );
-
     const q = query(
       activitiesRef,
+      where('createdBy', '==', userId),
       where('categoryRef', '==', categoryRef),
       ...getWheresForPeriod(period, new Date()),
     );
-
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) => ({
       ...(response.data() as Activity),

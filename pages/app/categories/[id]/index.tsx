@@ -30,6 +30,7 @@ import classNames from 'classnames';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import userAtom from '@atoms/user';
 import styles from './Category.module.scss';
 
 function getCategoryGoalString(category: ActivityCategory): string {
@@ -50,6 +51,7 @@ export default function Category() {
   const [activities, setActivities] = useState<Activity[]>();
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const user = useAtomValue(userAtom);
 
   const width = useAtomValue(screenWidth);
   const setNotification = useSetAtom(notifications);
@@ -72,26 +74,33 @@ export default function Category() {
     router.push('/app/categories');
     setNotification((values) => [
       ...values,
-      { id: generateUUID(), message: 'Category deleted', type: 'info' },
+      { id: generateUUID(), message: 'Category deleted', type: 'danger' },
     ]);
     setCategoryListReloader(generateUUID());
   };
 
   useEffect(() => {
-    if (!router.isReady) return;
-
+    if (!router.isReady || !user) return;
     ActivityCategoriesService.getById(router.query.id as string).then(
       (response) => {
         setCategory(response as ActivityCategory);
         ActivitiesService.getByCategoryForPeriod(
           router.query.id as string,
           response?.repeatType as ActivityCategoryRepeatType,
-        ).then((responseActivities) => {
-          setActivities(responseActivities);
-        });
+          user.uid,
+        )
+          .then((responseActivities) => {
+            setActivities(responseActivities);
+          })
+          .catch((error) => {
+            setNotification((values) => [
+              ...values,
+              { id: generateUUID(), message: error.toString(), type: 'danger' },
+            ]);
+          });
       },
     );
-  }, [router.asPath]);
+  }, [router.asPath, user]);
 
   return (
     <>

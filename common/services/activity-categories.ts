@@ -13,6 +13,7 @@ import { ActivityCategory } from '@schemas/activity-category';
 import { generateUUID } from '@utils/uuid';
 import { auth, database } from '@services/firebase';
 import { DatabaseCollection } from '@constants/collections';
+import { ActivityCategoryRepeatType } from '@constants/dictionaries';
 import { ActivitiesService } from './activities';
 
 export class ActivityCategoriesService {
@@ -31,7 +32,7 @@ export class ActivityCategoriesService {
   }
 
   static async getById(categoryId: string): Promise<ActivityCategory | null> {
-    const d = await doc(database, this.collectionName, categoryId);
+    const d = doc(database, this.collectionName, categoryId);
     const q = await getDoc(d);
 
     return q.exists()
@@ -64,9 +65,4 @@ export class ActivityCategoriesService {
       id: response.id,
     }));
   }
-
-  // static async getProgressById(categoryId: string): Promise<number> {
-  //   const category = await this.getById(categoryId);
-  //   const activities = await ActivitiesService.getByCategory(categoryId);
-  // }
 }

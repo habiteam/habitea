@@ -18,7 +18,7 @@ export default function Dashboard() {
     if (user) {
       ActivityCategoriesService.getActiveByUserId(user?.uid as string).then(
         (categories) => {
-          setHabits(categories as ActivityCategory[]);
+          setHabits(categories);
         },
       );
     }
