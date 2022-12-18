@@ -31,6 +31,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import userAtom from '@atoms/user';
+import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import styles from './Category.module.scss';
 
 function getCategoryGoalString(category: ActivityCategory): string {
@@ -51,6 +52,7 @@ export default function Category() {
   const [activities, setActivities] = useState<Activity[]>();
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState<boolean>(false);
   const user = useAtomValue(userAtom);
 
   const width = useAtomValue(screenWidth);
@@ -61,6 +63,7 @@ export default function Category() {
     {
       icon: faPenToSquare,
       text: 'Edit',
+      onClick: () => setIsUpdateDialogOpen(true),
     },
     {
       icon: faTrash,
@@ -69,7 +72,7 @@ export default function Category() {
     },
   ];
 
-  const deleteCategory = () => {
+  const deleteCategory = (): void => {
     ActivityCategoriesService.deleteById(category?.id as string);
     router.push('/app/categories');
     setNotification((values) => [
@@ -79,7 +82,7 @@ export default function Category() {
     setCategoryListReloader(generateUUID());
   };
 
-  useEffect(() => {
+  const updateCategory = (): void => {
     if (!router.isReady || !user) return;
     ActivityCategoriesService.getById(router.query.id as string).then(
       (response) => {
@@ -100,6 +103,10 @@ export default function Category() {
           });
       },
     );
+  };
+
+  useEffect(() => {
+    updateCategory();
   }, [router.asPath, user]);
 
   return (
@@ -189,19 +196,7 @@ export default function Category() {
           </div>
         ))}
       </div>
-      <div>
-        {/* TODO display nice info */}
-        <h1>Habit strength</h1>
-        <div>
-          <p>
-            {activities?.reduce((t, v) => t + parseInt(v.value, 10), 0)}/
-            {category?.goalValue} this {category?.repeatType}. That is{' '}
-            {((activities?.reduce((t, v) => t + parseInt(v.value, 10), 0) /
-              category?.goalValue) as number) * 100 ?? 0}
-            % progress
-          </p>
-        </div>
-      </div>
+      <div>{/* TODO display nice info */}</div>
       <Dialog
         title="Delete category"
         open={deleteDialogOpen}
@@ -223,6 +218,16 @@ export default function Category() {
       >
         <span>Are you sure you want to delete this category?</span>
       </Dialog>
+
+      <CategoryUpdateDialog
+        isUpdateDialogOpen={isUpdateDialogOpen}
+        setIsUpdateDialogOpen={(value) => {
+          updateCategory();
+          setCategoryListReloader(generateUUID());
+          setIsUpdateDialogOpen(value);
+        }}
+        activityCategory={category}
+      ></CategoryUpdateDialog>
     </>
   );
 }

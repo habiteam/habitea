@@ -27,5 +27,5 @@ export interface ActivityCategory {
 
 export type ActivityCategoryCreateFormType = Omit<
   ActivityCategory,
-  'id' | 'createdDate' | 'createdBy'
+  'createdDate' | 'createdBy'
 >;

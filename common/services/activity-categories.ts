@@ -13,14 +13,12 @@ import { ActivityCategory } from '@schemas/activity-category';
 import { generateUUID } from '@utils/uuid';
 import { auth, database } from '@services/firebase';
 import { DatabaseCollection } from '@constants/collections';
-import { ActivityCategoryRepeatType } from '@constants/dictionaries';
-import { ActivitiesService } from './activities';
 
 export class ActivityCategoriesService {
   static readonly collectionName = DatabaseCollection.ActivityCategories;
 
-  static create(category: Partial<ActivityCategory>): void {
-    setDoc(doc(database, this.collectionName, generateUUID()), {
+  static update(category: Partial<ActivityCategory>): void {
+    setDoc(doc(database, this.collectionName, category.id ?? generateUUID()), {
       ...category,
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
