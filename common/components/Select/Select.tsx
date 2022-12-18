@@ -98,6 +98,7 @@ export default function Select(props: SelectPropsSchema) {
             id={props.id}
             autoComplete="off"
             required={props.required}
+            onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
             onFocus={() => {
               setIsFocused(true);
             }}

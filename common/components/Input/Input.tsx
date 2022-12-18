@@ -47,6 +47,7 @@ export default function Input(props: InputPropsSchema) {
           value={props.value}
           id={props.id}
           required={props.required}
+          onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
           onFocus={() => {
             setIsFocused(true);
           }}
