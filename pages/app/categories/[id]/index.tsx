@@ -189,6 +189,19 @@ export default function Category() {
           </div>
         ))}
       </div>
+      <div>
+        {/* TODO display nice info */}
+        <h1>Habit strength</h1>
+        <div>
+          <p>
+            {activities?.reduce((t, v) => t + parseInt(v.value, 10), 0)}/
+            {category?.goalValue} this {category?.repeatType}. That is{' '}
+            {((activities?.reduce((t, v) => t + parseInt(v.value, 10), 0) /
+              category?.goalValue) as number) * 100 ?? 0}
+            % progress
+          </p>
+        </div>
+      </div>
       <Dialog
         title="Delete category"
         open={deleteDialogOpen}
