@@ -28,4 +28,16 @@ export class Activity {
     this.createdDate = createdDate;
     this.createdBy = createdBy;
   }
+
+  static fromFirestore(snapshot: any): Activity {
+    const data = snapshot.data();
+    return new Activity(
+      snapshot.id,
+      data.categoryRef,
+      data.value,
+      data.activityDate,
+      data.createdDate,
+      data.createdBy,
+    );
+  }
 }

@@ -47,10 +47,9 @@ export class ActivitiesService {
     );
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((response) => ({
-      ...(response.data() as Activity),
-      id: response.id,
-    }));
+    return querySnapshot.docs.map((response) =>
+      Activity.fromFirestore(response),
+    );
   }
 
   static async getByCategoryForPeriod(
@@ -71,9 +70,8 @@ export class ActivitiesService {
       ...getWheresForPeriod(period, new Date()),
     );
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((response) => ({
-      ...(response.data() as Activity),
-      id: response.id,
-    }));
+    return querySnapshot.docs.map((response) =>
+      Activity.fromFirestore(response),
+    );
   }
 }

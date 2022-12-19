@@ -44,9 +44,7 @@ export class ActivityCategoriesService {
     const d = doc(database, this.collectionName, categoryId);
     const q = await getDoc(d);
 
-    return q.exists()
-      ? { ...(q.data() as ActivityCategory), id: categoryId }
-      : null;
+    return q.exists() ? ActivityCategory.fromFirestore(q) : null;
   }
 
   static async getByUserId(userId: string): Promise<ActivityCategory[]> {
@@ -54,10 +52,9 @@ export class ActivityCategoriesService {
     const q = query(categoriesRef, where('createdBy', '==', userId));
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((response) => ({
-      ...(response.data() as ActivityCategory),
-      id: response.id,
-    }));
+    return querySnapshot.docs.map((response) =>
+      ActivityCategory.fromFirestore(response),
+    );
   }
 
   static async getActiveByUserId(userId: string): Promise<ActivityCategory[]> {
@@ -69,9 +66,8 @@ export class ActivityCategoriesService {
     );
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((response) => ({
-      ...(response.data() as ActivityCategory),
-      id: response.id,
-    }));
+    return querySnapshot.docs.map((response) =>
+      ActivityCategory.fromFirestore(response),
+    );
   }
 }

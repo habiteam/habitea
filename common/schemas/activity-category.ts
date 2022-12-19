@@ -71,6 +71,27 @@ export class ActivityCategory {
     this.validFrom = validFrom;
     this.validTo = validTo;
   }
+
+  static fromFirestore(snapshot: any): ActivityCategory {
+    const data = snapshot.data();
+    return new ActivityCategory(
+      snapshot.id,
+      data.name,
+      data.icon,
+      data.description,
+      data.status,
+      data.goalValue,
+      data.goalType,
+      data.repeatType,
+      data.unit,
+      data.unitType,
+      data.duration,
+      data.createdDate,
+      data.createdBy,
+      data.validFrom,
+      data.validTo,
+    );
+  }
 }
 
 export type ActivityCategoryCreateFormType = Omit<
