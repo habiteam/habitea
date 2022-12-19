@@ -20,7 +20,7 @@ export class ActivityCategoriesService {
   static readonly collectionName = DatabaseCollection.ActivityCategories;
 
   static update(category: Partial<ActivityCategory>): void {
-    setDoc(doc(database, this.collectionName, category.id ?? generateUUID()), {
+    setDoc(doc(database, this.collectionName, category.id || generateUUID()), {
       ...category,
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
