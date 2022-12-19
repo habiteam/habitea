@@ -41,7 +41,7 @@ export default function Dashboard() {
   return (
     <div className={classnames(styles.container)}>
       <Head>
-        <title>Dashboard</title>
+        <title>Dashboard - Habitea</title>
       </Head>
       <div className={classnames(styles.summary)}>
         <Image

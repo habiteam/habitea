@@ -26,6 +26,7 @@ import { useSetAtom } from 'jotai';
 import notifications from '@atoms/notifications';
 import { v4 } from 'uuid';
 import getErrorMessage from '@utils/firebase-error';
+import Head from 'next/head';
 import styles from './SignInForm.module.scss';
 import { EmailAuthData } from '../../common/schemas/email-auth-data';
 
@@ -79,6 +80,9 @@ export function RegisterForm({ router }: { router: NextRouter }) {
 
   return (
     <>
+      <Head>
+        <title>Sign up - Habitea</title>
+      </Head>
       <h1>Register</h1>
       <Input
         title="E-mail"
@@ -145,6 +149,9 @@ export function LoginForm({ router }: { router: NextRouter }) {
 
   return (
     <>
+      <Head>
+        <title>Login - Habitea</title>
+      </Head>
       <h1>Login</h1>
       <Input
         title="E-mail"
@@ -277,7 +284,7 @@ export default function Page() {
                 }}
               >
                 <FontAwesomeIcon icon={faGoogle as IconProp}></FontAwesomeIcon>
-                &nbsp; Sign in with Googoo
+                &nbsp; Sign in with Google
               </Button>
               <Button
                 fillType={'outlined'}

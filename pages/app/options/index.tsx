@@ -10,7 +10,7 @@ export default function Options() {
   return (
     <>
       <Head>
-        <title>Options</title>
+        <title>Options - Habitea</title>
       </Head>
       <h2>Options</h2>
       <ThemeSelector

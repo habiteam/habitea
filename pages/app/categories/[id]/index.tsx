@@ -115,7 +115,7 @@ export default function Category() {
     router.push('/app/categories');
     setNotification((values) => [
       ...values,
-      { id: generateUUID(), message: 'Category deleted', type: 'danger' },
+      { id: generateUUID(), message: 'Category deleted', type: 'info' },
     ]);
     setCategoryListReloader(generateUUID());
   };
@@ -127,7 +127,7 @@ export default function Category() {
   return (
     <>
       <Head>
-        <title>{category?.name ?? 'Category'}</title>
+        <title>{category?.name ?? 'Category'} - Habitea</title>
       </Head>
       {category && (
         <div className={classNames(styles.header)}>

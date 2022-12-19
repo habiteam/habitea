@@ -6,7 +6,7 @@ export default function Categories() {
   return (
     <div className={styles.categories}>
       <Head>
-        <title>Categories</title>
+        <title>Categories - Habitea</title>
       </Head>
       <div>Select or create new category</div>
     </div>
