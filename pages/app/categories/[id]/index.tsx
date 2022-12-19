@@ -32,6 +32,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import userAtom from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
+import Head from 'next/head';
 import styles from './Category.module.scss';
 
 function getCategoryGoalString(category: ActivityCategory): string {
@@ -125,6 +126,9 @@ export default function Category() {
 
   return (
     <>
+      <Head>
+        <title>{category?.name ?? 'Category'}</title>
+      </Head>
       {category && (
         <div className={classNames(styles.header)}>
           {width <= MOBILE_BREAKPOINT ? (

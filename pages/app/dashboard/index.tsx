@@ -7,6 +7,7 @@ import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { ActivityCategory } from '@schemas/activity-category';
+import Head from 'next/head';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
@@ -39,6 +40,9 @@ export default function Dashboard() {
 
   return (
     <div className={classnames(styles.container)}>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       <div className={classnames(styles.summary)}>
         <Image
           src={user?.photoURL ?? '/cat.jpg'}
