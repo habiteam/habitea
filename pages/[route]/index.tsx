@@ -22,11 +22,9 @@ import bgImg from '@public/backgrounds/bg-desk-light.jpg';
 import { auth } from '@services/firebase';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FirebaseError } from 'firebase/app';
-import { useSetAtom } from 'jotai';
-import notifications from '@atoms/notifications';
-import { v4 } from 'uuid';
 import getErrorMessage from '@utils/firebase-error';
 import Head from 'next/head';
+import { useAddNotification } from '@utils/notifications';
 import styles from './SignInForm.module.scss';
 import { EmailAuthData } from '../../common/schemas/email-auth-data';
 
@@ -56,7 +54,7 @@ export function RegisterForm({ router }: { router: NextRouter }) {
     }));
   }
 
-  const setNotificationAtom = useSetAtom(notifications);
+  const addNotifcation = useAddNotification();
 
   function registerUser() {
     createUserWithEmailAndPassword(
@@ -65,16 +63,10 @@ export function RegisterForm({ router }: { router: NextRouter }) {
       registerData.password,
     )
       .then((user) => {
-        setNotificationAtom((prev) => [
-          ...prev,
-          { id: v4(), message: 'User registered', type: 'success' },
-        ]);
+        addNotifcation({ message: 'User registered', type: 'success' });
       })
       .catch((error) => {
-        setNotificationAtom((prev) => [
-          ...prev,
-          { id: v4(), message: getErrorMessage(error), type: 'danger' },
-        ]);
+        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
       });
   }
 
@@ -134,16 +126,13 @@ export function LoginForm({ router }: { router: NextRouter }) {
     }));
   }
 
-  const setNotificationAtom = useSetAtom(notifications);
+  const addNotifcation = useAddNotification();
 
   function loginUser() {
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
       .then((user) => {})
       .catch((error: FirebaseError) => {
-        setNotificationAtom((prev) => [
-          ...prev,
-          { id: v4(), message: getErrorMessage(error), type: 'danger' },
-        ]);
+        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
       });
   }
 
@@ -192,13 +181,13 @@ export function LoginForm({ router }: { router: NextRouter }) {
 }
 export default function Page() {
   const router = useRouter();
-  const setNotificationAtom = useSetAtom(notifications);
+  const addNotifcation = useAddNotification();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log(user);
+        // console.log(user);
         router.push('/app/home');
       }
     });
@@ -233,10 +222,7 @@ export default function Page() {
         console.log(result, token ?? 'Could not get token');
       })
       .catch((error) => {
-        setNotificationAtom((prev) => [
-          ...prev,
-          { id: v4(), message: getErrorMessage(error), type: 'danger' },
-        ]);
+        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
       });
   }
   /**
@@ -256,10 +242,7 @@ export default function Page() {
         console.log(result, token ?? 'Could not get token');
       })
       .catch((error) => {
-        setNotificationAtom((prev) => [
-          ...prev,
-          { id: v4(), message: getErrorMessage(error), type: 'danger' },
-        ]);
+        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
       });
   }
 

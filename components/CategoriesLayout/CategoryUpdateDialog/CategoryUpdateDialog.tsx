@@ -13,11 +13,9 @@ import {
 import ResponsiveDialog from '@commonComponents/ResponsiveDialog/ResponsiveDialog';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
 import { getSecondsFromDuration, toDurationString } from '@utils/duration';
-import notifications from '@atoms/notifications';
-import { generateUUID } from '@utils/uuid';
-import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
+import { useAddNotification } from '@utils/notifications';
 import CategoryIconSelector from '../CategoryIconSelector/CategoryIconSelector';
 import styles from './CategoryUpdateDialog.module.scss';
 
@@ -50,7 +48,7 @@ export function CategoryUpdateDialog({
     activityCategory ?? defaultCreateValues,
   );
 
-  const setNotificationsAtom = useSetAtom(notifications);
+  const addNotifcation = useAddNotification();
 
   function handleFormChange(event: any) {
     setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -64,14 +62,10 @@ export function CategoryUpdateDialog({
     const tempForm = form;
 
     if (tempForm.name.length === 0) {
-      setNotificationsAtom((values) => [
-        ...values,
-        {
-          id: generateUUID(),
-          message: "Can't create category without a name",
-          type: 'danger',
-        },
-      ]);
+      addNotifcation({
+        message: "Can't create category without a name",
+        type: 'danger',
+      });
       return;
     }
 

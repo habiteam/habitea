@@ -33,6 +33,7 @@ import { useEffect, useState } from 'react';
 import userAtom from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import Head from 'next/head';
+import { useAddNotification } from '@utils/notifications';
 import styles from './Category.module.scss';
 
 function getCategoryGoalString(category: ActivityCategory): string {
@@ -58,7 +59,7 @@ export default function Category() {
   const user = useAtomValue(userAtom);
 
   const width = useAtomValue(screenWidth);
-  const setNotification = useSetAtom(notifications);
+  const addNotifcation = useAddNotification();
   const setCategoryListReloader = useSetAtom(categoryListReloader);
 
   const actions: DropdownMenuItem[] = [
@@ -88,10 +89,7 @@ export default function Category() {
             setActivities(responseActivities);
           })
           .catch((error) => {
-            setNotification((values) => [
-              ...values,
-              { id: generateUUID(), message: error.toString(), type: 'danger' },
-            ]);
+            addNotifcation({ message: error.toString(), type: 'danger' });
           });
       },
     );
@@ -102,10 +100,7 @@ export default function Category() {
       router.query.id as string,
       category?.status === 'ACTIVE' ? 'ARCHIVED' : 'ACTIVE',
     );
-    setNotification((values) => [
-      ...values,
-      { id: generateUUID(), message: 'Category status updated', type: 'info' },
-    ]);
+    addNotifcation({ message: 'Category status updated', type: 'info' });
     updateCategory();
     setStatusDialogOpen(false);
   };
@@ -113,10 +108,7 @@ export default function Category() {
   const deleteCategory = (): void => {
     ActivityCategoriesService.deleteById(category?.id as string);
     router.push('/app/categories');
-    setNotification((values) => [
-      ...values,
-      { id: generateUUID(), message: 'Category deleted', type: 'info' },
-    ]);
+    addNotifcation({ message: 'Category deleted', type: 'info' });
     setCategoryListReloader(generateUUID());
   };
 
