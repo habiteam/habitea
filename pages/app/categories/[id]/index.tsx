@@ -1,4 +1,3 @@
-import notifications from '@atoms/notifications';
 import { categoryListReloader } from '@atoms/reloaders';
 import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen';
 import Button from '@commonComponents/Button/Button';
@@ -9,8 +8,8 @@ import DropdownMenu, {
 } from '@commonComponents/DropdownMenu/DropdownMenu';
 import { getCategoriesLayout } from '@components/CategoriesLayout/CategoriesLayout';
 import {
-  ActivityCategoryRepeatType,
   ActivityCategoryRepeatTypeOptions,
+  ActivityCategoryRepeatTypePeriods,
 } from '@constants/dictionaries';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -19,6 +18,7 @@ import {
   faPenToSquare,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import { summariseActivities, getCategoryGoalString } from '@utils/habits';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
@@ -36,22 +36,10 @@ import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
 import styles from './Category.module.scss';
 
-function getCategoryGoalString(category: ActivityCategory): string {
-  if (category.unitType === 'TIME') {
-    const duration = getDurationFromString(category.duration);
-    return `${duration.hours} hours, ${duration.minutes} minutes, ${
-      duration.seconds
-    } seconds ${ActivityCategoryRepeatTypeOptions[category.repeatType]}`;
-  }
-
-  return `${category.goalValue} ${category.unit} ${
-    ActivityCategoryRepeatTypeOptions[category.repeatType]
-  }`;
-}
 export default function Category() {
   const router = useRouter();
   const [category, setCategory] = useState<ActivityCategory>();
-  const [activities, setActivities] = useState<Activity[]>();
+  const [recentActivities, setRecentActivities] = useState<Activity[]>();
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [statusDialogOpen, setStatusDialogOpen] = useState(false);
@@ -81,12 +69,12 @@ export default function Category() {
       (response) => {
         setCategory(response as ActivityCategory);
         ActivitiesService.getByCategoryForPeriod(
-          router.query.id as string,
-          response?.repeatType as ActivityCategoryRepeatType,
+          response as ActivityCategory,
+          new Date(),
           user.uid,
         )
           .then((responseActivities) => {
-            setActivities(responseActivities);
+            setRecentActivities(responseActivities);
           })
           .catch((error) => {
             addNotifcation({ message: error.toString(), type: 'danger' });
@@ -200,15 +188,29 @@ export default function Category() {
           )}
         </div>
       )}
+
       <div>
-        {activities?.map((el, i) => (
+        <p>
+          {summariseActivities(recentActivities ?? [])} {category?.unit} this{' '}
+          {ActivityCategoryRepeatTypePeriods[category?.repeatType ?? 'DAILY']}
+        </p>
+        <p>
+          {/* TODO calculate progress for duration type */}
+          {category?.unitType === 'QUANTITY'
+            ? (summariseActivities(recentActivities ?? []) /
+                parseInt(category?.goalValue as string, 10)) *
+              100
+            : '??'}{' '}
+          % progress
+        </p>
+      </div>
+      <div>
+        {recentActivities?.map((el, i) => (
           <div key={el.id}>
             date: {el.activityDate.toDate().toString()}, value: {el.value}
           </div>
         ))}
       </div>
-      <div>{/* TODO display nice info */}</div>
-
       <Dialog
         title="Change category status"
         open={statusDialogOpen}

@@ -20,6 +20,15 @@ export const ActivityCategoryRepeatTypeOptions: Record<
   MONTHLY: 'per month',
 };
 
+export const ActivityCategoryRepeatTypePeriods: Record<
+  ActivityCategoryRepeatType,
+  string
+> = {
+  DAILY: 'day',
+  WEEKLY: 'week',
+  MONTHLY: 'month',
+};
+
 export const ActivityUnitTypeOptions: Record<ActivityUnitType, string> = {
   QUANTITY: 'Quantity',
   TIME: 'Time',

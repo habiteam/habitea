@@ -1,6 +1,6 @@
 import { DatabaseCollection } from '@constants/collections';
-import { ActivityCategoryRepeatType } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
+import { ActivityCategory } from '@schemas/activity-category';
 import { getWheresForPeriod } from '@utils/time';
 import { generateUUID } from '@utils/uuid';
 import {
@@ -53,21 +53,21 @@ export class ActivitiesService {
   }
 
   static async getByCategoryForPeriod(
-    categoryId: string,
-    period: ActivityCategoryRepeatType,
+    category: ActivityCategory,
+    from: Date,
     userId: string,
   ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const categoryRef = doc(
       database,
       DatabaseCollection.ActivityCategories,
-      categoryId,
+      category.id,
     );
     const q = query(
       activitiesRef,
       where('createdBy', '==', userId),
       where('categoryRef', '==', categoryRef),
-      ...getWheresForPeriod(period, new Date()),
+      ...getWheresForPeriod(category.repeatType, from),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
