@@ -188,28 +188,29 @@ export default function Category() {
           )}
         </div>
       )}
-
-      <div>
-        <p>
-          {summariseActivities(recentActivities ?? [])} {category?.unit} this{' '}
-          {ActivityCategoryRepeatTypePeriods[category?.repeatType ?? 'DAILY']}
-        </p>
-        <p>
-          {/* TODO calculate progress for duration type */}
-          {category?.unitType === 'QUANTITY'
-            ? (summariseActivities(recentActivities ?? []) /
-                parseInt(category?.goalValue as string, 10)) *
-              100
-            : '??'}{' '}
-          % progress
-        </p>
-      </div>
-      <div>
-        {recentActivities?.map((el, i) => (
-          <div key={el.id}>
-            date: {el.activityDate.toDate().toString()}, value: {el.value}
-          </div>
-        ))}
+      <div className={classNames(styles.body)}>
+        <div>
+          <p>
+            {summariseActivities(recentActivities ?? [])} {category?.unit} this{' '}
+            {ActivityCategoryRepeatTypePeriods[category?.repeatType ?? 'DAILY']}
+          </p>
+          <p>
+            {/* TODO calculate progress for duration type */}
+            {category?.unitType === 'QUANTITY'
+              ? (summariseActivities(recentActivities ?? []) /
+                  parseInt(category?.goalValue as string, 10)) *
+                100
+              : '??'}{' '}
+            % progress
+          </p>
+        </div>
+        <div>
+          {recentActivities?.map((el, i) => (
+            <div key={el.id}>
+              date: {el.activityDate.toDate().toString()}, value: {el.value}
+            </div>
+          ))}
+        </div>
       </div>
       <Dialog
         title="Change category status"

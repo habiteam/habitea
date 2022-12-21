@@ -31,3 +31,10 @@
     padding: 32px;
   }
 }
+
+@mixin px($paddingMobile: 12px) {
+  padding-inline: $paddingMobile;
+  @media (min-width: $breakpoint-md) {
+    padding-inline: 16px;
+  }
+}

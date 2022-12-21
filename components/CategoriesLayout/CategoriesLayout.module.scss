@@ -9,13 +9,6 @@
   gap: 16px;
   min-height: calc(100vh - 80px);
 
-  @media (min-width: $breakpoint-md) {
-    padding: 32px;
-    main {
-      border-radius: 12px;
-    }
-  }
-
   aside {
     @include scrollbar();
     margin: 0px;

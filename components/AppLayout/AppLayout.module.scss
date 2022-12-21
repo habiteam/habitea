@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints.module.scss';
+
 .layout {
   position: fixed;
   width: 100%;
@@ -5,4 +7,10 @@
   background-color: var(--c-primary-dark-bg);
   overflow-x: hidden;
   overflow-y: auto;
+}
+.main {
+  padding: 12px;
+  @media (min-width: $breakpoint-md) {
+    padding: 32px;
+  }
 }

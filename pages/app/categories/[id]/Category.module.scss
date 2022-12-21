@@ -7,7 +7,8 @@
   background-color: var(--c-primary-light-bg);
   display: flex;
   align-items: center;
-  padding: 0px 16px;
+  @include px();
+
   gap: 16px;
 
   .icon {
@@ -51,4 +52,7 @@
     font-weight: 400;
     color: $color-inactive;
   }
+}
+.body {
+  @include px();
 }
