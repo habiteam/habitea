@@ -6,6 +6,12 @@ import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { getDurationFromString, getSecondsFromDuration } from '@utils/duration';
 
+/**
+ *
+ * @param activities
+ * @param unitType
+ * @returns total value of activities
+ */
 export function summariseActivities(
   activities: Activity[],
   unitType: ActivityUnitType = 'QUANTITY',
@@ -16,6 +22,11 @@ export function summariseActivities(
   return activities.reduce((t, v) => t + parseInt(v.value, 10), 0);
 }
 
+/**
+ *
+ * @param category
+ * @returns goal description like "10 km per week"
+ */
 export function getCategoryGoalString(category: ActivityCategory): string {
   if (category.unitType === 'TIME') {
     const duration = getDurationFromString(category.duration);
@@ -27,4 +38,24 @@ export function getCategoryGoalString(category: ActivityCategory): string {
   return `${category.goalValue} ${category.unit} ${
     ActivityCategoryRepeatTypeOptions[category.repeatType]
   }`;
+}
+
+/**
+ *
+ * @param activities
+ * @param category
+ * @returns progress as percentage
+ */
+export function calculateProgress(
+  activities: Activity[],
+  category: ActivityCategory | null = null,
+): number {
+  if (!category) return -1;
+  return (
+    (category?.unitType === 'QUANTITY'
+      ? summariseActivities(activities ?? [], category?.unitType) /
+        parseInt(category?.goalValue as string, 10)
+      : summariseActivities(activities ?? [], category?.unitType) /
+        getSecondsFromDuration(category?.duration as string)) * 100
+  );
 }

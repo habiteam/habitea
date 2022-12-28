@@ -15,7 +15,11 @@ import {
   faPenToSquare,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { summariseActivities, getCategoryGoalString } from '@utils/habits';
+import {
+  summariseActivities,
+  getCategoryGoalString,
+  calculateProgress,
+} from '@utils/habits';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
@@ -30,7 +34,6 @@ import userAtom from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
-import { getSecondsFromDuration } from '@utils/duration';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -192,21 +195,11 @@ export default function Category() {
             {ActivityCategoryRepeatTypePeriods[category?.repeatType ?? 'DAILY']}
           </p>
           <p>
-            {(category?.unitType === 'QUANTITY'
-              ? summariseActivities(
-                  recentActivities ?? [],
-                  category?.unitType,
-                ) / parseInt(category?.goalValue as string, 10)
-              : summariseActivities(
-                  recentActivities ?? [],
-                  category?.unitType,
-                ) / getSecondsFromDuration(category?.duration as string)) *
-              100}{' '}
-            % progress
+            {calculateProgress(recentActivities ?? [], category)} % progress
           </p>
         </div>
         <div>
-          {recentActivities?.map((el, i) => (
+          {recentActivities?.map((el) => (
             <div key={el.id}>
               date: {el.activityDate.toDate().toString()}, value: {el.value}
             </div>
