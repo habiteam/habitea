@@ -1,9 +1,18 @@
-import { ActivityCategoryRepeatTypeOptions } from '@constants/dictionaries';
+import {
+  ActivityCategoryRepeatTypeOptions,
+  ActivityUnitType,
+} from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
-import { getDurationFromString } from '@utils/duration';
+import { getDurationFromString, getSecondsFromDuration } from '@utils/duration';
 
-export function summariseActivities(activities: Activity[]): number {
+export function summariseActivities(
+  activities: Activity[],
+  unitType: ActivityUnitType = 'QUANTITY',
+): number {
+  if (unitType === 'TIME') {
+    return activities.reduce((t, v) => t + getSecondsFromDuration(v.value), 0);
+  }
   return activities.reduce((t, v) => t + parseInt(v.value, 10), 0);
 }
 

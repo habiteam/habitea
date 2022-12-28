@@ -7,10 +7,7 @@ import DropdownMenu, {
   DropdownMenuItem,
 } from '@commonComponents/DropdownMenu/DropdownMenu';
 import { getCategoriesLayout } from '@components/CategoriesLayout/CategoriesLayout';
-import {
-  ActivityCategoryRepeatTypeOptions,
-  ActivityCategoryRepeatTypePeriods,
-} from '@constants/dictionaries';
+import { ActivityCategoryRepeatTypePeriods } from '@constants/dictionaries';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowLeftLong,
@@ -24,7 +21,6 @@ import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
 import { ActivityCategoriesService } from '@services/activity-categories';
-import { getDurationFromString } from '@utils/duration';
 import { generateUUID } from '@utils/uuid';
 import classNames from 'classnames';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -34,6 +30,7 @@ import userAtom from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
+import { getSecondsFromDuration } from '@utils/duration';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -148,7 +145,6 @@ export default function Category() {
               {getCategoryGoalString(category)}
             </div>
           </div>
-
           {width <= MOBILE_BREAKPOINT ? (
             <div>
               <Button
@@ -191,16 +187,21 @@ export default function Category() {
       <div className={classNames(styles.body)}>
         <div>
           <p>
-            {summariseActivities(recentActivities ?? [])} {category?.unit} this{' '}
+            {summariseActivities(recentActivities ?? [], category?.unitType)}{' '}
+            {category?.unit} this{' '}
             {ActivityCategoryRepeatTypePeriods[category?.repeatType ?? 'DAILY']}
           </p>
           <p>
-            {/* TODO calculate progress for duration type */}
-            {category?.unitType === 'QUANTITY'
-              ? (summariseActivities(recentActivities ?? []) /
-                  parseInt(category?.goalValue as string, 10)) *
-                100
-              : '??'}{' '}
+            {(category?.unitType === 'QUANTITY'
+              ? summariseActivities(
+                  recentActivities ?? [],
+                  category?.unitType,
+                ) / parseInt(category?.goalValue as string, 10)
+              : summariseActivities(
+                  recentActivities ?? [],
+                  category?.unitType,
+                ) / getSecondsFromDuration(category?.duration as string)) *
+              100}{' '}
             % progress
           </p>
         </div>

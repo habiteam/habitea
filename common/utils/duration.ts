@@ -7,6 +7,7 @@ export interface Duration {
 }
 
 export function getSecondsFromDuration(value: string): number {
+  if (!value) return 0;
   const [hours, minutes, seconds] = value.split(':').map(Number);
 
   if (!isNaN(hours) && isNaN(minutes) && isNaN(seconds)) {
