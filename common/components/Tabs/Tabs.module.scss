@@ -8,9 +8,10 @@
   overflow-x: auto;
   overflow-y: hidden;
   position: relative;
-  padding-inline: 12px;
   font-size: 1.8rem;
-  border-bottom: 1px solid var(--c-primary-medium-bg);
+  //margin and padding are so that the active tab bg is not cut off
+  padding-inline: 12px;
+  margin-inline: -12px;
 }
 .tab {
   padding: 8px 12px;
@@ -19,6 +20,7 @@
 }
 .tab--active {
   // border-bottom: 2px solid var(--c-primary);
+  color: var(--c-primary);
 }
 .active-tab-bg {
   position: absolute;
@@ -26,22 +28,23 @@
   border-radius: 12px 12px 0 0;
   height: 46px;
 
-  &::before,
-  &::after {
-    position: absolute;
-    content: '';
-    height: 36px;
-    width: 40px;
-    bottom: 0;
-  }
-  &::before {
-    left: -40px;
-    box-shadow: 20px 0 0 0 var(--c-primary-medium-bg);
-    border-radius: 0 0 20px 0;
-  }
-  &::after {
-    right: -40px;
-    box-shadow: -20px 0 0 0 var(--c-primary-medium-bg);
-    border-radius: 0 0 0 20px;
-  }
+  // fancy border lip - disabled for now - too fancy for current design
+  // &::before,
+  // &::after {
+  //   position: absolute;
+  //   content: '';
+  //   height: 36px;
+  //   width: 40px;
+  //   bottom: 0;
+  // }
+  // &::before {
+  //   left: -40px;
+  //   box-shadow: 20px 0 0 0 var(--c-primary-medium-bg);
+  //   border-radius: 0 0 20px 0;
+  // }
+  // &::after {
+  //   right: -40px;
+  //   box-shadow: -20px 0 0 0 var(--c-primary-medium-bg);
+  //   border-radius: 0 0 0 20px;
+  // }
 }
