@@ -195,7 +195,8 @@ export default function Category() {
             {ActivityCategoryRepeatTypePeriods[category?.repeatType ?? 'DAILY']}
           </p>
           <p>
-            {calculateProgress(recentActivities ?? [], category)} % progress
+            {calculateProgress(recentActivities ?? [], category).toFixed(0)} %
+            progress
           </p>
         </div>
         <div>

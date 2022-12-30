@@ -1,6 +1,12 @@
 import { ActivityCategoryRepeatType } from '@constants/dictionaries';
 import { QueryConstraint, Timestamp, where } from 'firebase/firestore';
 
+/**
+ *
+ * @param period Category repeat type
+ * @param date will create query for period containing this date
+ * @returns
+ */
 export function getWheresForPeriod(
   period: ActivityCategoryRepeatType,
   date: Date,

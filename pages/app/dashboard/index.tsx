@@ -8,20 +8,38 @@ import Image from 'next/image';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { ActivityCategory } from '@schemas/activity-category';
 import Head from 'next/head';
+import { ActivitiesService } from '@services/activities';
+import { calculateProgress } from '@utils/habits';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Categories');
   const user = useAtomValue(userAtom);
   const [habits, setHabits] = useState<ActivityCategory[]>([]);
+  const [habitProgress, setHabitProgress] = useState(0);
 
   useEffect(() => {
     if (user) {
-      ActivityCategoriesService.getActiveByUserId(user?.uid as string).then(
-        (categories) => {
-          setHabits(categories);
-        },
-      );
+      const fetchData = async () => {
+        const categories = await ActivityCategoriesService.getActiveByUserId(
+          user?.uid as string,
+        );
+
+        setHabits(categories);
+
+        // calculate progress
+        const promises = categories.map(async (category) => {
+          const activities = await ActivitiesService.getByCategoryForPeriod(
+            category,
+            new Date(),
+            user?.uid,
+          );
+          return calculateProgress(activities, category);
+        });
+        const results = await Promise.all(promises);
+        setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
+      };
+      fetchData();
     }
   }, [user]);
 
@@ -54,7 +72,7 @@ export default function Dashboard() {
         <div className={classnames(styles['user-info'])}>
           <h2>{user?.displayName ?? user?.email}</h2>
           <span>Tracking {habits.length} habits</span>
-          <span>Current habit progress: 69%</span>
+          <span>Current habit progress: {habitProgress.toFixed(0)}%</span>
         </div>
       </div>
       <p>Here you can see your progress and manage your goals.</p>
