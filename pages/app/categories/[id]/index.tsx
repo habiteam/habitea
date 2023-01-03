@@ -34,6 +34,7 @@ import userAtom from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
+import { getDateStringFromTimestamp } from '@utils/time';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -203,12 +204,16 @@ export default function Category() {
 
             <div className={classNames(styles.info)}>
               <h2 className={classNames(styles.label)}>Started</h2>
-              <p className={classNames(styles.value)}>{category.validFrom}</p>
+              <p className={classNames(styles.value)}>
+                {getDateStringFromTimestamp(category.validFrom)}
+              </p>
             </div>
 
             <div className={classNames(styles.info)}>
               <h2 className={classNames(styles.label)}>Ends</h2>
-              <p className={classNames(styles.value)}>{category.validTo}</p>
+              <p className={classNames(styles.value)}>
+                {getDateStringFromTimestamp(category.validTo)}
+              </p>
             </div>
 
             {/* <p>

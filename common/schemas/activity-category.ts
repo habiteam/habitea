@@ -34,9 +34,9 @@ export class ActivityCategory {
 
   createdBy: string;
 
-  validFrom?: string;
+  validFrom?: Timestamp;
 
-  validTo?: string;
+  validTo?: Timestamp;
 
   constructor(
     id: string,
@@ -52,8 +52,8 @@ export class ActivityCategory {
     duration: string,
     createdDate: Timestamp,
     createdBy: string,
-    validFrom: string,
-    validTo: string,
+    validFrom: Timestamp,
+    validTo: Timestamp,
   ) {
     this.id = id;
     this.name = name;
@@ -96,5 +96,5 @@ export class ActivityCategory {
 
 export type ActivityCategoryCreateFormType = Omit<
   ActivityCategory,
-  'createdDate' | 'createdBy'
->;
+  'validFrom' | 'validTo' | 'createdDate' | 'createdBy'
+> & { validFrom: string; validTo: string };

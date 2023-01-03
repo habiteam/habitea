@@ -89,3 +89,13 @@ export function getWheresForPeriod(
       ];
   }
 }
+
+export function getDateStringFromTimestamp(timestamp?: Timestamp): string {
+  if (!timestamp) return '';
+
+  const offset = timestamp.toDate().getTimezoneOffset();
+
+  return new Date(timestamp.toDate().getTime() - offset * 60 * 1000)
+    .toISOString()
+    .split('T')[0];
+}

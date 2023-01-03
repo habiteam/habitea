@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { useAddNotification } from '@utils/notifications';
 import Datepicker from '@commonComponents/Datepicker/Datepicker';
+import { getDateStringFromTimestamp } from '@utils/time';
 import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 import styles from './CategoryUpdateDialog.module.scss';
 import CategoryDatePicker from './CategoryDatePicker/CategoryDatePicker';
@@ -47,7 +48,13 @@ export function CategoryUpdateDialog({
   activityCategory?: ActivityCategory;
 }) {
   const [form, setForm] = useState<ActivityCategoryCreateFormType>(
-    activityCategory ?? defaultCreateValues,
+    activityCategory
+      ? {
+          ...activityCategory,
+          validFrom: getDateStringFromTimestamp(activityCategory.validFrom),
+          validTo: getDateStringFromTimestamp(activityCategory.validTo),
+        }
+      : defaultCreateValues,
   );
 
   const addNotifcation = useAddNotification();
@@ -77,13 +84,21 @@ export function CategoryUpdateDialog({
         Math.max(0, getSecondsFromDuration(tempForm.duration)),
       );
     }
-
+    console.log(new Date(form.validFrom as string));
     ActivityCategoriesService.update(form);
     setIsUpdateDialogOpen(false);
   };
 
   useEffect(() => {
-    setForm(activityCategory ?? defaultCreateValues);
+    setForm(
+      activityCategory
+        ? {
+            ...activityCategory,
+            validFrom: getDateStringFromTimestamp(activityCategory.validFrom),
+            validTo: getDateStringFromTimestamp(activityCategory.validTo),
+          }
+        : defaultCreateValues,
+    );
   }, [isUpdateDialogOpen, activityCategory]);
 
   return (

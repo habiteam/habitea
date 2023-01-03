@@ -10,7 +10,10 @@ import {
   deleteDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { ActivityCategory } from '@schemas/activity-category';
+import {
+  ActivityCategory,
+  ActivityCategoryCreateFormType,
+} from '@schemas/activity-category';
 import { generateUUID } from '@utils/uuid';
 import { auth, database } from '@services/firebase';
 import { DatabaseCollection } from '@constants/collections';
@@ -19,9 +22,11 @@ import { ActivityCategoryStatus } from '@constants/dictionaries';
 export class ActivityCategoriesService {
   static readonly collectionName = DatabaseCollection.ActivityCategories;
 
-  static update(category: Partial<ActivityCategory>): void {
+  static update(category: Partial<ActivityCategoryCreateFormType>): void {
     setDoc(doc(database, this.collectionName, category.id || generateUUID()), {
       ...category,
+      validFrom: Timestamp.fromDate(new Date(category.validFrom as string)),
+      validTo: Timestamp.fromDate(new Date(category.validTo as string)),
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
     });
