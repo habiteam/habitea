@@ -16,7 +16,8 @@ import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import { useEffect, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { useAddNotification } from '@utils/notifications';
-import CategoryIconSelector from '../CategoryIconSelector/CategoryIconSelector';
+import Datepicker from '@commonComponents/Datepicker/Datepicker';
+import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 import styles from './CategoryUpdateDialog.module.scss';
 
 const defaultCreateValues: ActivityCategoryCreateFormType = {

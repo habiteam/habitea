@@ -1,3 +1,5 @@
+@import '../../../../styles/mixins.module';
+
 .selector-button-container {
   display: flex;
   align-items: center;
@@ -24,6 +26,8 @@
 }
 
 .icons-wrapper {
+  @include scrollbar();
+
   position: absolute;
   left: 32px;
   translate: 0 8px;
@@ -55,6 +59,15 @@
     &:hover {
       background-color: var(--c-primary-medium-bg);
       cursor: pointer;
+    }
+  }
+
+  .icon--selected {
+    background-color: var(--c-primary);
+    color: var(--c-text-dark);
+
+    &:hover {
+      color: var(--c-primary-unfocused);
     }
   }
 }

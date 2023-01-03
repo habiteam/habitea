@@ -67,13 +67,14 @@ export function DatepickerCalendar({
             currentlyViewed.year === selectedDate.year,
         })}
         key={`day-${i}`}
-        onClick={() =>
+        onClick={(event) => {
+          event.preventDefault();
           onChange({
             day: i,
             month: currentlyViewed.month,
             year: currentlyViewed.year,
-          })
-        }
+          });
+        }}
       >
         {i}
       </button>,

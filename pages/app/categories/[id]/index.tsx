@@ -193,7 +193,25 @@ export default function Category() {
 
         <div className={classNames(styles.main)}>
           <div>
-            <p>
+            <div className={classNames(styles.info)}>
+              <h2 className={classNames(styles.label)}>Description</h2>
+              <p className={classNames(styles.value)}>
+                {category.description ||
+                  'This category doesn’t have a description yet.'}
+              </p>
+            </div>
+
+            <div className={classNames(styles.info)}>
+              <h2 className={classNames(styles.label)}>Started</h2>
+              <p className={classNames(styles.value)}>{category.validFrom}</p>
+            </div>
+
+            <div className={classNames(styles.info)}>
+              <h2 className={classNames(styles.label)}>Ends</h2>
+              <p className={classNames(styles.value)}>{category.validTo}</p>
+            </div>
+
+            {/* <p>
               {summariseActivities(recentActivities ?? [], category.unitType)}{' '}
               {category.unit} this{' '}
               {
@@ -205,7 +223,7 @@ export default function Category() {
             <p>
               {calculateProgress(recentActivities ?? [], category).toFixed(0)} %
               progress
-            </p>
+            </p> */}
           </div>
           <div>
             {recentActivities?.map((el) => (

@@ -50,7 +50,9 @@ export default function CategoryIconSelector(
               icon.match(new RegExp(iconsFilter, 'gi')) ? (
                 <FontAwesomeIcon
                   key={i}
-                  className={classNames(styles['icon--selectable'])}
+                  className={classNames(styles['icon--selectable'], {
+                    [styles['icon--selected']]: props.value === icon,
+                  })}
                   icon={findIconDefinition({
                     prefix: 'fas',
                     iconName: icon,

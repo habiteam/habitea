@@ -40,7 +40,7 @@
       display: inline-block;
       margin: 0px;
       font-style: normal;
-      font-weight: 400;
+      font-weight: 500;
       font-size: 2rem;
       white-space: nowrap;
       overflow: auto;
@@ -56,4 +56,19 @@
 
 .main {
   padding: 16px 16px 16px 72px;
+
+  .info {
+    display: inline-block;
+
+    .label {
+      margin: 0px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.8rem;
+    }
+
+    .value {
+      font-size: 1.4rem;
+    }
+  }
 }
