@@ -53,6 +53,7 @@
     color: $color-inactive;
   }
 }
-.body {
-  @include px();
+
+.main {
+  padding: 16px 16px 16px 72px;
 }

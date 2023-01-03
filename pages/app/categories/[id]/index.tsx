@@ -119,7 +119,7 @@ export default function Category() {
             >
               <FontAwesomeIcon
                 icon={faArrowLeftLong}
-                width={16}
+                width={24}
               ></FontAwesomeIcon>
             </Button>
           ) : (
@@ -187,7 +187,8 @@ export default function Category() {
           )}
         </div>
       )}
-      <div className={classNames(styles.body)}>
+
+      <div className={classNames(styles.main)}>
         <div>
           <p>
             {summariseActivities(recentActivities ?? [], category?.unitType)}{' '}
@@ -207,6 +208,9 @@ export default function Category() {
           ))}
         </div>
       </div>
+
+      {/* Dialogs */}
+
       <Dialog
         title="Change category status"
         open={statusDialogOpen}
