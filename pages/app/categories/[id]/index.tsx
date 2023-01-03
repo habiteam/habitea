@@ -105,11 +105,12 @@ export default function Category() {
   }, [router.asPath, user]);
 
   return (
-    <>
-      <Head>
-        <title>{category?.name ?? 'Category'} - Habitea</title>
-      </Head>
-      {category && (
+    category && (
+      <>
+        <Head>
+          <title>{category.name ?? 'Category'} - Habitea</title>
+        </Head>
+
         <div className={classNames(styles.header)}>
           {width <= MOBILE_BREAKPOINT ? (
             <Button
@@ -148,6 +149,7 @@ export default function Category() {
               {getCategoryGoalString(category)}
             </div>
           </div>
+
           {width <= MOBILE_BREAKPOINT ? (
             <div>
               <Button
@@ -186,85 +188,91 @@ export default function Category() {
             )
           )}
         </div>
-      )}
 
-      <div className={classNames(styles.main)}>
-        <div>
-          <p>
-            {summariseActivities(recentActivities ?? [], category?.unitType)}{' '}
-            {category?.unit} this{' '}
-            {ActivityCategoryRepeatTypePeriods[category?.repeatType ?? 'DAILY']}
-          </p>
-          <p>
-            {calculateProgress(recentActivities ?? [], category).toFixed(0)} %
-            progress
-          </p>
+        {/* Main */}
+
+        <div className={classNames(styles.main)}>
+          <div>
+            <p>
+              {summariseActivities(recentActivities ?? [], category.unitType)}{' '}
+              {category.unit} this{' '}
+              {
+                ActivityCategoryRepeatTypePeriods[
+                  category.repeatType ?? 'DAILY'
+                ]
+              }
+            </p>
+            <p>
+              {calculateProgress(recentActivities ?? [], category).toFixed(0)} %
+              progress
+            </p>
+          </div>
+          <div>
+            {recentActivities?.map((el) => (
+              <div key={el.id}>
+                date: {el.activityDate.toDate().toString()}, value: {el.value}
+              </div>
+            ))}
+          </div>
         </div>
-        <div>
-          {recentActivities?.map((el) => (
-            <div key={el.id}>
-              date: {el.activityDate.toDate().toString()}, value: {el.value}
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Dialogs */}
+        {/* Dialogs */}
 
-      <Dialog
-        title="Change category status"
-        open={statusDialogOpen}
-        handleClose={() => setStatusDialogOpen(false)}
-        actions={[
-          {
-            text: 'Cancel',
-            fillType: 'regular',
-            color: 'primary',
-            onClick: () => setStatusDialogOpen(false),
-          },
-          {
-            text: 'Confirm',
-            fillType: 'filled',
-            color: 'primary',
-            onClick: updateCategoryStatus,
-          },
-        ]}
-      >
-        <span>Are you sure you want to change this category status?</span>
-      </Dialog>
+        <Dialog
+          title="Change category status"
+          open={statusDialogOpen}
+          handleClose={() => setStatusDialogOpen(false)}
+          actions={[
+            {
+              text: 'Cancel',
+              fillType: 'regular',
+              color: 'primary',
+              onClick: () => setStatusDialogOpen(false),
+            },
+            {
+              text: 'Confirm',
+              fillType: 'filled',
+              color: 'primary',
+              onClick: updateCategoryStatus,
+            },
+          ]}
+        >
+          <span>Are you sure you want to change this category status?</span>
+        </Dialog>
 
-      <Dialog
-        title="Delete category"
-        open={deleteDialogOpen}
-        handleClose={() => setDeleteDialogOpen(false)}
-        actions={[
-          {
-            text: 'Cancel',
-            fillType: 'regular',
-            color: 'primary',
-            onClick: () => setDeleteDialogOpen(false),
-          },
-          {
-            text: 'Confirm',
-            fillType: 'filled',
-            color: 'primary',
-            onClick: deleteCategory,
-          },
-        ]}
-      >
-        <span>Are you sure you want to delete this category?</span>
-      </Dialog>
+        <Dialog
+          title="Delete category"
+          open={deleteDialogOpen}
+          handleClose={() => setDeleteDialogOpen(false)}
+          actions={[
+            {
+              text: 'Cancel',
+              fillType: 'regular',
+              color: 'primary',
+              onClick: () => setDeleteDialogOpen(false),
+            },
+            {
+              text: 'Confirm',
+              fillType: 'filled',
+              color: 'primary',
+              onClick: deleteCategory,
+            },
+          ]}
+        >
+          <span>Are you sure you want to delete this category?</span>
+        </Dialog>
 
-      <CategoryUpdateDialog
-        isUpdateDialogOpen={isUpdateDialogOpen}
-        setIsUpdateDialogOpen={(value) => {
-          updateCategory();
-          setCategoryListReloader(generateUUID());
-          setIsUpdateDialogOpen(value);
-        }}
-        activityCategory={category}
-      ></CategoryUpdateDialog>
-    </>
+        <CategoryUpdateDialog
+          isUpdateDialogOpen={isUpdateDialogOpen}
+          setIsUpdateDialogOpen={(value) => {
+            updateCategory();
+            setCategoryListReloader(generateUUID());
+            setIsUpdateDialogOpen(value);
+          }}
+          activityCategory={category}
+        ></CategoryUpdateDialog>
+      </>
+    )
   );
 }
 
