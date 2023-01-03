@@ -6,16 +6,10 @@ import {
   getDaysInMonth,
   getLastDayOfPreviousMonth,
 } from '../Datepicker.utils';
-
-export interface DatepickerCalendarViewSchema {
-  month: number;
-  year: number;
-}
-
-export interface DatepickerCalendarSelectedDateSchema
-  extends DatepickerCalendarViewSchema {
-  day: number;
-}
+import {
+  DatepickerCalendarSelectedDateSchema,
+  DatepickerCalendarViewSchema,
+} from './Datepicker-calendar-schema';
 
 export interface DatepickerCalendarPropSchema {
   currentlyViewed: DatepickerCalendarViewSchema;

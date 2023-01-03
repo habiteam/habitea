@@ -23,7 +23,13 @@ export default function CategoryIconSelector(
 
   return (
     <div style={props.style}>
-      <div className={classNames(styles['selector-button-container'])}>
+      <button
+        className={classNames(styles['selector-button-container'])}
+        onClick={(event) => {
+          event.preventDefault();
+          setIsMenuOpened(!isMenuOpened);
+        }}
+      >
         <FontAwesomeIcon
           className={classNames(styles['selector-button'], {
             [styles['selector-button--focued']]: isMenuOpened,
@@ -32,9 +38,8 @@ export default function CategoryIconSelector(
             prefix: 'fas',
             iconName: props.value,
           })}
-          onClick={() => setIsMenuOpened(!isMenuOpened)}
         ></FontAwesomeIcon>
-      </div>
+      </button>
       {isMenuOpened && (
         <div className={styles['icons-wrapper']}>
           <Input

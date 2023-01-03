@@ -30,7 +30,10 @@ export function DatepickerSelect({
           })}
           id={item.value.toLocaleString()}
           key={i}
-          onClick={() => onSelect(item.value)}
+          onClick={(event) => {
+            event.preventDefault();
+            onSelect(item.value);
+          }}
         >
           {item.label}
         </button>

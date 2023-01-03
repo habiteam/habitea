@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { useTransition, animated, easings } from 'react-spring';
 import styles from './Datepicker.module.scss';
+import { DatepickerCalendar } from './DatepickerCalendar/DatepickerCalendar';
+import { getDateObject, getMonthName, months, years } from './Datepicker.utils';
+import { DatepickerSelect } from './DatepickerSelect/DatepickerSelect';
 import {
-  DatepickerCalendar,
   DatepickerCalendarSelectedDateSchema,
   DatepickerCalendarViewSchema,
-} from './DatepickerCalendar/DatepickerCalendar';
-import { getMonthName, months, years } from './Datepicker.utils';
-import { DatepickerSelect } from './DatepickerSelect/DatepickerSelect';
+} from './DatepickerCalendar/Datepicker-calendar-schema';
 
 export type DatepickerView = 'Calendar' | 'Months' | 'Years';
 
@@ -28,11 +28,7 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
     });
 
   const [selectedDate, setSelectedDate] =
-    useState<DatepickerCalendarSelectedDateSchema>({
-      day: 0,
-      month: 0,
-      year: 0,
-    });
+    useState<DatepickerCalendarSelectedDateSchema>(getDateObject(date));
 
   const [view, setView] = useState<DatepickerView>('Calendar');
 
@@ -58,19 +54,37 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
   );
 
   const monthButton = (
-    <button key="monthButton" onClick={() => setView('Months')}>
+    <button
+      key="monthButton"
+      onClick={(event) => {
+        event.preventDefault();
+        setView('Months');
+      }}
+    >
       {getMonthName(currentlyViewed.month)}
     </button>
   );
 
   const yearButton = (
-    <button key="yearButton" onClick={() => setView('Years')}>
+    <button
+      key="yearButton"
+      onClick={(event) => {
+        event.preventDefault();
+        setView('Years');
+      }}
+    >
       {currentlyViewed.year}
     </button>
   );
 
   const calendarButton = (
-    <button key="calendarButton" onClick={() => setView('Calendar')}>
+    <button
+      key="calendarButton"
+      onClick={(event) => {
+        event.preventDefault();
+        setView('Calendar');
+      }}
+    >
       <FontAwesomeIcon icon={faCalendarDays}></FontAwesomeIcon>
     </button>
   );

@@ -1,3 +1,4 @@
+import { DatepickerCalendarSelectedDateSchema } from './DatepickerCalendar/Datepicker-calendar-schema';
 import { DatepickerSelectItem } from './DatepickerSelect/DatepickerSelect';
 
 export function getFirstDayOfMonth(year: number, month: number) {
@@ -19,6 +20,18 @@ export function getMonthName(monthNumber: number) {
   return date.toLocaleString('en-US', { month: 'short' });
 }
 
+export function getDateObject(
+  date?: string,
+): DatepickerCalendarSelectedDateSchema {
+  if (!date) return { year: 0, month: 0, day: 0 };
+
+  return {
+    year: Number(date.split('-')[0]),
+    month: Number(date.split('-')[1]) - 1,
+    day: Number(date.split('-')[2]),
+  };
+}
+
 export const months: DatepickerSelectItem[] = [
   { label: 'January', value: 0 },
   { label: 'February', value: 1 },
@@ -36,7 +49,7 @@ export const months: DatepickerSelectItem[] = [
 
 export const years = (): DatepickerSelectItem[] => {
   const list = [];
-  for (let i = 1922; i < 2122; i += 1) {
+  for (let i = 2000; i < 2100; i += 1) {
     list.push({ label: i.toString(), value: i });
   }
   return list;

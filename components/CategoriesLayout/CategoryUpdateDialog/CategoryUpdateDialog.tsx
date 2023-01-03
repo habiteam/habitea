@@ -19,6 +19,7 @@ import { useAddNotification } from '@utils/notifications';
 import Datepicker from '@commonComponents/Datepicker/Datepicker';
 import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 import styles from './CategoryUpdateDialog.module.scss';
+import CategoryDatePicker from './CategoryDatePicker/CategoryDatePicker';
 
 const defaultCreateValues: ActivityCategoryCreateFormType = {
   id: '',
@@ -210,23 +211,17 @@ export function CategoryUpdateDialog({
           className={styles.control}
         ></Select>
 
-        <Input
-          title="Valid from"
-          id="validFrom"
-          name="validFrom"
-          style={{ width: 'calc(50% - 6px)' }}
-          color="primary"
-          className={styles.control}
-        ></Input>
+        <CategoryDatePicker
+          label="Valid From"
+          value={form.validFrom}
+          onSelect={(date) => handleSelectFormChange(date, 'validFrom')}
+        ></CategoryDatePicker>
 
-        <Input
-          title="Valid to"
-          id="validTo"
-          name="validTo"
-          style={{ width: 'calc(50% - 6px)' }}
-          color="primary"
-          className={styles.control}
-        ></Input>
+        <CategoryDatePicker
+          label="Valid To"
+          value={form.validTo}
+          onSelect={(date) => handleSelectFormChange(date, 'validTo')}
+        ></CategoryDatePicker>
       </form>
     </ResponsiveDialog>
   );
