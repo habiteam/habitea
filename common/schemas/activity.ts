@@ -1,9 +1,12 @@
 import { Timestamp } from 'firebase/firestore';
+import { ActivityCategory } from './activity-category';
 
 export class Activity {
   id: string;
 
   categoryRef: string;
+
+  category?: ActivityCategory;
 
   value: string;
 

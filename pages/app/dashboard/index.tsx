@@ -10,6 +10,7 @@ import { ActivityCategory } from '@schemas/activity-category';
 import Head from 'next/head';
 import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
+import { Activity } from '@schemas/activity';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
@@ -17,27 +18,46 @@ export default function Dashboard() {
   const user = useAtomValue(userAtom);
   const [habits, setHabits] = useState<ActivityCategory[]>([]);
   const [habitProgress, setHabitProgress] = useState(0);
+  const [activityList, setAtivityList] = useState<Activity[]>([]);
 
   useEffect(() => {
     if (user) {
       const fetchData = async () => {
+        // get categories
         const categories = await ActivityCategoriesService.getActiveByUserId(
           user?.uid as string,
         );
 
         setHabits(categories);
 
-        // calculate progress
+        // get activities for each category
+        const allActivities: Activity[] = [];
         const promises = categories.map(async (category) => {
-          const activities = await ActivitiesService.getByCategoryForPeriod(
+          let activities = await ActivitiesService.getByCategoryForPeriod(
             category,
             new Date(),
             user?.uid,
           );
-          return calculateProgress(activities, category);
+          // calculate progress for each category
+          const progress = calculateProgress(activities, category);
+          // assign categories to activity object for easier display
+          activities = activities.map((activity) => ({
+            ...activity,
+            category,
+          }));
+          allActivities.push(...activities);
+          return progress;
         });
+        // calculate overall progress when all activities are fetched
         const results = await Promise.all(promises);
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
+
+        // sort activities by date
+        allActivities.sort((a, b) =>
+          a.activityDate > b.activityDate ? -1 : 1,
+        );
+
+        setAtivityList(allActivities);
       };
       fetchData();
     }
@@ -50,7 +70,18 @@ export default function Dashboard() {
       case 'Calendar':
         return <div className={styles.tab}>Tab 2 content</div>;
       case 'Journal':
-        return <div className={styles.tab}>Tab 3 content</div>;
+        return (
+          <div className={styles.tab}>
+            {activityList.map((activity) => (
+              <div key={activity.id}>
+                <span>
+                  {activity.category?.name} {activity.value}{' '}
+                  {activity.category?.unit}
+                </span>
+              </div>
+            ))}
+          </div>
+        );
       default:
         return <div className={styles.tab}>Tab 1 content</div>;
     }
