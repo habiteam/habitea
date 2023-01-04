@@ -16,7 +16,9 @@ import styles from './Dashboard.module.scss';
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Categories');
   const user = useAtomValue(userAtom);
-  const [habits, setHabits] = useState<ActivityCategory[]>([]);
+  const [activityCategories, setActivityCategories] = useState<
+    ActivityCategory[]
+  >([]);
   const [habitProgress, setHabitProgress] = useState(0);
   const [activityList, setAtivityList] = useState<Activity[]>([]);
 
@@ -28,36 +30,38 @@ export default function Dashboard() {
           user?.uid as string,
         );
 
-        setHabits(categories);
+        setActivityCategories(categories);
 
         // get activities for each category
-        const allActivities: Activity[] = [];
+        const currentActivities: Activity[] = [];
         const promises = categories.map(async (category) => {
-          let activities = await ActivitiesService.getByCategoryForPeriod(
+          const activities = await ActivitiesService.getByCategoryForPeriod(
             category,
             new Date(),
             user?.uid,
           );
           // calculate progress for each category
           const progress = calculateProgress(activities, category);
-          // assign categories to activity object for easier display
-          activities = activities.map((activity) => ({
-            ...activity,
-            category,
-          }));
-          allActivities.push(...activities);
+
+          currentActivities.push(...activities);
           return progress;
         });
         // calculate overall progress when all activities are fetched
         const results = await Promise.all(promises);
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
 
-        // sort activities by date
-        allActivities.sort((a, b) =>
-          a.activityDate > b.activityDate ? -1 : 1,
+        // get recent activities
+        let recentActivities = await ActivitiesService.getForMonth(
+          new Date(),
+          user?.uid,
         );
 
-        setAtivityList(allActivities);
+        // assign categories to activity object for easier display
+        recentActivities = recentActivities.map((activity) => ({
+          ...activity,
+          category: categories.find((c) => c.id === activity.categoryRef.id),
+        }));
+        setAtivityList(recentActivities);
       };
       fetchData();
     }
@@ -102,7 +106,7 @@ export default function Dashboard() {
         ></Image>
         <div className={classnames(styles['user-info'])}>
           <h2>{user?.displayName ?? user?.email}</h2>
-          <span>Tracking {habits.length} habits</span>
+          <span>Tracking {activityCategories.length} habits</span>
           <span>Current habit progress: {habitProgress.toFixed(0)}%</span>
         </div>
       </div>
