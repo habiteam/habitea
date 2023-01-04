@@ -16,11 +16,10 @@ import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import { useEffect, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { useAddNotification } from '@utils/notifications';
-import Datepicker from '@commonComponents/Datepicker/Datepicker';
 import { getDateStringFromTimestamp } from '@utils/time';
+import DateInput from '@commonComponents/DateInput/DateInput';
 import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 import styles from './CategoryUpdateDialog.module.scss';
-import CategoryDatePicker from './CategoryDatePicker/CategoryDatePicker';
 
 const defaultCreateValues: ActivityCategoryCreateFormType = {
   id: '',
@@ -84,7 +83,7 @@ export function CategoryUpdateDialog({
         Math.max(0, getSecondsFromDuration(tempForm.duration)),
       );
     }
-    console.log(new Date(form.validFrom as string));
+
     ActivityCategoriesService.update(form);
     setIsUpdateDialogOpen(false);
   };
@@ -226,17 +225,17 @@ export function CategoryUpdateDialog({
           className={styles.control}
         ></Select>
 
-        <CategoryDatePicker
+        <DateInput
           label="Valid From"
           value={form.validFrom}
           onSelect={(date) => handleSelectFormChange(date, 'validFrom')}
-        ></CategoryDatePicker>
+        ></DateInput>
 
-        <CategoryDatePicker
+        <DateInput
           label="Valid To"
           value={form.validTo}
           onSelect={(date) => handleSelectFormChange(date, 'validTo')}
-        ></CategoryDatePicker>
+        ></DateInput>
       </form>
     </ResponsiveDialog>
   );

@@ -55,7 +55,6 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
 
   const monthButton = (
     <button
-      key="monthButton"
       onClick={(event) => {
         event.preventDefault();
         setView('Months');
@@ -67,7 +66,6 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
 
   const yearButton = (
     <button
-      key="yearButton"
       onClick={(event) => {
         event.preventDefault();
         setView('Years');
@@ -79,7 +77,6 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
 
   const calendarButton = (
     <button
-      key="calendarButton"
       onClick={(event) => {
         event.preventDefault();
         setView('Calendar');

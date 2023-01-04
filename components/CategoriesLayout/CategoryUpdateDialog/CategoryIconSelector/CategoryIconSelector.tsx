@@ -4,7 +4,7 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { CSSProperties, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import { SELECTABLE_ICONS } from '@utils/fontawesome-icons';
 import Input from '@commonComponents/Input/Input';
 import styles from './CategoryIconSelector.module.scss';
@@ -20,9 +20,23 @@ export default function CategoryIconSelector(
 ) {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
   const [iconsFilter, setIconsFilter] = useState<string>('');
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsMenuOpened(false);
+      }
+    }
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [ref]);
 
   return (
-    <div style={props.style}>
+    <div style={props.style} ref={ref}>
       <button
         className={classNames(styles['selector-button-container'])}
         onClick={(event) => {

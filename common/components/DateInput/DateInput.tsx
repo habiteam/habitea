@@ -1,32 +1,30 @@
 import Datepicker from '@commonComponents/Datepicker/Datepicker';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import styles from './CategoryDatePicker.module.scss';
+import styles from './DateInput.module.scss';
 
-export interface CategoryDatePickerPropSchema {
+export interface DateInputPropSchema {
   label?: string;
   value?: string;
   onSelect: (date: string) => void;
 }
 
-export default function CategoryDatePicker(
-  props: CategoryDatePickerPropSchema,
-) {
+export default function DateInput(props: DateInputPropSchema) {
   const [isDatepickerOpened, setIsDatepickerOpened] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   function handleClickOutside(event: MouseEvent) {
-  //     if (ref.current && !ref.current.contains(event.target as Node)) {
-  //       setIsDatepickerOpened(false);
-  //     }
-  //   }
-  //   document.addEventListener('click', handleClickOutside);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsDatepickerOpened(false);
+      }
+    }
+    document.addEventListener('click', handleClickOutside);
 
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, [ref]);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [ref]);
 
   return (
     <div className={styles.container} ref={ref}>
