@@ -11,16 +11,20 @@ import Head from 'next/head';
 import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
 import { Activity } from '@schemas/activity';
+import { getDateStringFromTimestamp } from '@utils/time';
+import Button from '@commonComponents/Button/Button';
+import { getPreviousMonth } from '@utils/date';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
-  const [currentTab, setCurrentTab] = useState('Categories');
+  const [currentTab, setCurrentTab] = useState('Journal');
   const user = useAtomValue(userAtom);
   const [activityCategories, setActivityCategories] = useState<
     ActivityCategory[]
   >([]);
   const [habitProgress, setHabitProgress] = useState(0);
   const [activityList, setAtivityList] = useState<Activity[]>([]);
+  const [lastLoadedMonth, setLastLoadedMonth] = useState(new Date());
 
   useEffect(() => {
     if (user) {
@@ -67,6 +71,18 @@ export default function Dashboard() {
     }
   }, [user]);
 
+  const loadMoreActivities = async () => {
+    if (user) {
+      const newMonth = getPreviousMonth(lastLoadedMonth);
+      const newActivities = await ActivitiesService.getForMonth(
+        newMonth,
+        user?.uid,
+      );
+      setAtivityList((prev) => [...prev, ...newActivities]);
+      setLastLoadedMonth(newMonth);
+    }
+  };
+
   const tabContent = (tab: string) => {
     switch (tab) {
       case 'Categories':
@@ -79,11 +95,15 @@ export default function Dashboard() {
             {activityList.map((activity) => (
               <div key={activity.id}>
                 <span>
+                  {getDateStringFromTimestamp(activity.activityDate)}
                   {activity.category?.name} {activity.value}{' '}
                   {activity.category?.unit}
                 </span>
               </div>
             ))}
+            <Button onClick={loadMoreActivities} fillType={'regular'}>
+              Load more activities
+            </Button>
           </div>
         );
       default:
@@ -116,9 +136,9 @@ export default function Dashboard() {
       <br />
       <Tabs
         tabs={[
-          { key: 'Categories', title: 'Categories' },
-          { key: 'Calendar', title: 'Calendar' },
           { key: 'Journal', title: 'Journal' },
+          { key: 'Calendar', title: 'Calendar' },
+          { key: 'Categories', title: 'Categories' },
         ]}
         activeTab={currentTab}
         setActiveTab={(key: string): void => {
