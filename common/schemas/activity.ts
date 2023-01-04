@@ -1,10 +1,10 @@
-import { Timestamp } from 'firebase/firestore';
+import { DocumentReference, Timestamp } from 'firebase/firestore';
 import { ActivityCategory } from './activity-category';
 
 export class Activity {
   id: string;
 
-  categoryRef: string;
+  categoryRef: DocumentReference;
 
   category?: ActivityCategory;
 
@@ -18,7 +18,7 @@ export class Activity {
 
   constructor(
     id: string,
-    categoryRef: string,
+    categoryRef: DocumentReference,
     value: string,
     activityDate: Timestamp,
     createdDate: Timestamp,

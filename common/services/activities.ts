@@ -74,4 +74,17 @@ export class ActivitiesService {
       Activity.fromFirestore(response),
     );
   }
+
+  static async getForMonth(from: Date, userId: string): Promise<Activity[]> {
+    const activitiesRef = collection(database, this.collectionName);
+    const q = query(
+      activitiesRef,
+      where('createdBy', '==', userId),
+      ...getWheresForPeriod('MONTHLY', from),
+    );
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((response) =>
+      Activity.fromFirestore(response),
+    );
+  }
 }
