@@ -228,12 +228,14 @@ export function CategoryUpdateDialog({
         <DateInput
           label="Valid From"
           value={form.validFrom}
+          position="top"
           onSelect={(date) => handleSelectFormChange(date, 'validFrom')}
         ></DateInput>
 
         <DateInput
           label="Valid To"
           value={form.validTo}
+          position="top"
           onSelect={(date) => handleSelectFormChange(date, 'validTo')}
         ></DateInput>
       </form>

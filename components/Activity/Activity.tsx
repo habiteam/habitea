@@ -1,4 +1,5 @@
 import Button from '@commonComponents/Button/Button';
+import DateInput from '@commonComponents/DateInput/DateInput';
 import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialog';
 import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
@@ -9,6 +10,7 @@ export default function Activity() {
   const [openActivityModal, setOpenActivityModal] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
   const [value, setValue] = useState<string>('');
+  const [date, setDate] = useState<string>('');
   const buttonRef = useRef(null);
 
   return (
@@ -52,10 +54,12 @@ export default function Activity() {
         ]}
       >
         <h4>Select category</h4>
+
         <CategorySelector
           value={selectedCategoryId}
           onSelect={(category) => setSelectedCategoryId(category.id)}
         ></CategorySelector>
+
         <div style={{ marginTop: '16px' }}>
           <Input
             title="Value"
@@ -67,6 +71,14 @@ export default function Activity() {
             color="primary"
             style={{ width: '200px' }}
           ></Input>
+        </div>
+
+        <div style={{ marginTop: '16px' }}>
+          <DateInput
+            label="Date"
+            value={date}
+            onSelect={(val) => setDate(val)}
+          ></DateInput>
         </div>
       </FullscreenDialog>
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { useTransition, animated, easings } from 'react-spring';
@@ -79,6 +79,7 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
     <button
       onClick={(event) => {
         event.preventDefault();
+        event.stopPropagation();
         setView('Calendar');
       }}
     >
@@ -86,15 +87,17 @@ export default function Datepicker({ date, onSelect }: DatepickerPropSchema) {
     </button>
   );
 
-  const buttons: Record<DatepickerView, any> = {
-    Calendar: <>{[monthButton, yearButton]}</>,
-    Months: <>{[calendarButton, yearButton]}</>,
-    Years: <>{[monthButton, calendarButton]}</>,
+  const buttons: Record<DatepickerView, [JSX.Element, JSX.Element]> = {
+    Calendar: [monthButton, yearButton],
+    Months: [calendarButton, yearButton],
+    Years: [monthButton, calendarButton],
   };
 
   return (
     <div className={styles.datepicker}>
-      <div className={styles['buttons-container']}>{buttons[view]}</div>
+      <div className={styles['buttons-container']}>
+        {buttons[view].map((el, index) => ({ ...el, key: index }))}
+      </div>
       {monthTransition(
         (style, item) =>
           item && (
