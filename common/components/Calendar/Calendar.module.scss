@@ -52,9 +52,22 @@ $calendarMainColor: var(--c-primary-medium-bg);
   color: var(--c-primary-dark);
   border: 1px solid $calendarMainColor;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  position: relative;
   &:not(.days__day--inactive):hover {
     background-color: var(--c-primary-light-bg);
   }
+}
+.day-nr {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--c-primary-dark-bg);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .days__day--inactive {
   background-color: var(--c-primary-dark-bg);

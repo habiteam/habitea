@@ -57,8 +57,19 @@ export default function Calendar(props: CalendarProps) {
   for (let i = 1; i <= lastDayIndex; i += 1) {
     days.push(
       <div key={i} className={styles.days__day}>
-        {i}🚀️
+        <span className={styles['day-nr']}>{i}</span>
       </div>,
+    );
+  }
+
+  const padDays = [];
+  const endIndex = 7 * 6 - (firstDayIndex + lastDayIndex);
+  for (let i = 0; i < endIndex; i += 1) {
+    padDays.push(
+      <div
+        key={i}
+        className={classNames(styles.days__day, styles['days__day--inactive'])}
+      ></div>,
     );
   }
 
@@ -94,6 +105,7 @@ export default function Calendar(props: CalendarProps) {
         <div className={styles.days}>
           {emptyDays.map((day) => day)}
           {days.map((day) => day)}
+          {padDays.map((day) => day)}
         </div>
       </div>
     </div>
