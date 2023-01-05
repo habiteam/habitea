@@ -1,0 +1,62 @@
+$calendarMainColor: var(--c-primary-medium-bg);
+.calendar {
+  border-radius: 24px;
+  background-color: white;
+  border: 1px solid $calendarMainColor;
+  overflow: hidden;
+}
+.header {
+  padding: 16px;
+  background-color: $calendarMainColor;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  font-weight: bold;
+}
+.header__controls {
+  display: flex;
+  align-items: center;
+}
+.header__control {
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  &:hover {
+    background-color: var(--c-primary-light-bg);
+  }
+}
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: var(--c-primary-light-bg);
+}
+.weekdays__day {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--c-primary-dark);
+  font-weight: bold;
+  border: 1px solid $calendarMainColor;
+}
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.days__day {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--c-primary-dark);
+  border: 1px solid $calendarMainColor;
+  cursor: pointer;
+  &:not(.days__day--inactive):hover {
+    background-color: var(--c-primary-light-bg);
+  }
+}
+.days__day--inactive {
+  background-color: var(--c-primary-dark-bg);
+  cursor: default;
+}

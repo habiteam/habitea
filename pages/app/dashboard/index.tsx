@@ -14,6 +14,7 @@ import { Activity } from '@schemas/activity';
 import { getDateStringFromTimestamp } from '@utils/time';
 import Button from '@commonComponents/Button/Button';
 import { getPreviousMonth } from '@utils/date';
+import Calendar from '@commonComponents/Calendar/Calendar';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
@@ -88,7 +89,11 @@ export default function Dashboard() {
       case 'Categories':
         return <div className={styles.tab}>Tab 1 content</div>;
       case 'Calendar':
-        return <div className={styles.tab}>Tab 2 content</div>;
+        return (
+          <div className={styles.tab}>
+            <Calendar date={new Date()}></Calendar>
+          </div>
+        );
       case 'Journal':
         return (
           <div className={styles.tab}>
