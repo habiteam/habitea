@@ -3,7 +3,8 @@ import Tabs from '@commonComponents/Tabs/Tabs';
 import { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import userAtom from '@atoms/user';
-import { useAtomValue } from 'jotai';
+import categoriesAtom from '@atoms/categories';
+import { useAtom, useAtomValue } from 'jotai';
 import Image from 'next/image';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { ActivityCategory } from '@schemas/activity-category';
@@ -20,9 +21,7 @@ import styles from './Dashboard.module.scss';
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Journal');
   const user = useAtomValue(userAtom);
-  const [activityCategories, setActivityCategories] = useState<
-    ActivityCategory[]
-  >([]);
+  const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
   const [habitProgress, setHabitProgress] = useState(0);
   const [activityList, setAtivityList] = useState<Activity[]>([]);
   const [lastLoadedMonth, setLastLoadedMonth] = useState(new Date());
@@ -83,7 +82,7 @@ export default function Dashboard() {
       setLastLoadedMonth(newMonth);
     }
   };
-
+  // TODO Move Journal to separate component
   const tabContent = (tab: string) => {
     switch (tab) {
       case 'Categories':
