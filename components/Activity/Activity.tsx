@@ -46,7 +46,7 @@ export default function Activity() {
             fillType: 'regular',
             color: 'primary',
             onClick: () => {
-              ActivitiesService.create(
+              ActivitiesService.update(
                 {
                   value,
                   activityDate: date

@@ -18,8 +18,8 @@ import { auth, database } from './firebase';
 export class ActivitiesService {
   static readonly collectionName = DatabaseCollection.Activities;
 
-  static create(activity: Partial<Activity>, categoryId: string): void {
-    setDoc(doc(database, this.collectionName, generateUUID()), {
+  static update(activity: Partial<Activity>, categoryId: string): void {
+    setDoc(doc(database, this.collectionName, activity.id || generateUUID()), {
       ...activity,
       categoryRef: doc(
         database,
