@@ -1,5 +1,6 @@
 import Button from '@commonComponents/Button/Button';
 import DateInput from '@commonComponents/DateInput/DateInput';
+import DurationInput from '@commonComponents/DurationInput/DurationInput';
 import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialog';
 import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
@@ -73,18 +74,46 @@ export default function Activity() {
           onSelect={(category) => setSelectedCategory(category)}
         ></CategorySelector>
 
-        <div style={{ marginTop: '16px' }}>
-          <Input
-            title="Value"
-            id="value"
-            name="value"
-            value={value}
-            type="number"
-            onChange={(e) => setValue(Number(e.target.value))}
-            color="primary"
-            style={{ width: '200px' }}
-          ></Input>
-        </div>
+        {selectedCategory && (
+          <div
+            style={{
+              marginTop: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+            }}
+          >
+            {selectedCategory.unitType === 'QUANTITY' ? (
+              <>
+                <Input
+                  title="Value"
+                  id="value"
+                  name="value"
+                  value={value}
+                  type="number"
+                  onChange={(e) => setValue(Number(e.target.value))}
+                  color="primary"
+                  style={{ width: '200px' }}
+                ></Input>
+                <span>
+                  of {selectedCategory?.goalValue} {selectedCategory?.unit}
+                </span>
+              </>
+            ) : (
+              <>
+                <DurationInput
+                  id="duration"
+                  name="duration"
+                  title="Duration"
+                  value={duration}
+                  style={{ width: '200px' }}
+                  onChange={(e) => setDuration(e.target.value)}
+                ></DurationInput>
+                <span>of {selectedCategory?.duration}</span>
+              </>
+            )}
+          </div>
+        )}
 
         <div style={{ marginTop: '16px' }}>
           <DateInput
