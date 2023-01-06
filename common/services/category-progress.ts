@@ -23,6 +23,7 @@ export class CategoryProgressService {
       doc(database, this.collectionName, categoryProgress.id || generateUUID()),
       {
         ...categoryProgress,
+        category: { ...categoryProgress.category },
         createdBy: auth.currentUser?.uid,
       },
     );
@@ -34,7 +35,7 @@ export class CategoryProgressService {
       progressRef,
       where('createdBy', '==', auth.currentUser?.uid),
       where('categoryRef', '==', categoryId),
-      orderBy('progressDate', 'desc'),
+      orderBy('activityDate', 'desc'),
     );
 
     const querySnapshot = await getDocs(q);
@@ -58,7 +59,7 @@ export class CategoryProgressService {
       where('createdBy', '==', auth.currentUser?.uid),
       where('categoryRef', '==', categoryRef),
       ...getWheresForPeriod(category.repeatType, from),
-      orderBy('progressDate', 'desc'),
+      orderBy('activityDate', 'desc'),
     );
 
     const querySnapshot = await getDocs(q);

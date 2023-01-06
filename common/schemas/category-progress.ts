@@ -6,13 +6,13 @@ export class CategoryProgress {
 
   categoryRef: DocumentReference;
 
-  category?: ActivityCategory;
+  category: ActivityCategory;
 
   value: number;
 
   duration: string;
 
-  progressDate: Timestamp;
+  activityDate: Timestamp;
 
   isGoalCompleted: boolean;
 
@@ -21,17 +21,19 @@ export class CategoryProgress {
   constructor(
     id: string,
     categoryRef: DocumentReference,
+    category: ActivityCategory,
     value: number,
     duration: string,
-    progressDate: Timestamp,
+    activityDate: Timestamp,
     isGoalCompleted: boolean,
     createdBy: string,
   ) {
     this.id = id;
     this.categoryRef = categoryRef;
+    this.category = category;
     this.value = value;
     this.duration = duration;
-    this.progressDate = progressDate;
+    this.activityDate = activityDate;
     this.isGoalCompleted = isGoalCompleted;
     this.createdBy = createdBy;
   }
@@ -41,9 +43,10 @@ export class CategoryProgress {
     return new CategoryProgress(
       snapshot.id,
       data.categoryRef,
+      data.category,
       data.value,
       data.duration,
-      data.progressDate,
+      data.activityDate,
       data.isGoalCompleted,
       data.createdBy,
     );

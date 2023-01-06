@@ -12,7 +12,7 @@ import {
 import styles from './CategorySelector.module.scss';
 
 export interface CategorySelectorPropsSchema {
-  value: string;
+  value?: string;
   onSelect: (category: ActivityCategory) => void;
 }
 

@@ -3,15 +3,18 @@ import DateInput from '@commonComponents/DateInput/DateInput';
 import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialog';
 import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
+import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
 import { Timestamp } from 'firebase/firestore';
 import { useRef, useState } from 'react';
 
 export default function Activity() {
   const [openActivityModal, setOpenActivityModal] = useState(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<
+    ActivityCategory | undefined
+  >(undefined);
   const [value, setValue] = useState<number>(1);
-  const [duration, setDuration] = useState<string>(''); // TODO input for duration
+  const [duration, setDuration] = useState<string>('00:00:00'); // TODO input for duration
   const [date, setDate] = useState<string>('');
   const buttonRef = useRef(null);
 
@@ -46,16 +49,19 @@ export default function Activity() {
             fillType: 'regular',
             color: 'primary',
             onClick: () => {
-              ActivitiesService.update(
-                {
-                  value,
-                  activityDate: date
-                    ? Timestamp.fromDate(new Date(date))
-                    : undefined,
-                },
-                selectedCategoryId,
-              );
-              setOpenActivityModal(false);
+              if (selectedCategory) {
+                ActivitiesService.update(
+                  {
+                    value,
+                    duration,
+                    activityDate: date
+                      ? Timestamp.fromDate(new Date(date))
+                      : Timestamp.now(),
+                  },
+                  selectedCategory,
+                );
+                setOpenActivityModal(false);
+              }
             },
           },
         ]}
@@ -63,8 +69,8 @@ export default function Activity() {
         <h4>Select category</h4>
 
         <CategorySelector
-          value={selectedCategoryId}
-          onSelect={(category) => setSelectedCategoryId(category.id)}
+          value={selectedCategory?.id}
+          onSelect={(category) => setSelectedCategory(category)}
         ></CategorySelector>
 
         <div style={{ marginTop: '16px' }}>
