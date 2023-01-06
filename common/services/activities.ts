@@ -7,6 +7,7 @@ import {
   collection,
   doc,
   getDocs,
+  orderBy,
   query,
   setDoc,
   Timestamp,
@@ -44,6 +45,7 @@ export class ActivitiesService {
       activitiesRef,
       where('createdBy', '==', userId),
       where('categoryRef', '==', categoryRef),
+      orderBy('activityDate', 'desc'),
     );
 
     const querySnapshot = await getDocs(q);
@@ -68,6 +70,7 @@ export class ActivitiesService {
       where('createdBy', '==', userId),
       where('categoryRef', '==', categoryRef),
       ...getWheresForPeriod(category.repeatType, from),
+      orderBy('activityDate', 'desc'),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
@@ -81,6 +84,7 @@ export class ActivitiesService {
       activitiesRef,
       where('createdBy', '==', userId),
       ...getWheresForPeriod('MONTHLY', from),
+      orderBy('activityDate', 'desc'),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>

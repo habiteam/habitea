@@ -25,7 +25,7 @@ export default function Calendar(props: CalendarProps) {
   const [currentDate, setCurrentDate] = useState(props.date);
   const user = useAtomValue(userAtom);
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [activityCategories] = useAtom(categoriesAtom);
+  const activityCategories = useAtomValue(categoriesAtom);
 
   const loadPreviousMonth = () => {
     setCurrentDate(getPreviousMonth(currentDate));

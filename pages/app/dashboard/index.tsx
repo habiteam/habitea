@@ -7,7 +7,6 @@ import categoriesAtom from '@atoms/categories';
 import { useAtom, useAtomValue } from 'jotai';
 import Image from 'next/image';
 import { ActivityCategoriesService } from '@services/activity-categories';
-import { ActivityCategory } from '@schemas/activity-category';
 import Head from 'next/head';
 import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
@@ -15,7 +14,8 @@ import { Activity } from '@schemas/activity';
 import { getDateStringFromTimestamp } from '@utils/time';
 import Button from '@commonComponents/Button/Button';
 import { getPreviousMonth } from '@utils/date';
-import Calendar from '@commonComponents/Calendar/Calendar';
+import Calendar from '@components/Calendar/Calendar';
+import Journal from '@components/Journal/Journal';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
@@ -24,7 +24,6 @@ export default function Dashboard() {
   const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
   const [habitProgress, setHabitProgress] = useState(0);
   const [activityList, setAtivityList] = useState<Activity[]>([]);
-  const [lastLoadedMonth, setLastLoadedMonth] = useState(new Date());
 
   useEffect(() => {
     if (user) {
@@ -71,18 +70,6 @@ export default function Dashboard() {
     }
   }, [user]);
 
-  const loadMoreActivities = async () => {
-    if (user) {
-      const newMonth = getPreviousMonth(lastLoadedMonth);
-      const newActivities = await ActivitiesService.getForMonth(
-        newMonth,
-        user?.uid,
-      );
-      setAtivityList((prev) => [...prev, ...newActivities]);
-      setLastLoadedMonth(newMonth);
-    }
-  };
-  // TODO Move Journal to separate component
   const tabContent = (tab: string) => {
     switch (tab) {
       case 'Categories':
@@ -96,18 +83,9 @@ export default function Dashboard() {
       case 'Journal':
         return (
           <div className={styles.tab}>
-            {activityList.map((activity) => (
-              <div key={activity.id}>
-                <span>
-                  {getDateStringFromTimestamp(activity.activityDate)}
-                  {activity.category?.name} {activity.value}{' '}
-                  {activity.category?.unit}
-                </span>
-              </div>
-            ))}
-            <Button onClick={loadMoreActivities} fillType={'regular'}>
-              Load more activities
-            </Button>
+            {activityList.length > 0 && (
+              <Journal activities={activityList}></Journal>
+            )}
           </div>
         );
       default:
