@@ -80,8 +80,14 @@ export default function Calendar(props: CalendarProps) {
   const lastDayIndex = getLastDayOfMonth(currentDate).getDate();
   for (let i = 1; i <= lastDayIndex; i += 1) {
     days.push(
-      <div key={i} className={styles.days__day}>
-        <span className={styles['day-nr']}>{i}</span>
+      <div
+        key={i}
+        className={classNames(styles.days__day, {
+          [styles['days__day--compact']]:
+            activitiesByDay[i] && activitiesByDay[i].length > 4,
+        })}
+      >
+        <span className={classNames(styles['day-nr'])}>{i}</span>
         {activitiesByDay[i] &&
           activitiesByDay[i].map((activity) => (
             <div key={activity.id} className={styles['day-activity']}>

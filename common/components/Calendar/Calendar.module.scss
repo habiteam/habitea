@@ -63,6 +63,15 @@ $calendarMainColor: var(--c-primary-medium-bg);
     background-color: var(--c-primary-light-bg);
   }
 }
+.days__day--inactive {
+  background-color: var(--c-primary-dark-bg);
+  cursor: default;
+}
+.days__day--compact {
+  .day-activity__description {
+    display: none;
+  }
+}
 .day-activity {
   border-radius: 12px;
   background-color: var(--c-primary-medium-bg);
@@ -87,8 +96,4 @@ $calendarMainColor: var(--c-primary-medium-bg);
   position: absolute;
   top: 0;
   left: 0;
-}
-.days__day--inactive {
-  background-color: var(--c-primary-dark-bg);
-  cursor: default;
 }
