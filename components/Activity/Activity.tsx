@@ -4,6 +4,7 @@ import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialo
 import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
 import { ActivitiesService } from '@services/activities';
+import { Timestamp } from 'firebase/firestore';
 import { useRef, useState } from 'react';
 
 export default function Activity() {
@@ -47,6 +48,7 @@ export default function Activity() {
               ActivitiesService.create({
                 value,
                 categoryRef: selectedCategoryId,
+                activityDate: Timestamp.fromDate(new Date(date)),
               });
               setOpenActivityModal(false);
             },

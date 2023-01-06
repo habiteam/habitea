@@ -24,7 +24,7 @@ export class ActivitiesService {
         database,
         `${DatabaseCollection.ActivityCategories}/${activity.categoryRef}`,
       ),
-      activityDate: Timestamp.now(),
+      activityDate: activity.activityDate ?? Timestamp.now(),
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
     });
