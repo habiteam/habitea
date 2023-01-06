@@ -45,11 +45,15 @@ export default function Activity() {
             fillType: 'regular',
             color: 'primary',
             onClick: () => {
-              ActivitiesService.create({
-                value,
-                categoryRef: selectedCategoryId,
-                activityDate: Timestamp.fromDate(new Date(date)),
-              });
+              ActivitiesService.create(
+                {
+                  value,
+                  activityDate: date
+                    ? Timestamp.fromDate(new Date(date))
+                    : undefined,
+                },
+                selectedCategoryId,
+              );
               setOpenActivityModal(false);
             },
           },

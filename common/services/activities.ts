@@ -17,12 +17,12 @@ import { auth, database } from './firebase';
 export class ActivitiesService {
   static readonly collectionName = DatabaseCollection.Activities;
 
-  static create(activity: Partial<Activity>) {
+  static create(activity: Partial<Activity>, categoryId: string): void {
     setDoc(doc(database, this.collectionName, generateUUID()), {
       ...activity,
       categoryRef: doc(
         database,
-        `${DatabaseCollection.ActivityCategories}/${activity.categoryRef}`,
+        `${DatabaseCollection.ActivityCategories}/${categoryId}`,
       ),
       activityDate: activity.activityDate ?? Timestamp.now(),
       createdDate: Timestamp.now(),
