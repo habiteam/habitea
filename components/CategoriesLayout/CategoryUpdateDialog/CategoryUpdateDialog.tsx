@@ -27,7 +27,7 @@ const defaultCreateValues: ActivityCategoryCreateFormType = {
   icon: 'person-running',
   description: '',
   status: 'ACTIVE',
-  goalValue: '0',
+  goalValue: 0,
   goalType: 'MIN',
   repeatType: 'DAILY',
   unit: '',
@@ -181,7 +181,8 @@ export function CategoryUpdateDialog({
               title="Goal"
               id="goalValue"
               name="goalValue"
-              value={form.goalValue?.toLocaleString()}
+              type="number"
+              value={form.goalValue}
               onChange={handleFormChange}
               style={{ width: 'calc(50% - 6px)' }}
               color="primary"

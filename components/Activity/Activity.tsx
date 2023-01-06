@@ -10,7 +10,8 @@ import { useRef, useState } from 'react';
 export default function Activity() {
   const [openActivityModal, setOpenActivityModal] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<number>(1);
+  const [duration, setDuration] = useState<string>(''); // TODO input for duration
   const [date, setDate] = useState<string>('');
   const buttonRef = useRef(null);
 
@@ -73,7 +74,7 @@ export default function Activity() {
             name="value"
             value={value}
             type="number"
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => setValue(Number(e.target.value))}
             color="primary"
             style={{ width: '200px' }}
           ></Input>

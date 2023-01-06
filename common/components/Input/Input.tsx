@@ -12,7 +12,7 @@ export interface InputPropsSchema
   disabled?: boolean;
   color?: Color;
   type?: 'text' | 'password' | 'number';
-  value?: string;
+  value?: string | number;
   id: string;
 }
 
@@ -21,7 +21,7 @@ export default function Input(props: InputPropsSchema) {
   const [hasValue, setHasValue] = useState(false);
 
   useEffect(() => {
-    if (props.value && props.value?.length > 0) {
+    if (props.value && props.value?.toString().length > 0) {
       setHasValue(true);
     }
   }, []);

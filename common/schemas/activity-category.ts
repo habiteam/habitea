@@ -18,7 +18,7 @@ export class ActivityCategory {
 
   status: ActivityCategoryStatus;
 
-  goalValue: string | number;
+  goalValue: number;
 
   goalType: ActivityCategoryGoalType;
 
@@ -44,7 +44,7 @@ export class ActivityCategory {
     icon: IconName,
     description: string,
     status: ActivityCategoryStatus,
-    goalValue: string | number,
+    goalValue: number,
     goalType: ActivityCategoryGoalType,
     repeatType: ActivityCategoryRepeatType,
     unit: string,

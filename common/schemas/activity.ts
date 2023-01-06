@@ -8,7 +8,9 @@ export class Activity {
 
   category?: ActivityCategory;
 
-  value: string;
+  value: number;
+
+  duration: string;
 
   activityDate: Timestamp;
 
@@ -19,7 +21,8 @@ export class Activity {
   constructor(
     id: string,
     categoryRef: DocumentReference,
-    value: string,
+    value: number,
+    duration: string,
     activityDate: Timestamp,
     createdDate: Timestamp,
     createdBy: string,
@@ -27,6 +30,7 @@ export class Activity {
     this.id = id;
     this.categoryRef = categoryRef;
     this.value = value;
+    this.duration = duration;
     this.activityDate = activityDate;
     this.createdDate = createdDate;
     this.createdBy = createdBy;
@@ -38,6 +42,7 @@ export class Activity {
       snapshot.id,
       data.categoryRef,
       data.value,
+      data.duration,
       data.activityDate,
       data.createdDate,
       data.createdBy,
