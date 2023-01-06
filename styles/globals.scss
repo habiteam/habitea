@@ -10,21 +10,21 @@ body {
   --c-primary-dark: rgb(60, 51, 42);
 
   &.coffee {
-    --c-primary: #71341f;
+    --c-primary: #653d2f;
     --c-primary-active: #e5c19c;
     --c-primary-dark-bg: #e3e3e3;
     --c-primary-medium-bg: #c4b2a8;
     --c-primary-light-bg: #fffdfc;
-    --c-primary-dark: rgb(136 101 76);
+    --c-primary-dark: rgb(50, 23, 4);
   }
 
   &.milky {
-    --c-primary: #766850;
+    --c-primary: #997f56;
     --c-primary-active: #e5c19c;
     --c-primary-dark-bg: #e3e3e3;
     --c-primary-medium-bg: #ffe9c5;
     --c-primary-light-bg: #fffdfc;
-    --c-primary-dark: #997f56;
+    --c-primary-dark: #766850;
   }
 
   &.kale {
