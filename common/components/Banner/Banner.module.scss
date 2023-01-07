@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: auto;
+  gap: 24px;
+}
+
+.image {
+  height: 320px;
+  object-fit: cover;
+  border-radius: 36px;
+  display: flex;
+  flex: 1;
+  transition: all 400ms ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.description {
+  min-height: 120px;
+  margin: 16px 0px 0px;
+
+  .title {
+    margin-bottom: 8px;
+    font-size: 2.4rem;
+    color: #845434;
+  }
+
+  .content {
+    font-size: 1.4rem;
+    color: #7a705d;
+  }
+}
