@@ -86,6 +86,7 @@ export default function Home() {
           className={styles['image-tea']}
           src={teaImg}
           alt={'background image'}
+          placeholder="blur"
         ></Image>
       </div>
     </>
