@@ -7,7 +7,7 @@ interface BlockProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function Block(props: BlockProps) {
   return (
-    <div className={classNames(styles.block, props.className)}>
+    <div {...props} className={classNames(styles.block, props.className)}>
       {props.children}
     </div>
   );

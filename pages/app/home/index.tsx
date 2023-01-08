@@ -48,7 +48,7 @@ export default function Home() {
         <title>Home - Habitea</title>
       </Head>
       <h2>Welcome {user?.displayName ?? user?.email}</h2>
-      <Block>
+      <Block style={{ marginBottom: '16px' }}>
         {activityList.length > 0 && (
           <Journal activities={activityList}></Journal>
         )}
