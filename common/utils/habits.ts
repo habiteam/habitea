@@ -17,9 +17,12 @@ export function summariseActivities(
   unitType: ActivityUnitType = 'QUANTITY',
 ): number {
   if (unitType === 'TIME') {
-    return activities.reduce((t, v) => t + getSecondsFromDuration(v.value), 0);
+    return activities.reduce(
+      (t, v) => t + getSecondsFromDuration(v.duration),
+      0,
+    );
   }
-  return activities.reduce((t, v) => t + parseInt(v.value, 10), 0);
+  return activities.reduce((t, v) => t + parseInt(v.duration, 10), 0);
 }
 
 /**
@@ -54,7 +57,7 @@ export function calculateProgress(
   return (
     (category?.unitType === 'QUANTITY'
       ? summariseActivities(activities ?? [], category?.unitType) /
-        parseInt(category?.goalValue as string, 10)
+        category.goalValue
       : summariseActivities(activities ?? [], category?.unitType) /
         getSecondsFromDuration(category?.duration as string)) * 100
   );

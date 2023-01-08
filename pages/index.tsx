@@ -9,6 +9,7 @@ import banner2 from '@public/main/banner2.png';
 import banner3 from '@public/main/banner3.png';
 import { auth } from '@services/firebase';
 import Banner, { BannerItem } from '@commonComponents/Banner/Banner';
+import Script from 'next/script';
 import styles from './Home.module.scss';
 
 export default function Home() {
@@ -41,7 +42,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={classNames(styles.container, styles.gradient)}>
+      <Script id="blobs">
+        {`
+          (async function () {
+            if (CSS['paintWorklet'] === undefined) {
+              await import('https://unpkg.com/css-paint-polyfill');
+            }
+
+            CSS.paintWorklet.addModule('blobs.js');
+          })()
+        `}
+      </Script>
+
+      <div className={classNames(styles.container, styles.blobs)}>
         <Image
           className={styles['background-image']}
           src={heroBgImg}
