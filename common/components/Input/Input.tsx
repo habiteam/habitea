@@ -21,7 +21,7 @@ export default function Input(props: InputPropsSchema) {
   const [hasValue, setHasValue] = useState(false);
 
   useEffect(() => {
-    if (props.value && props.value?.toString().length > 0) {
+    if ((props.value && String(props.value).length > 0) || props.value === 0) {
       setHasValue(true);
     }
   }, []);

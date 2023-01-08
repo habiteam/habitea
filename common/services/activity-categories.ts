@@ -26,12 +26,6 @@ export class ActivityCategoriesService {
     setDoc(doc(database, this.collectionName, category.id || generateUUID()), {
       ...category,
       goalValue: category.goalValue ? Number(category.goalValue) : null,
-      validFrom: category.validFrom
-        ? Timestamp.fromDate(new Date(category.validFrom as string))
-        : null,
-      validTo: category.validTo
-        ? Timestamp.fromDate(new Date(category.validTo as string))
-        : null,
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
     });

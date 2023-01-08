@@ -202,20 +202,6 @@ export default function Category() {
               </p>
             </div>
 
-            <div className={classNames(styles.info)}>
-              <h2 className={classNames(styles.label)}>Started</h2>
-              <p className={classNames(styles.value)}>
-                {getDateStringFromTimestamp(category.validFrom)}
-              </p>
-            </div>
-
-            <div className={classNames(styles.info)}>
-              <h2 className={classNames(styles.label)}>Ends</h2>
-              <p className={classNames(styles.value)}>
-                {getDateStringFromTimestamp(category.validTo)}
-              </p>
-            </div>
-
             {/* <p>
               {summariseActivities(recentActivities ?? [], category.unitType)}{' '}
               {category.unit} this{' '}

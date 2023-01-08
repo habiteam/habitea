@@ -33,8 +33,6 @@ const defaultCreateValues: ActivityCategoryCreateFormType = {
   unit: '',
   unitType: 'QUANTITY',
   duration: '00:00:00',
-  validFrom: '',
-  validTo: '',
 };
 
 export function CategoryUpdateDialog({
@@ -47,13 +45,7 @@ export function CategoryUpdateDialog({
   activityCategory?: ActivityCategory;
 }) {
   const [form, setForm] = useState<ActivityCategoryCreateFormType>(
-    activityCategory
-      ? {
-          ...activityCategory,
-          validFrom: getDateStringFromTimestamp(activityCategory.validFrom),
-          validTo: getDateStringFromTimestamp(activityCategory.validTo),
-        }
-      : defaultCreateValues,
+    activityCategory ?? defaultCreateValues,
   );
 
   const addNotifcation = useAddNotification();
@@ -89,15 +81,7 @@ export function CategoryUpdateDialog({
   };
 
   useEffect(() => {
-    setForm(
-      activityCategory
-        ? {
-            ...activityCategory,
-            validFrom: getDateStringFromTimestamp(activityCategory.validFrom),
-            validTo: getDateStringFromTimestamp(activityCategory.validTo),
-          }
-        : defaultCreateValues,
-    );
+    setForm(activityCategory ?? defaultCreateValues);
   }, [isUpdateDialogOpen, activityCategory]);
 
   return (
@@ -225,20 +209,6 @@ export function CategoryUpdateDialog({
           options={ActivityCategoryGoalTypeOptions}
           className={styles.control}
         ></Select>
-
-        <DateInput
-          label="Valid From"
-          value={form.validFrom}
-          position="top"
-          onSelect={(date) => handleSelectFormChange(date, 'validFrom')}
-        ></DateInput>
-
-        <DateInput
-          label="Valid To"
-          value={form.validTo}
-          position="top"
-          onSelect={(date) => handleSelectFormChange(date, 'validTo')}
-        ></DateInput>
       </form>
     </ResponsiveDialog>
   );

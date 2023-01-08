@@ -34,10 +34,6 @@ export class ActivityCategory {
 
   createdBy: string;
 
-  validFrom?: Timestamp;
-
-  validTo?: Timestamp;
-
   constructor(
     id: string,
     name: string,
@@ -52,8 +48,6 @@ export class ActivityCategory {
     duration: string,
     createdDate: Timestamp,
     createdBy: string,
-    validFrom: Timestamp,
-    validTo: Timestamp,
   ) {
     this.id = id;
     this.name = name;
@@ -68,8 +62,6 @@ export class ActivityCategory {
     this.duration = duration;
     this.createdDate = createdDate;
     this.createdBy = createdBy;
-    this.validFrom = validFrom;
-    this.validTo = validTo;
   }
 
   static fromFirestore(snapshot: any): ActivityCategory {
@@ -88,13 +80,11 @@ export class ActivityCategory {
       data.duration,
       data.createdDate,
       data.createdBy,
-      data.validFrom,
-      data.validTo,
     );
   }
 }
 
 export type ActivityCategoryCreateFormType = Omit<
   ActivityCategory,
-  'validFrom' | 'validTo' | 'createdDate' | 'createdBy'
-> & { validFrom: string; validTo: string };
+  'createdDate' | 'createdBy'
+>;
