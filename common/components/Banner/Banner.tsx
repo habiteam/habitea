@@ -15,21 +15,30 @@ export interface BannerPropSchema {
 
 export default function Banner(props: BannerPropSchema) {
   const [activeItem, setActiveItem] = useState<number>(0);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
 
   function getWidthOfImage(index: number): string {
     if (index !== activeItem)
-      return `calc(${(1 / (props.items.length + 4)) * 100}% - 12px)`;
+      return `calc(${(1 / (props.items.length + 6)) * 100}% - 8px)`;
 
-    return `calc(${(5 / (props.items.length + 4)) * 100}% - 12px)`;
+    return `calc(${(7 / (props.items.length + 6)) * 100}% - 8px)`;
+  }
+
+  function handleInterval(): void {
+    if (intervalId) clearInterval(intervalId);
+
+    setIntervalId(
+      setInterval(
+        () => setActiveItem((prev) => (prev + 1) % props.items.length),
+        5000,
+      ),
+    );
   }
 
   useEffect(() => {
-    const interval = setInterval(
-      () => setActiveItem((prev) => (prev + 1) % props.items.length),
-      5000,
-    );
+    handleInterval();
 
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -42,7 +51,10 @@ export default function Banner(props: BannerPropSchema) {
             className={classNames(styles.image)}
             src={item.image}
             alt="item"
-            onClick={() => setActiveItem(index)}
+            onClick={() => {
+              handleInterval();
+              setActiveItem(index);
+            }}
           ></Image>
         ))}
       </div>

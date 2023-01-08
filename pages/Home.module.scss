@@ -2,6 +2,25 @@
 @import '/styles/colors.module.scss';
 @import '/styles/breakpoints.module.scss';
 
+@property --blob-colors {
+  syntax: '<color>+';
+  initial-value: black white;
+  inherits: true;
+}
+
+@property --blob-count {
+  syntax: '<integer>';
+  initial-value: 30;
+  inherits: true;
+}
+
+.blobs {
+  background-color: #8c6443;
+  --blob-colors: #f3c889 #c38f59 #d4a065 #d0995f #9f6a3a #b07543 #b38058 #7e4623
+    #af7342 #bb814c #fecc81;
+  background-image: paint(blobs);
+}
+
 .background-image {
   z-index: -1;
   object-fit: cover;
@@ -13,9 +32,6 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  @media (max-width: $breakpoint-md) {
-    flex-direction: column;
-  }
   justify-content: center;
   align-items: center;
 
@@ -24,11 +40,12 @@
     filter: drop-shadow(0px 24px 10px #0000009f);
     max-width: 100%;
     height: auto;
-  }
-}
+    display: none;
 
-.gradient {
-  background-image: linear-gradient(339deg, #cf7e53, #8f997d29);
+    @media (min-width: $breakpoint-lg) {
+      display: block;
+    }
+  }
 }
 
 .card {
