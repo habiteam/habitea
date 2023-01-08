@@ -18,7 +18,12 @@
   background-color: #8c6443;
   --blob-colors: #f3c889 #c38f59 #d4a065 #d0995f #9f6a3a #b07543 #b38058 #7e4623
     #af7342 #bb814c #fecc81;
-  background-image: paint(blobs);
+  background-image: url('../public/backgrounds/bg-blobs.svg');
+  background-size: cover;
+  background-position: center;
+  @supports (background: paint(blobs)) {
+    background-image: paint(blobs);
+  }
 }
 
 .background-image {
