@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import styles from './Block.module.scss';
 
-interface BlockProps {
+interface BlockProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  className?: string;
 }
 
 export default function Block(props: BlockProps) {

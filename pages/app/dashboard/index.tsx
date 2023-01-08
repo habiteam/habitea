@@ -12,8 +12,8 @@ import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
 import { Activity } from '@schemas/activity';
 import Calendar from '@components/Calendar/Calendar';
-import styles from './Dashboard.module.scss';
 import Block from '@commonComponents/Block/Block';
+import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Calendar');
