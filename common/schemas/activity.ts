@@ -1,4 +1,8 @@
-import { DocumentReference, Timestamp } from 'firebase/firestore';
+import {
+  DocumentReference,
+  DocumentSnapshot,
+  Timestamp,
+} from 'firebase/firestore';
 import { ActivityCategory } from './activity-category';
 
 export class Activity {
@@ -36,16 +40,19 @@ export class Activity {
     this.createdBy = createdBy;
   }
 
-  static fromFirestore(snapshot: any): Activity {
+  static fromFirestore(snapshot: DocumentSnapshot): Activity {
     const data = snapshot.data();
-    return new Activity(
-      snapshot.id,
-      data.categoryRef,
-      data.value,
-      data.duration,
-      data.activityDate,
-      data.createdDate,
-      data.createdBy,
-    );
+    if (data) {
+      return new Activity(
+        snapshot.id,
+        data.categoryRef,
+        data.value,
+        data.duration,
+        data.activityDate,
+        data.createdDate,
+        data.createdBy,
+      );
+    }
+    throw new Error('Activity not found');
   }
 }

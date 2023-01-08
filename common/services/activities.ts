@@ -80,8 +80,9 @@ export class ActivitiesService {
       CategoryProgressService.update(progress);
     });
 
-    setDoc(doc(database, this.collectionName, activity.id || generateUUID()), {
+    setDoc(doc(database, this.collectionName, activity.id ?? generateUUID()), {
       ...activity,
+      id: null,
       categoryRef,
       activityDate: activity.activityDate ?? Timestamp.now(),
       createdDate: Timestamp.now(),
@@ -91,7 +92,7 @@ export class ActivitiesService {
 
   static async getById(id: string): Promise<Activity> {
     return Activity.fromFirestore(
-      getDoc(doc(database, this.collectionName, id)),
+      await getDoc(doc(database, this.collectionName, id)),
     );
   }
 

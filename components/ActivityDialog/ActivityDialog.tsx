@@ -1,3 +1,4 @@
+import { activityAtom, openActivityModalAtom } from '@atoms/activity-dialog';
 import Button from '@commonComponents/Button/Button';
 import DateInput from '@commonComponents/DateInput/DateInput';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
@@ -6,11 +7,16 @@ import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
+import { useAddNotification } from '@utils/notifications';
 import { Timestamp } from 'firebase/firestore';
-import { useRef, useState } from 'react';
+import { useAtom } from 'jotai';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ActivityDialog() {
-  const [openActivityModal, setOpenActivityModal] = useState(false);
+  const [openActivityModal, setOpenActivityModal] = useAtom(
+    openActivityModalAtom,
+  );
+  const [activity, setActivity] = useAtom(activityAtom);
   const [selectedCategory, setSelectedCategory] = useState<
     ActivityCategory | undefined
   >(undefined);
@@ -18,6 +24,21 @@ export default function ActivityDialog() {
   const [duration, setDuration] = useState<string>('00:00:00'); // TODO input for duration
   const [date, setDate] = useState<string>('');
   const buttonRef = useRef(null);
+  const addNotifcation = useAddNotification();
+
+  useEffect(() => {
+    if (activity) {
+      setSelectedCategory(activity.category);
+      setValue(activity.value);
+      setDuration(activity.duration);
+      setDate(activity.activityDate.toDate().toISOString().split('T')[0]);
+    } else {
+      setSelectedCategory(undefined);
+      setValue(1);
+      setDuration('00:00:00');
+      setDate('');
+    }
+  }, [activity]);
 
   return (
     <>
@@ -25,7 +46,10 @@ export default function ActivityDialog() {
         <Button
           fillType="filled"
           color="info"
-          onClick={() => setOpenActivityModal(true)}
+          onClick={() => {
+            setActivity(null);
+            setOpenActivityModal(true);
+          }}
         >
           Start Activity
         </Button>
@@ -46,13 +70,14 @@ export default function ActivityDialog() {
             },
           },
           {
-            text: 'Create',
+            text: activity ? 'Update' : 'Create',
             fillType: 'regular',
             color: 'primary',
             onClick: () => {
               if (selectedCategory) {
                 ActivitiesService.update(
                   {
+                    id: activity?.id,
                     value,
                     duration,
                     activityDate: date
@@ -61,6 +86,10 @@ export default function ActivityDialog() {
                   },
                   selectedCategory,
                 );
+                addNotifcation({
+                  message: 'Activity updated',
+                  type: 'success',
+                });
                 setOpenActivityModal(false);
               }
             },
