@@ -50,7 +50,7 @@ class BlobPainter {
       drawBlob(
         context,
         { x: random(0, width), y: random(0, height) },
-        random(1, 100),
+        random(100, 500),
         colors[Math.floor(random(0, colors.length))],
       );
     }
