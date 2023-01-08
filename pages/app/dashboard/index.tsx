@@ -13,6 +13,7 @@ import { calculateProgress } from '@utils/habits';
 import { Activity } from '@schemas/activity';
 import Calendar from '@components/Calendar/Calendar';
 import styles from './Dashboard.module.scss';
+import Block from '@commonComponents/Block/Block';
 
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Calendar');
@@ -74,7 +75,7 @@ export default function Dashboard() {
       <Head>
         <title>Dashboard - Habitea</title>
       </Head>
-      <div className={classnames(styles.summary)}>
+      <Block className={classnames(styles.summary)}>
         <Image
           src={user?.photoURL ?? '/cat.jpg'}
           alt="Card header image"
@@ -87,7 +88,7 @@ export default function Dashboard() {
           <span>Tracking {activityCategories.length} habits</span>
           <span>Current habit progress: {habitProgress.toFixed(0)}%</span>
         </div>
-      </div>
+      </Block>
       <p>Here you can see your progress and manage your goals.</p>
       <p>Click on the tabs to see more.</p>
       <br />

@@ -10,6 +10,7 @@ import { ActivityCategoriesService } from '@services/activity-categories';
 import categoriesAtom from '@atoms/categories';
 import { ActivitiesService } from '@services/activities';
 import Journal from '@components/Journal/Journal';
+import Block from '@commonComponents/Block/Block';
 
 export default function Home() {
   const user = useAtomValue(userAtom);
@@ -47,8 +48,11 @@ export default function Home() {
         <title>Home - Habitea</title>
       </Head>
       <h2>Welcome {user?.displayName ?? user?.email}</h2>
-
-      {activityList.length > 0 && <Journal activities={activityList}></Journal>}
+      <Block>
+        {activityList.length > 0 && (
+          <Journal activities={activityList}></Journal>
+        )}
+      </Block>
       <ActivityDialog></ActivityDialog>
     </>
   );
