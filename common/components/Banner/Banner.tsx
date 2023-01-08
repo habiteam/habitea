@@ -46,7 +46,7 @@ export default function Banner(props: BannerPropSchema) {
       <div className={classNames(styles.container)}>
         {props.items.map((item, index) => (
           <Image
-            style={{ width: getWidthOfImage(index) }}
+            style={{ maxWidth: getWidthOfImage(index) }}
             key={index}
             className={classNames(styles.image)}
             src={item.image}

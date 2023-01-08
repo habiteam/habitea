@@ -8,11 +8,14 @@
 
 .image {
   height: 320px;
+  width: 100%;
+  top: 0;
   object-fit: cover;
   border-radius: 36px;
   display: flex;
   flex: 1;
   transition: all 400ms ease-in-out;
+  object-position: top left;
 
   &:hover {
     cursor: pointer;
