@@ -40,7 +40,6 @@ class BlobPainter {
   static inputProperties = ['--blob-count', '--blob-colors'];
 
   paint(context, { width, height }, parameters) {
-    console.dir(parameters);
     const count = parameters.get('--blob-count').value;
     const colors = parameters
       .getAll('--blob-colors')
