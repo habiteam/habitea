@@ -22,7 +22,7 @@ export function summariseActivities(
       0,
     );
   }
-  return activities.reduce((t, v) => t + parseInt(v.duration, 10), 0);
+  return activities.reduce((t, v) => t + v.value, 0);
 }
 
 /**
