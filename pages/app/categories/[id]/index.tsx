@@ -202,7 +202,7 @@ export default function Category() {
               </p>
             </div>
 
-            {/* <p>
+            <p>
               {summariseActivities(recentActivities ?? [], category.unitType)}{' '}
               {category.unit} this{' '}
               {
@@ -214,7 +214,7 @@ export default function Category() {
             <p>
               {calculateProgress(recentActivities ?? [], category).toFixed(0)} %
               progress
-            </p> */}
+            </p>
           </div>
           <div>
             {recentActivities?.map((el) => (

@@ -19,7 +19,6 @@ export default function Dashboard() {
   const user = useAtomValue(userAtom);
   const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
   const [habitProgress, setHabitProgress] = useState(0);
-  const [activityList, setAtivityList] = useState<Activity[]>([]);
 
   useEffect(() => {
     if (user) {
@@ -60,7 +59,9 @@ export default function Dashboard() {
       case 'Calendar':
         return (
           <div className={styles.tab}>
-            <Calendar date={new Date()}></Calendar>
+            {activityCategories.length > 0 && (
+              <Calendar date={new Date()}></Calendar>
+            )}
           </div>
         );
       default:

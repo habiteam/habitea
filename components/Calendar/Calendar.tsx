@@ -1,6 +1,6 @@
 import { Months } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
 import userAtom from '@atoms/user';
 import categoriesAtom from '@atoms/categories';
