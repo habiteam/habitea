@@ -11,15 +11,11 @@ import Head from 'next/head';
 import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
 import { Activity } from '@schemas/activity';
-import { getDateStringFromTimestamp } from '@utils/time';
-import Button from '@commonComponents/Button/Button';
-import { getPreviousMonth } from '@utils/date';
 import Calendar from '@components/Calendar/Calendar';
-import Journal from '@components/Journal/Journal';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
-  const [currentTab, setCurrentTab] = useState('Journal');
+  const [currentTab, setCurrentTab] = useState('Calendar');
   const user = useAtomValue(userAtom);
   const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
   const [habitProgress, setHabitProgress] = useState(0);
@@ -52,19 +48,6 @@ export default function Dashboard() {
         // calculate overall progress when all activities are fetched
         const results = await Promise.all(promises);
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
-
-        // get recent activities
-        let recentActivities = await ActivitiesService.getForMonth(
-          new Date(),
-          user?.uid,
-        );
-
-        // assign categories to activity object for easier display
-        recentActivities = recentActivities.map((activity) => ({
-          ...activity,
-          category: categories.find((c) => c.id === activity.categoryRef.id),
-        }));
-        setAtivityList(recentActivities);
       };
       fetchData();
     }
@@ -78,14 +61,6 @@ export default function Dashboard() {
         return (
           <div className={styles.tab}>
             <Calendar date={new Date()}></Calendar>
-          </div>
-        );
-      case 'Journal':
-        return (
-          <div className={styles.tab}>
-            {activityList.length > 0 && (
-              <Journal activities={activityList}></Journal>
-            )}
           </div>
         );
       default:
@@ -118,7 +93,6 @@ export default function Dashboard() {
       <br />
       <Tabs
         tabs={[
-          { key: 'Journal', title: 'Journal' },
           { key: 'Calendar', title: 'Calendar' },
           { key: 'Categories', title: 'Categories' },
         ]}

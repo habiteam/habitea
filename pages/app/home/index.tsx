@@ -1,11 +1,46 @@
 import { getAppLayout } from '@components/AppLayout/AppLayout';
-import Activity from '@components/Activity/Activity';
+import ActivityDialog from '@components/ActivityDialog/ActivityDialog';
+import { Activity } from '@schemas/activity';
+
 import userAtom from '@atoms/user';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { ActivityCategoriesService } from '@services/activity-categories';
+import categoriesAtom from '@atoms/categories';
+import { ActivitiesService } from '@services/activities';
+import Journal from '@components/Journal/Journal';
 
 export default function Home() {
   const user = useAtomValue(userAtom);
+  const [activityList, setAtivityList] = useState<Activity[]>([]);
+  const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
+
+  useEffect(() => {
+    if (user) {
+      const fetchData = async () => {
+        // get categories
+        const categories = await ActivityCategoriesService.getActiveByUserId(
+          user?.uid as string,
+        );
+        setActivityCategories(categories);
+
+        // get recent activities
+        let recentActivities = await ActivitiesService.getForMonth(
+          new Date(),
+          user?.uid,
+        );
+
+        // assign categories to activity object for easier display
+        recentActivities = recentActivities.map((activity) => ({
+          ...activity,
+          category: categories.find((c) => c.id === activity.categoryRef.id),
+        }));
+        setAtivityList(recentActivities);
+      };
+      fetchData();
+    }
+  }, [user]);
   return (
     <>
       <Head>
@@ -13,7 +48,8 @@ export default function Home() {
       </Head>
       <h2>Welcome {user?.displayName ?? user?.email}</h2>
 
-      <Activity></Activity>
+      {activityList.length > 0 && <Journal activities={activityList}></Journal>}
+      <ActivityDialog></ActivityDialog>
     </>
   );
 }

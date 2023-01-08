@@ -9,7 +9,7 @@ import { ActivitiesService } from '@services/activities';
 import { Timestamp } from 'firebase/firestore';
 import { useRef, useState } from 'react';
 
-export default function Activity() {
+export default function ActivityDialog() {
   const [openActivityModal, setOpenActivityModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<
     ActivityCategory | undefined
