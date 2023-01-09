@@ -11,3 +11,21 @@
   justify-content: flex-start;
   margin-bottom: 12px;
 }
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.habit {
+  background-color: white;
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 2px solid var(--c-primary-medium-bg);
+  &--good {
+    border-color: var(--c-good);
+  }
+  &--bad {
+    border-color: var(--c-bad);
+  }
+}

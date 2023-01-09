@@ -9,18 +9,23 @@ import categoriesAtom from '@atoms/categories';
 import ActivityItem from '@commonComponents/ActivityItem/ActivityItem';
 import { Months } from '@constants/dictionaries';
 import { ActivityCategory } from '@schemas/activity-category';
-import { calculateProgress } from '@utils/habits';
+import { calculateProgress, getCategoryGoalString } from '@utils/habits';
+import classNames from 'classnames';
 import styles from './Journal.module.scss';
 
 interface JournalProps {
   activities: Activity[];
 }
 
+interface ActivityCategoryProgress extends ActivityCategory {
+  progress: number;
+}
+
 interface MonthCollection {
   year: number;
   month: number;
   activities: Activity[];
-  categories?: ActivityCategory[];
+  categories?: ActivityCategoryProgress[];
 }
 
 export default function Journal(props: JournalProps) {
@@ -32,6 +37,15 @@ export default function Journal(props: JournalProps) {
       year: new Date().getFullYear(),
       month: new Date().getMonth(),
       activities: props.activities,
+      categories: activityCategories.map((category) => {
+        const activities = props.activities.filter(
+          (a) => a.categoryRef.id === category.id,
+        );
+        return {
+          ...category,
+          progress: calculateProgress(activities, category),
+        };
+      }),
     },
   ]);
   const [lastLoadedMonth, setLastLoadedMonth] = useState(new Date());
@@ -48,10 +62,22 @@ export default function Journal(props: JournalProps) {
           (c) => c.id === activity.categoryRef.id,
         ),
       }));
+
+      const categoryProgresses = activityCategories.map((category) => {
+        const activities = newActivities.filter(
+          (a) => a.categoryRef.id === category.id,
+        );
+        return {
+          ...category,
+          progress: calculateProgress(activities, category),
+        };
+      });
+
       const monthCollection = {
         year: newMonth.getFullYear(),
         month: newMonth.getMonth(),
         activities: newActivities,
+        categories: categoryProgresses,
       };
       setAtivityList((prev) => [...prev, monthCollection]);
       setLastLoadedMonth(newMonth);
@@ -66,6 +92,30 @@ export default function Journal(props: JournalProps) {
             <h2 className={styles.title}>
               {Months[collection.month]} {collection.year}
             </h2>
+            <div className={styles.summary}>
+              {collection.categories?.map((category) => (
+                <div
+                  className={classNames(styles.habit, {
+                    [styles['habit--good']]:
+                      (category.progress >= 100 &&
+                        category.goalType === 'MIN') ||
+                      (category.progress <= 100 && category.goalType === 'MAX'),
+                    [styles['habit--bad']]:
+                      category.progress > 100 && category.goalType === 'MAX',
+                  })}
+                  key={category.name}
+                >
+                  <span>
+                    {category.name} -{' '}
+                    {category.goalType === 'MAX' && 'at least'}{' '}
+                    {category.goalType === 'MIN' && 'at most'}{' '}
+                    {getCategoryGoalString(category)}
+                    {' - '}
+                    {category.progress}%{' '}
+                  </span>
+                </div>
+              ))}
+            </div>
             <div className={styles['activity-list']}>
               {collection.activities.map((activity) => (
                 <ActivityItem
