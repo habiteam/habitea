@@ -18,7 +18,12 @@ export default function ActivityItem(props: ActivityItemProps) {
 
   return (
     <div className={classNames(styles.item)}>
-      <div className={classNames(styles.header)}>
+      <div
+        className={classNames(styles.header, {
+          [styles['header--good']]: props.activity.category?.goalType === 'MIN',
+          [styles['header--bad']]: props.activity.category?.goalType === 'MAX',
+        })}
+      >
         {props.activity.category?.icon && (
           <FontAwesomeIcon
             icon={findIconDefinition({

@@ -8,6 +8,12 @@
 }
 .header {
   background-color: var(--c-primary-medium-bg);
+  &--good {
+    background-color: var(--c-good);
+  }
+  &--bad {
+    background-color: var(--c-bad);
+  }
   height: 40px;
   padding: 0 16px;
   position: relative;

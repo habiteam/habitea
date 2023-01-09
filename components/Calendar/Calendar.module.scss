@@ -75,6 +75,12 @@ $calendarMainColor: var(--c-primary-medium-bg);
 .day-activity {
   border-radius: 12px;
   background-color: var(--c-primary-medium-bg);
+  &--good {
+    background-color: var(--c-good);
+  }
+  &--bad {
+    background-color: var(--c-bad);
+  }
   padding: 4px 8px;
   transition: all 300ms;
   cursor: pointer;

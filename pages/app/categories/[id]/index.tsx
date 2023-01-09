@@ -34,7 +34,6 @@ import userAtom from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
-import { getDateStringFromTimestamp } from '@utils/time';
 import styles from './Category.module.scss';
 
 export default function Category() {

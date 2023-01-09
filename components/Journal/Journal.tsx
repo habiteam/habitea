@@ -8,6 +8,8 @@ import { ActivitiesService } from '@services/activities';
 import categoriesAtom from '@atoms/categories';
 import ActivityItem from '@commonComponents/ActivityItem/ActivityItem';
 import { Months } from '@constants/dictionaries';
+import { ActivityCategory } from '@schemas/activity-category';
+import { calculateProgress } from '@utils/habits';
 import styles from './Journal.module.scss';
 
 interface JournalProps {
@@ -18,6 +20,7 @@ interface MonthCollection {
   year: number;
   month: number;
   activities: Activity[];
+  categories?: ActivityCategory[];
 }
 
 export default function Journal(props: JournalProps) {

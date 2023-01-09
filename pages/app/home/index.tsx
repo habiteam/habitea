@@ -15,7 +15,7 @@ import Block from '@commonComponents/Block/Block';
 export default function Home() {
   const user = useAtomValue(userAtom);
   const [activityList, setAtivityList] = useState<Activity[]>([]);
-  const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
+  const [, setActivityCategories] = useAtom(categoriesAtom);
 
   useEffect(() => {
     if (user) {

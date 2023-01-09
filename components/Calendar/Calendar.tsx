@@ -90,7 +90,15 @@ export default function Calendar(props: CalendarProps) {
         <span className={classNames(styles['day-nr'])}>{i}</span>
         {activitiesByDay[i] &&
           activitiesByDay[i].map((activity) => (
-            <div key={activity.id} className={styles['day-activity']}>
+            <div
+              key={activity.id}
+              className={classNames(styles['day-activity'], {
+                [styles['day-activity--good']]:
+                  activity.category?.goalType === 'MIN',
+                [styles['day-activity--bad']]:
+                  activity.category?.goalType === 'MAX',
+              })}
+            >
               {activity.category?.icon && (
                 <FontAwesomeIcon
                   icon={findIconDefinition({
