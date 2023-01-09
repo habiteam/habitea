@@ -10,7 +10,6 @@ import { ActivityCategoriesService } from '@services/activity-categories';
 import Head from 'next/head';
 import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
-import { Activity } from '@schemas/activity';
 import Calendar from '@components/Calendar/Calendar';
 import Block from '@commonComponents/Block/Block';
 import styles from './Dashboard.module.scss';
@@ -31,20 +30,19 @@ export default function Dashboard() {
 
         setActivityCategories(categories);
 
-        // get activities for each category
-        const currentActivities: Activity[] = [];
-        const promises = categories.map(async (category) => {
-          const activities = await ActivitiesService.getByCategoryForPeriod(
-            category,
-            new Date(),
-            user?.uid,
-          );
-          // calculate progress for each category
-          const progress = calculateProgress(activities, category);
-
-          currentActivities.push(...activities);
-          return progress;
-        });
+        // go through categories with MIN goalType and fetch activities
+        const promises = categories
+          .filter((c) => c.goalType === 'MIN')
+          .map(async (category) => {
+            const activities = await ActivitiesService.getByCategoryForPeriod(
+              category,
+              new Date(),
+              user?.uid,
+            );
+            // calculate progress for each category
+            const progress = calculateProgress(activities, category);
+            return progress;
+          });
         // calculate overall progress when all activities are fetched
         const results = await Promise.all(promises);
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
