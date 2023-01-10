@@ -1,0 +1,22 @@
+.heatmap {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 1fr);
+  justify-content: start;
+}
+.item {
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  background-color: var(--c-primaryprimary);
+  border: 1px solid var(--c-primary);
+  &--good {
+    background-color: var(--c-good);
+  }
+  &--bad {
+    background-color: var(--c-bad);
+  }
+  &--empty {
+    background-color: var(--c-primary-light-bg);
+  }
+}

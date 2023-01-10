@@ -34,6 +34,7 @@ import userAtom from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
+import Heatmap from '@commonComponents/Heatmap/Heatmap';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -200,7 +201,10 @@ export default function Category() {
                   'This category doesn’t have a description yet.'}
               </p>
             </div>
-
+            {(category.repeatType === 'MONTHLY' ||
+              category.repeatType === 'WEEKLY') && (
+              <Heatmap date={new Date()} category={category}></Heatmap>
+            )}
             <p>
               {summariseActivities(recentActivities ?? [], category.unitType)}{' '}
               {category.unit} this{' '}
