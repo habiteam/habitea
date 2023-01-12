@@ -1,5 +1,5 @@
 import { getAppLayout } from '@components/AppLayout/AppLayout';
-import ActivityDialog from '@components/ActivityDialog/ActivityDialog';
+import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
 import { Activity } from '@schemas/activity';
 
 import userAtom from '@atoms/user';
