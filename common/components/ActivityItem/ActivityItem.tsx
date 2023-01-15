@@ -26,6 +26,7 @@ export default function ActivityItem(props: ActivityItemProps) {
 
   const deleteActivity = (): void => {
     ActivitiesService.deleteById(props.activity.id as string);
+    router.reload();
     addNotification({ message: 'Activity deleted', type: 'info' });
   };
 

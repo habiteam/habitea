@@ -32,7 +32,7 @@ export default function Journal(props: JournalProps) {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
 
-  const [activityList, setAtivityList] = useState<MonthCollection[]>([
+  const [activityList, setActivityList] = useState<MonthCollection[]>([
     {
       year: new Date().getFullYear(),
       month: new Date().getMonth(),
@@ -79,7 +79,7 @@ export default function Journal(props: JournalProps) {
         activities: newActivities,
         categories: categoryProgresses,
       };
-      setAtivityList((prev) => [...prev, monthCollection]);
+      setActivityList((prev) => [...prev, monthCollection]);
       setLastLoadedMonth(newMonth);
     }
   };
@@ -88,7 +88,6 @@ export default function Journal(props: JournalProps) {
       <div className={styles.journal}>
         {activityList.map((collection, key) => (
           <div key={key}>
-            {' '}
             <h2 className={styles.title}>
               {Months[collection.month]} {collection.year}
             </h2>
@@ -107,11 +106,12 @@ export default function Journal(props: JournalProps) {
                   key={category.name}
                 >
                   <span>
-                    {category.name} - {category.goalType === 'MAX' && 'at most'}{' '}
-                    {category.goalType === 'MIN' && 'at least'}{' '}
+                    {category.name} -
+                    {category.goalType === 'MAX' && ' at most '}
+                    {category.goalType === 'MIN' && ' at least '}
                     {getCategoryGoalString(category)}
                     {' - '}
-                    {category.progress}%{' '}
+                    {category.progress}%
                   </span>
                 </div>
               ))}
