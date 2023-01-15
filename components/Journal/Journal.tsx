@@ -106,9 +106,8 @@ export default function Journal(props: JournalProps) {
                   key={category.name}
                 >
                   <span>
-                    {category.name} -{' '}
-                    {category.goalType === 'MAX' && 'at least'}{' '}
-                    {category.goalType === 'MIN' && 'at most'}{' '}
+                    {category.name} - {category.goalType === 'MAX' && 'at most'}{' '}
+                    {category.goalType === 'MIN' && 'at least'}{' '}
                     {getCategoryGoalString(category)}
                     {' - '}
                     {category.progress}%{' '}
