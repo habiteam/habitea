@@ -3,19 +3,23 @@
   grid-auto-flow: column;
   grid-template-rows: repeat(7, 1fr);
   justify-content: start;
-  gap: 4px;
+  gap: 1px;
+  width: max-content;
+}
+.heatmap-container {
+  overflow-x: auto;
 }
 
 .item-wrapper {
-  border: 2px solid var(--c-primary-dark-bg);
+  border: 1px solid var(--c-primary);
   border-radius: 8px;
   overflow: hidden;
 }
 
 .item {
-  width: 42px;
-  height: 42px;
-  background-color: #ddd;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
 }
 
 .fill {
@@ -46,5 +50,23 @@
 
   .item:hover & {
     visibility: visible;
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.header__controls {
+  display: flex;
+  align-items: center;
+}
+.header__control {
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  &:hover {
+    background-color: var(--c-primary-dark-bg);
   }
 }

@@ -2,6 +2,7 @@ import { DatabaseCollection } from '@constants/collections';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { CategoryProgress } from '@schemas/category-progress';
+import { getFirstDayOfYear, getLastDayOfYear } from '@utils/date';
 import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import { getWheresForPeriod } from '@utils/time';
 import { generateUUID } from '@utils/uuid';
@@ -101,7 +102,7 @@ export class ActivitiesService {
     );
   }
 
-  static async getByCategory(
+  static async getByCategoryId(
     categoryId: string,
     userId: string,
   ): Promise<Activity[]> {
@@ -118,6 +119,31 @@ export class ActivitiesService {
       orderBy('activityDate', 'desc'),
     );
 
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((response) =>
+      Activity.fromFirestore(response),
+    );
+  }
+
+  static async getByCategoryForYear(
+    category: ActivityCategory,
+    from: Date,
+    userId: string,
+  ): Promise<Activity[]> {
+    const activitiesRef = collection(database, this.collectionName);
+    const categoryRef = doc(
+      database,
+      DatabaseCollection.ActivityCategories,
+      category.id,
+    );
+    const q = query(
+      activitiesRef,
+      where('createdBy', '==', userId),
+      where('categoryRef', '==', categoryRef),
+      where('activityDate', '>=', Timestamp.fromDate(getFirstDayOfYear(from))),
+      where('activityDate', '<=', Timestamp.fromDate(getLastDayOfYear(from))),
+      orderBy('activityDate', 'desc'),
+    );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
       Activity.fromFirestore(response),

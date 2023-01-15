@@ -2,7 +2,14 @@ import userAtom from '@atoms/user';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
-import { getLastDayOfMonth } from '@utils/date';
+import {
+  getDateFromDayOfYear,
+  getDayOfYear,
+  getLastDayOfYear,
+  getFirstDayOfYear,
+  getPreviousYear,
+  getNextYear,
+} from '@utils/date';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
@@ -14,21 +21,29 @@ interface HeatmapProps {
 }
 
 export default function Heatmap(props: HeatmapProps) {
-  // TODO add a way to change the time period
-  const [currentDate, setCurrentDate] = useState(props.date);
+  const [currentDate, setCurrentDate] = useState(getFirstDayOfYear(props.date));
   const [activities, setActivities] = useState<Activity[]>([]);
   const user = useAtomValue(userAtom);
+
+  const calculateSaturation = (strength: number, goal: number) =>
+    (strength * 4) / goal;
+
+  const loadPreviousYear = () => {
+    setCurrentDate(getPreviousYear(currentDate));
+  };
+
+  const loadNextYear = () => {
+    setCurrentDate(getNextYear(currentDate));
+  };
 
   useEffect(() => {
     if (user) {
       const fetchData = async () => {
-        // TODO Fetch more than just last period
-        const fetchedActivities =
-          await ActivitiesService.getByCategoryForPeriod(
-            props.category,
-            currentDate,
-            user.uid,
-          );
+        const fetchedActivities = await ActivitiesService.getByCategoryForYear(
+          props.category,
+          currentDate,
+          user.uid,
+        );
         setActivities(fetchedActivities);
       };
       fetchData();
@@ -38,7 +53,7 @@ export default function Heatmap(props: HeatmapProps) {
   // Group activities by day
   const activitiesByDay: Activity[][] = [];
   activities.forEach((activity) => {
-    const day = activity.activityDate.toDate().getDate();
+    const day = getDayOfYear(activity.activityDate.toDate());
     if (!activitiesByDay[day]) {
       activitiesByDay[day] = [];
     }
@@ -53,7 +68,7 @@ export default function Heatmap(props: HeatmapProps) {
   });
 
   const days = [];
-  const lastDayIndex = getLastDayOfMonth(currentDate).getDate();
+  const lastDayIndex = getDayOfYear(getLastDayOfYear(currentDate));
   for (let i = 1; i <= lastDayIndex; i += 1) {
     days.push(
       <div key={i} className={styles['item-wrapper']}>
@@ -65,24 +80,48 @@ export default function Heatmap(props: HeatmapProps) {
                 [styles['fill--bad']]: props.category?.goalType === 'MAX',
               })}
               style={{
-                opacity: activityStrengthsByDay[i] / props.category.goalValue,
-                // TODO more vibrant colors
+                filter: `saturate(${calculateSaturation(
+                  activityStrengthsByDay[i],
+                  props.category.goalValue,
+                )})`,
               }}
             ></div>
             <div className={styles.tooltip}>
-              {i}-{currentDate.getMonth() + 1}-{currentDate.getFullYear()}
+              {getDateFromDayOfYear(
+                currentDate.getFullYear(),
+                i,
+              ).toDateString()}
             </div>
           </div>
         ) : (
           <div className={classNames(styles.item, styles['item--empty'])}>
             <div className={styles.tooltip}>
-              {' '}
-              {i}-{currentDate.getMonth() + 1}-{currentDate.getFullYear()}
+              {getDateFromDayOfYear(
+                currentDate.getFullYear(),
+                i,
+              ).toDateString()}
             </div>
           </div>
         )}
       </div>,
     );
   }
-  return <div className={styles.heatmap}>{days.map((day) => day)}</div>;
+  return (
+    <>
+      <div className={styles.header}>
+        <h2>{currentDate.getFullYear()}</h2>
+        <div className={styles.header__controls}>
+          <button onClick={loadPreviousYear} className={styles.header__control}>
+            &lt;
+          </button>
+          <button onClick={loadNextYear} className={styles.header__control}>
+            &gt;
+          </button>
+        </div>
+      </div>
+      <div className={styles['heatmap-container']}>
+        <div className={styles.heatmap}>{days.map((day) => day)}</div>
+      </div>
+    </>
+  );
 }
