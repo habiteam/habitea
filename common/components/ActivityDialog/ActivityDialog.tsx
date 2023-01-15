@@ -24,7 +24,7 @@ export default function ActivityDialog() {
   const [duration, setDuration] = useState<string>('00:00:00'); // TODO input for duration
   const [date, setDate] = useState<string>('');
   const buttonRef = useRef(null);
-  const addNotifcation = useAddNotification();
+  const addNotification = useAddNotification();
 
   useEffect(() => {
     if (activity) {
@@ -86,8 +86,8 @@ export default function ActivityDialog() {
                   },
                   selectedCategory,
                 );
-                addNotifcation({
-                  message: 'Activity updated',
+                addNotification({
+                  message: activity ? 'Activity updated' : 'Activity created',
                   type: 'success',
                 });
                 setOpenActivityModal(false);

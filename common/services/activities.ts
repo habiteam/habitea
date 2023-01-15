@@ -7,6 +7,7 @@ import { getWheresForPeriod } from '@utils/time';
 import { generateUUID } from '@utils/uuid';
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -88,6 +89,10 @@ export class ActivitiesService {
       createdDate: Timestamp.now(),
       createdBy: auth.currentUser?.uid,
     });
+  }
+
+  static deleteById(id: string): void {
+    deleteDoc(doc(database, this.collectionName, id));
   }
 
   static async getById(id: string): Promise<Activity> {

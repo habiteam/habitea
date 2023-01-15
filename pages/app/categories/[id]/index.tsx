@@ -11,8 +11,8 @@ import { ActivityCategoryRepeatTypePeriods } from '@constants/dictionaries';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowLeftLong,
+  faEdit,
   faEllipsisVertical,
-  faPenToSquare,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -53,7 +53,7 @@ export default function Category() {
 
   const actions: DropdownMenuItem[] = [
     {
-      icon: faPenToSquare,
+      icon: faEdit,
       text: 'Edit',
       onClick: () => setIsUpdateDialogOpen(true),
     },
