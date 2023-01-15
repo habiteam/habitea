@@ -10,14 +10,13 @@
 
 @property --blob-count {
   syntax: '<integer>';
-  initial-value: 30;
+  initial-value: 10;
   inherits: true;
 }
 
 .blobs {
-  background-color: #8c6443;
-  --blob-colors: #f3c889 #c38f59 #d4a065 #d0995f #9f6a3a #b07543 #b38058 #7e4623
-    #af7342 #bb814c #fecc81;
+  background-color: #8c644398;
+  --blob-colors: #c390599f #d4a06598;
   background-image: url('../public/backgrounds/bg-blobs.svg');
   background-size: cover;
   background-position: center;
