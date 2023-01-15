@@ -1,4 +1,4 @@
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { useTransition, animated } from 'react-spring';
@@ -41,7 +41,7 @@ export async function getStaticProps() {
   };
 }
 
-export function RegisterForm({ router }: { router: NextRouter }) {
+export function RegisterForm() {
   const [registerData, setRegisterData] = useState<EmailAuthData>({
     email: '',
     password: '',
@@ -62,7 +62,7 @@ export function RegisterForm({ router }: { router: NextRouter }) {
       registerData.email,
       registerData.password,
     )
-      .then((user) => {
+      .then(() => {
         addNotifcation({ message: 'User registered', type: 'success' });
       })
       .catch((error) => {
@@ -114,7 +114,7 @@ export function RegisterForm({ router }: { router: NextRouter }) {
   );
 }
 
-export function LoginForm({ router }: { router: NextRouter }) {
+export function LoginForm() {
   const [loginData, setLoginData] = useState<EmailAuthData>({
     email: '',
     password: '',
@@ -130,7 +130,7 @@ export function LoginForm({ router }: { router: NextRouter }) {
 
   function loginUser() {
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
-      .then((user) => {})
+      .then(() => {})
       .catch((error: FirebaseError) => {
         addNotifcation({ message: getErrorMessage(error), type: 'danger' });
       });
@@ -211,39 +211,18 @@ export default function Page() {
   function goolgeSignIn() {
     const provider = new GoogleAuthProvider();
 
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential ? credential.accessToken : null;
-        // The signed-in user info.
-        const { user } = result;
-        // ...
-        console.log(result, token ?? 'Could not get token');
-      })
-      .catch((error) => {
-        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
-      });
+    signInWithPopup(auth, provider).catch((error) => {
+      addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+    });
   }
   /**
    * @see https://firebase.google.com/docs/auth/web/github-auth
    */
   function githubSignIn() {
     const provider = new GithubAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        const credential = GithubAuthProvider.credentialFromResult(result);
-        const token = credential ? credential.accessToken : null;
-
-        // The signed-in user info.
-        const { user } = result;
-        // ...
-        console.log(result, token ?? 'Could not get token');
-      })
-      .catch((error) => {
-        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
-      });
+    signInWithPopup(auth, provider).catch((error) => {
+      addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+    });
   }
 
   return (
@@ -283,11 +262,11 @@ export default function Page() {
               {transition((style, item) =>
                 item ? (
                   <animated.form style={style} className={styles.form}>
-                    <RegisterForm router={router} />
+                    <RegisterForm />
                   </animated.form>
                 ) : (
                   <animated.form style={style} className={styles.form}>
-                    <LoginForm router={router} />
+                    <LoginForm />
                   </animated.form>
                 ),
               )}

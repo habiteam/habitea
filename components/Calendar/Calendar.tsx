@@ -109,6 +109,7 @@ export default function Calendar(props: CalendarProps) {
                 ></FontAwesomeIcon>
               )}
               {/* //TODO handle different unit types */}
+              {/* //TODO show details on click */}
               <span className={styles['day-activity__description']}>
                 &nbsp;
                 {activity.category?.name} {activity.value}{' '}

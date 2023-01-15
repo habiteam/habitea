@@ -1,6 +1,4 @@
 import userAtom from '@atoms/user';
-import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
@@ -16,6 +14,7 @@ interface HeatmapProps {
 }
 
 export default function Heatmap(props: HeatmapProps) {
+  // TODO add a way to change the time period
   const [currentDate, setCurrentDate] = useState(props.date);
   const [activities, setActivities] = useState<Activity[]>([]);
   const user = useAtomValue(userAtom);
