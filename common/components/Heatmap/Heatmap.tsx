@@ -55,23 +55,31 @@ export default function Heatmap(props: HeatmapProps) {
   const days = [];
   const lastDayIndex = getLastDayOfMonth(currentDate).getDate();
   for (let i = 1; i <= lastDayIndex; i += 1) {
-    // TODO add tooltips showing dates and maybe activities
     days.push(
       <div key={i} className={styles['item-wrapper']}>
         {activityStrengthsByDay[i] ? (
-          <div
-            key={i}
-            className={classNames(styles.item, {
-              [styles['item--good']]: props.category?.goalType === 'MIN',
-              [styles['item--bad']]: props.category?.goalType === 'MAX',
-            })}
-            style={{
-              opacity: activityStrengthsByDay[i] / props.category.goalValue,
-              // TODO more vibrant colors
-            }}
-          ></div>
+          <div key={i} className={classNames(styles.item)}>
+            <div
+              className={classNames(styles.fill, {
+                [styles['fill--good']]: props.category?.goalType === 'MIN',
+                [styles['fill--bad']]: props.category?.goalType === 'MAX',
+              })}
+              style={{
+                opacity: activityStrengthsByDay[i] / props.category.goalValue,
+                // TODO more vibrant colors
+              }}
+            ></div>
+            <div className={styles.tooltip}>
+              {i}-{currentDate.getMonth() + 1}-{currentDate.getFullYear()}
+            </div>
+          </div>
         ) : (
-          <div className={classNames(styles.item, styles['item--empty'])}></div>
+          <div className={classNames(styles.item, styles['item--empty'])}>
+            <div className={styles.tooltip}>
+              {' '}
+              {i}-{currentDate.getMonth() + 1}-{currentDate.getFullYear()}
+            </div>
+          </div>
         )}
       </div>,
     );

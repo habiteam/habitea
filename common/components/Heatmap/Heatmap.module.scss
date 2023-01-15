@@ -15,7 +15,12 @@
 .item {
   width: 42px;
   height: 42px;
-  background-color: var(--c-primary);
+  background-color: #ddd;
+}
+
+.fill {
+  width: 100%;
+  height: 100%;
   &--good {
     background-color: var(--c-good);
   }
@@ -24,5 +29,22 @@
   }
   &--empty {
     background-color: #ddd;
+  }
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+
+  .item:hover & {
+    visibility: visible;
   }
 }

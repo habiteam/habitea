@@ -201,10 +201,7 @@ export default function Category() {
                   'This category doesn’t have a description yet.'}
               </p>
             </div>
-            {(category.repeatType === 'MONTHLY' ||
-              category.repeatType === 'WEEKLY') && (
-              <Heatmap date={new Date()} category={category}></Heatmap>
-            )}
+            {<Heatmap date={new Date()} category={category}></Heatmap>}
             <p>
               {summariseActivities(recentActivities ?? [], category.unitType)}{' '}
               {category.unit} this{' '}
