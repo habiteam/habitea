@@ -3,6 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import Router from 'next/router';
 import heroBgImg from '@public/backgrounds/bg-blobs.svg';
+import deskBg from '@public/backgrounds/bg-main.jpg';
 import teaImg from '@public/tea.webp';
 import banner1 from '@public/main/banner1.png';
 import banner2 from '@public/main/banner2.png';
@@ -10,9 +11,14 @@ import banner3 from '@public/main/banner3.png';
 import { auth } from '@services/firebase';
 import Banner, { BannerItem } from '@commonComponents/Banner/Banner';
 import Script from 'next/script';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import styles from './Home.module.scss';
 
 export default function Home() {
+  // TODO content
   const bannerItems: BannerItem[] = [
     {
       image: banner1,
@@ -68,8 +74,18 @@ export default function Home() {
           <h2 className={classNames(styles.subtitle)}>
             Activity and habit tracker
           </h2>
-
-          <Banner items={bannerItems}></Banner>
+          <p>
+            Habitea is <strong>simple and easy-to-use</strong> habit tracker
+            that will help you take control of your life and make positive
+            changes that last.
+          </p>
+          <p>
+            <strong>Tracking your habits</strong> can help you identify
+            patterns, make changes, stay motivated, and build new habits. By
+            tracking your habits, you can{' '}
+            <strong>stay accountable and motivated</strong> as you work towards
+            your goals.
+          </p>
 
           <button
             onClick={() => {
@@ -80,14 +96,77 @@ export default function Home() {
           >
             <strong>Get started</strong>
           </button>
-        </div>
 
+          <p>
+            This application is free and open source under the{' '}
+            <a
+              href="https://www.gnu.org/licenses/agpl-3.0-standalone.html"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.link}
+            >
+              GNU Affero General Public License
+            </a>
+            .
+          </p>
+          <p>Have suggestions, ideas or want to contribute?</p>
+          <div
+            style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}
+          >
+            <a
+              className={styles['gh-cta']}
+              href={'https://github.com/habiteam/habitea'}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon icon={faGithub as IconProp}></FontAwesomeIcon>
+              &nbsp;Contribute
+            </a>
+            <a
+              className={styles['gh-cta']}
+              href={'https://github.com/habiteam/habitea/issues'}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon icon={faLightbulb as IconProp}></FontAwesomeIcon>
+              &nbsp;Report an issue
+            </a>
+          </div>
+        </div>
         <Image
           className={styles['image-tea']}
           src={teaImg}
           alt={'background image'}
           placeholder="blur"
         ></Image>
+        <div
+          onClick={() => document.getElementById('section-1')?.scrollIntoView()}
+          className={classNames(styles['scroll-down-prompt'])}
+        >
+          <p>Scroll down to learn more</p>
+        </div>
+      </div>
+      <div className={classNames(styles.container)} id="section-1">
+        <Image
+          className={styles['background-image']}
+          src={deskBg}
+          alt={'background image'}
+          fill
+        ></Image>
+        <div className={classNames(styles['banner-container'])}>
+          <div className={styles.grid}>
+            <Banner items={bannerItems}></Banner>
+          </div>
+          <button
+            onClick={() => {
+              Router.push(auth.currentUser ? '/app' : '/register');
+            }}
+            className={classNames(styles['main-action'])}
+            color="default"
+          >
+            <strong>Go to app</strong>
+          </button>
+        </div>
       </div>
     </>
   );
