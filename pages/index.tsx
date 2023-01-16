@@ -18,25 +18,42 @@ import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import styles from './Home.module.scss';
 
 export default function Home() {
-  // TODO content
   const bannerItems: BannerItem[] = [
     {
       image: banner1,
-      title: 'Habitea',
-      content:
-        'is simple and easy-to-use habit tracker that will help you take control of your life and make positive changes that last',
+      title: 'Track your habits',
+      content: (
+        <>
+          <p>
+            Add habits you want to track and set a goal for each one. You can
+            track your progress and see how you are doing over time.
+          </p>
+        </>
+      ),
     },
     {
       image: banner2,
-      title: 'Tracking your habits',
-      content:
-        'can help you identify patterns, make changes, stay motivated, and build new habits. By tracking your habits, you can stay accountable and motivated as you work towards your goals',
+      title: 'Monitor your progress',
+      content: (
+        <>
+          <p>
+            See how you are doing over time. Monitoring your progress will help
+            you stay accountable and motivated.
+          </p>
+        </>
+      ),
     },
     {
       image: banner3,
-      title: ' Application is free',
-      content:
-        'and open source. Have suggestions, ideas or want to contribute? Visit our GitHub repository.',
+      title: 'Grow',
+      content: (
+        <>
+          <p>
+            You become what you repeat. Improve your life by building new habits
+            and making positive changes that last.
+          </p>
+        </>
+      ),
     },
   ];
 

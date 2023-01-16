@@ -49,6 +49,7 @@ export default function Home() {
       </Head>
       <h2>Welcome {user?.displayName ?? user?.email}</h2>
       <Block style={{ marginBottom: '16px' }}>
+        <h1>Journal</h1>
         {activityList.length > 0 && (
           <Journal activities={activityList}></Journal>
         )}

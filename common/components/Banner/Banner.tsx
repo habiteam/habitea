@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import styles from './Banner.module.scss';
 
 export interface BannerItem {
   image: StaticImageData;
   title: string;
-  content: string;
+  content: ReactNode;
 }
 
 export interface BannerPropSchema {
