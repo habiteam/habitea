@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import TopBar from '@components/TopBar/TopBar';
 import styles from './Home.module.scss';
 
 export default function Home() {
@@ -76,6 +77,21 @@ export default function Home() {
           })()
         `}
       </Script>
+
+      <TopBar>
+        <span>
+          This app is still in developement. If you have suggestions or
+          encounter problems, let us know over at{' '}
+          <a
+            style={{ color: 'white', textDecoration: 'underline' }}
+            href="https://github.com/habiteam/habitea/issues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+        </span>
+      </TopBar>
 
       <div className={classNames(styles.container, styles.blobs)}>
         <Image

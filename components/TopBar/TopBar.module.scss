@@ -1,0 +1,19 @@
+.top-bar {
+  position: fixed;
+  background-color: #d94113;
+  color: white;
+  font-weight: 600;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  z-index: 1;
+  transition: all 400ms;
+  &--hidden {
+    transform: translateY(-100%);
+  }
+}
