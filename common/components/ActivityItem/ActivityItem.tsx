@@ -1,7 +1,6 @@
 import { openActivityModalAtom, activityAtom } from '@atoms/activity-dialog';
 import Button from '@commonComponents/Button/Button';
 import Dialog from '@commonComponents/Dialog/Dialog';
-import { useRouter } from 'next/router';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,11 +21,9 @@ export default function ActivityItem(props: ActivityItemProps) {
   const setActivity = useSetAtom(activityAtom);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const addNotification = useAddNotification();
-  const router = useRouter();
 
   const deleteActivity = (): void => {
     ActivitiesService.deleteById(props.activity.id as string);
-    router.reload();
     addNotification({ message: 'Activity deleted', type: 'info' });
   };
 

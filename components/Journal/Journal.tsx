@@ -49,40 +49,48 @@ export default function Journal(props: JournalProps) {
     },
   ]);
   const [lastLoadedMonth, setLastLoadedMonth] = useState(new Date());
-  const loadMoreActivities = async () => {
+
+  function mapToMonthCollection(
+    activities: Activity[],
+    month: Date,
+  ): MonthCollection {
+    const activitiesWithCategory = activities.map((activity) => ({
+      ...activity,
+      category: activityCategories.find(
+        (c) => c.id === activity.categoryRef.id,
+      ),
+    }));
+
+    const categoryProgresses = activityCategories.map((category) => ({
+      ...category,
+      progress: calculateProgress(
+        activitiesWithCategory.filter((a) => a.categoryRef.id === category.id),
+        category,
+      ),
+    }));
+
+    return {
+      year: month.getFullYear(),
+      month: month.getMonth(),
+      activities: activitiesWithCategory,
+      categories: categoryProgresses,
+    };
+  }
+
+  async function loadMoreActivities() {
     if (user) {
       const newMonth = getPreviousMonth(lastLoadedMonth);
-      let newActivities = await ActivitiesService.getForMonth(
+
+      const monthCollection = mapToMonthCollection(
+        await ActivitiesService.getForMonth(newMonth, user?.uid),
         newMonth,
-        user?.uid,
       );
-      newActivities = newActivities.map((activity) => ({
-        ...activity,
-        category: activityCategories.find(
-          (c) => c.id === activity.categoryRef.id,
-        ),
-      }));
 
-      const categoryProgresses = activityCategories.map((category) => {
-        const activities = newActivities.filter(
-          (a) => a.categoryRef.id === category.id,
-        );
-        return {
-          ...category,
-          progress: calculateProgress(activities, category),
-        };
-      });
-
-      const monthCollection = {
-        year: newMonth.getFullYear(),
-        month: newMonth.getMonth(),
-        activities: newActivities,
-        categories: categoryProgresses,
-      };
       setActivityList((prev) => [...prev, monthCollection]);
       setLastLoadedMonth(newMonth);
     }
-  };
+  }
+
   return (
     <div>
       <div className={styles.journal}>
@@ -91,7 +99,9 @@ export default function Journal(props: JournalProps) {
             <h2 className={styles.title}>
               {Months[collection.month]} {collection.year}
             </h2>
+
             <h3>Habit goals</h3>
+
             <div className={styles.summary}>
               {collection.categories?.map((category) => (
                 <div
@@ -116,7 +126,9 @@ export default function Journal(props: JournalProps) {
                 </div>
               ))}
             </div>
+
             <h3>Activities</h3>
+
             <div className={styles['activity-list']}>
               {collection.activities.map((activity) => (
                 <ActivityItem
@@ -128,7 +140,8 @@ export default function Journal(props: JournalProps) {
           </div>
         ))}
       </div>
-      <Button onClick={loadMoreActivities} fillType={'regular'}>
+
+      <Button onClick={() => loadMoreActivities()} fillType={'regular'}>
         Load more activities
       </Button>
     </div>
