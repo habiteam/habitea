@@ -3,6 +3,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DialogPropsSchema } from '@schemas/dialog-props';
 import classNames from 'classnames';
+import { useEffect } from 'react';
 import { easings, useTransition, animated } from 'react-spring';
 import styles from './FullscreenDialog.module.scss';
 
@@ -47,6 +48,19 @@ export default function FullscreenDialog({
 
     config: { duration: 400, easing: easings.easeInCubic },
   });
+
+  useEffect(() => {
+    function handleEscapePress(event: KeyboardEvent) {
+      if (event.code === 'Escape' && handleClose) {
+        handleClose();
+      }
+    }
+    document.addEventListener('keyup', handleEscapePress);
+
+    return () => {
+      document.removeEventListener('keyup', handleEscapePress);
+    };
+  }, []);
 
   return (
     <>

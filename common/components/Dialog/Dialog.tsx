@@ -2,6 +2,7 @@ import { animated, easings, useTransition } from 'react-spring';
 import Overlay from '@commonComponents/Overlay/Overlay';
 import Button from '@commonComponents/Button/Button';
 import { DialogPropsSchema } from '@schemas/dialog-props';
+import { useEffect } from 'react';
 import styles from './Dialog.module.scss';
 
 export default function Dialog({
@@ -17,6 +18,19 @@ export default function Dialog({
     leave: { opacity: 0, transform: 'scaleY(0) translateY(-200px)' },
     config: { duration: 250, easing: easings.easeInCubic },
   });
+
+  useEffect(() => {
+    function handleEscapePress(event: KeyboardEvent) {
+      if (event.code === 'Escape' && handleClose) {
+        handleClose();
+      }
+    }
+    document.addEventListener('keyup', handleEscapePress);
+
+    return () => {
+      document.removeEventListener('keyup', handleEscapePress);
+    };
+  }, []);
 
   return (
     <>

@@ -73,7 +73,7 @@ export default function ActivityDialog() {
           },
           {
             text: activity ? 'Update' : 'Create',
-            fillType: 'regular',
+            fillType: 'filled',
             color: 'primary',
             onClick: () => {
               const activityDate = date
