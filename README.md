@@ -14,13 +14,13 @@ Deploy status:
 
 ## Development
 
-`npm install` - install dependencies
-`npm run dev` - run development server
-`npm run build` - build production version
-`npm run start` - run production server
-`npm run lint` - run linter
-`npm run lint:fix` - run linter and fix errors
-`npm run clear` - clear build cache
+`npm install` - install dependencies  
+`npm run dev` - run development server  
+`npm run build` - build production version  
+`npm run start` - run production server  
+`npm run lint` - run linter  
+`npm run lint:fix` - run linter and fix errors  
+`npm run clear` - clear build cache  
 
 ## Contributing
 
