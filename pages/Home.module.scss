@@ -69,6 +69,12 @@
   max-width: 560px;
   border-radius: 24px;
   padding: 32px;
+  @media (max-width: $breakpoint-lg) {
+    padding: 16px;
+  }
+  @media (max-width: $breakpoint-md) {
+    margin-block: 96px;
+  }
   filter: drop-shadow(0px 24px 10px #0000009f);
 
   .title {
