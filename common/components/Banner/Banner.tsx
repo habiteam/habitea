@@ -11,6 +11,7 @@ export interface BannerItem {
 
 export interface BannerPropSchema {
   items: BannerItem[];
+  imageHeight?: string;
 }
 
 export default function Banner(props: BannerPropSchema) {
@@ -42,11 +43,14 @@ export default function Banner(props: BannerPropSchema) {
   }, []);
 
   return (
-    <>
+    <div className={classNames(styles.wrapper)}>
       <div className={classNames(styles.container)}>
         {props.items.map((item, index) => (
           <Image
-            style={{ maxWidth: getWidthOfImage(index) }}
+            style={{
+              maxWidth: getWidthOfImage(index),
+              height: props.imageHeight ?? '320px',
+            }}
             key={index}
             className={classNames(styles.image)}
             src={item.image}
@@ -68,6 +72,6 @@ export default function Banner(props: BannerPropSchema) {
             </div>
           ),
       )}
-    </>
+    </div>
   );
 }

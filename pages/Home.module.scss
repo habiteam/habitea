@@ -16,7 +16,7 @@
 
 .blobs {
   background-color: #8c644398;
-  --blob-colors: #c390599f #d4a06598;
+  --blob-colors: #db9d5b9f #e6b98698;
   background-image: url('../public/backgrounds/bg-blobs.svg');
   background-size: cover;
   background-position: center;
@@ -102,8 +102,6 @@
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-gap: 24px;
   @media (max-width: $breakpoint-lg) {
     grid-template-columns: 1fr;
@@ -113,7 +111,7 @@
 .banner-container {
   background-color: white;
   border-radius: 24px;
-  max-width: 1600px;
+  max-width: 620px;
   padding: 32px;
   @media (max-width: $breakpoint-lg) {
     padding: 16px;
@@ -137,9 +135,10 @@
     color: #fffaee;
   }
 }
+
 .scroll-down-prompt {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -149,12 +148,23 @@
   text-align: center;
   color: #fff;
   font-size: 1.6rem;
-  padding: 8px;
-  background-color: #8d4d3932;
+  padding: 16px;
+  background-color: #8d4d3973;
   border-radius: 24px;
   transition: all 400ms;
+  animation: MoveUpDown 2.5s linear infinite;
   cursor: pointer;
   &:hover {
-    background-color: #995f3f9c;
+    background-color: #995f3fe0;
+  }
+}
+
+@keyframes MoveUpDown {
+  0%,
+  100% {
+    bottom: 10px;
+  }
+  50% {
+    bottom: 18px;
   }
 }

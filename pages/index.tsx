@@ -142,7 +142,9 @@ export default function Home() {
             </a>
             .
           </p>
+
           <p>Have suggestions, ideas or want to contribute?</p>
+
           <div
             style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}
           >
@@ -166,19 +168,22 @@ export default function Home() {
             </a>
           </div>
         </div>
+
         <Image
           className={styles['image-tea']}
           src={teaImg}
           alt={'background image'}
           placeholder="blur"
         ></Image>
+
         <div
           onClick={() => document.getElementById('section-1')?.scrollIntoView()}
           className={classNames(styles['scroll-down-prompt'])}
         >
-          <p>Scroll down to learn more</p>
+          <span>Scroll down to learn more</span>
         </div>
       </div>
+
       <div className={classNames(styles.container)} id="section-1">
         <Image
           className={styles['background-image']}
@@ -186,10 +191,12 @@ export default function Home() {
           alt={'background image'}
           fill
         ></Image>
+
         <div className={classNames(styles['banner-container'])}>
           <div className={styles.grid}>
-            <Banner items={bannerItems}></Banner>
+            <Banner items={bannerItems} imageHeight="420px"></Banner>
           </div>
+
           <button
             onClick={() => {
               Router.push(auth.currentUser ? '/app' : '/register');
