@@ -1,19 +1,57 @@
 @import '../../../styles/breakpoints.module.scss';
 
-.summary {
+.container {
+  --summary-width: 256px;
+
   display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.user-info {
-  margin-left: 16px;
-  span {
-    display: block;
+  flex-direction: column;
+  gap: 24px;
+
+  .summary {
+    width: var(--summary-width);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .avatar {
+      border-radius: 50%;
+      width: 96px;
+      height: auto;
+    }
+
+    .user-info {
+      margin-left: 16px;
+
+      .chips {
+        margin: 8px 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto minmax(0, calc(100% - var(--summary-width)));
+
+    .summary {
+      flex-direction: column;
+      align-items: center;
+
+      .avatar {
+        border-radius: 50%;
+        width: 200px;
+      }
+
+      .user-info {
+        margin-top: 16px;
+      }
+    }
   }
 }
-.avatar {
-  border-radius: 50%;
-}
+
 .tab {
   padding: 16px;
   background-color: white;

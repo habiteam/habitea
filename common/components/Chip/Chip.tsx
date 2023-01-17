@@ -5,8 +5,8 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Color } from '@constants/palette';
 import styles from './Chip.module.scss';
 
-export interface ChipPropSchema {
-  text: string;
+export interface ChipPropSchema extends React.HTMLAttributes<HTMLSpanElement> {
+  text?: string;
   fillType?: 'filled' | 'outlined';
   color?: Color;
   icon?: IconDefinition;
@@ -18,6 +18,7 @@ export default function Chip(props: ChipPropSchema) {
     <span
       onClick={props.onClick}
       className={classNames(
+        props.className,
         styles.chip,
         styles[`chip--${props.color ?? 'default'}`],
         styles[`chip--${props.fillType ?? 'outlined'}`],
@@ -30,7 +31,7 @@ export default function Chip(props: ChipPropSchema) {
           className={styles['chip-icon']}
         ></FontAwesomeIcon>
       )}
-      <span>{props.text}</span>
+      <span>{props.text ?? props.children}</span>
     </span>
   );
 }

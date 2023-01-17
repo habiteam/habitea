@@ -12,13 +12,14 @@ import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
 import Calendar from '@components/Calendar/Calendar';
 import Block from '@commonComponents/Block/Block';
+import Chip from '@commonComponents/Chip/Chip';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Calendar');
   const user = useAtomValue(userAtom);
   const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
-  const [habitProgress, setHabitProgress] = useState(0);
+  const [habitProgress, setHabitProgress] = useState<number | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -73,35 +74,51 @@ export default function Dashboard() {
       <Head>
         <title>Dashboard - Habitea</title>
       </Head>
-      <Block className={classnames(styles.summary)}>
+
+      <div className={classnames(styles.summary)}>
         <Image
           src={user?.photoURL ?? '/cat.jpg'}
           alt="Card header image"
-          width={96}
-          height={96}
+          width={200}
+          height={200}
           className={classnames(styles.avatar)}
         ></Image>
+
         <div className={classnames(styles['user-info'])}>
           <h2>{user?.displayName ?? user?.email}</h2>
-          <span>Tracking {activityCategories.length} habits</span>
-          <span>Current habit progress: {habitProgress.toFixed(0)}%</span>
+
+          <div className={classnames(styles.chips)}>
+            <Chip color="info" fillType="filled">
+              Tracking <strong>{activityCategories.length}</strong> habits
+            </Chip>
+
+            {habitProgress && (
+              <Chip
+                color={habitProgress > 50 ? 'success' : 'danger'}
+                fillType="filled"
+              >
+                Current habit progress:{' '}
+                <strong>{habitProgress.toFixed(0)}</strong>%
+              </Chip>
+            )}
+          </div>
         </div>
-      </Block>
-      <p>Here you can see your progress and manage your goals.</p>
-      <p>Click on the tabs to see more.</p>
-      <br />
-      <br />
-      <Tabs
-        tabs={[
-          { key: 'Calendar', title: 'Calendar' },
-          { key: 'Categories', title: 'Categories' },
-        ]}
-        activeTab={currentTab}
-        setActiveTab={(key: string): void => {
-          setCurrentTab(key);
-        }}
-      ></Tabs>
-      {tabContent(currentTab)}
+      </div>
+
+      <div>
+        <Tabs
+          tabs={[
+            { key: 'Calendar', title: 'Calendar' },
+            { key: 'Categories', title: 'Categories' },
+          ]}
+          activeTab={currentTab}
+          setActiveTab={(key: string): void => {
+            setCurrentTab(key);
+          }}
+        ></Tabs>
+
+        {tabContent(currentTab)}
+      </div>
     </div>
   );
 }
