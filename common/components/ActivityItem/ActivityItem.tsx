@@ -1,4 +1,5 @@
 import { openActivityModalAtom, activityAtom } from '@atoms/activity-dialog';
+import { journalReloader } from '@atoms/reloaders';
 import Button from '@commonComponents/Button/Button';
 import Dialog from '@commonComponents/Dialog/Dialog';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -21,10 +22,13 @@ export default function ActivityItem(props: ActivityItemProps) {
   const setActivity = useSetAtom(activityAtom);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const addNotification = useAddNotification();
+  const setReloader = useSetAtom(journalReloader);
 
   const deleteActivity = (): void => {
     ActivitiesService.deleteById(props.activity.id as string);
     addNotification({ message: 'Activity deleted', type: 'info' });
+    setReloader(props.activity.activityDate.toDate());
+    setDeleteDialogOpen(false);
   };
 
   return (

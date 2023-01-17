@@ -1,4 +1,5 @@
 import { activityAtom, openActivityModalAtom } from '@atoms/activity-dialog';
+import { journalReloader } from '@atoms/reloaders';
 import Button from '@commonComponents/Button/Button';
 import DateInput from '@commonComponents/DateInput/DateInput';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
@@ -9,7 +10,7 @@ import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
 import { useAddNotification } from '@utils/notifications';
 import { Timestamp } from 'firebase/firestore';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 
 export default function ActivityDialog() {
@@ -25,6 +26,7 @@ export default function ActivityDialog() {
   const [date, setDate] = useState<string>('');
   const buttonRef = useRef(null);
   const addNotification = useAddNotification();
+  const setReloader = useSetAtom(journalReloader);
 
   useEffect(() => {
     if (activity) {
@@ -74,15 +76,17 @@ export default function ActivityDialog() {
             fillType: 'regular',
             color: 'primary',
             onClick: () => {
+              const activityDate = date
+                ? Timestamp.fromDate(new Date(date))
+                : Timestamp.now();
+
               if (selectedCategory) {
                 ActivitiesService.update(
                   {
                     id: activity?.id,
                     value,
                     duration,
-                    activityDate: date
-                      ? Timestamp.fromDate(new Date(date))
-                      : Timestamp.now(),
+                    activityDate,
                   },
                   selectedCategory,
                 );
@@ -90,6 +94,7 @@ export default function ActivityDialog() {
                   message: activity ? 'Activity updated' : 'Activity created',
                   type: 'success',
                 });
+                setReloader(activityDate.toDate());
                 setOpenActivityModal(false);
               }
             },

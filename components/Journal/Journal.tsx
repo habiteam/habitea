@@ -1,7 +1,7 @@
 import Button from '@commonComponents/Button/Button';
 import { Activity } from '@schemas/activity';
 import { useAtomValue } from 'jotai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import userAtom from '@atoms/user';
 import { getPreviousMonth } from '@utils/date';
 import { ActivitiesService } from '@services/activities';
@@ -11,6 +11,7 @@ import { Months } from '@constants/dictionaries';
 import { ActivityCategory } from '@schemas/activity-category';
 import { calculateProgress, getCategoryGoalString } from '@utils/habits';
 import classNames from 'classnames';
+import { journalReloader } from '@atoms/reloaders';
 import styles from './Journal.module.scss';
 
 interface JournalProps {
@@ -31,6 +32,7 @@ interface MonthCollection {
 export default function Journal(props: JournalProps) {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
+  const reloader = useAtomValue(journalReloader);
 
   const [activityList, setActivityList] = useState<MonthCollection[]>([
     {
@@ -90,6 +92,32 @@ export default function Journal(props: JournalProps) {
       setLastLoadedMonth(newMonth);
     }
   }
+
+  useEffect(() => {
+    if (reloader && user) {
+      const fetchData = async () =>
+        mapToMonthCollection(
+          await ActivitiesService.getForMonth(reloader, user?.uid),
+          reloader,
+        );
+
+      fetchData().then((response) => {
+        setActivityList((prev) => {
+          const index = prev.findIndex(
+            (el) => el.year === response.year && el.month === response.month,
+          );
+
+          const temp = [...prev];
+
+          if (index !== -1) {
+            temp[index].activities = response.activities;
+          }
+
+          return temp;
+        });
+      });
+    }
+  }, [reloader]);
 
   return (
     <div>
