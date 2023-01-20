@@ -27,7 +27,7 @@ Deploy status:
 `common/services/firebase.ts` contains firebase configuration.  
 Firebase API key **do not** need to obscured, database is secured by [Firebase Security Rules](https://firebase.google.com/docs/rules). Learn more [here](https://firebase.google.com/docs/projects/api-keys)
 
-If you wan't to change the database the app is using in your environment, [set up your firebase project](https://firebase.google.com/docs/web/setup) and replace the credentials in `common/service/firebase.ts`. Don't forget to set up rules and indexes for your database. Below is the configuration of cloud firestore rules the app should have in order to work properly.
+If you want to change the database the app is using in your environment, [set up your firebase project](https://firebase.google.com/docs/web/setup) and replace the credentials in `common/service/firebase.ts`. Don't forget to set up rules and indexes for your database. Below is the configuration of cloud firestore rules the app should have in order to work properly.
 
 ### Cloud firestore rules
 ```
