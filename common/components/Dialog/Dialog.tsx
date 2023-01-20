@@ -1,4 +1,4 @@
-import { animated, easings, useTransition } from 'react-spring';
+import { animated, easings, useTransition } from '@react-spring/web';
 import Overlay from '@commonComponents/Overlay/Overlay';
 import Button from '@commonComponents/Button/Button';
 import { DialogPropsSchema } from '@schemas/dialog-props';

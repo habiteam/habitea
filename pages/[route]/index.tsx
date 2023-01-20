@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated } from '@react-spring/web';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,

@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { useTransition, animated, config } from 'react-spring';
+import { useTransition, animated, config } from '@react-spring/web';
 import notifications from '@atoms/notifications';
 import styles from './NotificationProvider.module.scss';
 import { Notification } from './Notification';

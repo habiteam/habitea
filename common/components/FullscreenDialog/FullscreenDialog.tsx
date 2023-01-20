@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DialogPropsSchema } from '@schemas/dialog-props';
 import classNames from 'classnames';
 import { useEffect } from 'react';
-import { easings, useTransition, animated } from 'react-spring';
+import { easings, useTransition, animated } from '@react-spring/web';
 import styles from './FullscreenDialog.module.scss';
 
 export default function FullscreenDialog({

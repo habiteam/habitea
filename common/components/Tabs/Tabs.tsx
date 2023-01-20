@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect } from 'react';
-import { animated, config, useSpring } from 'react-spring';
+import { animated, config, useSpring } from '@react-spring/web';
 import styles from './Tabs.module.scss';
 
 export interface TabSchema {

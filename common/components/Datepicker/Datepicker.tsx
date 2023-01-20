@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
-import { useTransition, animated, easings } from 'react-spring';
+import { useTransition, animated, easings } from '@react-spring/web';
 import styles from './Datepicker.module.scss';
 import { DatepickerCalendar } from './DatepickerCalendar/DatepickerCalendar';
 import { getDateObject, getMonthName, months, years } from './Datepicker.utils';
