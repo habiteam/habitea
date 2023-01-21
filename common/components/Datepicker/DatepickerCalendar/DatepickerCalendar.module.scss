@@ -25,17 +25,18 @@
 
   &--clickable {
     &:hover {
-      background-color: var(--c-primary-medium-bg);
+      background-color: var(--c-primary-container);
       cursor: pointer;
     }
   }
 
   &--selected {
-    background-color: var(--c-primary-active);
+    color: var(--c-secondary-text);
+    background-color: var(--c-secondary);
     border-radius: 8px;
 
     &:hover {
-      color: var(--c-text-dark);
+      color: var(--c-primary-text);
       background-color: var(--c-primary);
     }
   }

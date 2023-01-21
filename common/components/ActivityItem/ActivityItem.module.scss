@@ -1,27 +1,28 @@
 .item {
   border-radius: 12px;
-  background-color: var(--c-primary-light-bg);
+  background-color: var(--c-bg);
   overflow: hidden;
   position: relative;
   min-width: 300px;
-  border: 1px solid var(--c-primary-medium-bg);
 }
 .header {
-  background-color: var(--c-primary-medium-bg);
-  &--good {
-    background-color: var(--c-good);
-  }
-  &--bad {
-    background-color: var(--c-bad);
-  }
+  background-color: var(--c-primary-container);
   height: 40px;
-  padding: 0 16px;
+  padding: 8px 16px;
   position: relative;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   font-size: 1.8rem;
+
+  &--good {
+    background-color: var(--c-good);
+  }
+
+  &--bad {
+    background-color: var(--c-bad);
+  }
 }
 .spacer {
   flex: 1;

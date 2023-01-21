@@ -1,0 +1,200 @@
+body {
+  --c-primary: #984700;
+  --c-primary-text: #ffffff;
+  --c-primary-container: #ffdbc8;
+  --c-primary-container-text: #321300;
+
+  --c-secondary: #755847;
+  --c-secondary-text: #ffffff;
+  --c-secondary-container: #ffdbc8;
+  --c-secondary-container-text: #2b1709;
+
+  --c-tertiary: #616133;
+  --c-tertiary-text: #ffffff;
+  --c-tertiary-container: #e8e5ac;
+  --c-tertiary-container-text: #1d1d00;
+
+  --c-bg: #faf1f2;
+  --c-text: #201a17;
+  --c-outline: #85746b;
+  --c-unfocused: #52443c;
+
+  --c-good: #d6eeca;
+  --c-bad: #e79b9b;
+
+  &.coffee {
+    --c-primary: #9a4525;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #ffdbcf;
+    --c-primary-container-text: #390c00;
+
+    --c-secondary: #77574c;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #ffdbcf;
+    --c-secondary-container-text: #2c160e;
+
+    --c-tertiary: #6a5e2f;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #f3e2a7;
+    --c-tertiary-container-text: #221b00;
+
+    --c-bg: #faf1f4;
+    --c-text: #201a18;
+    --c-outline: #85736d;
+    --c-unfocused: #53433e;
+  }
+
+  &.milky {
+    --c-primary: #7e5700;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #ffdeac;
+    --c-primary-container-text: #281900;
+
+    --c-secondary: #6e5c40;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #f8dfbb;
+    --c-secondary-container-text: #261904;
+
+    --c-tertiary: #4e6542;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #d0eabf;
+    --c-tertiary-container-text: #0d2005;
+
+    --c-bg: #f8f2f2;
+    --c-text: #1f1b16;
+    --c-outline: #807567;
+    --c-unfocused: #4e4539;
+  }
+
+  &.kale {
+    --c-primary: #48680e;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #c8f088;
+    --c-primary-container-text: #121f00;
+
+    --c-secondary: #596248;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #dde6c6;
+    --c-secondary-container-text: #161e0a;
+
+    --c-tertiary: #396661;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #bcece6;
+    --c-tertiary-container-text: #00201d;
+
+    --c-bg: #f5f3f2;
+    --c-text: #1b1c18;
+    --c-outline: #75786c;
+    --c-unfocused: #45483d;
+  }
+
+  &.mint {
+    --c-primary: #006876;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #9fefff;
+    --c-primary-container-text: #001f24;
+
+    --c-secondary: #4a6267;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #cde7ed;
+    --c-secondary-container-text: #051f23;
+
+    --c-tertiary: #535d7e;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #dbe1ff;
+    --c-tertiary-container-text: #101a37;
+
+    --c-bg: #f2f3f8;
+    --c-text: #191c1d;
+    --c-outline: #6f797b;
+    --c-unfocused: #3f484a;
+  }
+
+  &.raspberry {
+    --c-primary: #006590;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #c8e6ff;
+    --c-primary-container-text: #001e2e;
+
+    --c-secondary: #4f606e;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #d2e5f5;
+    --c-secondary-container-text: #0b1d29;
+
+    --c-tertiary: #63597c;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #e9ddff;
+    --c-tertiary-container-text: #1f1635;
+
+    --c-bg: #f2f3f9;
+    --c-text: #1d1b1e;
+    --c-outline: #71787e;
+    --c-unfocused: #41484d;
+  }
+
+  &.blackberry {
+    --c-primary: #7e3db9;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #f1dbff;
+    --c-primary-container-text: #2d0050;
+
+    --c-secondary: #665a6f;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #edddf6;
+    --c-secondary-container-text: #211829;
+
+    --c-tertiary: #805157;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #ffd9dc;
+    --c-tertiary-container-text: #321016;
+
+    --c-bg: #f8f1fc;
+    --c-text: #1d1b1e;
+    --c-outline: #7c757e;
+    --c-unfocused: #4a454d;
+  }
+
+  &.bubblegum {
+    --c-primary: #ac009d;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #ffd7f1;
+    --c-primary-container-text: #390033;
+
+    --c-secondary: #6f5867;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #f9daed;
+    --c-secondary-container-text: #271623;
+
+    --c-tertiary: #815342;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #ffdbcf;
+    --c-tertiary-container-text: #321206;
+
+    --c-bg: #fbeefa;
+    --c-text: #1f1a1d;
+    --c-outline: #80747b;
+    --c-unfocused: #4f444a;
+  }
+
+  &.beetroot {
+    --c-primary: #a7373a;
+    --c-primary-text: #ffffff;
+    --c-primary-container: #ffdad8;
+    --c-primary-container-text: #410006;
+
+    --c-secondary: #775655;
+    --c-secondary-text: #ffffff;
+    --c-secondary-container: #ffdad8;
+    --c-secondary-container-text: #2c1514;
+
+    --c-tertiary: #735a2e;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #ffdeaa;
+    --c-tertiary-container-text: #271900;
+
+    --c-bg: #fbf1f5;
+    --c-text: #201a1a;
+    --c-outline: #857372;
+    --c-unfocused: #534342;
+  }
+}

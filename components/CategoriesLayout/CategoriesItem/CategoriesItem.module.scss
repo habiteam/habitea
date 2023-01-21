@@ -20,17 +20,17 @@
 
   &:hover {
     color: black;
-    background-color: var(--c-primary-medium-bg);
+    background-color: var(--c-primary-container);
   }
 
   &--active {
     border-radius: 12px;
-    color: black;
-    background-color: var(--c-primary-active);
+    color: var(--c-secondary-text);
+    background-color: var(--c-secondary);
 
     &:hover,
     &:focus-visible {
-      color: var(--c-text-dark);
+      color: var(--c-primary-text);
       background-color: var(--c-primary);
     }
   }

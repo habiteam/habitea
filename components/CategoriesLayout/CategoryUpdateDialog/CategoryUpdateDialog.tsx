@@ -109,7 +109,7 @@ export function CategoryUpdateDialog({
       <form className={styles.form}>
         <CategoryIconSelector
           value={form.icon ?? 'person-running'}
-          style={{ width: 'calc(10% - 6px)' }}
+          style={{ width: 'calc(13% - 6px)' }}
           onSelect={(icon) => setForm((prev) => ({ ...prev, icon }))}
         ></CategoryIconSelector>
 
@@ -119,7 +119,7 @@ export function CategoryUpdateDialog({
           name="name"
           value={form.name}
           onChange={handleFormChange}
-          style={{ width: 'calc(90% - 6px)' }}
+          style={{ width: 'calc(87% - 6px)' }}
           required
           autoFocus
           color="primary"

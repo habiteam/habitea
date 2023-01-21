@@ -17,17 +17,18 @@
   border-radius: 24px;
 
   &:hover {
-    background-color: var(--c-primary-medium-bg);
+    background-color: var(--c-primary-container);
     cursor: pointer;
   }
 }
 
 .item.item--selected {
-  background-color: var(--c-primary-active);
+  color: var(--c-secondary-text);
+  background-color: var(--c-secondary);
   border-radius: 8px;
 
   &:hover {
-    color: var(--c-text-dark);
+    color: var(--c-primary-text);
     background-color: var(--c-primary);
   }
 }

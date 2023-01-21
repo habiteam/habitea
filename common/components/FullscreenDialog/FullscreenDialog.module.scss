@@ -5,8 +5,8 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
-  background-color: var(--c-primary-light-bg);
-  color: var(--c-primary-unfocused);
+  background-color: var(--c-bg);
+  color: var(--c-unfocused);
   scrollbar-gutter: stable;
   z-index: 1000;
 

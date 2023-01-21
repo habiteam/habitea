@@ -18,7 +18,7 @@
     white-space: nowrap;
     overflow: hidden;
     z-index: 1;
-    color: var(--c-primary-unfocused);
+    color: var(--c-unfocused);
     transform-origin: left top;
   }
 
@@ -49,7 +49,7 @@
     fieldset {
       position: absolute;
       border-radius: inherit;
-      border: 1px solid var(--c-primary-unfocused);
+      border: 1px solid var(--c-unfocused);
       inset: -5px 0 0;
       pointer-events: none;
       margin: 0px;
@@ -118,7 +118,7 @@
   font-size: 1.6rem;
   padding: 12px 16px;
   width: 100%;
-  background-color: var(--c-primary-light-bg);
+  background-color: var(--c-bg);
   border: none;
   color: var(--c-text-light);
 
@@ -127,17 +127,17 @@
   }
 
   &--selected {
-    background-color: var(--c-primary-dark-bg);
+    background-color: var(--c-bg);
   }
 
   &:not(:last-child) {
-    border-bottom: 1px dashed var(--c-primary-dark-bg);
+    border-bottom: 1px dashed var(--c-bg);
   }
 
   &:hover,
   &:focus-visible {
     color: var(--c-text-light);
-    background-color: var(--c-primary-medium-bg);
+    background-color: var(--c-primary-container);
     cursor: pointer;
     outline: none;
   }

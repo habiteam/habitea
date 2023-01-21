@@ -9,7 +9,7 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: var(--c-primary-light-bg);
+    background: var(--c-bg);
     border-radius: 8px;
   }
 
@@ -21,7 +21,7 @@
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--c-primary-dark);
+    background: var(--c-secondary);
   }
 }
 

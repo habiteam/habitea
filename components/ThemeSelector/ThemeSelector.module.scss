@@ -21,7 +21,7 @@
       &--active {
         border-radius: 8px;
         position: relative;
-        outline: 2px solid var(--c-text-dark);
+        outline: 2px solid var(--c-primary-text);
 
         &::before {
           content: '';
@@ -31,7 +31,7 @@
           position: absolute;
           top: 22px;
           left: 76px;
-          background-color: var(--c-text-dark);
+          background-color: var(--c-primary-text);
           animation: appear 400ms;
         }
         &::after {
@@ -42,7 +42,7 @@
           position: absolute;
           top: 16px;
           left: 83px;
-          background-color: var(--c-text-dark);
+          background-color: var(--c-primary-text);
           animation: appear 400ms;
         }
       }

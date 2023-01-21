@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #3f3f3f;
+  color: var(--c-text);
   transition: scale 200ms ease-in-out;
 
   &-icon {
@@ -40,18 +40,19 @@
     &:hover,
     &:focus-visible {
       .link-icon {
-        background-color: var(--c-primary-dark-bg);
+        background-color: var(--c-bg);
       }
     }
 
     &.link--active {
       .link-icon {
-        background-color: var(--c-primary-active);
+        color: var(--c-secondary-text);
+        background-color: var(--c-secondary);
         border-radius: 8px;
       }
 
       .link-text {
-        color: var(--c-primary-dark);
+        color: var(--c-secondary);
       }
 
       &:hover,

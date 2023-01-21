@@ -27,10 +27,10 @@
     }
   }
   &--color-primary.card--elevated {
-    background-color: var(--c-primary-light-bg);
+    background-color: var(--c-bg);
   }
 
   &--color-primary.card--filled {
-    background-color: var(--c-primary-medium-bg);
+    background-color: var(--c-primary-container);
   }
 }

@@ -10,10 +10,10 @@
 
   .selector-button {
     font-size: 1.6rem;
-    padding: 12px;
+    padding: 16px;
     border-radius: 24px;
-    color: var(--c-primary-unfocused);
-    border: 1px solid var(--c-primary-unfocused);
+    color: var(--c-unfocused);
+    border: 1px solid var(--c-unfocused);
     transition: all 200ms ease-in-out;
 
     &--focued {
@@ -39,7 +39,7 @@
   z-index: 2;
   padding: 8px;
   padding-top: 16px;
-  background-color: var(--c-primary-light-bg);
+  background-color: var(--c-bg);
   border-radius: 8px;
   box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 15%), 0px 1px 3px rgba(0, 0, 0, 30%);
 }
@@ -60,17 +60,19 @@
     font-size: 2rem;
 
     &:hover {
-      background-color: var(--c-primary-medium-bg);
+      color: var(--c-primary-container-text);
+      background-color: var(--c-primary-container);
       cursor: pointer;
     }
   }
 
   .icon--selected {
-    background-color: var(--c-primary);
-    color: var(--c-text-dark);
+    background-color: var(--c-secondary);
+    color: var(--c-secondary-text);
 
     &:hover {
-      color: var(--c-primary-unfocused);
+      background-color: var(--c-primary);
+      color: var(--c-primary-text);
     }
   }
 }

@@ -4,7 +4,7 @@
 .header {
   height: 80px;
   width: 100%;
-  background-color: var(--c-primary-medium-bg);
+  background-color: var(--c-primary-container);
   display: flex;
   align-items: center;
   @include px();
@@ -18,7 +18,7 @@
     justify-content: center;
     align-items: center;
     padding: 8px;
-    background-color: var(--c-text-dark);
+    background-color: var(--c-primary-text);
     border-radius: 9999px;
   }
 
