@@ -92,7 +92,7 @@
     &:active,
     &:focus-visible {
       background-color: var(--c-primary-container);
-      color: var(--c-primary);
+      color: var(--c-primary-container-text);
     }
     &:disabled {
       cursor: not-allowed;
@@ -103,9 +103,11 @@
 
   &--filled {
     background-color: var(--c-secondary);
+    color: var(--c-secondary-text);
 
     &:hover {
       background-color: var(--c-primary);
+      color: var(--c-primary-text);
     }
 
     &:disabled {
@@ -115,13 +117,117 @@
   }
 
   &--outlined {
-    color: var(--c-secondary-text);
+    color: var(--c-secondary);
     border-color: var(--c-secondary);
 
     &:hover {
       border-color: var(--c-primary);
       background-color: var(--c-primary);
       color: var(--c-primary-text);
+    }
+
+    &:disabled {
+      border-color: #999;
+      color: #999;
+      background-color: transparent;
+
+      cursor: not-allowed;
+    }
+  }
+}
+
+.button--tertiary.button {
+  &--regular {
+    color: var(--c-tertiary);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: var(--c-tertiary-container);
+      color: var(--c-tertiary-container-text);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: #999;
+    }
+  }
+
+  &--filled {
+    background-color: var(--c-tertiary);
+    color: var(--c-tertiary-text);
+
+    &:hover {
+      background-color: var(--c-tertiary-container);
+      color: var(--c-tertiary-container-text);
+    }
+
+    &:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+  }
+
+  &--outlined {
+    color: var(--c-tertiary);
+    border-color: var(--c-tertiary);
+
+    &:hover {
+      border-color: var(--c-tertiary);
+      background-color: var(--c-tertiary);
+      color: var(--c-tertiary-text);
+    }
+
+    &:disabled {
+      border-color: #999;
+      color: #999;
+      background-color: transparent;
+
+      cursor: not-allowed;
+    }
+  }
+}
+
+.button--default.button {
+  &--regular {
+    color: var(--c-text);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: var(--c-text);
+      color: var(--c-bg);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: #999;
+    }
+  }
+
+  &--filled {
+    background-color: var(--c-text);
+    color: var(--c-bg);
+    &:hover {
+      background-color: var(--c-bg);
+      color: var(--c-text);
+      border-color: var(--c-text);
+    }
+
+    &:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+  }
+
+  &--outlined {
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    border-color: var(--c-text);
+
+    &:hover {
+      background-color: var(--c-text);
+      color: var(--c-bg);
     }
 
     &:disabled {

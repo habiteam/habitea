@@ -4,7 +4,6 @@ export type Color =
   | 'warning'
   | 'danger'
   | 'primary'
-  | 'secondary'
   | 'tertiary'
   | 'default';
 
@@ -71,7 +70,7 @@ export const THEMES: Theme[] = [
     secondary: '#ffdad8',
   },
   {
-    name: 'Orange juice',
+    name: 'Orange peel',
     value: 'orange',
     primary: '#ffa500',
     secondary: '#292b31',
