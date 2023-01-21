@@ -127,36 +127,7 @@ export default function Journal(props: JournalProps) {
             <h2 className={styles.title}>
               {Months[collection.month]} {collection.year}
             </h2>
-
-            <h3>Habit goals</h3>
-
-            <div className={styles.summary}>
-              {collection.categories?.map((category) => (
-                <div
-                  className={classNames(styles.habit, {
-                    [styles['habit--good']]:
-                      (category.progress >= 100 &&
-                        category.goalType === 'MIN') ||
-                      (category.progress < 100 && category.goalType === 'MAX'),
-                    [styles['habit--bad']]:
-                      category.progress > 100 && category.goalType === 'MAX',
-                  })}
-                  key={category.name}
-                >
-                  <span>
-                    {category.name} -
-                    {category.goalType === 'MAX' && ' at most '}
-                    {category.goalType === 'MIN' && ' at least '}
-                    {getCategoryGoalString(category)}
-                    {' - '}
-                    {category.progress}%
-                  </span>
-                </div>
-              ))}
-            </div>
-
             <h3>Activities</h3>
-
             <div className={styles['activity-list']}>
               {collection.activities.map((activity) => (
                 <ActivityItem

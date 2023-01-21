@@ -11,7 +11,6 @@ import Head from 'next/head';
 import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
 import Calendar from '@components/Calendar/Calendar';
-import Block from '@commonComponents/Block/Block';
 import Chip from '@commonComponents/Chip/Chip';
 import styles from './Dashboard.module.scss';
 
