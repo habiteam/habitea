@@ -73,7 +73,7 @@ export const THEMES: Theme[] = [
   {
     name: 'Orange juice',
     value: 'orange',
-    primary: '#a7373a',
-    secondary: '#ffdad8',
+    primary: '#ffa500',
+    secondary: '#292b31',
   },
 ];

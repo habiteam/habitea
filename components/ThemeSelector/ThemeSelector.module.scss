@@ -17,6 +17,7 @@
       border-radius: 24px;
       transition: all 400ms ease-in-out;
       outline: 2px solid transparent;
+      cursor: pointer;
 
       &--active {
         border-radius: 8px;
