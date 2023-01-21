@@ -39,6 +39,12 @@ export const THEMES: Theme[] = [
     secondary: '#ffdeac',
   },
   {
+    name: 'Matcha',
+    value: 'matcha',
+    primary: '#c1d03d',
+    secondary: '#444b00',
+  },
+  {
     name: 'Kale smoothie',
     value: 'kale',
     primary: '#48680e',

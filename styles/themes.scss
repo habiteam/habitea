@@ -69,6 +69,29 @@ body {
     --c-unfocused: #4e4539;
   }
 
+  &.matcha {
+    --c-primary: #c1d03d;
+    --c-primary-text: #2e3300;
+    --c-primary-container: #444b00;
+    --c-primary-container-text: #dded57;
+
+    --c-secondary: #c7c9a6;
+    --c-secondary-text: #30321a;
+    --c-secondary-container: #46492e;
+    --c-secondary-container-text: #e3e5c1;
+
+    --c-tertiary: #a2d0c1;
+    --c-tertiary-text: #07372d;
+    --c-tertiary-container: #234e43;
+    --c-tertiary-container-text: #beecdd;
+
+    --c-bg: #1c1c17;
+    --c-surface: #21221c;
+    --c-text: #e5e2da;
+    --c-outline: #929282;
+    --c-unfocused: #c8c7b7;
+  }
+
   &.kale {
     --c-primary: #48680e;
     --c-primary-text: #ffffff;

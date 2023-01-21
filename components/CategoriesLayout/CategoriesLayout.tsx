@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { auth } from '@services/firebase';
 import { categoryListReloader } from '@atoms/reloaders';
+import Button from '@commonComponents/Button/Button';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -54,13 +55,15 @@ export default function CategoriesLayout(props: AppLayoutProps) {
       {(width > MOBILE_BREAKPOINT || !router.query.id) && (
         <aside>
           <div className={styles.headline}>Categories</div>
-          <button
+          <Button
+            color="tertiary"
+            fillType="filled"
             className={styles['add-button']}
             onClick={() => setIsUpdateDialogOpen(true)}
           >
             <FontAwesomeIcon icon={faPlus} width={14}></FontAwesomeIcon>
             Add category
-          </button>
+          </Button>
 
           <CategoryUpdateDialog
             isUpdateDialogOpen={isUpdateDialogOpen}

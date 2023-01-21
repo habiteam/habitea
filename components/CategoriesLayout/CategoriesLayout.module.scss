@@ -36,22 +36,7 @@
       display: flex;
       gap: 18px;
       align-items: center;
-      cursor: pointer;
-      background-color: mix($color-info, #fff, 25%);
       width: calc(100% - 16px);
-      color: mix($color-info, #2e2e2e, 10%);
-      box-shadow: 0px 3px 6px 2px rgba(0, 0, 0, 15%),
-        0px 1px 3px rgba(0, 0, 0, 30%);
-
-      &:hover {
-        background-color: mix($color-info, #fff, 35%);
-      }
-
-      &:active {
-        background-color: mix($color-info, #fff, 40%);
-        box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 15%),
-          0px 1px 2px rgba(0, 0, 0, 30%);
-      }
     }
 
     .list {

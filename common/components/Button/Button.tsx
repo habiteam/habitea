@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import { Color } from '@constants/palette';
 import styles from './Button.module.scss';
 
-export interface ButtonPropSchema {
+export interface ButtonPropSchema
+  extends React.HTMLAttributes<HTMLButtonElement> {
   text?: string;
   children?: React.ReactNode;
   fillType: 'regular' | 'filled' | 'outlined';
@@ -24,6 +25,7 @@ export default function Button(props: ButtonPropSchema) {
       disabled={props.disabled}
       onClick={props.onClick}
       className={classNames(
+        props.className,
         styles.button,
         styles[`button--${props.color ?? 'default'}`],
         styles[`button--${props.fillType}`],
