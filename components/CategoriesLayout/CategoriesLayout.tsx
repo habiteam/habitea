@@ -54,7 +54,6 @@ export default function CategoriesLayout(props: AppLayoutProps) {
     <div className={styles.layout}>
       {(width > MOBILE_BREAKPOINT || !router.query.id) && (
         <aside>
-          <div className={styles.headline}>Categories</div>
           <Button
             color="tertiary"
             fillType="filled"
