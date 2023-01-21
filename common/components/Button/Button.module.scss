@@ -142,9 +142,10 @@
     &:hover,
     &:active,
     &:focus-visible {
-      background-color: var(--c-primary-container);
-      color: var(--c-primary-container-text);
+      color: var(--c-text);
+      background-color: var(--c-bg);
     }
+
     &:disabled {
       cursor: not-allowed;
       background-color: transparent;
