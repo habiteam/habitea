@@ -369,6 +369,7 @@
   &--filled {
     background-color: var(--c-text);
     color: var(--c-bg);
+
     &:hover {
       background-color: var(--c-bg);
       color: var(--c-text);
@@ -420,6 +421,7 @@
   &--filled {
     background-color: white;
     color: black;
+
     &:hover {
       background-color: black;
       color: white;
