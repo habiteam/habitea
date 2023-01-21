@@ -47,6 +47,7 @@
 
     li {
       &:hover {
+        color: var(--c-primary-container-text);
         background-color: var(--c-primary-container);
         cursor: pointer;
       }

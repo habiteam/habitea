@@ -47,7 +47,6 @@ export default function ActivityDialog() {
       <div style={{ width: 'max-content' }} ref={buttonRef}>
         <Button
           fillType="filled"
-          color="primary"
           onClick={() => {
             setActivity(null);
             setOpenActivityModal(true);
@@ -66,7 +65,6 @@ export default function ActivityDialog() {
           {
             text: 'Cancel',
             fillType: 'regular',
-            color: 'primary',
             onClick: () => {
               setOpenActivityModal(false);
             },
@@ -74,7 +72,6 @@ export default function ActivityDialog() {
           {
             text: activity ? 'Update' : 'Create',
             fillType: 'filled',
-            color: 'primary',
             onClick: () => {
               const activityDate = date
                 ? Timestamp.fromDate(new Date(date))
@@ -126,7 +123,6 @@ export default function ActivityDialog() {
                   value={value}
                   type="number"
                   onChange={(e) => setValue(Number(e.target.value))}
-                  color="primary"
                   style={{ width: '200px' }}
                 ></Input>
                 <span>

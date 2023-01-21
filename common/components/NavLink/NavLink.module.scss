@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--c-text);
+  color: var(--c-primary-container-text);
   transition: scale 200ms ease-in-out;
 
   &-icon {
@@ -40,24 +40,26 @@
     &:hover,
     &:focus-visible {
       .link-icon {
-        background-color: var(--c-bg);
+        color: var(--c-secondary-text);
+        background-color: var(--c-secondary);
+      }
+
+      .link-text {
+        color: var(--c-primary-container-text);
       }
     }
 
     &.link--active {
       .link-icon {
-        color: var(--c-secondary-text);
-        background-color: var(--c-secondary);
+        color: var(--c-secondary-container-text);
+        background-color: var(--c-secondary-container);
         border-radius: 8px;
-      }
-
-      .link-text {
-        color: var(--c-secondary);
       }
 
       &:hover,
       &:focus-visible {
         .link-icon {
+          color: var(--c-primary-text);
           background-color: var(--c-primary);
         }
       }

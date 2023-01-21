@@ -1,4 +1,5 @@
 import userAtom from '@atoms/user';
+import Button from '@commonComponents/Button/Button';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
@@ -110,15 +111,18 @@ export default function Heatmap(props: HeatmapProps) {
     <div className={styles['heatmap-container-container']}>
       <div className={styles.header}>
         <h2>{currentDate.getFullYear()}</h2>
+
         <div className={styles.header__controls}>
-          <button onClick={loadPreviousYear} className={styles.header__control}>
+          <Button onClick={loadPreviousYear} fillType="regular">
             &lt;
-          </button>
-          <button onClick={loadNextYear} className={styles.header__control}>
+          </Button>
+
+          <Button onClick={loadNextYear} fillType="regular">
             &gt;
-          </button>
+          </Button>
         </div>
       </div>
+
       <div className={styles['heatmap-container']}>
         <div className={styles.heatmap}>{days.map((day) => day)}</div>
       </div>

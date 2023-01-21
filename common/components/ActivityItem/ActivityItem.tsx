@@ -54,7 +54,7 @@ export default function ActivityItem(props: ActivityItemProps) {
           &nbsp;
           {props.activity.category?.name}
           <div className={styles.spacer}></div>
-          <div className={styles.icons}>
+          <div className={styles.actions}>
             <Button
               fillType="regular"
               onClick={() => {
@@ -91,13 +91,11 @@ export default function ActivityItem(props: ActivityItemProps) {
           {
             text: 'Cancel',
             fillType: 'regular',
-            color: 'primary',
             onClick: () => setDeleteDialogOpen(false),
           },
           {
             text: 'Confirm',
             fillType: 'filled',
-            color: 'primary',
             onClick: deleteActivity,
           },
         ]}

@@ -26,7 +26,7 @@ body {
   &.coffee {
     --c-primary: #ffb784;
     --c-primary-text: #4f2500;
-    --c-primary-container: #713700;
+    --c-primary-container: #634224;
     --c-primary-container-text: #ffdcc6;
 
     --c-secondary: #e4bfa8;
@@ -110,7 +110,6 @@ body {
 
     --c-bg: #f2f3f8;
     --c-surface: #ffffff;
-
     --c-text: #191c1d;
     --c-outline: #6f797b;
     --c-unfocused: #3f484a;
@@ -134,7 +133,6 @@ body {
 
     --c-bg: #f2f3f9;
     --c-surface: #ffffff;
-
     --c-text: #1d1b1e;
     --c-outline: #71787e;
     --c-unfocused: #41484d;
@@ -158,7 +156,6 @@ body {
 
     --c-bg: #f8f1fc;
     --c-surface: #ffffff;
-
     --c-text: #1d1b1e;
     --c-outline: #7c757e;
     --c-unfocused: #4a454d;
@@ -182,7 +179,6 @@ body {
 
     --c-bg: #fbeefa;
     --c-surface: #ffffff;
-
     --c-text: #1f1a1d;
     --c-outline: #80747b;
     --c-unfocused: #4f444a;
@@ -206,9 +202,31 @@ body {
 
     --c-bg: #fbf1f5;
     --c-surface: #ffffff;
-
     --c-text: #201a1a;
     --c-outline: #857372;
     --c-unfocused: #534342;
+  }
+
+  &.orange {
+    --c-primary: #ffa500;
+    --c-primary-text: #473100;
+    --c-primary-container: #ffb95c;
+    --c-primary-container-text: #462a00;
+
+    --c-secondary: #dfc493;
+    --c-secondary-text: #3f2d17;
+    --c-secondary-container: #57432b;
+    --c-secondary-container-text: #fcdebc;
+
+    --c-tertiary: #bacd9f;
+    --c-tertiary-text: #ffffff;
+    --c-tertiary-container: #3c4c28;
+    --c-tertiary-container-text: #d6e9b9;
+
+    --c-bg: #1d1e22;
+    --c-surface: #292b31;
+    --c-text: #e2e1dd;
+    --c-outline: #9c8e80;
+    --c-unfocused: #d4c4b5;
   }
 }

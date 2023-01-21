@@ -23,7 +23,9 @@ export default function ThemeSelector({
             onClick={() => onSelect(theme.value)}
           >
             <div
-              style={{ backgroundColor: theme.primary }}
+              style={{
+                background: `linear-gradient(140deg, ${theme.primary} 0%, ${theme.primary} 49%, ${theme.secondary} 50%, ${theme.secondary} 100%`,
+              }}
               className={classNames(styles.box, {
                 [styles['box--active']]: value === theme.value,
               })}

@@ -4,6 +4,7 @@
 .header {
   height: 80px;
   width: 100%;
+  color: var(--c-primary-container-text);
   background-color: var(--c-primary-container);
   display: flex;
   align-items: center;
@@ -18,7 +19,8 @@
     justify-content: center;
     align-items: center;
     padding: 8px;
-    background-color: var(--c-primary-text);
+    color: var(--c-primary-text);
+    background-color: var(--c-primary);
     border-radius: 9999px;
   }
 
@@ -50,7 +52,7 @@
   .subtitle {
     font-size: 1.2rem;
     font-weight: 400;
-    color: #ddd;
+    color: var(--c-primary-container-text);
   }
 }
 

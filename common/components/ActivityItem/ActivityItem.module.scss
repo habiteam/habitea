@@ -5,6 +5,7 @@
   position: relative;
   min-width: 300px;
 }
+
 .header {
   background-color: var(--c-primary-container);
   color: black;
@@ -25,17 +26,27 @@
     background-color: var(--c-bad);
   }
 }
+
 .spacer {
   flex: 1;
 }
+
 .body {
   padding: 16px;
   display: flex;
   flex-direction: column;
 }
+
 .value {
   font-size: 2.6rem;
 }
+
 .date {
   font-size: 1.5rem;
+}
+
+.actions {
+  button {
+    color: black;
+  }
 }

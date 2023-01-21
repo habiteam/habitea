@@ -57,21 +57,13 @@
     visibility: visible;
   }
 }
+
 .header {
   display: flex;
   justify-content: space-between;
 }
+
 .header__controls {
   display: flex;
   align-items: center;
-}
-.header__control {
-  padding: 8px 16px;
-  cursor: pointer;
-  border: none;
-  background: none;
-  border-radius: 8px;
-  &:hover {
-    background-color: var(--c-bg);
-  }
 }
