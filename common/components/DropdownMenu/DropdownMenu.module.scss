@@ -28,7 +28,7 @@
       height: 16px;
     }
   }
-
+  // TODO adjust to new themes
   @each $name, $color in $colors-map {
     &--#{$name} {
       background-color: mix($color, #fff, 20%);

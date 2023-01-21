@@ -116,7 +116,7 @@ export default function Category() {
           {width <= MOBILE_BREAKPOINT ? (
             <Button
               fillType="regular"
-              color="default"
+              color="primary-alt"
               onClick={() => router.push('/app/categories')}
             >
               <FontAwesomeIcon
@@ -141,7 +141,7 @@ export default function Category() {
               <h1>{category.name}</h1>
               <Chip
                 text={category.status}
-                color={category.status === 'ACTIVE' ? 'info' : 'inactive'}
+                color={category.status === 'ACTIVE' ? 'info' : 'tertiary'}
                 fillType="filled"
                 onClick={() => setStatusDialogOpen(true)}
               ></Chip>
@@ -155,7 +155,7 @@ export default function Category() {
             <div>
               <Button
                 fillType="regular"
-                color="default"
+                color="primary-alt"
                 onClick={() => setIsActionMenuOpened(true)}
               >
                 <FontAwesomeIcon
@@ -177,7 +177,7 @@ export default function Category() {
                   <Button
                     key={i}
                     fillType="regular"
-                    color="default"
+                    color="primary-alt"
                     onClick={action.onClick}
                   >
                     <FontAwesomeIcon

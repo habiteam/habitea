@@ -57,6 +57,7 @@ export default function ActivityItem(props: ActivityItemProps) {
           <div className={styles.actions}>
             <Button
               fillType="regular"
+              color="dark"
               onClick={() => {
                 setActivity(props.activity);
                 setOpenActivityModal(true);
@@ -66,6 +67,7 @@ export default function ActivityItem(props: ActivityItemProps) {
             </Button>
             <Button
               fillType="regular"
+              color="dark"
               onClick={() => {
                 setDeleteDialogOpen(true);
               }}

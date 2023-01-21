@@ -36,8 +36,13 @@ export default function Options() {
           'warning',
           'danger',
           'primary',
+          'primary-alt',
+          'secondary',
+          'secondary-alt',
           'tertiary',
           'default',
+          'light',
+          'dark',
         ].map((color) =>
           ['regular', 'filled', 'outlined'].map((fillType) =>
             ['md', 'lg'].map((size) => (

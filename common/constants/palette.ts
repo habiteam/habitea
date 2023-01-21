@@ -4,8 +4,13 @@ export type Color =
   | 'warning'
   | 'danger'
   | 'primary'
+  | 'primary-alt'
+  | 'secondary'
+  | 'secondary-alt'
   | 'tertiary'
-  | 'default';
+  | 'default'
+  | 'light'
+  | 'dark';
 
 export interface Theme {
   name: string;
