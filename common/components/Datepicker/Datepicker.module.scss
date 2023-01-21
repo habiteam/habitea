@@ -3,6 +3,7 @@
 .datepicker {
   @include scrollbar();
   width: 304px;
+  color: var(--c-text);
 }
 
 .buttons-container {
@@ -12,6 +13,7 @@
   justify-content: center;
 
   button {
+    color: var(--c-text);
     padding: 8px 12px;
     background-color: transparent;
     border: 0;

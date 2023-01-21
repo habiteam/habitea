@@ -67,7 +67,7 @@
   main {
     flex: 20;
     border-radius: 0;
-    background-color: white;
+    background-color: var(--c-surface);
     overflow: hidden;
 
     @media (min-width: $breakpoint-md) {

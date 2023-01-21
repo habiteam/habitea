@@ -107,7 +107,7 @@ export default function Heatmap(props: HeatmapProps) {
     );
   }
   return (
-    <>
+    <div className={styles['heatmap-container-container']}>
       <div className={styles.header}>
         <h2>{currentDate.getFullYear()}</h2>
         <div className={styles.header__controls}>
@@ -122,6 +122,6 @@ export default function Heatmap(props: HeatmapProps) {
       <div className={styles['heatmap-container']}>
         <div className={styles.heatmap}>{days.map((day) => day)}</div>
       </div>
-    </>
+    </div>
   );
 }

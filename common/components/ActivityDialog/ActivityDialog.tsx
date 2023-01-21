@@ -47,7 +47,7 @@ export default function ActivityDialog() {
       <div style={{ width: 'max-content' }} ref={buttonRef}>
         <Button
           fillType="filled"
-          color="info"
+          color="primary"
           onClick={() => {
             setActivity(null);
             setOpenActivityModal(true);

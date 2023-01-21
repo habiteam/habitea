@@ -1,11 +1,4 @@
-export type Color =
-  | 'primary'
-  | 'success'
-  | 'info'
-  | 'default'
-  | 'warning'
-  | 'danger'
-  | 'inactive';
+export type Color = 'success' | 'info' | 'warning' | 'danger';
 
 export interface Theme {
   name: string;

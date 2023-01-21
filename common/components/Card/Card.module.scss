@@ -2,7 +2,7 @@
 
 .card {
   width: 100%;
-  background-color: #fff;
+  background-color: var(--c-surface);
   overflow: hidden;
 
   &--outlined {

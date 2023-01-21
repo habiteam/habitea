@@ -2,7 +2,7 @@
 
 .button {
   background: none;
-  color: white;
+  color: var(--c-surface);
   border: 2px solid transparent;
   border-radius: 24px;
   transition: all 400ms;
@@ -71,7 +71,7 @@
     &:hover {
       border-color: darken($v, 20%);
       background-color: #{$v};
-      color: white;
+      color: var(--c-surface);
     }
 
     &:disabled {

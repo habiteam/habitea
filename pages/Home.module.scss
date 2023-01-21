@@ -4,7 +4,7 @@
 
 @property --blob-colors {
   syntax: '<color>+';
-  initial-value: black white;
+  initial-value: black var(--c-surface);
   inherits: true;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .banner-container {
-  background-color: white;
+  background-color: var(--c-surface);
   border-radius: 24px;
   max-width: 620px;
   padding: 32px;

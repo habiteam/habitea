@@ -9,7 +9,7 @@
   align-items: center;
   cursor: pointer;
   border-radius: 24px;
-  color: black;
+  color: var(--c-text);
   transition: all 400ms ease-in-out;
 
   span {
@@ -19,7 +19,7 @@
   }
 
   &:hover {
-    color: black;
+    color: var(--c-text);
     background-color: var(--c-primary-container);
   }
 

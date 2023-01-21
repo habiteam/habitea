@@ -13,6 +13,8 @@
 }
 
 .cell {
+  color: var(--c-text);
+
   width: 40px;
   height: 40px;
   display: flex;
@@ -42,6 +44,6 @@
   }
 
   &--inactive {
-    color: $color-disabled-text;
+    color: #666;
   }
 }
