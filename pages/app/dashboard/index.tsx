@@ -77,7 +77,7 @@ export default function Dashboard() {
 
       <div className={classnames(styles.summary)}>
         <Image
-          src={user?.photoURL ?? '/cat.jpg'}
+          src={user?.photoURL?.split('=')[0] ?? '/cat.jpg'}
           alt="Card header image"
           width={200}
           height={200}
