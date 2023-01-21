@@ -58,6 +58,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
           <Button
             color="tertiary"
             fillType="filled"
+            isElevated={true}
             className={styles['add-button']}
             onClick={() => setIsUpdateDialogOpen(true)}
           >

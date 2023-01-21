@@ -26,6 +26,14 @@
   &:hover {
     cursor: pointer;
   }
+
+  &--elevated {
+    box-shadow: var(--e-1);
+
+    &:hover {
+      box-shadow: var(--e-2);
+    }
+  }
 }
 
 @each $k, $v in $colors-map {

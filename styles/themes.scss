@@ -23,6 +23,10 @@ body {
   --c-good: #d6eeca;
   --c-bad: #e79b9b;
 
+  --e-1: 0px 1px 2px 0px #0000004d, 0px 1px 3px 1px #00000026;
+  --e-2: 0px 1px 2px 0px #0000004d, 0px 2px 6px 2px #00000026;
+  --e-3: 0px 4px 8px 3px #00000026, 0px 1px 3px 0px #0000004d;
+
   &.coffee {
     --c-primary: #ffb784;
     --c-primary-text: #4f2500;

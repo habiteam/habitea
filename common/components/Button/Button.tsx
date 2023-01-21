@@ -13,6 +13,7 @@ export interface ButtonPropSchema
   disabled?: boolean;
   color?: Color;
   style?: CSSProperties;
+  isElevated?: boolean;
 }
 
 /**
@@ -30,6 +31,7 @@ export default function Button(props: ButtonPropSchema) {
         styles[`button--${props.color ?? 'default'}`],
         styles[`button--${props.fillType}`],
         styles[`button--${props.size ?? 'md'}`],
+        { [styles[`button--elevated`]]: props?.isElevated },
       )}
       style={props.style}
     >
