@@ -18,7 +18,7 @@ export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState('Calendar');
   const user = useAtomValue(userAtom);
   const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
-  const [habitProgress, setHabitProgress] = useState<number | null>(null);
+  const [habitProgress, setHabitProgress] = useState<number>(0);
 
   useEffect(() => {
     if (user) {
@@ -41,10 +41,12 @@ export default function Dashboard() {
             );
             // calculate progress for each category
             const progress = calculateProgress(activities, category);
+            console.log(progress);
             return progress;
           });
         // calculate overall progress when all activities are fetched
         const results = await Promise.all(promises);
+
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
       };
       fetchData();
@@ -92,12 +94,9 @@ export default function Dashboard() {
             </Chip>
 
             {habitProgress && (
-              <Chip
-                color={habitProgress > 50 ? 'success' : 'danger'}
-                fillType="filled"
-              >
+              <Chip color="primary" fillType="filled">
                 Current habit progress:{' '}
-                <strong>{habitProgress.toFixed(0)}</strong>%
+                <strong>{habitProgress?.toFixed(0)}</strong>%
               </Chip>
             )}
           </div>
