@@ -4,7 +4,7 @@
 
 @property --blob-colors {
   syntax: '<color>+';
-  initial-value: black var(--c-surface);
+  initial-value: black white;
   inherits: true;
 }
 
