@@ -1,10 +1,12 @@
 .themes {
-  display: flex;
+  margin: 24px 0 0;
+  display: grid;
+  max-width: 704px;
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  flex-wrap: wrap;
 
   .theme {
-    width: 160px;
+    max-width: 160px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -30,8 +32,8 @@
           height: 8px;
           rotate: -45deg;
           position: absolute;
-          top: 22px;
-          left: 76px;
+          top: 50%;
+          left: 45%;
           background-color: var(--c-tertiary-container-text);
           animation: appear 400ms;
         }
@@ -41,8 +43,8 @@
           height: 15px;
           rotate: 45deg;
           position: absolute;
-          top: 16px;
-          left: 83px;
+          top: 36%;
+          left: 50%;
           background-color: var(--c-tertiary-container-text);
           animation: appear 400ms;
         }

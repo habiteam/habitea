@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { THEMES } from '@constants/palette';
+import Block from '@commonComponents/Block/Block';
 import styles from './ThemeSelector.module.scss';
 
 export interface ThemeSelectorPropsSchema {
@@ -12,7 +13,7 @@ export default function ThemeSelector({
   onSelect,
 }: ThemeSelectorPropsSchema) {
   return (
-    <>
+    <Block>
       <h3>Select theme</h3>
 
       <div className={styles.themes}>
@@ -34,6 +35,6 @@ export default function ThemeSelector({
           </div>
         ))}
       </div>
-    </>
+    </Block>
   );
 }
