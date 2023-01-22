@@ -51,10 +51,10 @@ export const THEMES: Theme[] = [
     secondary: '#c8f088',
   },
   {
-    name: 'Blue Lemonade',
-    value: 'raspberry',
-    primary: '#006590',
-    secondary: '#c8e6ff',
+    name: 'Blueberry',
+    value: 'blueberry',
+    primary: '#004c6d',
+    secondary: '#212427',
   },
   {
     name: 'Spearmint',
@@ -63,10 +63,10 @@ export const THEMES: Theme[] = [
     secondary: '#9fefff',
   },
   {
-    name: 'Eggplant',
-    value: 'eggplant',
-    primary: '#d4bbff',
-    secondary: '#533688',
+    name: 'Cabbage',
+    value: 'cabbage',
+    primary: '#48398d',
+    secondary: '#242227',
   },
   {
     name: 'Blackberry juice',
@@ -77,6 +77,12 @@ export const THEMES: Theme[] = [
   {
     name: 'Borsch',
     value: 'beetroot',
+    primary: '#822146',
+    secondary: '#ffd9e1',
+  },
+  {
+    name: 'Strawberry',
+    value: 'strawberry',
     primary: '#a7373a',
     secondary: '#ffdad8',
   },
@@ -97,5 +103,11 @@ export const THEMES: Theme[] = [
     value: 'lemon',
     primary: '#676000',
     secondary: '#f5e633',
+  },
+  {
+    name: 'Temp',
+    value: 'temp',
+    primary: '#7d799a',
+    secondary: '#f8a2a1',
   },
 ];
