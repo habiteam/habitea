@@ -155,7 +155,7 @@ export default function Home() {
               rel="noreferrer"
             >
               <FontAwesomeIcon icon={faGithub as IconProp}></FontAwesomeIcon>
-              &nbsp;Contribute
+              &nbsp;View source code
             </a>
             <a
               className={styles['gh-cta']}
