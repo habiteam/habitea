@@ -2,7 +2,9 @@ import userAtom from '@atoms/user';
 import Button from '@commonComponents/Button/Button';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
+import { CategoryProgress } from '@schemas/category-progress';
 import { ActivitiesService } from '@services/activities';
+import { CategoryProgressService } from '@services/category-progress';
 import {
   getDateFromDayOfYear,
   getDayOfYear,
@@ -24,10 +26,8 @@ interface HeatmapProps {
 export default function Heatmap(props: HeatmapProps) {
   const [currentDate, setCurrentDate] = useState(getFirstDayOfYear(props.date));
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [progress, setProgress] = useState<CategoryProgress[]>([]);
   const user = useAtomValue(userAtom);
-
-  const calculateSaturation = (strength: number, goal: number) =>
-    (strength * 4) / goal;
 
   const loadPreviousYear = () => {
     setCurrentDate(getPreviousYear(currentDate));
@@ -39,7 +39,7 @@ export default function Heatmap(props: HeatmapProps) {
 
   useEffect(() => {
     if (user) {
-      const fetchData = async () => {
+      const fetchActivities = async () => {
         const fetchedActivities = await ActivitiesService.getByCategoryForYear(
           props.category,
           currentDate,
@@ -47,7 +47,19 @@ export default function Heatmap(props: HeatmapProps) {
         );
         setActivities(fetchedActivities);
       };
-      fetchData();
+      const fetchProgress = async () => {
+        const fetchedProgress =
+          await CategoryProgressService.getByCategoryForYear(
+            props.category,
+            currentDate,
+          );
+        setProgress(fetchedProgress);
+        // fetchedProgress.forEach((element) => {
+        //   console.log(element.activityDate.toDate(), element.isGoalCompleted);
+        // });
+      };
+      fetchActivities();
+      fetchProgress();
     }
   }, [currentDate, props.category]);
 
@@ -67,7 +79,17 @@ export default function Heatmap(props: HeatmapProps) {
     }
     return a.reduce((acc, activity) => acc + activity.value, 0);
   });
-
+  // create array of progress items per period
+  const period: boolean[] = [];
+  progress.forEach((p) => {
+    if (p.category.repeatType !== 'MONTHLY') {
+      return; // TODO: handle other repeat types
+    }
+    const i = p.activityDate.toDate().getMonth();
+    period[i] = p.isGoalCompleted;
+  });
+  // console.log(progress);
+  // create items for each day
   const days = [];
   const lastDayIndex = getDayOfYear(getLastDayOfYear(currentDate));
   for (let i = 1; i <= lastDayIndex; i += 1) {
@@ -79,13 +101,14 @@ export default function Heatmap(props: HeatmapProps) {
               className={classNames(styles.fill, {
                 [styles['fill--good']]: props.category?.goalType === 'MIN',
                 [styles['fill--bad']]: props.category?.goalType === 'MAX',
+                [styles['fill--goal']]:
+                  period[
+                    getDateFromDayOfYear(
+                      currentDate.getFullYear(),
+                      i,
+                    ).getMonth()
+                  ],
               })}
-              style={{
-                filter: `saturate(${calculateSaturation(
-                  activityStrengthsByDay[i],
-                  props.category.goalValue,
-                )})`,
-              }}
             ></div>
             <div className={styles.tooltip}>
               {getDateFromDayOfYear(

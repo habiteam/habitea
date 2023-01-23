@@ -72,11 +72,21 @@ export class ActivitiesService {
       }
 
       if (category.unitType === 'QUANTITY' && progress.value) {
-        progress.isGoalCompleted = progress.value >= category.goalValue;
+        if (category.goalType === 'MIN') {
+          progress.isGoalCompleted = progress.value >= category.goalValue;
+        } else if (category.goalType === 'MAX') {
+          progress.isGoalCompleted = progress.value <= category.goalValue;
+        }
       } else if (category.unitType === 'TIME' && progress.duration) {
-        progress.isGoalCompleted =
-          getSecondsFromDuration(progress.duration) >=
-          getSecondsFromDuration(category.duration);
+        if (category.goalType === 'MIN') {
+          progress.isGoalCompleted =
+            getSecondsFromDuration(progress.duration) >=
+            getSecondsFromDuration(category.duration);
+        } else if (category.goalType === 'MAX') {
+          progress.isGoalCompleted =
+            getSecondsFromDuration(progress.duration) <=
+            getSecondsFromDuration(category.duration);
+        }
       }
 
       CategoryProgressService.update(progress);
