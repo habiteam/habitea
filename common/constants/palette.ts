@@ -105,8 +105,8 @@ export const THEMES: Theme[] = [
     secondary: '#f5e633',
   },
   {
-    name: 'Temp',
-    value: 'temp',
+    name: 'Grapefruit',
+    value: 'grapefruit',
     primary: '#7d799a',
     secondary: '#f8a2a1',
   },
