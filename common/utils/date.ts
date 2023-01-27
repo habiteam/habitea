@@ -59,3 +59,10 @@ export function getDayOfYear(date: Date): number {
 export function getDateFromDayOfYear(year: number, day: number): Date {
   return new Date(year, 0, day);
 }
+
+export function getDateInputFormatFromDate(date: Date): string {
+  return Intl.DateTimeFormat('sv-SE', {
+    dateStyle: 'short',
+    timeStyle: 'short',
+  }).format(date);
+}

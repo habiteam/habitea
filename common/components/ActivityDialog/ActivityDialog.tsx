@@ -8,6 +8,7 @@ import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
+import { getDateInputFormatFromDate } from '@utils/date';
 import { useAddNotification } from '@utils/notifications';
 import { Timestamp } from 'firebase/firestore';
 import { useAtom, useSetAtom } from 'jotai';
@@ -23,7 +24,9 @@ export default function ActivityDialog() {
   >(undefined);
   const [value, setValue] = useState<number>(1);
   const [duration, setDuration] = useState<string>('00:00:00'); // TODO input for duration
-  const [date, setDate] = useState<Date>(new Date());
+  const [date, setDate] = useState<string>(
+    getDateInputFormatFromDate(new Date()),
+  );
   const buttonRef = useRef(null);
   const addNotification = useAddNotification();
   const setReloader = useSetAtom(journalReloader);
@@ -33,12 +36,12 @@ export default function ActivityDialog() {
       setSelectedCategory(activity.category);
       setValue(activity.value);
       setDuration(activity.duration);
-      setDate(activity.activityDate.toDate());
+      setDate(getDateInputFormatFromDate(activity.activityDate.toDate()));
     } else {
       setSelectedCategory(undefined);
       setValue(1);
       setDuration('00:00:00');
-      setDate(new Date());
+      setDate(getDateInputFormatFromDate(new Date()));
     }
   }, [activity]);
 
@@ -76,7 +79,7 @@ export default function ActivityDialog() {
             text: activity ? 'Update' : 'Create',
             fillType: 'filled',
             onClick: () => {
-              const activityDate = Timestamp.fromDate(date);
+              const activityDate = Timestamp.fromDate(new Date(date));
 
               if (selectedCategory) {
                 ActivitiesService.update(

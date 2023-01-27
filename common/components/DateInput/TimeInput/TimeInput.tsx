@@ -23,13 +23,16 @@ export default function TimeInput(props: TimeInputPropSchema) {
     return num;
   }
 
-  function valueChanges(): void {
-    if (hours && minutes) props.onChange(`${hours}:${minutes}`);
+  function valueChanges(ho: string, min: string): void {
+    props.onChange(`${ho}:${min}`);
   }
 
   useEffect(() => {
-    valueChanges();
-  }, [hours, minutes]);
+    if (props.value) {
+      setHours(props.value.split(':')[0]);
+      setMinutes(props.value.split(':')[1]);
+    }
+  }, [props.value]);
 
   return (
     <div className={classNames(styles.timeinput)}>
@@ -42,9 +45,9 @@ export default function TimeInput(props: TimeInputPropSchema) {
             maxLength={2}
             autoComplete="false"
             value={hours}
-            onChange={(event) => {
-              setHours(normalize(event.target.value, 0, 23));
-            }}
+            onChange={(event) =>
+              valueChanges(normalize(event.target.value, 0, 23), minutes)
+            }
           ></input>
           <label htmlFor="hours">Hours</label>
         </div>
@@ -56,9 +59,9 @@ export default function TimeInput(props: TimeInputPropSchema) {
             maxLength={2}
             autoComplete="false"
             value={minutes}
-            onChange={(event) => {
-              setMinutes(normalize(event.target.value, 0, 59));
-            }}
+            onChange={(event) =>
+              valueChanges(hours, normalize(event.target.value, 0, 59))
+            }
           ></input>
           <label htmlFor="minutes">Minutes</label>
         </div>
