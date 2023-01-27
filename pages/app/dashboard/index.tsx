@@ -41,7 +41,6 @@ export default function Dashboard() {
             );
             // calculate progress for each category
             const progress = calculateProgress(activities, category);
-            console.log(progress);
             return progress;
           });
         // calculate overall progress when all activities are fetched

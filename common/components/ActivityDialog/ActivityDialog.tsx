@@ -23,7 +23,7 @@ export default function ActivityDialog() {
   >(undefined);
   const [value, setValue] = useState<number>(1);
   const [duration, setDuration] = useState<string>('00:00:00'); // TODO input for duration
-  const [date, setDate] = useState<string>('');
+  const [date, setDate] = useState<Date>(new Date());
   const buttonRef = useRef(null);
   const addNotification = useAddNotification();
   const setReloader = useSetAtom(journalReloader);
@@ -33,12 +33,12 @@ export default function ActivityDialog() {
       setSelectedCategory(activity.category);
       setValue(activity.value);
       setDuration(activity.duration);
-      setDate(activity.activityDate.toDate().toISOString().split('T')[0]);
+      setDate(activity.activityDate.toDate());
     } else {
       setSelectedCategory(undefined);
       setValue(1);
       setDuration('00:00:00');
-      setDate('');
+      setDate(new Date());
     }
   }, [activity]);
 
@@ -61,7 +61,9 @@ export default function ActivityDialog() {
         anchorRef={buttonRef}
         title="Start Activity"
         open={openActivityModal}
-        handleClose={() => setOpenActivityModal(false)}
+        handleClose={() => {
+          setOpenActivityModal(false);
+        }}
         actions={[
           {
             text: 'Cancel',
@@ -74,9 +76,7 @@ export default function ActivityDialog() {
             text: activity ? 'Update' : 'Create',
             fillType: 'filled',
             onClick: () => {
-              const activityDate = date
-                ? Timestamp.fromDate(new Date(date))
-                : Timestamp.now();
+              const activityDate = Timestamp.fromDate(date);
 
               if (selectedCategory) {
                 ActivitiesService.update(
@@ -150,7 +150,9 @@ export default function ActivityDialog() {
           <DateInput
             label="Date"
             value={date}
-            onSelect={(val) => setDate(val)}
+            onChange={(val) => {
+              setDate(val);
+            }}
           ></DateInput>
         </div>
       </FullscreenDialog>
