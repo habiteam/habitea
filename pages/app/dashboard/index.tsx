@@ -45,7 +45,6 @@ export default function Dashboard() {
           });
         // calculate overall progress when all activities are fetched
         const results = await Promise.all(promises);
-
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
       };
       fetchData();
@@ -92,7 +91,7 @@ export default function Dashboard() {
               Tracking <strong>{activityCategories.length}</strong> habits
             </Chip>
 
-            {habitProgress && (
+            {!Number.isNaN(habitProgress) && (
               <Chip color="primary" fillType="filled">
                 Current habit progress:{' '}
                 <strong>{habitProgress?.toFixed(0)}</strong>%
