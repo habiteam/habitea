@@ -7,6 +7,7 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Activity } from '@schemas/activity';
 import { ActivitiesService } from '@services/activities';
+import { getDateInputFormatFromDate } from '@utils/date';
 import { useAddNotification } from '@utils/notifications';
 import { getDateStringFromTimestamp } from '@utils/time';
 import classNames from 'classnames';
@@ -78,10 +79,12 @@ export default function ActivityItem(props: ActivityItemProps) {
         </div>
         <div className={classNames(styles.body)}>
           <span className={classNames(styles.value)}>
-            {props.activity.value} {props.activity.category?.unit}
+            {props.activity.category?.unitType === 'QUANTITY'
+              ? `${props.activity.value} ${props.activity.category?.unit}`
+              : props.activity.duration}
           </span>
           <span className={classNames(styles.date)}>
-            {getDateStringFromTimestamp(props.activity.activityDate)}
+            {getDateInputFormatFromDate(props.activity.activityDate.toDate())}
           </span>
         </div>
       </div>

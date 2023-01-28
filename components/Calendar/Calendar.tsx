@@ -1,4 +1,4 @@
-import { Months } from '@constants/dictionaries';
+import { ActivityUnitTypeOptions, Months } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
@@ -112,8 +112,10 @@ export default function Calendar(props: CalendarProps) {
               {/* //TODO show details on click */}
               <span className={styles['day-activity__description']}>
                 &nbsp;
-                {activity.category?.name} {activity.value}{' '}
-                {activity.category?.unit}
+                {activity.category?.name}{' '}
+                {activity.category?.unitType === 'QUANTITY'
+                  ? `${activity.value} ${activity.category?.unit}`
+                  : activity.duration}
               </span>
             </div>
           ))}
