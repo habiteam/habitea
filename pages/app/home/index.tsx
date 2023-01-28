@@ -2,12 +2,12 @@ import { getAppLayout } from '@components/AppLayout/AppLayout';
 import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
 import { Activity } from '@schemas/activity';
 
-import userAtom from '@atoms/user';
+import { userAtom } from '@atoms/user';
 import { useAtom, useAtomValue } from 'jotai';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
-import categoriesAtom from '@atoms/categories';
+import { categoriesAtom } from '@atoms/categories';
 import { ActivitiesService } from '@services/activities';
 import Journal from '@components/Journal/Journal';
 import Block from '@commonComponents/Block/Block';

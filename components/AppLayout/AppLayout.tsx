@@ -1,11 +1,11 @@
 import { useAtom, useSetAtom } from 'jotai';
 import React, { ReactElement, useEffect } from 'react';
-import { screenHeight, screenWidth } from '@atoms/screen';
-import themeAtom from '@atoms/theme';
+import { screenHeightAtom, screenWidthAtom } from '@atoms/screen';
+import { themeAtom } from '@atoms/theme';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { auth } from '@services/firebase';
-import userAtom from '@atoms/user';
+import { userAtom } from '@atoms/user';
 import AppHeader from './AppHeader/AppHeader';
 import styles from './AppLayout.module.scss';
 
@@ -14,8 +14,8 @@ export interface AppLayoutProps {
 }
 
 export default function AppLayout(props: AppLayoutProps) {
-  const setWidth = useSetAtom(screenWidth);
-  const setHeight = useSetAtom(screenHeight);
+  const setWidth = useSetAtom(screenWidthAtom);
+  const setHeight = useSetAtom(screenHeightAtom);
 
   const [theme, setTheme] = useAtom(themeAtom);
   const router = useRouter();

@@ -2,15 +2,14 @@ import Button from '@commonComponents/Button/Button';
 import { Activity } from '@schemas/activity';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
-import userAtom from '@atoms/user';
+import { userAtom } from '@atoms/user';
 import { getPreviousMonth } from '@utils/date';
 import { ActivitiesService } from '@services/activities';
-import categoriesAtom from '@atoms/categories';
+import { categoriesAtom } from '@atoms/categories';
 import ActivityItem from '@commonComponents/ActivityItem/ActivityItem';
 import { Months } from '@constants/dictionaries';
 import { ActivityCategory } from '@schemas/activity-category';
-import { calculateProgress, getCategoryGoalString } from '@utils/habits';
-import classNames from 'classnames';
+import { calculateProgress } from '@utils/habits';
 import { journalReloader } from '@atoms/reloaders';
 import styles from './Journal.module.scss';
 

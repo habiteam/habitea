@@ -2,8 +2,8 @@ import { Months } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
-import userAtom from '@atoms/user';
-import categoriesAtom from '@atoms/categories';
+import { userAtom } from '@atoms/user';
+import { categoriesAtom } from '@atoms/categories';
 
 import { ActivitiesService } from '@services/activities';
 import {

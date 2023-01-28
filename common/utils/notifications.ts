@@ -1,10 +1,10 @@
-import notifications from '@atoms/notifications';
+import { notificationsAtom } from '@atoms/notifications';
 import { Color } from '@constants/palette';
 import { useSetAtom } from 'jotai';
 import { generateUUID } from './uuid';
 
 export function useAddNotification() {
-  const setNotificationsAtom = useSetAtom(notifications);
+  const setNotificationsAtom = useSetAtom(notificationsAtom);
 
   return (props: { message: string; type: Color }) => {
     setNotificationsAtom((values) => [

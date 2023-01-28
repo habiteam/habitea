@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { useTransition, animated, config } from '@react-spring/web';
-import notifications from '@atoms/notifications';
+import { notificationsAtom } from '@atoms/notifications';
 import styles from './NotificationProvider.module.scss';
 import { Notification } from './Notification';
 
@@ -9,7 +9,7 @@ export interface NotificationProviderPropSchema {
 }
 
 export function NotificationProvider(props: NotificationProviderPropSchema) {
-  const notificationList = useAtomValue(notifications);
+  const notificationList = useAtomValue(notificationsAtom);
 
   const transitions = useTransition(notificationList, {
     from: { opacity: 0, transform: 'translateY(100px) scaleY(0.2)' },

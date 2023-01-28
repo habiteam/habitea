@@ -1,5 +1,5 @@
 import { categoryListReloader } from '@atoms/reloaders';
-import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen';
+import { MOBILE_BREAKPOINT, screenWidthAtom } from '@atoms/screen';
 import Button from '@commonComponents/Button/Button';
 import Chip from '@commonComponents/Chip/Chip';
 import Dialog from '@commonComponents/Dialog/Dialog';
@@ -30,7 +30,7 @@ import classNames from 'classnames';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import userAtom from '@atoms/user';
+import { userAtom } from '@atoms/user';
 import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdateDialog/CategoryUpdateDialog';
 import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
@@ -47,7 +47,7 @@ export default function Category() {
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState<boolean>(false);
   const user = useAtomValue(userAtom);
 
-  const width = useAtomValue(screenWidth);
+  const width = useAtomValue(screenWidthAtom);
   const addNotifcation = useAddNotification();
   const setCategoryListReloader = useSetAtom(categoryListReloader);
 

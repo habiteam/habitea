@@ -16,8 +16,6 @@ import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import { useEffect, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { useAddNotification } from '@utils/notifications';
-import { getDateStringFromTimestamp } from '@utils/time';
-import DateInput from '@commonComponents/DateInput/DateInput';
 import CategoryIconSelector from './CategoryIconSelector/CategoryIconSelector';
 import styles from './CategoryUpdateDialog.module.scss';
 

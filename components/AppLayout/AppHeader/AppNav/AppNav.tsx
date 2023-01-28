@@ -19,12 +19,12 @@ import { useState } from 'react';
 import DropdownMenu from '@commonComponents/DropdownMenu/DropdownMenu';
 import NavLink from '@commonComponents/NavLink/NavLink';
 import { auth } from '@services/firebase';
-import { MOBILE_BREAKPOINT, screenWidth } from '@atoms/screen';
-import userAtom from '@atoms/user';
+import { MOBILE_BREAKPOINT, screenWidthAtom } from '@atoms/screen';
+import { userAtom } from '@atoms/user';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {
-  const width = useAtomValue(screenWidth);
+  const width = useAtomValue(screenWidthAtom);
 
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
 

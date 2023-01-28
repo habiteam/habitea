@@ -1,4 +1,4 @@
-import userAtom from '@atoms/user';
+import { userAtom } from '@atoms/user';
 import Button from '@commonComponents/Button/Button';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';

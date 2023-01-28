@@ -11,7 +11,7 @@ import Button from '@commonComponents/Button/Button';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
-import { MOBILE_BREAKPOINT, screenWidth } from '../../common/atoms/screen';
+import { MOBILE_BREAKPOINT, screenWidthAtom } from '../../common/atoms/screen';
 import { CategoryUpdateDialog } from './CategoryUpdateDialog/CategoryUpdateDialog';
 
 export interface AppLayoutProps {
@@ -22,7 +22,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState<boolean>(false);
   const [categoryList, setCategoryList] = useState<any[]>([]);
   const router = useRouter();
-  const width = useAtomValue(screenWidth);
+  const width = useAtomValue(screenWidthAtom);
   const categoryListReloaderValue = useAtomValue(categoryListReloader);
 
   function updateCategoriesList() {
