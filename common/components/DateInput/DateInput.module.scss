@@ -38,6 +38,9 @@
   background-color: var(--c-bg);
   border-radius: 8px;
   box-shadow: var(--e-3);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
   &.top {
     bottom: 56px;

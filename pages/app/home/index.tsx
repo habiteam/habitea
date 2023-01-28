@@ -2,7 +2,7 @@ import { getAppLayout } from '@components/AppLayout/AppLayout';
 import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
 import { Activity } from '@schemas/activity';
 import { userAtom } from '@atoms/user';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
@@ -11,12 +11,13 @@ import { ActivitiesService } from '@services/activities';
 import Journal from '@components/Journal/Journal';
 import Block from '@commonComponents/Block/Block';
 import classNames from 'classnames';
+import Daily from '@components/Daily/Daily';
 import styles from './Home.module.scss';
 
 export default function Home() {
   const user = useAtomValue(userAtom);
-  const [activityList, setAtivityList] = useState<Activity[]>([]);
-  const [, setActivityCategories] = useAtom(categoriesAtom);
+  const [activityList, setActivityList] = useState<Activity[]>([]);
+  const setActivityCategories = useSetAtom(categoriesAtom);
 
   useEffect(() => {
     if (user) {
@@ -38,11 +39,12 @@ export default function Home() {
           ...activity,
           category: categories.find((c) => c.id === activity.categoryRef.id),
         }));
-        setAtivityList(recentActivities);
+        setActivityList(recentActivities);
       };
       fetchData();
     }
   }, [user]);
+
   return (
     <>
       <Head>
@@ -55,7 +57,9 @@ export default function Home() {
       </div>
 
       <div className={classNames(styles['blocks-container'])}>
-        <Block title="Daily"></Block>
+        <Block title="Daily">
+          <Daily></Daily>
+        </Block>
         <Block title="Timeline"></Block>
         <Block title="Journal">
           {activityList.length > 0 && (

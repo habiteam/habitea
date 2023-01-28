@@ -66,3 +66,9 @@ export function getDateInputFormatFromDate(date: Date): string {
     timeStyle: 'short',
   }).format(date);
 }
+
+export function getTimeFromDate(date: Date): string {
+  return Intl.DateTimeFormat('sv-SE', {
+    timeStyle: 'short',
+  }).format(date);
+}
