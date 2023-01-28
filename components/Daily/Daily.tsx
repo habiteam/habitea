@@ -45,17 +45,19 @@ export default function Daily(props: DailyProps) {
   }, [user, activityCategories]);
 
   return (
-    <div className={classNames(styles.daily)}>
-      {activities.length < 1 ? (
-        <DailyActivityItem></DailyActivityItem>
-      ) : (
-        activities.map((activity, index) => (
-          <DailyActivityItem
-            key={index}
-            activity={activity}
-          ></DailyActivityItem>
-        ))
-      )}
+    <div className={classNames(styles.container)}>
+      <div className={classNames(styles.dailies)}>
+        {activities.length < 1 ? (
+          <DailyActivityItem></DailyActivityItem>
+        ) : (
+          activities.map((activity, index) => (
+            <DailyActivityItem
+              key={index}
+              activity={activity}
+            ></DailyActivityItem>
+          ))
+        )}
+      </div>
     </div>
   );
 }

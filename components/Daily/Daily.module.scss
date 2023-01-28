@@ -1,5 +1,11 @@
-.daily {
+.container {
   display: flex;
   justify-content: center;
+}
+
+.dailies {
+  display: flex;
   gap: 24px;
+  overflow: auto;
+  padding-block: 24px;
 }

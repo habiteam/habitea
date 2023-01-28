@@ -33,7 +33,7 @@ export default function DailyActivityItem({
               })}
               width={48}
             ></FontAwesomeIcon>
-            {activity.progress && <h2>{activity.progress.toPrecision(2)}%</h2>}
+            {activity.progress && <h2>{activity.progress.toFixed(0)}%</h2>}
           </div>
         </>
       ) : (
