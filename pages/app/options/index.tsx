@@ -13,7 +13,7 @@ export default function Options() {
       <Head>
         <title>Options - Habitea</title>
       </Head>
-      <h2>Options</h2>
+
       <ThemeSelector
         value={theme}
         onSelect={(value) => {
@@ -22,7 +22,7 @@ export default function Options() {
         }}
       ></ThemeSelector>
       {/* Playground */}
-      <div
+      {/* <div
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(6,1fr)',
@@ -56,7 +56,7 @@ export default function Options() {
             )),
           ),
         )}
-      </div>
+      </div> */}
     </>
   );
 }

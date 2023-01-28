@@ -13,9 +13,7 @@ export default function ThemeSelector({
   onSelect,
 }: ThemeSelectorPropsSchema) {
   return (
-    <Block>
-      <h3>Select theme</h3>
-
+    <Block title="Theme">
       <div className={styles.themes}>
         {THEMES.map((theme, index) => (
           <div
