@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  margin: 0px 0px 24px;
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+.blocks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

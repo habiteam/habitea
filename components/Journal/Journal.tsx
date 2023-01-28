@@ -122,11 +122,10 @@ export default function Journal(props: JournalProps) {
     <div>
       <div className={styles.journal}>
         {activityList.map((collection, key) => (
-          <div key={key}>
+          <div className={styles['month-container']} key={key}>
             <h2 className={styles.title}>
               {Months[collection.month]} {collection.year}
             </h2>
-            <h3>Activities</h3>
             <div className={styles['activity-list']}>
               {collection.activities.map((activity) => (
                 <ActivityItem
@@ -139,7 +138,11 @@ export default function Journal(props: JournalProps) {
         ))}
       </div>
 
-      <Button onClick={() => loadMoreActivities()} fillType={'regular'}>
+      <Button
+        onClick={() => loadMoreActivities()}
+        fillType="outlined"
+        color="primary"
+      >
         Load more activities
       </Button>
     </div>

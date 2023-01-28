@@ -1,13 +1,22 @@
 .journal {
   margin-bottom: 12px;
 }
+
 .title {
   margin-bottom: 12px;
 }
+
+.month-container {
+  padding-block: 24px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--c-outline);
+  }
+}
+
 .activity-list {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 12px;
 }
