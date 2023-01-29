@@ -5,6 +5,7 @@ import { ActivityCategory } from '@schemas/activity-category';
 import { CategoryProgress } from '@schemas/category-progress';
 import { ActivitiesService } from '@services/activities';
 import { CategoryProgressService } from '@services/category-progress';
+import { checkIfDatesAreInPeriod } from '@utils/activity-utils';
 import {
   getDateFromDayOfYear,
   getDayOfYear,
@@ -12,6 +13,7 @@ import {
   getFirstDayOfYear,
   getPreviousYear,
   getNextYear,
+  getWeekOfYear,
 } from '@utils/date';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
@@ -73,21 +75,13 @@ export default function Heatmap(props: HeatmapProps) {
     activitiesByDay[day].push(activity);
   });
   // reduce activities in each day to it's strength
-  const activityStrengthsByDay = activitiesByDay.map((a) => {
+  const activityStrengthsByDay: number[] = activitiesByDay.map((a) => {
     if (!a) {
       return 0;
     }
     return a.reduce((acc, activity) => acc + activity.value, 0);
   });
-  // create array of progress items per period
-  const period: boolean[] = [];
-  progress.forEach((p) => {
-    if (p.category.repeatType !== 'MONTHLY') {
-      return; // TODO: handle other repeat types
-    }
-    const i = p.activityDate.toDate().getMonth();
-    period[i] = p.isGoalCompleted;
-  });
+
   // console.log(progress);
   // create items for each day
   const days = [];
@@ -101,13 +95,13 @@ export default function Heatmap(props: HeatmapProps) {
               className={classNames(styles.fill, {
                 [styles['fill--good']]: props.category?.goalType === 'MIN',
                 [styles['fill--bad']]: props.category?.goalType === 'MAX',
-                [styles['fill--goal']]:
-                  period[
-                    getDateFromDayOfYear(
-                      currentDate.getFullYear(),
-                      i,
-                    ).getMonth()
-                  ],
+                [styles['fill--goal']]: progress.find((p) =>
+                  checkIfDatesAreInPeriod(
+                    p.activityDate.toDate(),
+                    getDateFromDayOfYear(currentDate.getFullYear(), i),
+                    p.category,
+                  ),
+                )?.isGoalCompleted,
               })}
             ></div>
             <div className={styles.tooltip}>

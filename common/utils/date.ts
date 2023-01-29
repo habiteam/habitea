@@ -22,19 +22,19 @@ export function getLastDayOfMonth(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0);
 }
 
+export function getFirstDayOfWeek(date: Date): Date {
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate() - ((date.getDay() + 6) % 7) + 1,
+  );
+}
+
 export function getLastDayOfWeek(date: Date): Date {
   return new Date(
     date.getFullYear(),
     date.getMonth(),
     date.getDate() + (6 - date.getDay()),
-  );
-}
-
-export function getFirstDayOfWeek(date: Date): Date {
-  return new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate() - date.getDay(),
   );
 }
 
@@ -58,6 +58,12 @@ export function getDayOfYear(date: Date): number {
 
 export function getDateFromDayOfYear(year: number, day: number): Date {
   return new Date(year, 0, day);
+}
+
+export function getWeekOfYear(date: Date): number {
+  const firstDayOfYear = getFirstDayOfWeek(new Date(date.getFullYear(), 0, 1));
+  const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
+  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() - 1) / 7);
 }
 
 export function getDateInputFormatFromDate(date: Date): string {
