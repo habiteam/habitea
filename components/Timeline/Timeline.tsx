@@ -1,7 +1,6 @@
 import { categoriesAtom } from '@atoms/categories';
 import { userAtom } from '@atoms/user';
 import { ActivitiesService } from '@services/activities';
-import { calculateProgress } from '@utils/habits';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
 import { useState, useEffect, useRef } from 'react';

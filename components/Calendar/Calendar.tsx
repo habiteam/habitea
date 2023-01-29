@@ -1,4 +1,4 @@
-import { ActivityUnitTypeOptions, Months } from '@constants/dictionaries';
+import { Months } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
@@ -15,6 +15,7 @@ import {
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { getActivityValue } from '@utils/activity-utils';
 import styles from './Calendar.module.scss';
 
 export interface CalendarProps {
@@ -108,14 +109,10 @@ export default function Calendar(props: CalendarProps) {
                   width={14}
                 ></FontAwesomeIcon>
               )}
-              {/* //TODO handle different unit types */}
               {/* //TODO show details on click */}
               <span className={styles['day-activity__description']}>
                 &nbsp;
-                {activity.category?.name}{' '}
-                {activity.category?.unitType === 'QUANTITY'
-                  ? `${activity.value} ${activity.category?.unit}`
-                  : activity.duration}
+                {activity.category?.name} {getActivityValue(activity)}
               </span>
             </div>
           ))}

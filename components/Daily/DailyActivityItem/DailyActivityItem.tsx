@@ -3,6 +3,7 @@ import {
   IconName,
 } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getActivityValue } from '@utils/activity-utils';
 import { getTimeFromDate } from '@utils/date';
 import classNames from 'classnames';
 import { DailyActivity } from '../Daily.schema';
@@ -34,9 +35,7 @@ export default function DailyActivityItem({
               width={48}
             ></FontAwesomeIcon>
             <div>
-              {activity.category?.unitType === 'QUANTITY'
-                ? `${activity.value} ${activity.category?.unit}`
-                : activity.duration}
+              {getActivityValue(activity)}
               {activity.progress && <h2>{activity.progress.toFixed(0)}%</h2>}
             </div>
           </div>
