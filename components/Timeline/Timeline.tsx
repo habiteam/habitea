@@ -7,6 +7,7 @@ import { useAtomValue } from 'jotai';
 import { useState, useEffect } from 'react';
 import { Activity } from '@schemas/activity';
 import { Days } from '@constants/dictionaries';
+import { getSecondsFromDuration } from '@utils/duration';
 import styles from './Timeline.module.scss';
 
 interface TimelineProps {}
@@ -83,6 +84,28 @@ export default function Timeline(props: TimelineProps) {
                   <span className={styles.hour} key={hour}>
                     {hour}
                   </span>
+                ))}
+
+                {day.activities.map((activity, activityIndex) => (
+                  <div
+                    className={styles.activity}
+                    style={{
+                      top: `${((activityIndex * 48) % 240) + 48}px`,
+                      left: `${
+                        120 * activity.activityDate.toDate().getHours() +
+                        activity.activityDate.toDate().getMinutes()
+                      }px`,
+                      width:
+                        activity.category?.unitType === 'TIME'
+                          ? `${
+                              getSecondsFromDuration(activity.duration) / 30
+                            }px`
+                          : 'auto',
+                    }}
+                    key={activity.id}
+                  >
+                    {activity.category?.name}
+                  </div>
                 ))}
               </div>
             </div>

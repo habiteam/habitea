@@ -14,7 +14,7 @@
 }
 
 .day-container {
-  width: 1200px;
+  width: 2880px;
 
   .day-name {
     position: sticky;
@@ -24,11 +24,21 @@
 
 .hour-container {
   display: flex;
+  position: relative;
 
   .hour {
     flex: 1;
     border-left: 1px solid var(--c-outline);
     padding-left: 4px;
-    min-height: 200px;
+    min-height: 320px;
+  }
+
+  .activity {
+    position: absolute;
+    padding: 8px;
+    border-radius: 999px;
+    background-color: var(--c-primary);
+    color: var(--c-primary-text);
+    min-width: 120px;
   }
 }
