@@ -104,7 +104,9 @@ export default function Timeline(props: TimelineProps) {
                     }}
                     key={activity.id}
                   >
-                    {activity.category?.name}
+                    <span style={{ position: 'sticky', left: '8px' }}>
+                      {activity.category?.name}
+                    </span>
                   </div>
                 ))}
               </div>
