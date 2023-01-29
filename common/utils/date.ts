@@ -73,6 +73,6 @@ export function getTimeFromDate(date: Date): string {
   }).format(date);
 }
 
-export function getSevenDaysAgo(): Date {
-  return new Date(new Date().setDate(new Date().getDate() - 7));
+export function getSevenDaysAgo(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
 }
