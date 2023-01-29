@@ -109,7 +109,7 @@ export default function Timeline(props: TimelineProps) {
                       top: `${((activityIndex * 48) % 240) + 48}px`,
                       left: `${
                         120 * activity.activityDate.toDate().getHours() +
-                        activity.activityDate.toDate().getMinutes()
+                        activity.activityDate.toDate().getMinutes() * 2
                       }px`,
                       width:
                         activity.category?.unitType === 'TIME'
