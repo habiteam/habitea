@@ -65,7 +65,7 @@
 }
 
 .tooltip {
-  visibility: hidden;
+  display: none;
   background-color: var(--c-secondary);
   color: var(--c-secondary-text);
   text-align: center;
@@ -75,7 +75,7 @@
   z-index: 1;
 
   .item:hover & {
-    visibility: visible;
+    display: block;
   }
 }
 
