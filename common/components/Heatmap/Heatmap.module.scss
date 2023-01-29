@@ -9,6 +9,19 @@
   width: max-content;
   padding-block: 8px;
 }
+.heatmap-months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: 1fr;
+  justify-content: start;
+  gap: 8px;
+  width: max-content;
+  padding-block: 8px;
+}
+.heatmap-month {
+  width: 112px;
+  height: 24px;
+}
 .heatmap-container {
   overflow-x: auto;
 }

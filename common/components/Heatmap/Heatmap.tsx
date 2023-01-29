@@ -1,5 +1,6 @@
 import { userAtom } from '@atoms/user';
 import Button from '@commonComponents/Button/Button';
+import { Months } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { CategoryProgress } from '@schemas/category-progress';
@@ -141,6 +142,13 @@ export default function Heatmap(props: HeatmapProps) {
       </div>
 
       <div className={styles['heatmap-container']}>
+        <div className={styles['heatmap-months']}>
+          {Months.map((month) => (
+            <div key={month} className={styles['heatmap-month']}>
+              {month}
+            </div>
+          ))}
+        </div>
         <div className={styles.heatmap}>{days.map((day) => day)}</div>
       </div>
     </div>
