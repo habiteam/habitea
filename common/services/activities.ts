@@ -2,7 +2,11 @@ import { DatabaseCollection } from '@constants/collections';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { CategoryProgress } from '@schemas/category-progress';
-import { getFirstDayOfYear, getLastDayOfYear } from '@utils/date';
+import {
+  getFirstDayOfYear,
+  getLastDayOfYear,
+  getSevenDaysAgo,
+} from '@utils/date';
 import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import { getWheresForPeriod } from '@utils/time';
 import { generateUUID } from '@utils/uuid';
@@ -204,6 +208,28 @@ export class ActivitiesService {
       activitiesRef,
       where('createdBy', '==', userId),
       ...getWheresForPeriod('DAILY', from),
+      orderBy('activityDate', 'asc'),
+    );
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((response) =>
+      Activity.fromFirestore(response),
+    );
+  }
+
+  static async getForLastSevenDays(
+    from: Date,
+    userId: string,
+  ): Promise<Activity[]> {
+    const activitiesRef = collection(database, this.collectionName);
+    const q = query(
+      activitiesRef,
+      where('createdBy', '==', userId),
+      where('activityDate', '>=', Timestamp.fromDate(getSevenDaysAgo(from))),
+      where(
+        'activityDate',
+        '<=',
+        Timestamp.fromDate(new Date(from.setHours(24, 0, 0))),
+      ),
       orderBy('activityDate', 'asc'),
     );
     const querySnapshot = await getDocs(q);

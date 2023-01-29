@@ -48,3 +48,16 @@ export const Months = [
   'November',
   'December',
 ];
+
+export const Days = {
+  short: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+  long: [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ],
+};

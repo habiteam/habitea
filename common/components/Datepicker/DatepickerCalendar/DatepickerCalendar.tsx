@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Days } from '@constants/dictionaries';
 import styles from './DatepickerCalendar.module.scss';
 import {
   getFirstDayOfMonth,
@@ -22,7 +23,7 @@ export function DatepickerCalendar({
   selectedDate,
   onChange,
 }: DatepickerCalendarPropSchema) {
-  const weekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+  const weekdays = Days.short;
 
   const emptiesBefore: any[] = [];
   const days: any[] = [];

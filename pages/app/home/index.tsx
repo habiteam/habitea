@@ -12,6 +12,7 @@ import Journal from '@components/Journal/Journal';
 import Block from '@commonComponents/Block/Block';
 import classNames from 'classnames';
 import Daily from '@components/Daily/Daily';
+import Timeline from '@components/Timeline/Timeline';
 import styles from './Home.module.scss';
 
 export default function Home() {
@@ -60,7 +61,9 @@ export default function Home() {
         <Block title="Daily">
           <Daily></Daily>
         </Block>
-        <Block title="Timeline"></Block>
+        <Block title="Timeline">
+          <Timeline></Timeline>
+        </Block>
         <Block title="Journal">
           {activityList.length > 0 && (
             <Journal activities={activityList}></Journal>

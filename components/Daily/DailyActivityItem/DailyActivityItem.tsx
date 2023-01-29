@@ -33,7 +33,12 @@ export default function DailyActivityItem({
               })}
               width={48}
             ></FontAwesomeIcon>
-            {activity.progress && <h2>{activity.progress.toFixed(0)}%</h2>}
+            <div>
+              {activity.category?.unitType === 'QUANTITY'
+                ? `${activity.value} ${activity.category?.unit}`
+                : activity.duration}
+              {activity.progress && <h2>{activity.progress.toFixed(0)}%</h2>}
+            </div>
           </div>
         </>
       ) : (
