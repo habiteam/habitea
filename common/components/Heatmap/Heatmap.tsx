@@ -14,7 +14,6 @@ import {
   getFirstDayOfYear,
   getPreviousYear,
   getNextYear,
-  getWeekOfYear,
 } from '@utils/date';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
@@ -69,9 +68,14 @@ export default function Heatmap(props: HeatmapProps) {
 
   useEffect(() => {
     const handleWindowMouseMove = (event: MouseEvent) => {
+      let additionalY = 0;
+      if (document.getElementById('appLayout')) {
+        additionalY = document.getElementById('appLayout')?.scrollTop ?? 0;
+      }
+
       setCoords({
         x: event.clientX + 12,
-        y: event.clientY + 12,
+        y: event.clientY + 12 + additionalY,
       });
     };
     window.addEventListener('mousemove', handleWindowMouseMove);
@@ -83,6 +87,7 @@ export default function Heatmap(props: HeatmapProps) {
 
   // Group activities by day
   const activitiesByDay: Activity[][] = [];
+
   activities.forEach((activity) => {
     const day = getDayOfYear(activity.activityDate.toDate());
     if (!activitiesByDay[day]) {
