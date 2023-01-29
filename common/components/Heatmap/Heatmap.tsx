@@ -31,6 +31,7 @@ export default function Heatmap(props: HeatmapProps) {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [progress, setProgress] = useState<CategoryProgress[]>([]);
   const user = useAtomValue(userAtom);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
 
   const loadPreviousYear = () => {
     setCurrentDate(getPreviousYear(currentDate));
@@ -65,6 +66,20 @@ export default function Heatmap(props: HeatmapProps) {
       fetchProgress();
     }
   }, [currentDate, props.category]);
+
+  useEffect(() => {
+    const handleWindowMouseMove = (event: MouseEvent) => {
+      setCoords({
+        x: event.clientX + 12,
+        y: event.clientY + 12,
+      });
+    };
+    window.addEventListener('mousemove', handleWindowMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleWindowMouseMove);
+    };
+  }, []);
 
   // Group activities by day
   const activitiesByDay: Activity[][] = [];
@@ -105,7 +120,10 @@ export default function Heatmap(props: HeatmapProps) {
                 )?.isGoalCompleted,
               })}
             ></div>
-            <div className={styles.tooltip}>
+            <div
+              className={styles.tooltip}
+              style={{ top: `${coords.y}px`, left: `${coords.x}px` }}
+            >
               {getDateFromDayOfYear(
                 currentDate.getFullYear(),
                 i,
@@ -114,7 +132,10 @@ export default function Heatmap(props: HeatmapProps) {
           </div>
         ) : (
           <div className={classNames(styles.item, styles['item--empty'])}>
-            <div className={styles.tooltip}>
+            <div
+              className={styles.tooltip}
+              style={{ top: `${coords.y}px`, left: `${coords.x}px` }}
+            >
               {getDateFromDayOfYear(
                 currentDate.getFullYear(),
                 i,
