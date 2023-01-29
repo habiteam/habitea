@@ -72,3 +72,7 @@ export function getTimeFromDate(date: Date): string {
     timeStyle: 'short',
   }).format(date);
 }
+
+export function getSevenDaysAgo(): Date {
+  return new Date(new Date().setDate(new Date().getDate() - 7));
+}
