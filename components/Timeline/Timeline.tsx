@@ -4,7 +4,7 @@ import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Activity } from '@schemas/activity';
 import { Days } from '@constants/dictionaries';
 import { getSecondsFromDuration } from '@utils/duration';
@@ -21,6 +21,7 @@ export default function Timeline(props: TimelineProps) {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
   const [dayCollection, setDayCollection] = useState<DayCollection[]>([]);
+  const divRef = useRef<HTMLDivElement>(null);
 
   function mapToDayCollection(activities: Activity[]): DayCollection[] {
     const activitiesWithCategory = activities.map((activity) => ({
@@ -54,7 +55,6 @@ export default function Timeline(props: TimelineProps) {
       await ActivitiesService.getForLastSevenDays(new Date(), user?.uid).then(
         (response) => {
           setDayCollection(mapToDayCollection(response));
-          console.log(dayCollection);
         },
       );
     }
@@ -72,9 +72,25 @@ export default function Timeline(props: TimelineProps) {
     hours.push(i);
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (divRef.current) {
+        const today = new Date();
+
+        divRef.current.scrollBy({
+          left:
+            17280 +
+            (120 * today.getHours() + today.getMinutes()) -
+            divRef.current.clientWidth / 2,
+          behavior: 'smooth',
+        });
+      }
+    }, 1000);
+  }, []);
+
   return (
     <div className={classNames(styles['timeline-wrapper'])}>
-      <div className={classNames(styles.timeline)}>
+      <div ref={divRef} className={classNames(styles.timeline)}>
         <div className={classNames(styles.container)}>
           {dayCollection.map((day, index) => (
             <div className={styles['day-container']} key={index}>
