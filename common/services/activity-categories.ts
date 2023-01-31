@@ -9,6 +9,7 @@ import {
   where,
   deleteDoc,
   updateDoc,
+  runTransaction,
 } from 'firebase/firestore';
 import {
   ActivityCategory,
@@ -18,6 +19,7 @@ import { generateUUID } from '@utils/uuid';
 import { auth, database } from '@services/firebase';
 import { DatabaseCollection } from '@constants/collections';
 import { ActivityCategoryStatus } from '@constants/dictionaries';
+import { ActivitiesService } from './activities';
 
 export class ActivityCategoriesService {
   static readonly collectionName = DatabaseCollection.ActivityCategories;
@@ -40,8 +42,26 @@ export class ActivityCategoriesService {
     });
   }
 
-  static deleteById(categoryId: string): void {
-    deleteDoc(doc(database, this.collectionName, categoryId));
+  static async deleteById(categoryId: string, userId: string): Promise<void> {
+    // get all activities for this category
+    const activities = await ActivitiesService.getByCategoryId(
+      categoryId,
+      userId,
+    );
+    await runTransaction(database, async (transaction) => {
+      const category = await transaction.get(
+        doc(database, this.collectionName, categoryId),
+      );
+      if (!category.exists()) {
+        throw new Error('Category does not exist!');
+      }
+      activities.forEach((activity) => {
+        transaction.delete(
+          doc(database, ActivitiesService.collectionName, activity.id),
+        );
+      });
+      transaction.delete(category.ref);
+    });
   }
 
   static async getById(categoryId: string): Promise<ActivityCategory | null> {
