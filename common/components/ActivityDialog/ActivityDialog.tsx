@@ -1,11 +1,12 @@
 import { activityAtom, openActivityModalAtom } from '@atoms/activity-dialog';
-import { journalReloader } from '@atoms/reloaders';
+import { activityReloader } from '@atoms/reloaders';
 import Button from '@commonComponents/Button/Button';
 import DateInput from '@commonComponents/DateInput/DateInput';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
 import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialog';
 import Input from '@commonComponents/Input/Input';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
+import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
 import { getDateInputFormatFromDate } from '@utils/date';
@@ -29,7 +30,7 @@ export default function ActivityDialog() {
   );
   const buttonRef = useRef(null);
   const addNotification = useAddNotification();
-  const setReloader = useSetAtom(journalReloader);
+  const setReloader = useSetAtom(activityReloader);
 
   useEffect(() => {
     if (activity) {
@@ -81,21 +82,20 @@ export default function ActivityDialog() {
             onClick: () => {
               const activityDate = Timestamp.fromDate(new Date(date));
 
+              const activityRequest: Partial<Activity> = {
+                id: activity?.id as string,
+                value,
+                duration,
+                activityDate,
+              };
+
               if (selectedCategory) {
-                ActivitiesService.update(
-                  {
-                    id: activity?.id,
-                    value,
-                    duration,
-                    activityDate,
-                  },
-                  selectedCategory,
-                );
+                ActivitiesService.update(activityRequest, selectedCategory);
                 addNotification({
                   message: activity ? 'Activity updated' : 'Activity created',
                   type: 'success',
                 });
-                setReloader(activityDate.toDate());
+                setReloader(activityRequest);
                 setOpenActivityModal(false);
               }
             },

@@ -1,5 +1,5 @@
 import { openActivityModalAtom, activityAtom } from '@atoms/activity-dialog';
-import { journalReloader } from '@atoms/reloaders';
+import { activityReloader } from '@atoms/reloaders';
 import Button from '@commonComponents/Button/Button';
 import Dialog from '@commonComponents/Dialog/Dialog';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -10,7 +10,6 @@ import { ActivitiesService } from '@services/activities';
 import { getActivityValue } from '@utils/activity-utils';
 import { getDateInputFormatFromDate } from '@utils/date';
 import { useAddNotification } from '@utils/notifications';
-import { getDateStringFromTimestamp } from '@utils/time';
 import classNames from 'classnames';
 import { useSetAtom } from 'jotai';
 import { useState } from 'react';
@@ -24,12 +23,12 @@ export default function ActivityItem(props: ActivityItemProps) {
   const setActivity = useSetAtom(activityAtom);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const addNotification = useAddNotification();
-  const setReloader = useSetAtom(journalReloader);
+  const setReloader = useSetAtom(activityReloader);
 
   const deleteActivity = (): void => {
     ActivitiesService.deleteById(props.activity.id as string);
     addNotification({ message: 'Activity deleted', type: 'info' });
-    setReloader(props.activity.activityDate.toDate());
+    setReloader(props.activity);
     setDeleteDialogOpen(false);
   };
 

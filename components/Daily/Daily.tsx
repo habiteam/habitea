@@ -1,4 +1,5 @@
 import { categoriesAtom } from '@atoms/categories';
+import { activityReloader } from '@atoms/reloaders';
 import { userAtom } from '@atoms/user';
 import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
@@ -15,6 +16,7 @@ export default function Daily(props: DailyProps) {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
   const [activities, setActivities] = useState<DailyActivity[]>([]);
+  const reloader = useAtomValue(activityReloader);
 
   const fetchActivities = async () => {
     if (user && activityCategories) {
@@ -42,7 +44,7 @@ export default function Daily(props: DailyProps) {
     if (user && activityCategories) {
       fetchActivities();
     }
-  }, [user, activityCategories]);
+  }, [user, activityCategories, reloader]);
 
   return (
     <div className={classNames(styles.container)}>

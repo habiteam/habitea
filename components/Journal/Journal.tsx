@@ -10,7 +10,7 @@ import ActivityItem from '@commonComponents/ActivityItem/ActivityItem';
 import { Months } from '@constants/dictionaries';
 import { ActivityCategory } from '@schemas/activity-category';
 import { calculateProgress } from '@utils/habits';
-import { journalReloader } from '@atoms/reloaders';
+import { activityReloader } from '@atoms/reloaders';
 import styles from './Journal.module.scss';
 
 interface JournalProps {
@@ -31,7 +31,7 @@ interface MonthCollection {
 export default function Journal(props: JournalProps) {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
-  const reloader = useAtomValue(journalReloader);
+  const reloader = useAtomValue(activityReloader);
 
   const [activityList, setActivityList] = useState<MonthCollection[]>([
     {
@@ -96,8 +96,11 @@ export default function Journal(props: JournalProps) {
     if (reloader && user) {
       const fetchData = async () =>
         mapToMonthCollection(
-          await ActivitiesService.getForMonth(reloader, user?.uid),
-          reloader,
+          await ActivitiesService.getForMonth(
+            reloader.activityDate?.toDate() as Date,
+            user?.uid,
+          ),
+          reloader.activityDate?.toDate() as Date,
         );
 
       fetchData().then((response) => {

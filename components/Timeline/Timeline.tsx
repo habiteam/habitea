@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Activity } from '@schemas/activity';
 import { Days } from '@constants/dictionaries';
 import { getSecondsFromDuration } from '@utils/duration';
+import { activityReloader } from '@atoms/reloaders';
 import styles from './Timeline.module.scss';
 
 interface TimelineProps {}
@@ -21,6 +22,7 @@ export default function Timeline(props: TimelineProps) {
   const activityCategories = useAtomValue(categoriesAtom);
   const [dayCollection, setDayCollection] = useState<DayCollection[]>([]);
   const divRef = useRef<HTMLDivElement>(null);
+  const reloader = useAtomValue(activityReloader);
 
   function mapToDayCollection(activities: Activity[]): DayCollection[] {
     const activitiesWithCategory = activities.map((activity) => ({
@@ -63,7 +65,7 @@ export default function Timeline(props: TimelineProps) {
     if (user && activityCategories) {
       fetchActivities();
     }
-  }, [user, activityCategories]);
+  }, [user, activityCategories, reloader]);
 
   const hours: number[] = [];
 

@@ -13,12 +13,14 @@ import Block from '@commonComponents/Block/Block';
 import classNames from 'classnames';
 import Daily from '@components/Daily/Daily';
 import Timeline from '@components/Timeline/Timeline';
+import { activityReloader } from '@atoms/reloaders';
 import styles from './Home.module.scss';
 
 export default function Home() {
   const user = useAtomValue(userAtom);
   const [activityList, setActivityList] = useState<Activity[]>([]);
   const setActivityCategories = useSetAtom(categoriesAtom);
+  const reloader = useAtomValue(activityReloader);
 
   useEffect(() => {
     if (user) {
@@ -44,7 +46,7 @@ export default function Home() {
       };
       fetchData();
     }
-  }, [user]);
+  }, [user, reloader]);
 
   return (
     <>
@@ -58,7 +60,7 @@ export default function Home() {
       </div>
 
       <div className={classNames(styles['blocks-container'])}>
-        <Block title="Daily">
+        <Block title={new Date().toISOString().split('T')[0]}>
           <Daily></Daily>
         </Block>
         <Block title="Timeline">
