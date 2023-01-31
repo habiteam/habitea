@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+
+  > div {
+    min-width: 200px;
+  }
+}
+
+.contributors-container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tooltip {
+  background-color: var(--c-secondary);
+  color: var(--c-secondary-text);
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}

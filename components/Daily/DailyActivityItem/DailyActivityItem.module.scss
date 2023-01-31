@@ -8,10 +8,20 @@
   flex-direction: column;
   gap: 12px;
 
+  .item-header {
+    .category-name {
+      font-size: 2rem;
+    }
+  }
+
   .item-content {
     display: flex;
     align-items: center;
     gap: 16px;
+
+    .activity-progress {
+      font-size: 2rem;
+    }
   }
 
   .item-icon {

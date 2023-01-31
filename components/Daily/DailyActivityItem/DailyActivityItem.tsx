@@ -21,7 +21,11 @@ export default function DailyActivityItem({
       {activity ? (
         <>
           <div className={classNames(styles['item-header'])}>
-            {activity.category && <h2>{activity.category.name}</h2>}
+            {activity.category && (
+              <div className={classNames(styles['category-name'])}>
+                {activity.category.name}
+              </div>
+            )}
             {getTimeFromDate(activity.activityDate.toDate())}
           </div>
 
@@ -36,7 +40,11 @@ export default function DailyActivityItem({
             ></FontAwesomeIcon>
             <div>
               {getActivityValue(activity)}
-              {activity.progress && <h2>{activity.progress.toFixed(0)}%</h2>}
+              {activity.progress && (
+                <div className={classNames(styles['activity-progress'])}>
+                  {activity.progress.toFixed(0)}%
+                </div>
+              )}
             </div>
           </div>
         </>
