@@ -95,10 +95,17 @@ export default function Category() {
   };
 
   const deleteCategory = (): void => {
-    ActivityCategoriesService.deleteById(category?.id as string);
-    router.push('/app/categories');
-    addNotifcation({ message: 'Category deleted', type: 'info' });
-    setCategoryListReloader(generateUUID());
+    if (user) {
+      ActivityCategoriesService.deleteById(category?.id as string, user.uid)
+        .then(() => {
+          router.push('/app/categories');
+          addNotifcation({ message: 'Category deleted', type: 'info' });
+          setCategoryListReloader(generateUUID());
+        })
+        .catch((error) => {
+          addNotifcation({ message: 'Something went wrong', type: 'danger' });
+        });
+    }
   };
 
   useEffect(() => {
