@@ -11,8 +11,8 @@ export interface ContributorPropSchema {
   rel?: string;
   img?: string;
   name: string;
-  onMouseEnter: (name: string) => any;
-  onMouseLeave: () => any;
+  onMouseEnter?: (name: string) => any;
+  onMouseLeave?: () => any;
 }
 
 export default function Contributor(props: ContributorPropSchema) {
@@ -25,8 +25,12 @@ export default function Contributor(props: ContributorPropSchema) {
           width={200}
           height={200}
           className={classNames(styles.avatar)}
-          onMouseEnter={() => props.onMouseEnter(props.name)}
-          onMouseLeave={() => props.onMouseLeave()}
+          onMouseEnter={() => {
+            if (props.onMouseEnter) props.onMouseEnter(props.name);
+          }}
+          onMouseLeave={() => {
+            if (props.onMouseLeave) props.onMouseLeave();
+          }}
         ></Image>
       </a>
     </NextLink>
