@@ -81,7 +81,7 @@ export default function Info() {
 
           <p>
             On
-            <Link color="primary" href="/app/home">
+            <Link color="primary" href="/app/options">
               <FontAwesomeIcon icon={faGear}></FontAwesomeIcon> options
             </Link>
             page you can set different theme.
@@ -113,7 +113,14 @@ export default function Info() {
         </Block>
 
         <Block title="Version">
-          Currently we are preparing for version: <strong>1.0.0</strong>
+          Currently we are preparing for version:
+          <Link
+            color="primary"
+            target="_blank"
+            href="https://github.com/habiteam/habitea/milestone/1"
+          >
+            1.0.0
+          </Link>
         </Block>
 
         <Block title="Contributors">
