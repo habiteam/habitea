@@ -25,11 +25,15 @@ export default function ActivityItem(props: ActivityItemProps) {
   const addNotification = useAddNotification();
   const setReloader = useSetAtom(activityReloader);
 
-  const deleteActivity = (): void => {
-    ActivitiesService.deleteById(props.activity.id as string);
-    addNotification({ message: 'Activity deleted', type: 'info' });
-    setReloader(props.activity);
-    setDeleteDialogOpen(false);
+  const deleteActivity = async () => {
+    try {
+      ActivitiesService.deleteById(props.activity.id as string);
+      addNotification({ message: 'Activity deleted', type: 'info' });
+      setReloader(props.activity);
+      setDeleteDialogOpen(false);
+    } catch (e) {
+      addNotification({ message: 'Error deleting activity', type: 'danger' });
+    }
   };
 
   return (

@@ -56,7 +56,7 @@ export function CategoryUpdateDialog({
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  const updateCategory = () => {
+  const updateCategory = async () => {
     const tempForm = form;
 
     if (tempForm.name.length === 0) {
@@ -73,8 +73,14 @@ export function CategoryUpdateDialog({
         Math.max(0, getSecondsFromDuration(tempForm.duration)),
       );
     }
-
-    ActivityCategoriesService.update(form);
+    try {
+      await ActivityCategoriesService.update(form);
+    } catch (e: any) {
+      addNotifcation({
+        message: e.message,
+        type: 'danger',
+      });
+    }
     setIsUpdateDialogOpen(false);
   };
 

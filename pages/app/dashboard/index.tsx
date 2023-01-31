@@ -12,6 +12,7 @@ import { ActivitiesService } from '@services/activities';
 import { calculateProgress } from '@utils/habits';
 import Calendar from '@components/Calendar/Calendar';
 import Chip from '@commonComponents/Chip/Chip';
+import { useAddNotification } from '@utils/notifications';
 import styles from './Dashboard.module.scss';
 
 export default function Dashboard() {
@@ -19,6 +20,7 @@ export default function Dashboard() {
   const user = useAtomValue(userAtom);
   const [activityCategories, setActivityCategories] = useAtom(categoriesAtom);
   const [habitProgress, setHabitProgress] = useState<number>(0);
+  const addNotifcation = useAddNotification();
 
   useEffect(() => {
     if (user) {
@@ -39,6 +41,7 @@ export default function Dashboard() {
               new Date(),
               user?.uid,
             );
+
             // calculate progress for each category
             const progress = calculateProgress(activities, category);
             return progress;
@@ -47,7 +50,12 @@ export default function Dashboard() {
         const results = await Promise.all(promises);
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
       };
-      fetchData();
+      fetchData().catch((e) => {
+        addNotifcation({
+          type: 'danger',
+          message: 'Could not fetch categories',
+        });
+      });
     }
   }, [user]);
 

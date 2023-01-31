@@ -35,6 +35,8 @@ import { CategoryUpdateDialog } from '@components/CategoriesLayout/CategoryUpdat
 import Head from 'next/head';
 import { useAddNotification } from '@utils/notifications';
 import Heatmap from '@commonComponents/Heatmap/Heatmap';
+import getErrorMessage from '@utils/firebase-error';
+import { FirebaseError } from 'firebase/app';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -66,8 +68,8 @@ export default function Category() {
 
   const updateCategory = (): void => {
     if (!router.isReady || !user) return;
-    ActivityCategoriesService.getById(router.query.id as string).then(
-      (response) => {
+    ActivityCategoriesService.getById(router.query.id as string)
+      .then((response) => {
         setCategory(response as ActivityCategory);
         ActivitiesService.getByCategoryForPeriod(
           response as ActivityCategory,
@@ -78,20 +80,26 @@ export default function Category() {
             setRecentActivities(responseActivities);
           })
           .catch((error) => {
-            addNotifcation({ message: error.toString(), type: 'danger' });
+            addNotifcation({ message: getErrorMessage(error), type: 'danger' });
           });
-      },
-    );
+      })
+      .catch((error) => {
+        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+      });
   };
 
-  const updateCategoryStatus = (): void => {
-    ActivityCategoriesService.patchStatus(
-      router.query.id as string,
-      category?.status === 'ACTIVE' ? 'ARCHIVED' : 'ACTIVE',
-    );
-    addNotifcation({ message: 'Category status updated', type: 'info' });
-    updateCategory();
-    setStatusDialogOpen(false);
+  const updateCategoryStatus = async () => {
+    try {
+      await ActivityCategoriesService.patchStatus(
+        router.query.id as string,
+        category?.status === 'ACTIVE' ? 'ARCHIVED' : 'ACTIVE',
+      );
+      addNotifcation({ message: 'Category status updated', type: 'info' });
+      updateCategory();
+      setStatusDialogOpen(false);
+    } catch (error: any) {
+      addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+    }
   };
 
   const deleteCategory = (): void => {
@@ -102,8 +110,8 @@ export default function Category() {
           addNotifcation({ message: 'Category deleted', type: 'info' });
           setCategoryListReloader(generateUUID());
         })
-        .catch((error) => {
-          addNotifcation({ message: 'Something went wrong', type: 'danger' });
+        .catch((error: FirebaseError) => {
+          addNotifcation({ message: getErrorMessage(error), type: 'danger' });
         });
     }
   };

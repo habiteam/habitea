@@ -11,6 +11,9 @@ import { Months } from '@constants/dictionaries';
 import { ActivityCategory } from '@schemas/activity-category';
 import { calculateProgress } from '@utils/habits';
 import { activityReloader } from '@atoms/reloaders';
+import getErrorMessage from '@utils/firebase-error';
+import { useAddNotification } from '@utils/notifications';
+import { FirebaseError } from 'firebase/app';
 import styles from './Journal.module.scss';
 
 interface JournalProps {
@@ -32,6 +35,7 @@ export default function Journal(props: JournalProps) {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
   const reloader = useAtomValue(activityReloader);
+  const addNotifcation = useAddNotification();
 
   const [activityList, setActivityList] = useState<MonthCollection[]>([
     {
@@ -82,13 +86,17 @@ export default function Journal(props: JournalProps) {
     if (user) {
       const newMonth = getPreviousMonth(lastLoadedMonth);
 
-      const monthCollection = mapToMonthCollection(
-        await ActivitiesService.getForMonth(newMonth, user?.uid),
-        newMonth,
-      );
+      try {
+        const monthCollection = mapToMonthCollection(
+          await ActivitiesService.getForMonth(newMonth, user?.uid),
+          newMonth,
+        );
 
-      setActivityList((prev) => [...prev, monthCollection]);
-      setLastLoadedMonth(newMonth);
+        setActivityList((prev) => [...prev, monthCollection]);
+        setLastLoadedMonth(newMonth);
+      } catch (error: any) {
+        addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+      }
     }
   }
 
@@ -103,21 +111,25 @@ export default function Journal(props: JournalProps) {
           reloader.activityDate?.toDate() as Date,
         );
 
-      fetchData().then((response) => {
-        setActivityList((prev) => {
-          const index = prev.findIndex(
-            (el) => el.year === response.year && el.month === response.month,
-          );
+      fetchData()
+        .then((response) => {
+          setActivityList((prev) => {
+            const index = prev.findIndex(
+              (el) => el.year === response.year && el.month === response.month,
+            );
 
-          const temp = [...prev];
+            const temp = [...prev];
 
-          if (index !== -1) {
-            temp[index].activities = response.activities;
-          }
+            if (index !== -1) {
+              temp[index].activities = response.activities;
+            }
 
-          return temp;
+            return temp;
+          });
+        })
+        .catch((error: FirebaseError) => {
+          addNotifcation({ message: getErrorMessage(error), type: 'danger' });
         });
-      });
     }
   }, [reloader]);
 

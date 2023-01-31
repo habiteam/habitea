@@ -14,6 +14,7 @@ import classNames from 'classnames';
 import Daily from '@components/Daily/Daily';
 import Timeline from '@components/Timeline/Timeline';
 import { activityReloader } from '@atoms/reloaders';
+import { useAddNotification } from '@utils/notifications';
 import styles from './Home.module.scss';
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
   const [activityList, setActivityList] = useState<Activity[]>([]);
   const setActivityCategories = useSetAtom(categoriesAtom);
   const reloader = useAtomValue(activityReloader);
+  const addNotifcation = useAddNotification();
 
   useEffect(() => {
     if (user) {
@@ -44,7 +46,12 @@ export default function Home() {
         }));
         setActivityList(recentActivities);
       };
-      fetchData();
+      fetchData().catch((e) => {
+        addNotifcation({
+          type: 'danger',
+          message: 'Could not fetch activities',
+        });
+      });
     }
   }, [user, reloader]);
 

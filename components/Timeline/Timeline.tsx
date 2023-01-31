@@ -8,6 +8,7 @@ import { Activity } from '@schemas/activity';
 import { Days } from '@constants/dictionaries';
 import { getSecondsFromDuration } from '@utils/duration';
 import { activityReloader } from '@atoms/reloaders';
+import { useAddNotification } from '@utils/notifications';
 import styles from './Timeline.module.scss';
 
 interface TimelineProps {}
@@ -23,6 +24,7 @@ export default function Timeline(props: TimelineProps) {
   const [dayCollection, setDayCollection] = useState<DayCollection[]>([]);
   const divRef = useRef<HTMLDivElement>(null);
   const reloader = useAtomValue(activityReloader);
+  const addNotifcation = useAddNotification();
 
   function mapToDayCollection(activities: Activity[]): DayCollection[] {
     const activitiesWithCategory = activities.map((activity) => ({
@@ -53,11 +55,15 @@ export default function Timeline(props: TimelineProps) {
 
   const fetchActivities = async () => {
     if (user && activityCategories) {
-      await ActivitiesService.getForLastSevenDays(new Date(), user?.uid).then(
-        (response) => {
-          setDayCollection(mapToDayCollection(response));
-        },
-      );
+      try {
+        await ActivitiesService.getForLastSevenDays(new Date(), user?.uid).then(
+          (response) => {
+            setDayCollection(mapToDayCollection(response));
+          },
+        );
+      } catch (error: any) {
+        addNotifcation({ message: error.message, type: 'danger' });
+      }
     }
   };
 

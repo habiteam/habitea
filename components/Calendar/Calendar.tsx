@@ -16,6 +16,8 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { getActivityValue } from '@utils/activity-utils';
+import { useAddNotification } from '@utils/notifications';
+import getErrorMessage from '@utils/firebase-error';
 import styles from './Calendar.module.scss';
 
 export interface CalendarProps {
@@ -27,6 +29,7 @@ export default function Calendar(props: CalendarProps) {
   const user = useAtomValue(userAtom);
   const [activities, setActivities] = useState<Activity[]>([]);
   const activityCategories = useAtomValue(categoriesAtom);
+  const addNotifcation = useAddNotification();
 
   const loadPreviousMonth = () => {
     setCurrentDate(getPreviousMonth(currentDate));
@@ -38,17 +41,24 @@ export default function Calendar(props: CalendarProps) {
   useEffect(() => {
     if (user) {
       const fetchData = async () => {
-        let fetchedActivities = await ActivitiesService.getForMonth(
-          currentDate,
-          user?.uid,
-        );
-        fetchedActivities = fetchedActivities.map((activity) => ({
-          ...activity,
-          category: activityCategories.find(
-            (c) => c.id === activity.categoryRef.id,
-          ),
-        }));
-        setActivities(fetchedActivities);
+        try {
+          let fetchedActivities = await ActivitiesService.getForMonth(
+            currentDate,
+            user?.uid,
+          );
+          fetchedActivities = fetchedActivities.map((activity) => ({
+            ...activity,
+            category: activityCategories.find(
+              (c) => c.id === activity.categoryRef.id,
+            ),
+          }));
+          setActivities(fetchedActivities);
+        } catch (error: any) {
+          addNotifcation({
+            message: getErrorMessage(error),
+            type: 'danger',
+          });
+        }
       };
       fetchData();
     }

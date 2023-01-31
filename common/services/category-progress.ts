@@ -19,8 +19,10 @@ import { auth, database } from './firebase';
 export class CategoryProgressService {
   static readonly collectionName = DatabaseCollection.CategoryProgress;
 
-  static update(categoryProgress: Partial<CategoryProgress>): void {
-    setDoc(
+  static async update(
+    categoryProgress: Partial<CategoryProgress>,
+  ): Promise<void> {
+    return setDoc(
       doc(database, this.collectionName, categoryProgress.id || generateUUID()),
       {
         ...categoryProgress,

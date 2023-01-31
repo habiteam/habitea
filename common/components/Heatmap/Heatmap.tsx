@@ -15,6 +15,7 @@ import {
   getPreviousYear,
   getNextYear,
 } from '@utils/date';
+import { useAddNotification } from '@utils/notifications';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
@@ -31,6 +32,7 @@ export default function Heatmap(props: HeatmapProps) {
   const [progress, setProgress] = useState<CategoryProgress[]>([]);
   const user = useAtomValue(userAtom);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const addNotifcation = useAddNotification();
 
   const loadPreviousYear = () => {
     setCurrentDate(getPreviousYear(currentDate));
@@ -43,12 +45,20 @@ export default function Heatmap(props: HeatmapProps) {
   useEffect(() => {
     if (user) {
       const fetchActivities = async () => {
-        const fetchedActivities = await ActivitiesService.getByCategoryForYear(
-          props.category,
-          currentDate,
-          user.uid,
-        );
-        setActivities(fetchedActivities);
+        try {
+          const fetchedActivities =
+            await ActivitiesService.getByCategoryForYear(
+              props.category,
+              currentDate,
+              user.uid,
+            );
+          setActivities(fetchedActivities);
+        } catch (e) {
+          addNotifcation({
+            type: 'danger',
+            message: 'Could not fetch activities',
+          });
+        }
       };
       const fetchProgress = async () => {
         const fetchedProgress =

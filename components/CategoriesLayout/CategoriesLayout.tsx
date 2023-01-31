@@ -8,6 +8,8 @@ import { ActivityCategoriesService } from '@services/activity-categories';
 import { auth } from '@services/firebase';
 import { categoryListReloader } from '@atoms/reloaders';
 import Button from '@commonComponents/Button/Button';
+import getErrorMessage from '@utils/firebase-error';
+import { useAddNotification } from '@utils/notifications';
 import { getAppLayout } from '../AppLayout/AppLayout';
 import CategoriesItem from './CategoriesItem/CategoriesItem';
 import styles from './CategoriesLayout.module.scss';
@@ -24,14 +26,17 @@ export default function CategoriesLayout(props: AppLayoutProps) {
   const router = useRouter();
   const width = useAtomValue(screenWidthAtom);
   const categoryListReloaderValue = useAtomValue(categoryListReloader);
+  const addNotifcation = useAddNotification();
 
   function updateCategoriesList() {
     if (auth.currentUser) {
-      ActivityCategoriesService.getByUserId(auth.currentUser.uid).then(
-        (response) => {
+      ActivityCategoriesService.getByUserId(auth.currentUser.uid)
+        .then((response) => {
           setCategoryList(response);
-        },
-      );
+        })
+        .catch((error) => {
+          addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+        });
     }
   }
 

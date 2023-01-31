@@ -9,6 +9,8 @@ import {
   findIconDefinition,
   IconName,
 } from '@fortawesome/fontawesome-svg-core';
+import getErrorMessage from '@utils/firebase-error';
+import { useAddNotification } from '@utils/notifications';
 import styles from './CategorySelector.module.scss';
 
 export interface CategorySelectorPropsSchema {
@@ -21,14 +23,17 @@ export default function CategorySelector({
   onSelect,
 }: CategorySelectorPropsSchema) {
   const [categoryList, setCategoryList] = useState<any[]>([]);
+  const addNotifcation = useAddNotification();
 
   function updateCategoriesList() {
     if (auth.currentUser) {
-      ActivityCategoriesService.getActiveByUserId(auth.currentUser.uid).then(
-        (response) => {
+      ActivityCategoriesService.getActiveByUserId(auth.currentUser.uid)
+        .then((response) => {
           setCategoryList(response);
-        },
-      );
+        })
+        .catch((error) => {
+          addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+        });
     }
   }
 

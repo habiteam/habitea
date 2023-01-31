@@ -10,6 +10,7 @@ import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
 import { getDateInputFormatFromDate } from '@utils/date';
+import getErrorMessage from '@utils/firebase-error';
 import { useAddNotification } from '@utils/notifications';
 import { Timestamp } from 'firebase/firestore';
 import { useAtom, useSetAtom } from 'jotai';
@@ -79,7 +80,7 @@ export default function ActivityDialog() {
           {
             text: activity ? 'Update' : 'Create',
             fillType: 'filled',
-            onClick: () => {
+            onClick: async () => {
               const activityDate = Timestamp.fromDate(new Date(date));
 
               const activityRequest: Partial<Activity> = {
@@ -90,13 +91,23 @@ export default function ActivityDialog() {
               };
 
               if (selectedCategory) {
-                ActivitiesService.update(activityRequest, selectedCategory);
-                addNotification({
-                  message: activity ? 'Activity updated' : 'Activity created',
-                  type: 'success',
-                });
-                setReloader(activityRequest);
-                setOpenActivityModal(false);
+                try {
+                  await ActivitiesService.update(
+                    activityRequest,
+                    selectedCategory,
+                  );
+                  addNotification({
+                    message: activity ? 'Activity updated' : 'Activity created',
+                    type: 'success',
+                  });
+                  setReloader(activityRequest);
+                  setOpenActivityModal(false);
+                } catch (e: any) {
+                  addNotification({
+                    message: getErrorMessage(e),
+                    type: 'danger',
+                  });
+                }
               }
             },
           },

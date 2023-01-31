@@ -2,7 +2,9 @@ import { categoriesAtom } from '@atoms/categories';
 import { activityReloader } from '@atoms/reloaders';
 import { userAtom } from '@atoms/user';
 import { ActivitiesService } from '@services/activities';
+import getErrorMessage from '@utils/firebase-error';
 import { calculateProgress } from '@utils/habits';
+import { useAddNotification } from '@utils/notifications';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
 import { useState, useEffect } from 'react';
@@ -17,11 +19,12 @@ export default function Daily(props: DailyProps) {
   const activityCategories = useAtomValue(categoriesAtom);
   const [activities, setActivities] = useState<DailyActivity[]>([]);
   const reloader = useAtomValue(activityReloader);
+  const addNotifcation = useAddNotification();
 
   const fetchActivities = async () => {
     if (user && activityCategories) {
-      await ActivitiesService.getForDate(new Date(), user?.uid).then(
-        (response) => {
+      await ActivitiesService.getForDate(new Date(), user?.uid)
+        .then((response) => {
           setActivities(
             response.map((activity) => {
               const activityCategory = activityCategories.find(
@@ -35,8 +38,10 @@ export default function Daily(props: DailyProps) {
               };
             }),
           );
-        },
-      );
+        })
+        .catch((error) => {
+          addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+        });
     }
   };
 

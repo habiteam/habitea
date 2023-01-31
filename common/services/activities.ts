@@ -28,7 +28,10 @@ import { auth, database } from './firebase';
 export class ActivitiesService {
   static readonly collectionName = DatabaseCollection.Activities;
 
-  static update(activity: Partial<Activity>, category: ActivityCategory): void {
+  static async update(
+    activity: Partial<Activity>,
+    category: ActivityCategory,
+  ): Promise<void> {
     const categoryRef = doc(
       database,
       `${DatabaseCollection.ActivityCategories}/${category.id}`,
@@ -96,18 +99,21 @@ export class ActivitiesService {
       CategoryProgressService.update(progress);
     });
 
-    setDoc(doc(database, this.collectionName, activity.id ?? generateUUID()), {
-      ...activity,
-      id: null,
-      categoryRef,
-      activityDate: activity.activityDate ?? Timestamp.now(),
-      createdDate: Timestamp.now(),
-      createdBy: auth.currentUser?.uid,
-    });
+    return setDoc(
+      doc(database, this.collectionName, activity.id ?? generateUUID()),
+      {
+        ...activity,
+        id: null,
+        categoryRef,
+        activityDate: activity.activityDate ?? Timestamp.now(),
+        createdDate: Timestamp.now(),
+        createdBy: auth.currentUser?.uid,
+      },
+    );
   }
 
-  static deleteById(id: string): void {
-    deleteDoc(doc(database, this.collectionName, id));
+  static async deleteById(id: string): Promise<void> {
+    return deleteDoc(doc(database, this.collectionName, id));
   }
 
   static async getById(id: string): Promise<Activity> {

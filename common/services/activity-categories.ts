@@ -7,7 +7,6 @@ import {
   setDoc,
   Timestamp,
   where,
-  deleteDoc,
   updateDoc,
   runTransaction,
 } from 'firebase/firestore';
@@ -24,20 +23,25 @@ import { ActivitiesService } from './activities';
 export class ActivityCategoriesService {
   static readonly collectionName = DatabaseCollection.ActivityCategories;
 
-  static update(category: Partial<ActivityCategoryCreateFormType>): void {
-    setDoc(doc(database, this.collectionName, category.id || generateUUID()), {
-      ...category,
-      goalValue: category.goalValue ? Number(category.goalValue) : null,
-      createdDate: Timestamp.now(),
-      createdBy: auth.currentUser?.uid,
-    });
+  static async update(
+    category: Partial<ActivityCategoryCreateFormType>,
+  ): Promise<void> {
+    return setDoc(
+      doc(database, this.collectionName, category.id || generateUUID()),
+      {
+        ...category,
+        goalValue: category.goalValue ? Number(category.goalValue) : null,
+        createdDate: Timestamp.now(),
+        createdBy: auth.currentUser?.uid,
+      },
+    );
   }
 
-  static patchStatus(
+  static async patchStatus(
     categoryId: string,
     newStatus: ActivityCategoryStatus,
-  ): void {
-    updateDoc(doc(database, this.collectionName, categoryId), {
+  ): Promise<void> {
+    return updateDoc(doc(database, this.collectionName, categoryId), {
       status: newStatus,
     });
   }
