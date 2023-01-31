@@ -1,5 +1,6 @@
 import {
   faAddressCard as faAddressCardRegular,
+  faCircleQuestion,
   faFolder as faFolderRegular,
 } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -52,15 +53,14 @@ export default function AppNav() {
   ];
 
   const navAvatar = [
-    { text: 'Settings', icon: faGear, href: '/app/options' },
+    { text: 'Options', icon: faGear, href: '/app/options' },
+    { text: 'Info', icon: faCircleQuestion, href: '/app/info' },
     {
       text: 'Sign out',
       icon: faArrowRightFromBracket,
       onClick: () => {
         signOut(auth)
           .then(() => {
-            // Sign-out successful.
-            console.log('sajonara');
             Router.push('/');
           })
           .catch((error) => {
@@ -84,7 +84,7 @@ export default function AppNav() {
         <div style={{ height: '40px' }}>
           <Image
             src={user?.photoURL ?? '/cat.jpg'}
-            alt="Card header image"
+            alt="User avatar"
             width={40}
             height={40}
             onClick={() => setIsActionMenuOpened(!isActionMenuOpened)}

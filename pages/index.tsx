@@ -80,8 +80,8 @@ export default function Home() {
 
       <TopBar>
         <span>
-          This app is still in developement. If you have suggestions or
-          encounter problems, let us know over at{' '}
+          This app is still in development. If you have suggestions or encounter
+          problems, let us know over at{' '}
           <a
             style={{ color: 'white', textDecoration: 'underline' }}
             href="https://github.com/habiteam/habitea/issues"
