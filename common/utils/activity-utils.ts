@@ -6,6 +6,7 @@ export function getActivityValue(
   activity: Activity,
   category: ActivityCategory,
 ): string {
+  if (!category) return '';
   return category.unitType === 'QUANTITY'
     ? `${activity.value} ${category.unit}`
     : activity.duration;

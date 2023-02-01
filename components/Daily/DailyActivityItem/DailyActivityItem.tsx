@@ -19,7 +19,7 @@ export default function DailyActivityItem({
 }: DailyActivityItemProps) {
   return (
     <div className={classNames(styles.item)}>
-      {activity ? (
+      {activity && activity.category ? (
         <>
           <div className={classNames(styles['item-header'])}>
             {activity.category && (
