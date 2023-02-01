@@ -6,6 +6,7 @@ import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Activity } from '@schemas/activity';
+import { ActivityCategory } from '@schemas/activity-category';
 import { ActivitiesService } from '@services/activities';
 import { getActivityValue } from '@utils/activity-utils';
 import { getDateInputFormatFromDate } from '@utils/date';
@@ -83,7 +84,10 @@ export default function ActivityItem(props: ActivityItemProps) {
         </div>
         <div className={classNames(styles.body)}>
           <span className={classNames(styles.value)}>
-            {getActivityValue(props.activity)}
+            {getActivityValue(
+              props.activity,
+              props.activity.category as ActivityCategory,
+            )}
           </span>
           <span className={classNames(styles.date)}>
             {getDateInputFormatFromDate(props.activity.activityDate.toDate())}

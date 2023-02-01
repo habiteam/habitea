@@ -18,6 +18,7 @@ import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { getActivityValue } from '@utils/activity-utils';
 import { useAddNotification } from '@utils/notifications';
 import getErrorMessage from '@utils/firebase-error';
+import { ActivityCategory } from '@schemas/activity-category';
 import styles from './Calendar.module.scss';
 
 export interface CalendarProps {
@@ -40,12 +41,14 @@ export default function Calendar(props: CalendarProps) {
 
   useEffect(() => {
     if (user) {
+      // fetch activities for current month
       const fetchData = async () => {
         try {
           let fetchedActivities = await ActivitiesService.getForMonth(
             currentDate,
             user?.uid,
           );
+          // assign category to each activity
           fetchedActivities = fetchedActivities.map((activity) => ({
             ...activity,
             category: activityCategories.find(
@@ -122,7 +125,11 @@ export default function Calendar(props: CalendarProps) {
               {/* //TODO show details on click */}
               <span className={styles['day-activity__description']}>
                 &nbsp;
-                {activity.category?.name} {getActivityValue(activity)}
+                {activity.category?.name}{' '}
+                {getActivityValue(
+                  activity,
+                  activity.category as ActivityCategory,
+                )}
               </span>
             </div>
           ))}

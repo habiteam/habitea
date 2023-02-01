@@ -2,9 +2,12 @@ import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
 import { getWeekOfYear } from './date';
 
-export function getActivityValue(activity: Activity): string {
-  return activity.category?.unitType === 'QUANTITY'
-    ? `${activity.value} ${activity.category?.unit}`
+export function getActivityValue(
+  activity: Activity,
+  category: ActivityCategory,
+): string {
+  return category.unitType === 'QUANTITY'
+    ? `${activity.value} ${category.unit}`
     : activity.duration;
 }
 

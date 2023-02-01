@@ -6,7 +6,10 @@ import { ActivityCategory } from '@schemas/activity-category';
 import { CategoryProgress } from '@schemas/category-progress';
 import { ActivitiesService } from '@services/activities';
 import { CategoryProgressService } from '@services/category-progress';
-import { checkIfDatesAreInPeriod } from '@utils/activity-utils';
+import {
+  checkIfDatesAreInPeriod,
+  getActivityValue,
+} from '@utils/activity-utils';
 import {
   getDateFromDayOfYear,
   getDayOfYear,
@@ -14,6 +17,7 @@ import {
   getFirstDayOfYear,
   getPreviousYear,
   getNextYear,
+  getTimeFromDate,
 } from '@utils/date';
 import { useAddNotification } from '@utils/notifications';
 import classNames from 'classnames';
@@ -44,6 +48,7 @@ export default function Heatmap(props: HeatmapProps) {
 
   useEffect(() => {
     if (user) {
+      // fetch activities and progress for current year
       const fetchActivities = async () => {
         try {
           const fetchedActivities =
@@ -67,9 +72,6 @@ export default function Heatmap(props: HeatmapProps) {
             currentDate,
           );
         setProgress(fetchedProgress);
-        // fetchedProgress.forEach((element) => {
-        //   console.log(element.activityDate.toDate(), element.isGoalCompleted);
-        // });
       };
       fetchActivities();
       fetchProgress();
@@ -158,6 +160,16 @@ export default function Heatmap(props: HeatmapProps) {
                 currentDate.getFullYear(),
                 i,
               ).toDateString()}
+              {activitiesByDay[i] && (
+                <div>
+                  {activitiesByDay[i].map((activity) => (
+                    <span key={activity.id}>
+                      {getTimeFromDate(activity.createdDate.toDate())} -{' '}
+                      {getActivityValue(activity, props.category)}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ) : (
