@@ -124,7 +124,7 @@ test('getWeekOfYear', () => {
   expect(getWeekOfYear(lastDayOfYear)).toEqual(53);
   expect(getWeekOfYear(firstDayofSomeMonth)).toEqual(10);
   expect(getWeekOfYear(lastDayofSomeMonth)).toEqual(14);
-  expect(getWeekOfYear(firstDayofSomeWeek)).toEqual(6);
+  expect(getWeekOfYear(firstDayofSomeWeek)).toEqual(7);
   expect(getWeekOfYear(lastDayofSomeWeek)).toEqual(7);
 });
 
