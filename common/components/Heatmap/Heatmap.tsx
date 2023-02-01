@@ -113,7 +113,22 @@ export default function Heatmap(props: HeatmapProps) {
     return a.reduce((acc, activity) => acc + activity.value, 0);
   });
 
-  // console.log(progress);
+  // pad beggining of heatmap so monday is always on top
+  const emptyDays = [];
+  const firstDayIndex = (getFirstDayOfYear(currentDate).getDay() || 7) - 1;
+  for (let i = 0; i < firstDayIndex; i += 1) {
+    emptyDays.push(
+      <div
+        key={i}
+        className={classNames(
+          styles['item-wrapper'],
+          styles['item-wrapper--invisible'],
+        )}
+      >
+        <div className={classNames(styles.item)}></div>
+      </div>,
+    );
+  }
   // create items for each day
   const days = [];
   const lastDayIndex = getDayOfYear(getLastDayOfYear(currentDate));
@@ -185,7 +200,10 @@ export default function Heatmap(props: HeatmapProps) {
             </div>
           ))}
         </div>
-        <div className={styles.heatmap}>{days.map((day) => day)}</div>
+        <div className={styles.heatmap}>
+          {emptyDays.map((day) => day)}
+          {days.map((day) => day)}
+        </div>
       </div>
     </div>
   );
