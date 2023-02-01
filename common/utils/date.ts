@@ -26,7 +26,7 @@ export function getFirstDayOfWeek(date: Date): Date {
   return new Date(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate() - ((date.getDay() + 6) % 7) + 1,
+    date.getDate() - ((date.getDay() + 6) % 7),
   );
 }
 
@@ -38,12 +38,13 @@ export function getLastDayOfWeek(date: Date): Date {
   );
 }
 
-export function getLastDayOfYear(date: Date): Date {
-  return new Date(date.getFullYear(), 11, 31);
-}
-
 export function getFirstDayOfYear(date: Date): Date {
   return new Date(date.getFullYear(), 0, 1);
+}
+
+// TODO - this is not correct - need fix
+export function getLastDayOfYear(date: Date): Date {
+  return new Date(date.getFullYear(), 11, 31);
 }
 
 export function getDayOfYear(date: Date): number {
