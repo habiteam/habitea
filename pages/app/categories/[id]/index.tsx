@@ -37,6 +37,7 @@ import { useAddNotification } from '@utils/notifications';
 import Heatmap from '@commonComponents/Heatmap/Heatmap';
 import getErrorMessage from '@utils/firebase-error';
 import { FirebaseError } from 'firebase/app';
+import Pin from '@commonComponents/Pin/Pin';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -95,6 +96,24 @@ export default function Category() {
         category?.status === 'ACTIVE' ? 'ARCHIVED' : 'ACTIVE',
       );
       addNotifcation({ message: 'Category status updated', type: 'info' });
+      updateCategory();
+      setStatusDialogOpen(false);
+    } catch (error: any) {
+      addNotifcation({ message: getErrorMessage(error), type: 'danger' });
+    }
+  };
+
+  const updatePinned = async () => {
+    try {
+      await ActivityCategoriesService.patchPinned(
+        router.query.id as string,
+        category?.pinned === 0 ? 1 : 0,
+      );
+      addNotifcation({
+        message:
+          category?.pinned === 0 ? 'Category pinned' : 'Category unpinned',
+        type: 'info',
+      });
       updateCategory();
       setStatusDialogOpen(false);
     } catch (error: any) {
@@ -165,6 +184,11 @@ export default function Category() {
               {getCategoryGoalString(category)}
             </div>
           </div>
+
+          <Pin
+            value={category.pinned ?? 0}
+            onClick={() => updatePinned()}
+          ></Pin>
 
           {width <= MOBILE_BREAKPOINT ? (
             <div>

@@ -31,6 +31,7 @@ export class ActivityCategoriesService {
       {
         ...category,
         goalValue: category.goalValue ? Number(category.goalValue) : null,
+        pinned: 0,
         createdDate: Timestamp.now(),
         createdBy: auth.currentUser?.uid,
       },
@@ -43,6 +44,15 @@ export class ActivityCategoriesService {
   ): Promise<void> {
     return updateDoc(doc(database, this.collectionName, categoryId), {
       status: newStatus,
+    });
+  }
+
+  static async patchPinned(
+    categoryId: string,
+    newPinned: number,
+  ): Promise<void> {
+    return updateDoc(doc(database, this.collectionName, categoryId), {
+      pinned: newPinned,
     });
   }
 

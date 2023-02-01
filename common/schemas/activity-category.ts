@@ -34,6 +34,8 @@ export class ActivityCategory {
 
   createdBy: string;
 
+  pinned: number;
+
   constructor(
     id: string,
     name: string,
@@ -48,6 +50,7 @@ export class ActivityCategory {
     duration: string,
     createdDate: Timestamp,
     createdBy: string,
+    pinned: number,
   ) {
     this.id = id;
     this.name = name;
@@ -62,6 +65,7 @@ export class ActivityCategory {
     this.duration = duration;
     this.createdDate = createdDate;
     this.createdBy = createdBy;
+    this.pinned = pinned;
   }
 
   static fromFirestore(snapshot: any): ActivityCategory {
@@ -80,11 +84,12 @@ export class ActivityCategory {
       data.duration,
       data.createdDate,
       data.createdBy,
+      data.pinned,
     );
   }
 }
 
 export type ActivityCategoryCreateFormType = Omit<
   ActivityCategory,
-  'createdDate' | 'createdBy'
+  'createdDate' | 'createdBy' | 'pinned'
 >;
