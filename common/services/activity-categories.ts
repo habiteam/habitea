@@ -9,6 +9,7 @@ import {
   where,
   updateDoc,
   runTransaction,
+  orderBy,
 } from 'firebase/firestore';
 import {
   ActivityCategory,
@@ -87,7 +88,11 @@ export class ActivityCategoriesService {
 
   static async getByUserId(userId: string): Promise<ActivityCategory[]> {
     const categoriesRef = collection(database, this.collectionName);
-    const q = query(categoriesRef, where('createdBy', '==', userId));
+    const q = query(
+      categoriesRef,
+      where('createdBy', '==', userId),
+      orderBy('pinned', 'desc'),
+    );
 
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>

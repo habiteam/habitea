@@ -115,6 +115,7 @@ export default function Category() {
         type: 'info',
       });
       updateCategory();
+      setCategoryListReloader(generateUUID());
       setStatusDialogOpen(false);
     } catch (error: any) {
       addNotifcation({ message: getErrorMessage(error), type: 'danger' });
