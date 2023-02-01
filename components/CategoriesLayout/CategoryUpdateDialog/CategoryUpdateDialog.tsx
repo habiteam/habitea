@@ -31,6 +31,7 @@ const defaultCreateValues: ActivityCategoryCreateFormType = {
   unit: '',
   unitType: 'QUANTITY',
   duration: '00:00:00',
+  pinned: 0,
 };
 
 export function CategoryUpdateDialog({

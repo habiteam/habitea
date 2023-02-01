@@ -91,5 +91,5 @@ export class ActivityCategory {
 
 export type ActivityCategoryCreateFormType = Omit<
   ActivityCategory,
-  'createdDate' | 'createdBy' | 'pinned'
+  'createdDate' | 'createdBy'
 >;

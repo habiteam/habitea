@@ -32,7 +32,6 @@ export class ActivityCategoriesService {
       {
         ...category,
         goalValue: category.goalValue ? Number(category.goalValue) : null,
-        pinned: 0,
         createdDate: Timestamp.now(),
         createdBy: auth.currentUser?.uid,
       },
