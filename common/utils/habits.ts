@@ -4,7 +4,11 @@ import {
 } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
-import { getDurationFromString, getSecondsFromDuration } from '@utils/duration';
+import {
+  getDurationFromString,
+  getSecondsFromDuration,
+  toDurationString,
+} from '@utils/duration';
 
 /**
  *
@@ -12,7 +16,7 @@ import { getDurationFromString, getSecondsFromDuration } from '@utils/duration';
  * @param unitType
  * @returns total value of activities
  */
-export function summariseActivities(
+function summariseActivities(
   activities: Activity[],
   unitType: ActivityUnitType = 'QUANTITY',
 ): number {
@@ -23,6 +27,17 @@ export function summariseActivities(
     );
   }
   return activities.reduce((t, v) => t + v.value, 0);
+}
+
+export function getSummarisedActivities(
+  activities: Activity[],
+  unitType: ActivityUnitType = 'QUANTITY',
+): string {
+  const total = summariseActivities(activities, unitType);
+  if (unitType === 'TIME') {
+    return toDurationString(total);
+  }
+  return total.toString();
 }
 
 /**

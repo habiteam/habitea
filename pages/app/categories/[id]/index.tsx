@@ -16,7 +16,7 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  summariseActivities,
+  getSummarisedActivities,
   getCategoryGoalString,
   calculateProgress,
 } from '@utils/habits';
@@ -243,7 +243,10 @@ export default function Category() {
             </div>
             {<Heatmap date={new Date()} category={category}></Heatmap>}
             <p>
-              {summariseActivities(recentActivities ?? [], category.unitType)}{' '}
+              {getSummarisedActivities(
+                recentActivities ?? [],
+                category.unitType,
+              )}{' '}
               {category.unit} this{' '}
               {
                 ActivityCategoryRepeatTypePeriods[
