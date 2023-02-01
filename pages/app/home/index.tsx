@@ -46,7 +46,7 @@ export default function Home() {
         }));
         setActivityList(recentActivities);
       };
-      fetchData().catch((e) => {
+      fetchData().catch(() => {
         addNotifcation({
           type: 'danger',
           message: 'Could not fetch activities',

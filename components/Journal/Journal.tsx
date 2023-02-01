@@ -37,6 +37,7 @@ export default function Journal(props: JournalProps) {
   const reloader = useAtomValue(activityReloader);
   const addNotifcation = useAddNotification();
 
+  // set initial state of activity list to current month
   const [activityList, setActivityList] = useState<MonthCollection[]>([
     {
       year: new Date().getFullYear(),
@@ -55,6 +56,7 @@ export default function Journal(props: JournalProps) {
   ]);
   const [lastLoadedMonth, setLastLoadedMonth] = useState(new Date());
 
+  // create month collection from activities
   function mapToMonthCollection(
     activities: Activity[],
     month: Date,
@@ -82,6 +84,7 @@ export default function Journal(props: JournalProps) {
     };
   }
 
+  // Load activities for previous month
   async function loadMoreActivities() {
     if (user) {
       const newMonth = getPreviousMonth(lastLoadedMonth);

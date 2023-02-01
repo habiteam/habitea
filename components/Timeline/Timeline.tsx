@@ -11,14 +11,12 @@ import { activityReloader } from '@atoms/reloaders';
 import { useAddNotification } from '@utils/notifications';
 import styles from './Timeline.module.scss';
 
-interface TimelineProps {}
-
 interface DayCollection {
   day: number;
   activities: Activity[];
 }
 
-export default function Timeline(props: TimelineProps) {
+export default function Timeline() {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
   const [dayCollection, setDayCollection] = useState<DayCollection[]>([]);

@@ -12,9 +12,7 @@ import styles from './Daily.module.scss';
 import { DailyActivity } from './Daily.schema';
 import DailyActivityItem from './DailyActivityItem/DailyActivityItem';
 
-interface DailyProps {}
-
-export default function Daily(props: DailyProps) {
+export default function Daily() {
   const user = useAtomValue(userAtom);
   const activityCategories = useAtomValue(categoriesAtom);
   const [activities, setActivities] = useState<DailyActivity[]>([]);
@@ -23,6 +21,7 @@ export default function Daily(props: DailyProps) {
 
   const fetchActivities = async () => {
     if (user && activityCategories) {
+      // fetch activities for today
       await ActivitiesService.getForDate(new Date(), user?.uid)
         .then((response) => {
           setActivities(

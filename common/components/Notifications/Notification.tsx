@@ -8,6 +8,12 @@ import Button from '@commonComponents/Button/Button';
 import { NotificationPropsSchema } from './Notification.schema';
 import styles from './Notification.module.scss';
 
+/**
+ * @see useAddNotification hook for usage
+ *
+ * @param props
+ * @returns
+ */
 export function Notification(props: NotificationPropsSchema) {
   const [, setNotificationList] = useAtom(notificationsAtom);
   const [intervalId, setIntervalId] = useState<NodeJS.Timer | null>(null);

@@ -48,7 +48,7 @@ export default function Heatmap(props: HeatmapProps) {
 
   useEffect(() => {
     if (user) {
-      // fetch activities and progress for current year
+      // fetch activities for current year
       const fetchActivities = async () => {
         try {
           const fetchedActivities =
@@ -65,6 +65,7 @@ export default function Heatmap(props: HeatmapProps) {
           });
         }
       };
+      // fetch progress for current year
       const fetchProgress = async () => {
         const fetchedProgress =
           await CategoryProgressService.getByCategoryForYear(
@@ -79,6 +80,7 @@ export default function Heatmap(props: HeatmapProps) {
   }, [currentDate, props.category]);
 
   useEffect(() => {
+    // update tooltip position on mouse move
     const handleWindowMouseMove = (event: MouseEvent) => {
       let additionalY = 0;
       if (document.getElementById('appLayout')) {

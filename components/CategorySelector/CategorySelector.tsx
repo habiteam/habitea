@@ -38,9 +38,7 @@ export default function CategorySelector({
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) =>
-      updateCategoriesList(),
-    );
+    const unsubscribe = onAuthStateChanged(auth, () => updateCategoriesList());
     return () => {
       unsubscribe();
     };
