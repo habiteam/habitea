@@ -30,6 +30,7 @@ export function getFirstDayOfWeek(date: Date): Date {
   );
 }
 
+// TODO - this is not correct - need fix
 export function getLastDayOfWeek(date: Date): Date {
   return new Date(
     date.getFullYear(),
@@ -42,7 +43,6 @@ export function getFirstDayOfYear(date: Date): Date {
   return new Date(date.getFullYear(), 0, 1);
 }
 
-// TODO - this is not correct - need fix
 export function getLastDayOfYear(date: Date): Date {
   return new Date(date.getFullYear(), 11, 31);
 }
