@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import classNames from 'classnames';
 import Router from 'next/router';
 import heroBgImg from '@public/backgrounds/bg-blobs.svg';
@@ -8,6 +8,10 @@ import teaImg from '@public/tea.webp';
 import banner1 from '@public/main/banner1.png';
 import banner2 from '@public/main/banner2.png';
 import banner3 from '@public/main/banner3.png';
+import regular from '@public/main/regular.png';
+import orange from '@public/main/orange.png';
+import beetroot from '@public/main/beetroot.png';
+import cabbage from '@public/main/cabbage.png';
 import { auth } from '@services/firebase';
 import Banner, { BannerItem } from '@commonComponents/Banner/Banner';
 import Script from 'next/script';
@@ -15,10 +19,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
-import TopBar from '@components/TopBar/TopBar';
+import { useState } from 'react';
 import styles from './Home.module.scss';
 
 export default function Home() {
+  const [theme, setTheme] = useState('regular');
+
+  const imgObj: Record<string, StaticImageData> = {
+    regular,
+    cabbage,
+    beetroot,
+    orange,
+  };
+
   const bannerItems: BannerItem[] = [
     {
       image: banner1,
@@ -77,21 +90,6 @@ export default function Home() {
           })()
         `}
       </Script>
-
-      <TopBar>
-        <span>
-          This app is still in development. If you have suggestions or encounter
-          problems, let us know over at{' '}
-          <a
-            style={{ color: 'white', textDecoration: 'underline' }}
-            href="https://github.com/habiteam/habitea/issues"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-        </span>
-      </TopBar>
 
       <div className={classNames(styles.container, styles.blobs)}>
         <Image
@@ -194,7 +192,7 @@ export default function Home() {
 
         <div className={classNames(styles['banner-container'])}>
           <div className={styles.grid}>
-            <Banner items={bannerItems} imageHeight="420px"></Banner>
+            <Banner items={bannerItems} imageHeight="600px"></Banner>
           </div>
 
           <button
@@ -206,6 +204,70 @@ export default function Home() {
           >
             <strong>Go to app</strong>
           </button>
+        </div>
+      </div>
+
+      <div
+        className={classNames(styles.container, styles[`container--${theme}`])}
+        id="section-2"
+      >
+        <div
+          className={classNames(styles.card)}
+          style={{ maxWidth: 'none', width: '100%' }}
+        >
+          <h2 style={{ marginBottom: '24px' }}>Choose your theme</h2>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}
+          >
+            <div style={{ display: 'flex', gap: '24px' }}>
+              <div
+                tabIndex={0}
+                onClick={() => setTheme('regular')}
+                className={classNames(
+                  styles['theme-item'],
+                  styles['theme-item--regular'],
+                )}
+              ></div>
+              <div
+                tabIndex={0}
+                onClick={() => setTheme('cabbage')}
+                className={classNames(
+                  styles['theme-item'],
+                  styles['theme-item--cabbage'],
+                )}
+              ></div>
+              <div
+                tabIndex={0}
+                onClick={() => setTheme('beetroot')}
+                className={classNames(
+                  styles['theme-item'],
+                  styles['theme-item--beetroot'],
+                )}
+              ></div>
+              <div
+                tabIndex={0}
+                onClick={() => setTheme('orange')}
+                className={classNames(
+                  styles['theme-item'],
+                  styles['theme-item--orange'],
+                )}
+              ></div>
+            </div>
+            <div
+              style={{
+                position: 'relative',
+                height: '572px',
+                maxWidth: '639px',
+                width: '100%',
+              }}
+            >
+              <Image
+                style={{ width: '100%', height: 'auto' }}
+                src={imgObj[theme]}
+                alt={'background image'}
+              ></Image>
+            </div>
+          </div>
         </div>
       </div>
     </>

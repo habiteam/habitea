@@ -57,6 +57,46 @@
       font-size: 16px;
     }
   }
+
+  &--regular {
+    background: linear-gradient(
+      140deg,
+      #984700 0%,
+      #984700 50%,
+      #755847 50%,
+      #755847 100%
+    );
+  }
+
+  &--cabbage {
+    background: linear-gradient(
+      140deg,
+      #cabeff 0%,
+      #cabeff 50%,
+      #eec28d 50%,
+      #eec28d 100%
+    );
+  }
+
+  &--beetroot {
+    background: linear-gradient(
+      140deg,
+      #9c3e5d 0%,
+      #9c3e5d 50%,
+      #75565d 50%,
+      #75565d 100%
+    );
+  }
+
+  &--orange {
+    background: linear-gradient(
+      140deg,
+      #ffa500 0%,
+      #ffa500 50%,
+      #dfc493 50%,
+      #dfc493 100%
+    );
+  }
 }
 .link {
   transition: all 300ms;
@@ -117,7 +157,7 @@
 .banner-container {
   background-color: var(--c-surface);
   border-radius: 24px;
-  max-width: 620px;
+
   padding: 32px;
   @media (max-width: $breakpoint-lg) {
     padding: 16px;
@@ -172,5 +212,55 @@
   }
   50% {
     bottom: 18px;
+  }
+}
+
+.theme-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+
+  &--regular {
+    background: linear-gradient(
+      140deg,
+      #984700 0%,
+      #984700 49%,
+      #755847 50%,
+      #755847 100%
+    );
+  }
+
+  &--cabbage {
+    background: linear-gradient(
+      140deg,
+      #cabeff 0%,
+      #cabeff 49%,
+      #eec28d 50%,
+      #eec28d 100%
+    );
+  }
+
+  &--beetroot {
+    background: linear-gradient(
+      140deg,
+      #9c3e5d 0%,
+      #9c3e5d 49%,
+      #75565d 50%,
+      #75565d 100%
+    );
+  }
+
+  &--orange {
+    background: linear-gradient(
+      140deg,
+      #ffa500 0%,
+      #ffa500 49%,
+      #dfc493 50%,
+      #dfc493 100%
+    );
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }
