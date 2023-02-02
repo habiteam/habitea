@@ -1,9 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import classNames from 'classnames';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from 'next/image';
 import { Color } from '@constants/palette';
 import styles from './Dropdown.module.scss';
 

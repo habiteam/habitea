@@ -50,7 +50,7 @@ export default function Dashboard() {
         const results = await Promise.all(promises);
         setHabitProgress(results.reduce((t, v) => t + v, 0) / results.length);
       };
-      fetchData().catch((e) => {
+      fetchData().catch(() => {
         addNotifcation({
           type: 'danger',
           message: 'Could not fetch categories',
