@@ -259,13 +259,6 @@ export default function Category() {
               progress
             </p>
           </div>
-          <div>
-            {recentActivities?.map((el) => (
-              <div key={el.id}>
-                date: {el.activityDate.toDate().toString()}, value: {el.value}
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Dialogs */}
