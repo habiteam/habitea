@@ -64,7 +64,7 @@ export function getDateFromDayOfYear(year: number, day: number): Date {
 export function getWeekOfYear(date: Date): number {
   const firstDayOfYear = getFirstDayOfWeek(new Date(date.getFullYear(), 0, 1));
   const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
-  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() - 1) / 7);
+  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay()) / 7);
 }
 
 export function getDateInputFormatFromDate(date: Date): string {
