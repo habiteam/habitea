@@ -9,7 +9,7 @@
     "lint": "next lint",
     "lint:fix": "npx prettier --write . && next lint --fix",
     "clear": "rm -r .next",
-    "test": "TZ=UTC jest"
+    "test": "jest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
