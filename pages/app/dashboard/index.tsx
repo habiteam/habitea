@@ -62,7 +62,7 @@ export default function Dashboard() {
   const tabContent = (tab: string) => {
     switch (tab) {
       case 'Categories':
-        return <div className={styles.tab}>Tab 1 content</div>;
+        return <div className={styles.tab}>Work in progress</div>;
       case 'Calendar':
         return (
           <div className={styles.tab}>
@@ -72,7 +72,7 @@ export default function Dashboard() {
           </div>
         );
       default:
-        return <div className={styles.tab}>Tab 1 content</div>;
+        return <div className={styles.tab}>Work in progress</div>;
     }
   };
 

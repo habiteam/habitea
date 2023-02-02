@@ -81,21 +81,24 @@ $calendarMainColor: var(--c-primary-container);
 }
 
 .day-activity {
+  position: relative;
   border-radius: 12px;
   background-color: var(--c-primary-container);
   &--good {
     background-color: var(--c-good);
+    &:hover {
+      background-color: var(--c-good-saturated);
+    }
   }
   &--bad {
     background-color: var(--c-bad);
+    &:hover {
+      background-color: var(--c-bad-saturated);
+    }
   }
   padding: 4px 8px;
   transition: all 300ms;
   cursor: pointer;
-
-  &:hover {
-    filter: saturate(1.5);
-  }
 }
 
 .day-activity__description {

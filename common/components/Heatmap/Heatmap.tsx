@@ -166,7 +166,7 @@ export default function Heatmap(props: HeatmapProps) {
                 <div>
                   {activitiesByDay[i].map((activity) => (
                     <span key={activity.id}>
-                      {getTimeFromDate(activity.createdDate.toDate())} -{' '}
+                      {getTimeFromDate(activity.activityDate.toDate())} -{' '}
                       {getActivityValue(activity, props.category)}
                     </span>
                   ))}

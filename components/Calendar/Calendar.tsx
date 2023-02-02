@@ -1,7 +1,7 @@
 import { Months } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { useAtomValue } from 'jotai';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { userAtom } from '@atoms/user';
 import { categoriesAtom } from '@atoms/categories';
 
@@ -11,6 +11,7 @@ import {
   getLastDayOfMonth,
   getNextMonth,
   getPreviousMonth,
+  getTimeFromDate,
 } from '@utils/date';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,6 +20,8 @@ import { getActivityValue } from '@utils/activity-utils';
 import { useAddNotification } from '@utils/notifications';
 import getErrorMessage from '@utils/firebase-error';
 import { ActivityCategory } from '@schemas/activity-category';
+import DropdownMenu from '@commonComponents/DropdownMenu/DropdownMenu';
+import Dropdown from '@commonComponents/Dropdown/DropdownMenu';
 import styles from './Calendar.module.scss';
 
 export interface CalendarProps {
@@ -30,6 +33,7 @@ export default function Calendar(props: CalendarProps) {
   const user = useAtomValue(userAtom);
   const [activities, setActivities] = useState<Activity[]>([]);
   const activityCategories = useAtomValue(categoriesAtom);
+  const [openActivity, setOpenActivity] = useState<string>('');
   const addNotifcation = useAddNotification();
 
   const loadPreviousMonth = () => {
@@ -104,34 +108,55 @@ export default function Calendar(props: CalendarProps) {
         <span className={classNames(styles['day-nr'])}>{i}</span>
         {activitiesByDay[i] &&
           activitiesByDay[i].map((activity) => (
-            <div
-              key={activity.id}
-              className={classNames(styles['day-activity'], {
-                [styles['day-activity--good']]:
-                  activity.category?.goalType === 'MIN',
-                [styles['day-activity--bad']]:
-                  activity.category?.goalType === 'MAX',
-              })}
-            >
-              {activity.category?.icon && (
-                <FontAwesomeIcon
-                  icon={findIconDefinition({
-                    prefix: 'fas',
-                    iconName: activity.category?.icon,
-                  })}
-                  width={14}
-                ></FontAwesomeIcon>
-              )}
-              {/* //TODO show details on click */}
-              <span className={styles['day-activity__description']}>
-                &nbsp;
-                {activity.category?.name}{' '}
-                {getActivityValue(
-                  activity,
-                  activity.category as ActivityCategory,
+            <React.Fragment key={activity.id}>
+              <div
+                onClick={(): void => {
+                  setOpenActivity(activity.id);
+                }}
+                className={classNames(styles['day-activity'], {
+                  [styles['day-activity--good']]:
+                    activity.category?.goalType === 'MIN',
+                  [styles['day-activity--bad']]:
+                    activity.category?.goalType === 'MAX',
+                })}
+              >
+                {activity.category?.icon && (
+                  <FontAwesomeIcon
+                    icon={findIconDefinition({
+                      prefix: 'fas',
+                      iconName: activity.category?.icon,
+                    })}
+                    width={14}
+                  ></FontAwesomeIcon>
                 )}
-              </span>
-            </div>
+                <Dropdown
+                  isOpen={activity.id === openActivity}
+                  color="primary"
+                  onClose={(): void => {
+                    setOpenActivity('');
+                  }}
+                >
+                  {activity.category?.icon && (
+                    <FontAwesomeIcon
+                      icon={findIconDefinition({
+                        prefix: 'fas',
+                        iconName: activity.category?.icon,
+                      })}
+                      width={14}
+                    ></FontAwesomeIcon>
+                  )}
+                  {activity.category?.icon && <span>&nbsp;</span>}
+                  {getTimeFromDate(activity.activityDate.toDate())} - &nbsp;
+                  <span>
+                    {activity.category?.name}{' '}
+                    {getActivityValue(
+                      activity,
+                      activity.category as ActivityCategory,
+                    )}
+                  </span>
+                </Dropdown>
+              </div>
+            </React.Fragment>
           ))}
       </div>,
     );

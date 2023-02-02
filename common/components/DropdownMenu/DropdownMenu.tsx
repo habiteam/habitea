@@ -21,6 +21,7 @@ export interface DropdownMenuProps {
   onClose: () => void;
   items: DropdownMenuItem[];
   color?: Color;
+  children?: React.ReactNode;
 }
 
 function DropdownItem(props: { item: DropdownMenuItem }) {
@@ -66,6 +67,7 @@ export default function DropdownMenu(props: DropdownMenuProps) {
     <>
       {props.isOpen && (
         <div className={styles.dropdown}>
+          {props.children}
           <ul
             ref={dropdownRef}
             className={classNames(

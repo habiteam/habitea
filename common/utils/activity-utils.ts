@@ -8,7 +8,7 @@ export function getActivityValue(
 ): string {
   if (!category) return '';
   return category.unitType === 'QUANTITY'
-    ? `${activity.value} ${category.unit}`
+    ? `${activity.value}\u00a0${category.unit}`
     : activity.duration;
 }
 

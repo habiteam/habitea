@@ -1,0 +1,11 @@
+@import '../../../styles/colors.module';
+
+.dropdown {
+  position: absolute;
+  top: 30px;
+  z-index: 1;
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-primary-container);
+  border-radius: 8px;
+  min-width: 100px;
+}
