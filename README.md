@@ -9,8 +9,9 @@ Deploy status:
 
 ## Screenshots
 
-![Screenshot](public/main/banner3.png)
+![Screenshot](public/main/banner1.png)
 ![Screenshot](public/main/banner2.png)
+![Screenshot](public/main/banner3.png)
 
 ## Development
 
@@ -30,32 +31,33 @@ Firebase API key **do not** need to obscured, database is secured by [Firebase S
 If you want to change the database the app is using in your environment, [set up your firebase project](https://firebase.google.com/docs/web/setup) and replace the credentials in `common/service/firebase.ts`. Don't forget to set up rules and indexes for your database. Below is the configuration of cloud firestore rules the app should have in order to work properly.
 
 ### Cloud firestore rules
+
 ```
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /activityCategories/{document=**}{
-    	allow create: if request.auth != null
+     allow create: if request.auth != null
     }
     
     match /activityCategories/{document=**} {
-    	allow read, write: if request.auth != null && request.auth.uid == resource.data.createdBy;
+     allow read, write: if request.auth != null && request.auth.uid == resource.data.createdBy;
     }
     
     match /activities/{document=**}{
-    	allow create: if request.auth != null
+     allow create: if request.auth != null
     }
     
     match /activities/{document=**} {
-    	allow read, write: if request.auth != null && request.auth.uid == resource.data.createdBy;
+     allow read, write: if request.auth != null && request.auth.uid == resource.data.createdBy;
     }
     
     match /categoryProgress/{document=**}{
-    	allow create: if request.auth != null
+     allow create: if request.auth != null
     }
     
     match /categoryProgress/{document=**} {
-    	allow read, write: if request.auth != null && request.auth.uid == resource.data.createdBy;
+     allow read, write: if request.auth != null && request.auth.uid == resource.data.createdBy;
     }
   }
 }
@@ -67,4 +69,4 @@ App uses Email/Password, Github and Google auth providers from Firebase Authenti
 
 ## Contributing
 
-WIP
+Feel free to.
