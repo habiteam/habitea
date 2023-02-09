@@ -112,7 +112,7 @@ export default function Info() {
           </p>
         </Block>
 
-        <Block title="Version">
+        {/* <Block title="Version">
           Currently we are preparing for version:
           <Link
             color="primary"
@@ -121,7 +121,7 @@ export default function Info() {
           >
             1.0.0
           </Link>
-        </Block>
+        </Block> */}
 
         <Block title="Contributors">
           <div className={classNames(styles['contributors-container'])}>
