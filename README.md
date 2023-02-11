@@ -3,7 +3,6 @@
 ## Activity and Habit tracker
 
 Branch `production` deploys to [habitea.netlify.app](https://habitea.netlify.app/)  
-Branch `staging` deploys to [staging--habitea.netlify.app/](https://staging--habitea.netlify.app/)
 
 Deploy status:  
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c8e79b08-4261-41d5-b6fd-dde9507891bd/deploy-status)](https://app.netlify.com/sites/habitea/deploys)
