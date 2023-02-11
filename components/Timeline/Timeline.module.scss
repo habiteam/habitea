@@ -23,7 +23,7 @@
   }
 }
 
-.hour-container {
+.hours-container {
   display: flex;
   position: relative;
 
@@ -33,6 +33,12 @@
     border-left: 1px solid var(--c-outline);
     padding-left: 4px;
     min-height: 320px;
+  }
+
+  .current-time {
+    position: absolute;
+    min-height: 320px;
+    border-left: 1px solid var(--c-primary);
   }
 
   .activity {

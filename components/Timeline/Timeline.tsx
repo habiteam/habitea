@@ -71,13 +71,8 @@ export default function Timeline() {
     }
   }, [user, activityCategories, reloader]);
 
-  const hours: number[] = [];
-
-  for (let i = 0; i < 24; i += 1) {
-    hours.push(i);
-  }
-
   useEffect(() => {
+    // Scroll to current time
     setTimeout(() => {
       if (divRef.current) {
         const today = new Date();
@@ -93,6 +88,11 @@ export default function Timeline() {
     }, 1000);
   }, []);
 
+  const hours: number[] = [];
+  for (let i = 0; i < 24; i += 1) {
+    hours.push(i);
+  }
+
   return (
     <div className={classNames(styles['timeline-wrapper'])}>
       <div ref={divRef} className={classNames(styles.timeline)}>
@@ -100,13 +100,23 @@ export default function Timeline() {
           {dayCollection.map((day, index) => (
             <div className={styles['day-container']} key={index}>
               <span className={styles['day-name']}>{Days.long[day.day]}</span>
-              <div className={styles['hour-container']}>
+              <div className={styles['hours-container']}>
+                {/* Hours */}
                 {hours.map((hour) => (
                   <span className={styles.hour} key={hour}>
                     {hour}
                   </span>
                 ))}
-
+                {/* Current time marker */}
+                <div
+                  className={classNames(styles['current-time'])}
+                  style={{
+                    left: `${
+                      120 * new Date().getHours() + new Date().getMinutes() * 2
+                    }px`,
+                  }}
+                ></div>
+                {/* Activities */}
                 {day.activities.map((activity, activityIndex) => (
                   <div
                     className={styles.activity}
