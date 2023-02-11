@@ -111,7 +111,7 @@ export default function Info() {
             </Link>
           </p>
           <p>
-            To see the latest changes, check out the{' '}
+            To see the latest changes, check out the
             <Link
               color="primary"
               href="https://github.com/habiteam/habitea/blob/main/CHANGELOG.md"
@@ -120,7 +120,7 @@ export default function Info() {
             </Link>
           </p>
           <p>
-            To see what we are planing to do next, take a look our{' '}
+            To see what we are planing to do next, take a look our
             <Link
               color="primary"
               href="https://github.com/habiteam/habitea/milestones"
