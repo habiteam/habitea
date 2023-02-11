@@ -12,6 +12,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 - fix: fixed Block elements showing unnecesary tooltips
 - Updated Github section in Info page
+- fix: showing calendar even if there are no activities
 
 ## 1.0.1 - 2023-02-09
 
