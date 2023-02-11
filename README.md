@@ -2,7 +2,13 @@
 
 ## Activity and Habit tracker
 
-Branch `production` deploys to [habitea.netlify.app](https://habitea.netlify.app/)  
+[habitea.netlify.app](https://habitea.netlify.app/)
+
+Habitea is simple and easy-to-use habit tracker that will help you take control of your life and make positive changes that last.
+
+Habitea is built with [Next.js](https://nextjs.org/) and [Firebase](https://firebase.google.com/) and is released under the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0-standalone.html) license.
+
+Branch `production` is automatically deployed to [Netlify](https://www.netlify.com/) and can be accessed [here](https://habitea.netlify.app/).
 
 Deploy status:  
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c8e79b08-4261-41d5-b6fd-dde9507891bd/deploy-status)](https://app.netlify.com/sites/habitea/deploys)
@@ -23,7 +29,7 @@ Deploy status:
 `npm run lint:fix` - run linter and fix errors  
 `npm run clear` - clear build cache
 
-## Firestore
+### Firestore
 
 `common/services/firebase.ts` contains firebase configuration.  
 Firebase API keys **do not** need to be obscured, database is secured by [Firebase Security Rules](https://firebase.google.com/docs/rules). Learn more [here](https://firebase.google.com/docs/projects/api-keys)
@@ -63,10 +69,10 @@ service cloud.firestore {
 }
 ```
 
-## Firebase auth
+### Firebase auth
 
 App uses Email/Password, Github and Google auth providers from Firebase Authentication. Refer to [Firebase documentation](https://firebase.google.com/docs/auth) if you want to set it up in your own firebase project.
 
 ## Contributing
 
-Feel free to.
+Feel free to open issues and pull requests. Please make pull requests to `main` branch.
