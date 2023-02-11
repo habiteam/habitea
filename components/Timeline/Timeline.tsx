@@ -108,14 +108,17 @@ export default function Timeline() {
                   </span>
                 ))}
                 {/* Current time marker */}
-                <div
-                  className={classNames(styles['current-time'])}
-                  style={{
-                    left: `${
-                      120 * new Date().getHours() + new Date().getMinutes() * 2
-                    }px`,
-                  }}
-                ></div>
+                {index === new Date().getDay() && (
+                  <div
+                    className={classNames(styles['current-time'])}
+                    style={{
+                      left: `${
+                        120 * new Date().getHours() +
+                        new Date().getMinutes() * 2
+                      }px`,
+                    }}
+                  ></div>
+                )}
                 {/* Activities */}
                 {day.activities.map((activity, activityIndex) => (
                   <div
