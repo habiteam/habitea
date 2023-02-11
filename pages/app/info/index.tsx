@@ -88,7 +88,7 @@ export default function Info() {
           </p>
         </Block>
         <Block header="Github">
-          This app is still in development.
+          This app is being constantly developed and improved.
           <p>
             Want to contribute? Visit us at
             <Link
@@ -110,19 +110,25 @@ export default function Info() {
               here.
             </Link>
           </p>
+          <p>
+            To see the latest changes, check out the{' '}
+            <Link
+              color="primary"
+              href="https://github.com/habiteam/habitea/blob/main/CHANGELOG.md"
+            >
+              Changelog
+            </Link>
+          </p>
+          <p>
+            To see what we are planing to do next, take a look our{' '}
+            <Link
+              color="primary"
+              href="https://github.com/habiteam/habitea/milestones"
+            >
+              Milestones
+            </Link>
+          </p>
         </Block>
-
-        {/* <Block title="Version">
-          Currently we are preparing for version:
-          <Link
-            color="primary"
-            target="_blank"
-            href="https://github.com/habiteam/habitea/milestone/1"
-          >
-            1.0.0
-          </Link>
-        </Block> */}
-
         <Block header="Contributors">
           <div className={classNames(styles['contributors-container'])}>
             {contributors.map((contributor) => (
