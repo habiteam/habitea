@@ -55,7 +55,7 @@ export default function Info() {
       </Head>
 
       <div className={classNames(styles.container)}>
-        <Block title="Info">
+        <Block header="Info">
           <p>
             <strong>Habitea</strong> is a platform to collect your habits /
             activities throughout the day, week or month.
@@ -87,7 +87,7 @@ export default function Info() {
             page you can set different theme.
           </p>
         </Block>
-        <Block title="Github">
+        <Block header="Github">
           This app is still in development.
           <p>
             Want to contribute? Visit us at
@@ -123,7 +123,7 @@ export default function Info() {
           </Link>
         </Block> */}
 
-        <Block title="Contributors">
+        <Block header="Contributors">
           <div className={classNames(styles['contributors-container'])}>
             {contributors.map((contributor) => (
               <Contributor
