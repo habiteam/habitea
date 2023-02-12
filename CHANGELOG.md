@@ -10,14 +10,24 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 ## Next
 
-- fix: fixed Block elements showing unnecesary tooltips
-- Updated Github section in Info page
-- fix: showing calendar even if there are no activities
-- feat: added a bar to timeline that shows the current time
+### Added
+
+- added a bar to timeline that shows the current time
+
+### Changed
+
+- updated Github section in Info page
+
+### Fixed
+
+- fixed Block elements showing unnecesary tooltips
+- made calendar visible even if there are no activities
 
 ## 1.0.1 - 2023-02-09
 
-- fix: make dropdown text color readable in dark themes
+### Fixed
+
+- made dropdown text color readable in dark themes
 
 ## 1.0.0 - 2023-02-02
 
