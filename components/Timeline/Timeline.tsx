@@ -108,7 +108,7 @@ export default function Timeline() {
                   </span>
                 ))}
                 {/* Current time marker */}
-                {index === new Date().getDay() && (
+                {day.day + 1 === new Date().getDay() && (
                   <div
                     className={classNames(styles['current-time'])}
                     style={{
