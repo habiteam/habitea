@@ -23,6 +23,7 @@ export default function Timeline() {
   const divRef = useRef<HTMLDivElement>(null);
   const reloader = useAtomValue(activityReloader);
   const addNotifcation = useAddNotification();
+  const [currentTime, setCurrentTime] = useState<string>();
 
   function mapToDayCollection(activities: Activity[]): DayCollection[] {
     const activitiesWithCategory = activities.map((activity) => ({
@@ -93,6 +94,16 @@ export default function Timeline() {
     hours.push(i);
   }
 
+  useEffect(() => {
+    // update current time every second
+    const interval = setInterval(() => {
+      setCurrentTime(
+        `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+      );
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={classNames(styles['timeline-wrapper'])}>
       <div ref={divRef} className={classNames(styles.timeline)}>
@@ -117,7 +128,11 @@ export default function Timeline() {
                         new Date().getMinutes() * 2
                       }px`,
                     }}
-                  ></div>
+                  >
+                    <span className={styles['current-time__text']}>
+                      {currentTime && currentTime}
+                    </span>
+                  </div>
                 )}
                 {/* Activities */}
                 {day.activities.map((activity, activityIndex) => (

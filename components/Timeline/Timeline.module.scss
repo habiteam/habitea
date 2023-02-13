@@ -41,6 +41,18 @@
     border-left: 1px solid var(--c-primary);
   }
 
+  .current-time__text {
+    position: absolute;
+    top: -24px;
+    left: 0;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    color: var(--c-primary-text);
+    background-color: var(--c-primary);
+    border-radius: 999px;
+    font-size: 1.4rem;
+  }
+
   .activity {
     position: absolute;
     padding: 8px;
