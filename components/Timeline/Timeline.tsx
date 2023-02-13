@@ -98,7 +98,13 @@ export default function Timeline() {
     // update current time every second
     const interval = setInterval(() => {
       setCurrentTime(
-        `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
+        `${new Date().getHours().toString().padStart(2, '0')}:${new Date()
+          .getMinutes()
+          .toString()
+          .padStart(2, '0')}:${new Date()
+          .getSeconds()
+          .toString()
+          .padStart(2, '0')}`,
       );
     }, 1000);
     return () => clearInterval(interval);
