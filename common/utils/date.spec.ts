@@ -76,7 +76,7 @@ test('getFirstDayOfWeek', () => {
 });
 test('getLastDayOfWeek', () => {
   expect(getLastDayOfWeek(firstDayOfYear)).toEqual(new Date('2023-01-01'));
-  expect(getLastDayOfWeek(lastDayOfYear)).toEqual(new Date('2023-01-02'));
+  expect(getLastDayOfWeek(lastDayOfYear)).toEqual(new Date('2023-12-31'));
   expect(getLastDayOfWeek(firstDayofSomeMonth)).toEqual(new Date('2023-03-05'));
   expect(getLastDayOfWeek(lastDayofSomeMonth)).toEqual(new Date('2023-04-02'));
   expect(getLastDayOfWeek(firstDayofSomeWeek)).toEqual(new Date('2023-02-12'));

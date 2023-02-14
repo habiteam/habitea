@@ -66,9 +66,7 @@ export default function Dashboard() {
       case 'Calendar':
         return (
           <div className={styles.tab}>
-            {activityCategories.length > 0 && (
-              <Calendar date={new Date()}></Calendar>
-            )}
+            <Calendar date={new Date()}></Calendar>
           </div>
         );
       default:

@@ -67,13 +67,13 @@ export default function Home() {
       </div>
 
       <div className={classNames(styles['blocks-container'])}>
-        <Block title={new Date().toISOString().split('T')[0]}>
+        <Block header={new Date().toISOString().split('T')[0]}>
           <Daily></Daily>
         </Block>
-        <Block title="Timeline">
+        <Block header="Timeline">
           <Timeline></Timeline>
         </Block>
-        <Block title="Journal">
+        <Block header="Journal">
           {activityList.length > 0 && (
             <Journal activities={activityList}></Journal>
           )}

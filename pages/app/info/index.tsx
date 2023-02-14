@@ -55,7 +55,7 @@ export default function Info() {
       </Head>
 
       <div className={classNames(styles.container)}>
-        <Block title="Info">
+        <Block header="Info">
           <p>
             <strong>Habitea</strong> is a platform to collect your habits /
             activities throughout the day, week or month.
@@ -87,8 +87,8 @@ export default function Info() {
             page you can set different theme.
           </p>
         </Block>
-        <Block title="Github">
-          This app is still in development.
+        <Block header="Github">
+          This app is being constantly developed and improved.
           <p>
             Want to contribute? Visit us at
             <Link
@@ -110,20 +110,26 @@ export default function Info() {
               here.
             </Link>
           </p>
+          <p>
+            To see the latest changes, check out the
+            <Link
+              color="primary"
+              href="https://github.com/habiteam/habitea/blob/main/CHANGELOG.md"
+            >
+              Changelog
+            </Link>
+          </p>
+          <p>
+            To see what we are planing to do next, take a look our
+            <Link
+              color="primary"
+              href="https://github.com/habiteam/habitea/milestones"
+            >
+              Milestones
+            </Link>
+          </p>
         </Block>
-
-        {/* <Block title="Version">
-          Currently we are preparing for version:
-          <Link
-            color="primary"
-            target="_blank"
-            href="https://github.com/habiteam/habitea/milestone/1"
-          >
-            1.0.0
-          </Link>
-        </Block> */}
-
-        <Block title="Contributors">
+        <Block header="Contributors">
           <div className={classNames(styles['contributors-container'])}>
             {contributors.map((contributor) => (
               <Contributor

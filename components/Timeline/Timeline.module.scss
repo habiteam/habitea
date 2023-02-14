@@ -23,7 +23,7 @@
   }
 }
 
-.hour-container {
+.hours-container {
   display: flex;
   position: relative;
 
@@ -33,6 +33,24 @@
     border-left: 1px solid var(--c-outline);
     padding-left: 4px;
     min-height: 320px;
+  }
+
+  .current-time {
+    position: absolute;
+    min-height: 320px;
+    border-left: 1px solid var(--c-primary);
+  }
+
+  .current-time__text {
+    position: absolute;
+    top: -24px;
+    left: 0;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    color: var(--c-primary-text);
+    background-color: var(--c-primary);
+    border-radius: 999px;
+    font-size: 1.4rem;
   }
 
   .activity {

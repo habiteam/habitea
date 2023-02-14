@@ -30,12 +30,11 @@ export function getFirstDayOfWeek(date: Date): Date {
   );
 }
 
-// TODO - this is not correct - need fix
 export function getLastDayOfWeek(date: Date): Date {
   return new Date(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate() + (6 - date.getDay()),
+    date.getDate() + (date.getDay() === 0 ? 0 : 7 - date.getDay()),
   );
 }
 
