@@ -1,3 +1,5 @@
+@import '../../styles/mixins.module';
+
 .container {
   display: flex;
   justify-content: center;
@@ -5,7 +7,10 @@
 
 .dailies {
   display: flex;
-  gap: 24px;
+  gap: 12px;
+  @media (min-width: $breakpoint-md) {
+    gap: 24px;
+  }
   overflow: auto;
   padding-block: 24px;
 }

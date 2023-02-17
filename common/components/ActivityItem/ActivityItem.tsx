@@ -1,5 +1,6 @@
 import { openActivityModalAtom, activityAtom } from '@atoms/activity-dialog';
 import { activityReloader } from '@atoms/reloaders';
+import { MOBILE_BREAKPOINT, screenWidthAtom } from '@atoms/screen';
 import Button from '@commonComponents/Button/Button';
 import Dialog from '@commonComponents/Dialog/Dialog';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -12,7 +13,7 @@ import { getActivityValue } from '@utils/activity-utils';
 import { getDateInputFormatFromDate } from '@utils/date';
 import { useAddNotification } from '@utils/notifications';
 import classNames from 'classnames';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useState } from 'react';
 import styles from './ActivityItem.module.scss';
 
@@ -25,6 +26,7 @@ export default function ActivityItem(props: ActivityItemProps) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const addNotification = useAddNotification();
   const setReloader = useSetAtom(activityReloader);
+  const screenWidth = useAtomValue(screenWidthAtom);
 
   const deleteActivity = async () => {
     try {
@@ -55,10 +57,14 @@ export default function ActivityItem(props: ActivityItemProps) {
                 iconName: props.activity.category?.icon,
               })}
               width={14}
+              className={classNames(styles['category-icon'])}
+              title={props.activity.category?.name}
             ></FontAwesomeIcon>
           )}
           &nbsp;
-          {props.activity.category?.name}
+          <span className={classNames(styles['category-name'])}>
+            {screenWidth >= MOBILE_BREAKPOINT && props.activity.category?.name}
+          </span>
           <div className={styles.spacer}></div>
           <div className={styles.actions}>
             <Button
@@ -83,6 +89,9 @@ export default function ActivityItem(props: ActivityItemProps) {
           </div>
         </div>
         <div className={classNames(styles.body)}>
+          <span className={classNames(styles['category-name'])}>
+            {screenWidth < MOBILE_BREAKPOINT && props.activity.category?.name}
+          </span>
           <span className={classNames(styles.value)}>
             {getActivityValue(
               props.activity,

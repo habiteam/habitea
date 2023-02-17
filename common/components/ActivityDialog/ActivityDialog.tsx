@@ -64,7 +64,7 @@ export default function ActivityDialog() {
 
       <FullscreenDialog
         anchorRef={buttonRef}
-        title="Start Activity"
+        title={activity ? activity.category?.name : 'Start Activity'}
         open={openActivityModal}
         handleClose={() => {
           setOpenActivityModal(false);

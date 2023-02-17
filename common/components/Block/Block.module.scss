@@ -1,7 +1,12 @@
+@import '../../../styles/breakpoints.module.scss';
+
 .block {
   background-color: var(--c-surface);
   color: var(--c-text);
-  padding: 16px;
+  padding: 10px;
+  @media (min-width: $breakpoint-md) {
+    padding: 16px;
+  }
   border-radius: 12px;
 
   > h2 {
