@@ -2,9 +2,9 @@ import { getAppLayout } from '@components/AppLayout/AppLayout';
 import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
 import { Activity } from '@schemas/activity';
 import { userAtom } from '@atoms/user';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';
 import { categoriesAtom } from '@atoms/categories';
 import { ActivitiesService } from '@services/activities';
@@ -15,14 +15,19 @@ import Daily from '@components/Daily/Daily';
 import Timeline from '@components/Timeline/Timeline';
 import { activityReloader } from '@atoms/reloaders';
 import { useAddNotification } from '@utils/notifications';
+import { activityAtom } from '@atoms/activity-dialog';
+import Button from '@commonComponents/Button/Button';
 import styles from './Home.module.scss';
 
 export default function Home() {
   const user = useAtomValue(userAtom);
   const [activityList, setActivityList] = useState<Activity[]>([]);
+  const buttonRef = useRef(null);
+  const setActivity = useSetAtom(activityAtom);
   const setActivityCategories = useSetAtom(categoriesAtom);
   const reloader = useAtomValue(activityReloader);
   const addNotifcation = useAddNotification();
+  const [openActivityModal, setOpenActivityModal] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -63,7 +68,23 @@ export default function Home() {
       <div className={classNames(styles.header)}>
         <h2>Welcome {user?.displayName ?? user?.email}</h2>
         <div className={classNames(styles.spacer)}></div>
-        <ActivityDialog></ActivityDialog>{' '}
+        <div style={{ width: 'max-content' }} ref={buttonRef}>
+          <Button
+            fillType="filled"
+            color="tertiary"
+            onClick={() => {
+              setActivity(null);
+              setOpenActivityModal(true);
+            }}
+          >
+            Start Activity
+          </Button>
+        </div>
+        <ActivityDialog
+          buttonRef={buttonRef}
+          openActivityModal={openActivityModal}
+          handleClose={() => setOpenActivityModal(false)}
+        ></ActivityDialog>
       </div>
 
       <div className={classNames(styles['blocks-container'])}>

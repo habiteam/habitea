@@ -1,6 +1,7 @@
 import { openActivityModalAtom, activityAtom } from '@atoms/activity-dialog';
 import { activityReloader } from '@atoms/reloaders';
 import { MOBILE_BREAKPOINT, screenWidthAtom } from '@atoms/screen';
+import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
 import Button from '@commonComponents/Button/Button';
 import Dialog from '@commonComponents/Dialog/Dialog';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -14,19 +15,19 @@ import { getDateInputFormatFromDate } from '@utils/date';
 import { useAddNotification } from '@utils/notifications';
 import classNames from 'classnames';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './ActivityItem.module.scss';
 
 interface ActivityItemProps {
   activity: Activity;
 }
 export default function ActivityItem(props: ActivityItemProps) {
-  const setOpenActivityModal = useSetAtom(openActivityModalAtom);
   const setActivity = useSetAtom(activityAtom);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const addNotification = useAddNotification();
   const setReloader = useSetAtom(activityReloader);
   const screenWidth = useAtomValue(screenWidthAtom);
+  const [openActivityModal, setOpenActivityModal] = useState(false);
 
   const deleteActivity = async () => {
     try {
@@ -41,6 +42,11 @@ export default function ActivityItem(props: ActivityItemProps) {
 
   return (
     <>
+      <ActivityDialog
+        openActivityModal={openActivityModal}
+        handleClose={() => setOpenActivityModal(false)}
+      ></ActivityDialog>
+
       <div className={classNames(styles.item)}>
         <div
           className={classNames(styles.header, {
@@ -77,6 +83,7 @@ export default function ActivityItem(props: ActivityItemProps) {
             >
               <FontAwesomeIcon icon={faEdit} width={14}></FontAwesomeIcon>
             </Button>
+
             <Button
               fillType="regular"
               color="dark"
