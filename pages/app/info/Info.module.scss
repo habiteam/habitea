@@ -9,9 +9,16 @@
 }
 
 .contributors-container {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  --contributors: 2;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(var(--contributors), 2em);
+  transition: all ease-in-out 400ms;
+}
+
+.contributors-container:hover {
+  grid-template-columns: repeat(var(--contributors), 3em);
 }
 
 .tooltip {
