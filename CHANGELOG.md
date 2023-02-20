@@ -8,6 +8,16 @@ Changes under the `Next` section reflect the unreleased changes that are current
 
 We **do not** use Semantic Versioning. In our scheme the third number is incremented for every release, while second number is incremented when we close a [milestone](https://github.com/habiteam/habitea/milestones). First number remains at 1, unless something crazy happens.
 
+## Next
+
+### Added
+
+- added possibility to add an activity in category view
+
+### Changed
+
+- Adjusted styling for better mobile experience
+
 ## 1.0.2 - 2023-02-14
 
 ### Added
