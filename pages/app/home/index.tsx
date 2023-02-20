@@ -2,7 +2,7 @@ import { getAppLayout } from '@components/AppLayout/AppLayout';
 import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
 import { Activity } from '@schemas/activity';
 import { userAtom } from '@atoms/user';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { ActivityCategoriesService } from '@services/activity-categories';

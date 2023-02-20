@@ -30,7 +30,7 @@
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      "@public/*": ["public/*"],
+      "@public/*": ["public/*"]
     }
   },
   "include": [

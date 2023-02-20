@@ -1,4 +1,4 @@
-import { openActivityModalAtom, activityAtom } from '@atoms/activity-dialog';
+import { activityAtom } from '@atoms/activity-dialog';
 import { activityReloader } from '@atoms/reloaders';
 import { MOBILE_BREAKPOINT, screenWidthAtom } from '@atoms/screen';
 import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
@@ -15,7 +15,7 @@ import { getDateInputFormatFromDate } from '@utils/date';
 import { useAddNotification } from '@utils/notifications';
 import classNames from 'classnames';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styles from './ActivityItem.module.scss';
 
 interface ActivityItemProps {
