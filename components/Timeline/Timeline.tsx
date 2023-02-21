@@ -55,7 +55,7 @@ export default function Timeline() {
   const fetchActivities = async () => {
     if (user && activityCategories) {
       try {
-        await ActivitiesService.getForLastSevenDays(new Date(), user?.uid).then(
+        await ActivitiesService.getForLastSixDays(new Date(), user?.uid).then(
           (response) => {
             setDayCollection(mapToDayCollection(response));
           },
