@@ -50,8 +50,6 @@ export default function ActivityItem(props: ActivityItemProps) {
       <div className={classNames(styles.item)}>
         <div
           className={classNames(styles.header, {
-            [styles['header--good']]:
-              props.activity.category?.goalType === 'MIN',
             [styles['header--bad']]:
               props.activity.category?.goalType === 'MAX',
           })}
@@ -75,7 +73,7 @@ export default function ActivityItem(props: ActivityItemProps) {
           <div className={styles.actions}>
             <Button
               fillType="regular"
-              color="dark"
+              color="secondary-alt"
               onClick={() => {
                 setActivity(props.activity);
                 setOpenActivityModal(true);
@@ -86,7 +84,7 @@ export default function ActivityItem(props: ActivityItemProps) {
 
             <Button
               fillType="regular"
-              color="dark"
+              color="secondary-alt"
               onClick={() => {
                 setDeleteDialogOpen(true);
               }}

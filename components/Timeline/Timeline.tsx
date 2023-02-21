@@ -143,7 +143,10 @@ export default function Timeline() {
                 {/* Activities */}
                 {day.activities.map((activity, activityIndex) => (
                   <div
-                    className={styles.activity}
+                    className={classNames(styles.activity, {
+                      [styles['activity--bad']]:
+                        activity.category?.goalType === 'MAX',
+                    })}
                     style={{
                       top: `${((activityIndex * 48) % 240) + 48}px`,
                       left: `${
