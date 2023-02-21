@@ -8,6 +8,18 @@ Changes under the `Next` section reflect the unreleased changes that are current
 
 We **do not** use Semantic Versioning. In our scheme the third number is incremented for every release, while second number is incremented when we close a [milestone](https://github.com/habiteam/habitea/milestones). First number remains at 1, unless something crazy happens.
 
+## Next
+
+### Changed
+
+- improved datepicker on mobile
+- unified color of activity items in different sections
+- made activities in heatmap tooltip display one under another
+
+### Fixed
+
+- fixed timeline displaying activities from previous week
+
 ## 1.0.3 - 2023-02-21
 
 ### Added
