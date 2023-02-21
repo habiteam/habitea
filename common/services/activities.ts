@@ -5,7 +5,6 @@ import { CategoryProgress } from '@schemas/category-progress';
 import {
   getFirstDayOfYear,
   getLastDayOfYear,
-  getSevenDaysAgo,
   getSixDaysAgo,
 } from '@utils/date';
 import { getSecondsFromDuration, toDurationString } from '@utils/duration';
