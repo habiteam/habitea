@@ -13,7 +13,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 ### Changed
 
 - improved datepicker on mobile
-- unified color of activity items in different sections
+- unified colors of activity items in different sections
 - made activities in heatmap tooltip display one under another
 
 ### Fixed
