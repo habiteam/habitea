@@ -41,9 +41,7 @@ export default function CategoriesLayout(props: AppLayoutProps) {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) =>
-      updateCategoriesList(),
-    );
+    const unsubscribe = onAuthStateChanged(auth, () => updateCategoriesList());
     return () => {
       unsubscribe();
     };

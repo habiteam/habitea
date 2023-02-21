@@ -11,22 +11,101 @@
     border-radius: 8px;
   }
 
-  @each $name, $color in $colors-map {
-    &--#{$name} {
-      color: #{$color};
-
-      &:hover,
-      &:focus-visible {
-        background-color: mix($color, #fff, 15%);
-      }
-    }
-  }
   &--primary {
     color: var(--c-primary);
 
     &:hover,
+    &:active,
     &:focus-visible {
-      background-color: var(--c-bg);
+      background-color: var(--c-primary-container);
+    }
+  }
+
+  &--primary-alt {
+    color: var(--c-primary-text);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      color: var(--c-primary-container);
+      background-color: var(--c-primary-container-text);
+    }
+  }
+
+  &--secondary {
+    color: var(--c-secondary);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: var(--c-secondary);
+      color: var(--c-secondary-text);
+    }
+  }
+
+  &--secondary-alt {
+    color: var(--c-secondary-text);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: var(--c-secondary-container);
+      color: var(--c-secondary-container-text);
+    }
+  }
+
+  &--tertiary {
+    color: var(--c-tertiary);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: var(--c-tertiary);
+      color: var(--c-tertiary-text);
+    }
+  }
+
+  &--tertiary-alt {
+    color: var(--c-tertiary-text);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: var(--c-tertiary-container);
+      color: var(--c-tertiary-container-text);
+    }
+  }
+
+  &--default {
+    color: var(--c-text);
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: var(--c-text);
+      color: var(--c-bg);
+    }
+  }
+
+  &--light {
+    color: white;
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: white;
+      color: black;
+    }
+  }
+
+  &--dark {
+    color: black;
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      background-color: black;
+      color: white;
     }
   }
 }

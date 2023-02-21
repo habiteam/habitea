@@ -8,6 +8,7 @@ export type Color =
   | 'secondary'
   | 'secondary-alt'
   | 'tertiary'
+  | 'tertiary-alt'
   | 'default'
   | 'light'
   | 'dark';

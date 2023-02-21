@@ -22,6 +22,9 @@ import NavLink from '@commonComponents/NavLink/NavLink';
 import { auth } from '@services/firebase';
 import { MOBILE_BREAKPOINT, screenWidthAtom } from '@atoms/screen';
 import { userAtom } from '@atoms/user';
+import { useAddNotification } from '@utils/notifications';
+import getErrorMessage from '@utils/firebase-error';
+import { FirebaseError } from 'firebase/app';
 import styles from './AppNav.module.scss';
 
 export default function AppNav() {
@@ -30,6 +33,8 @@ export default function AppNav() {
   const [isActionMenuOpened, setIsActionMenuOpened] = useState(false);
 
   const user = useAtomValue(userAtom);
+
+  const addNotification = useAddNotification();
 
   const navLinks = [
     {
@@ -63,8 +68,11 @@ export default function AppNav() {
           .then(() => {
             Router.push('/');
           })
-          .catch((error) => {
-            console.error(error);
+          .catch((error: FirebaseError) => {
+            addNotification({
+              message: getErrorMessage(error),
+              type: 'danger',
+            });
           });
       },
     },

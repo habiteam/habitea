@@ -53,7 +53,10 @@
 }
 
 .tab {
-  padding: 16px;
+  padding: 10px;
+  @media (min-width: $breakpoint-md) {
+    padding: 16px;
+  }
   background-color: var(--c-surface);
-  border-radius: 16px;
+  border-radius: 24px;
 }

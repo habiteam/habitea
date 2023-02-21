@@ -12,6 +12,16 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 ### Added
 
+- added possibility to add an activity in category view
+
+### Changed
+
+- Adjusted styling for better mobile experience
+
+## 1.0.2 - 2023-02-14
+
+### Added
+
 - added a bar to timeline that shows the current time
 
 ### Changed

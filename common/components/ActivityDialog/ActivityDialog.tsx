@@ -1,6 +1,5 @@
-import { activityAtom, openActivityModalAtom } from '@atoms/activity-dialog';
+import { activityAtom } from '@atoms/activity-dialog';
 import { activityReloader } from '@atoms/reloaders';
-import Button from '@commonComponents/Button/Button';
 import DateInput from '@commonComponents/DateInput/DateInput';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
 import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialog';
@@ -13,14 +12,23 @@ import { getDateInputFormatFromDate } from '@utils/date';
 import getErrorMessage from '@utils/firebase-error';
 import { useAddNotification } from '@utils/notifications';
 import { Timestamp } from 'firebase/firestore';
-import { useAtom, useSetAtom } from 'jotai';
-import { useEffect, useRef, useState } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { MutableRefObject, useEffect, useState } from 'react';
 
-export default function ActivityDialog() {
-  const [openActivityModal, setOpenActivityModal] = useAtom(
-    openActivityModalAtom,
-  );
-  const [activity, setActivity] = useAtom(activityAtom);
+export interface ActivityDialogProps {
+  openActivityModal: boolean;
+  handleClose: () => void;
+  buttonRef?: MutableRefObject<null>;
+  selectedCategoryValue?: ActivityCategory;
+}
+
+export default function ActivityDialog({
+  openActivityModal,
+  handleClose,
+  buttonRef,
+  selectedCategoryValue,
+}: ActivityDialogProps) {
+  const activity = useAtomValue(activityAtom);
   const [selectedCategory, setSelectedCategory] = useState<
     ActivityCategory | undefined
   >(undefined);
@@ -29,7 +37,6 @@ export default function ActivityDialog() {
   const [date, setDate] = useState<string>(
     getDateInputFormatFromDate(new Date()),
   );
-  const buttonRef = useRef(null);
   const addNotification = useAddNotification();
   const setReloader = useSetAtom(activityReloader);
 
@@ -47,34 +54,25 @@ export default function ActivityDialog() {
     }
   }, [activity]);
 
+  useEffect(() => {
+    setSelectedCategory(selectedCategoryValue);
+  }, [selectedCategoryValue]);
+
   return (
     <>
-      <div style={{ width: 'max-content' }} ref={buttonRef}>
-        <Button
-          fillType="filled"
-          color="tertiary"
-          onClick={() => {
-            setActivity(null);
-            setOpenActivityModal(true);
-          }}
-        >
-          Start Activity
-        </Button>
-      </div>
-
       <FullscreenDialog
         anchorRef={buttonRef}
-        title="Start Activity"
+        title={activity ? activity.category?.name : 'Start Activity'}
         open={openActivityModal}
         handleClose={() => {
-          setOpenActivityModal(false);
+          handleClose();
         }}
         actions={[
           {
             text: 'Cancel',
             fillType: 'regular',
             onClick: () => {
-              setOpenActivityModal(false);
+              handleClose();
             },
           },
           {
@@ -101,7 +99,7 @@ export default function ActivityDialog() {
                     type: 'success',
                   });
                   setReloader(activityRequest);
-                  setOpenActivityModal(false);
+                  handleClose();
                 } catch (e: any) {
                   addNotification({
                     message: getErrorMessage(e),

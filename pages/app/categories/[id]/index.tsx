@@ -13,6 +13,7 @@ import {
   faArrowLeftLong,
   faEdit,
   faEllipsisVertical,
+  faPlus,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -38,6 +39,8 @@ import Heatmap from '@commonComponents/Heatmap/Heatmap';
 import getErrorMessage from '@utils/firebase-error';
 import { FirebaseError } from 'firebase/app';
 import Pin from '@commonComponents/Pin/Pin';
+import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
+import { activityAtom } from '@atoms/activity-dialog';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -48,6 +51,8 @@ export default function Category() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [statusDialogOpen, setStatusDialogOpen] = useState(false);
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState<boolean>(false);
+  const setActivity = useSetAtom(activityAtom);
+  const [openActivityModal, setOpenActivityModal] = useState(false);
   const user = useAtomValue(userAtom);
 
   const width = useAtomValue(screenWidthAtom);
@@ -55,6 +60,14 @@ export default function Category() {
   const setCategoryListReloader = useSetAtom(categoryListReloader);
 
   const actions: DropdownMenuItem[] = [
+    {
+      icon: faPlus,
+      text: 'Add activity',
+      onClick: () => {
+        setActivity(null);
+        setOpenActivityModal(true);
+      },
+    },
     {
       icon: faEdit,
       text: 'Edit',
@@ -262,6 +275,12 @@ export default function Category() {
         </div>
 
         {/* Dialogs */}
+
+        <ActivityDialog
+          openActivityModal={openActivityModal}
+          handleClose={() => setOpenActivityModal(false)}
+          selectedCategoryValue={category}
+        ></ActivityDialog>
 
         <Dialog
           title="Change category status"
