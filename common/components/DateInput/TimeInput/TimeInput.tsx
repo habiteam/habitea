@@ -40,6 +40,9 @@ export default function TimeInput(props: TimeInputPropSchema) {
       <div className={classNames(styles.container)}>
         <div className={classNames(styles['input-container'])}>
           <input
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             id="hours"
             className={classNames(styles.input)}
             maxLength={2}
@@ -54,6 +57,9 @@ export default function TimeInput(props: TimeInputPropSchema) {
         <div className={classNames(styles.separator)}>:</div>
         <div className={classNames(styles['input-container'])}>
           <input
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             id="minutes"
             className={classNames(styles.input)}
             maxLength={2}
