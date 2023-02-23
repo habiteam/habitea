@@ -44,7 +44,7 @@
 
   &--primary {
     background-color: var(--c-bg);
-
+    color: var(--c-text);
     li {
       &:hover {
         color: var(--c-primary-container-text);

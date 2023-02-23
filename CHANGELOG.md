@@ -19,6 +19,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 ### Fixed
 
 - fixed timeline displaying activities from previous week
+- fixed text in dropdowns not being readable in certain themes
 
 ## 1.0.3 - 2023-02-21
 
