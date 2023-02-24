@@ -77,6 +77,11 @@
   position: absolute;
   z-index: 1;
 
+  .activities {
+    display: flex;
+    flex-direction: column;
+  }
+
   .item:hover & {
     display: block;
   }

@@ -5,7 +5,7 @@ import { CategoryProgress } from '@schemas/category-progress';
 import {
   getFirstDayOfYear,
   getLastDayOfYear,
-  getSevenDaysAgo,
+  getSixDaysAgo,
 } from '@utils/date';
 import { getSecondsFromDuration, toDurationString } from '@utils/duration';
 import { getWheresForPeriod } from '@utils/time';
@@ -222,7 +222,7 @@ export class ActivitiesService {
     );
   }
 
-  static async getForLastSevenDays(
+  static async getForLastSixDays(
     from: Date,
     userId: string,
   ): Promise<Activity[]> {
@@ -230,7 +230,7 @@ export class ActivitiesService {
     const q = query(
       activitiesRef,
       where('createdBy', '==', userId),
-      where('activityDate', '>=', Timestamp.fromDate(getSevenDaysAgo(from))),
+      where('activityDate', '>=', Timestamp.fromDate(getSixDaysAgo(from))),
       where(
         'activityDate',
         '<=',

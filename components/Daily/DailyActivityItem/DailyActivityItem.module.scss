@@ -13,6 +13,11 @@
   flex-direction: column;
   gap: 12px;
 
+  &--bad {
+    background-color: var(--c-bad);
+    border-color: var(--bad);
+  }
+
   .item-header {
     .category-name {
       font-size: 2rem;

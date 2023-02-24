@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import { useTransition, animated, easings } from '@react-spring/web';

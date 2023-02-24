@@ -163,7 +163,7 @@ export default function Heatmap(props: HeatmapProps) {
                 i,
               ).toDateString()}
               {activitiesByDay[i] && (
-                <div>
+                <div className={styles.activities}>
                   {activitiesByDay[i].map((activity) => (
                     <span key={activity.id}>
                       {getTimeFromDate(activity.activityDate.toDate())} -{' '}

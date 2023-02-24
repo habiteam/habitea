@@ -22,7 +22,7 @@ body {
 
   --c-good: #d6eeca;
   --c-good-saturated: #a3d9a5;
-  --c-bad: #e79b9b;
+  --c-bad: #b55656;
   --c-bad-saturated: #d66d6d;
 
   --e-1: 0px 1px 2px 0px #0000004d, 0px 1px 3px 1px #00000026;
@@ -50,6 +50,8 @@ body {
     --c-text: #ece0da;
     --c-outline: #9f8d83;
     --c-unfocused: #d7c3b7;
+
+    --c-bad: #e79b9b;
   }
 
   &.milky {
@@ -96,6 +98,8 @@ body {
     --c-text: #e5e2da;
     --c-outline: #929282;
     --c-unfocused: #c8c7b7;
+
+    --c-bad: #e79b9b;
   }
 
   &.kale {
@@ -142,6 +146,8 @@ body {
     --c-text: #e2e2e5;
     --c-outline: #8b9198;
     --c-unfocused: #c1c7ce;
+
+    --c-bad: #e79b9b;
   }
 
   &.mint {
@@ -188,6 +194,8 @@ body {
     --c-text: #e6e1e6;
     --c-outline: #938f99;
     --c-unfocused: #c9c4d0;
+
+    --c-bad: #e79b9b;
   }
 
   &.blackberry {
@@ -303,6 +311,8 @@ body {
     --c-text: #e2e1dd;
     --c-outline: #9c8e80;
     --c-unfocused: #d4c4b5;
+
+    --c-bad: #e79b9b;
   }
 
   &.lemon {

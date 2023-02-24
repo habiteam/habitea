@@ -18,7 +18,11 @@ export default function DailyActivityItem({
   activity,
 }: DailyActivityItemProps) {
   return (
-    <div className={classNames(styles.item)}>
+    <div
+      className={classNames(styles.item, {
+        [styles['item--bad']]: activity?.category?.goalType === 'MAX',
+      })}
+    >
       {activity && activity.category ? (
         <>
           <div className={classNames(styles['item-header'])}>
