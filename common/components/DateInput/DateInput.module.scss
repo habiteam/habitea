@@ -32,6 +32,10 @@
 .date-picker-wrapper {
   @include scrollbar();
 
+  @media (min-width: $breakpoint-md) {
+    position: absolute;
+  }
+
   z-index: 2;
   padding: 8px;
   background-color: var(--c-bg);
