@@ -104,7 +104,7 @@ export function CategoryUpdateDialog({
           },
         },
         {
-          text: activityCategory?.id ? 'Edit' : 'Create',
+          text: activityCategory?.id ? 'Save' : 'Create',
           fillType: 'filled',
           color: 'primary',
           onClick: updateCategory,

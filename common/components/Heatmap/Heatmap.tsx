@@ -140,7 +140,12 @@ export default function Heatmap(props: HeatmapProps) {
     days.push(
       <div key={i} className={styles['item-wrapper']}>
         {activityStrengthsByDay[i] ? (
-          <div key={i} className={classNames(styles.item)}>
+          <div
+            key={i}
+            className={classNames(styles.item, {
+              [styles['item--current']]: i === getDayOfYear(new Date()),
+            })}
+          >
             <div
               className={classNames(styles.fill, {
                 [styles['fill--good']]: props.category?.goalType === 'MIN',
@@ -175,7 +180,11 @@ export default function Heatmap(props: HeatmapProps) {
             </div>
           </div>
         ) : (
-          <div className={classNames(styles.item, styles['item--empty'])}>
+          <div
+            className={classNames(styles.item, styles['item--empty'], {
+              [styles['item--current']]: i === getDayOfYear(new Date()),
+            })}
+          >
             <div
               className={styles.tooltip}
               style={{ top: `${coords.y}px`, left: `${coords.x}px` }}

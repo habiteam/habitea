@@ -42,6 +42,9 @@
   width: 20px;
   height: 20px;
   background-color: transparent;
+  &--current {
+    border: 2px solid var(--c-tertiary);
+  }
 }
 
 .fill {
@@ -50,7 +53,7 @@
   &--good {
     background-color: var(--c-primary-container);
     &.fill--goal {
-      border: 4px solid var(--c-good-saturated);
+      background-color: var(--c-primary);
     }
   }
 

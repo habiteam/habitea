@@ -10,6 +10,16 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 ## Next
 
+### Added
+
+- marking current day in heatmap
+
+### Changed
+
+- changed colors of heatmap items
+
+## 1.0.4 - 2024-02-24
+
 ### Changed
 
 - improved datepicker on mobile
