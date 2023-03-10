@@ -53,7 +53,7 @@
   &--good {
     background-color: var(--c-primary-container);
     &.fill--goal {
-      border: 4px solid var(--c-good-saturated);
+      background-color: var(--c-primary);
     }
   }
 

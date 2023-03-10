@@ -8,6 +8,16 @@ Changes under the `Next` section reflect the unreleased changes that are current
 
 We **do not** use Semantic Versioning. In our scheme the third number is incremented for every release, while second number is incremented when we close a [milestone](https://github.com/habiteam/habitea/milestones). First number remains at 1, unless something crazy happens.
 
+## Next
+
+### Added
+
+- marking current day in heatmap
+
+### Changed
+
+- changed colors of heatmap items
+
 ## 1.0.4 - 2024-02-24
 
 ### Changed
