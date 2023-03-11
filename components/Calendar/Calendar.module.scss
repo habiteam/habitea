@@ -72,11 +72,12 @@ $calendarMainColor: var(--c-primary-container);
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
-  justify-content: center;
-  @media (min-width: $breakpoint-md) {
-    justify-content: flex-start;
-  }
+  flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+  }
   min-height: 80px;
   position: relative;
   transition: all 300ms;
@@ -95,8 +96,14 @@ $calendarMainColor: var(--c-primary-container);
 
 .day-activity {
   position: relative;
-  border-radius: 12px;
-  padding: 4px 8px;
+  border-radius: 999px;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--c-primary-container);
   &--good {
     background-color: var(--c-good);

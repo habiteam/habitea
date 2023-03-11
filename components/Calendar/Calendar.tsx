@@ -125,7 +125,6 @@ export default function Calendar(props: CalendarProps) {
                       prefix: 'fas',
                       iconName: activity.category?.icon,
                     })}
-                    width={14}
                   ></FontAwesomeIcon>
                 )}
                 <Dropdown
