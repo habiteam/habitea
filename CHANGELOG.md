@@ -13,6 +13,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 ### Fixed
 
 - fixed leading zeros remaining in number inputs
+- fixed visual bugs in dashboard, like overflowing text and poorly aligned elements
 
 ## 1.0.5 - 2024-03-10
 
