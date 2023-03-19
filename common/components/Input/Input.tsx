@@ -44,7 +44,11 @@ export default function Input(props: InputPropsSchema) {
       <div className={styles.input__container}>
         <input
           name={props.name}
-          value={props.value}
+          value={
+            props.type === 'number'
+              ? props.value?.toString().replace(/^0+(?=.)/g, '')
+              : props.value
+          }
           id={props.id}
           required={props.required}
           onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}

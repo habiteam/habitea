@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { ActivityCategory } from '@schemas/activity-category';
+import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 import styles from './CategoriesItem.module.scss';
 
 export default function CategoriesItem(props: ActivityCategory) {
@@ -29,6 +30,13 @@ export default function CategoriesItem(props: ActivityCategory) {
         ></FontAwesomeIcon>
       )}
       <span>{props.name}</span>
+      {props.pinned > 0 && (
+        <FontAwesomeIcon
+          icon={faThumbtack}
+          width={14}
+          className={classNames(styles['pinned-icon'])}
+        ></FontAwesomeIcon>
+      )}
     </Link>
   );
 }

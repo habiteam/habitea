@@ -10,13 +10,21 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 ## Next
 
+### Fixed
+
+- fixed leading zeros remaining in number inputs
+- fixed visual bugs in dashboard, like overflowing text and poorly aligned elements
+
+## 1.0.5 - 2024-03-10
+
 ### Added
 
 - marking current day in heatmap
 
 ### Changed
 
-- changed colors of heatmap items
+- changed the way completed goals are colored in heatmap
+- minor aesthetic changes
 
 ## 1.0.4 - 2024-02-24
 
