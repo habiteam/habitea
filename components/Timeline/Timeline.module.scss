@@ -60,10 +60,18 @@
     border: 1px solid var(--c-outline);
     color: var(--c-secondary-text);
     background-color: var(--c-secondary);
-    min-width: 120px;
+
     &--bad {
       background-color: var(--c-bad);
       border-color: var(--bad);
+    }
+
+    &--timed {
+      min-width: 120px;
+    }
+
+    &--quantified {
+      min-width: 38px;
     }
   }
 }
