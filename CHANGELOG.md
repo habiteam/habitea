@@ -14,6 +14,10 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 - updated the way activities are displayed in the timeline to be more compact
 
+### Fixed
+
+- fixed category view main content section being misaligned on mobile
+
 ## 1.0.6 - 2024-03-19
 
 ### Fixed
