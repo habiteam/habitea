@@ -13,6 +13,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 ### Changed
 
 - updated the way activities are displayed in the timeline to be more compact
+- made items in heatmap become highlighted while being viewed for better readability on mobile
 
 ### Fixed
 
