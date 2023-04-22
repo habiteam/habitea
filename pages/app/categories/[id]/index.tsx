@@ -41,6 +41,7 @@ import { FirebaseError } from 'firebase/app';
 import Pin from '@commonComponents/Pin/Pin';
 import ActivityDialog from '@commonComponents/ActivityDialog/ActivityDialog';
 import { activityAtom } from '@atoms/activity-dialog';
+import MontlhyProgressChart from '@commonComponents/MontlhyProgressChart/MontlhyProgressChart';
 import styles from './Category.module.scss';
 
 export default function Category() {
@@ -247,6 +248,14 @@ export default function Category() {
 
         <div className={classNames(styles.main)}>
           <div>
+            {
+              <MontlhyProgressChart
+                date={new Date()}
+                category={category}
+              ></MontlhyProgressChart>
+            }
+            {<Heatmap date={new Date()} category={category}></Heatmap>}
+
             <div className={classNames(styles.info)}>
               <h2 className={classNames(styles.label)}>Description</h2>
               <p className={classNames(styles.value)}>
@@ -254,23 +263,30 @@ export default function Category() {
                   'This category doesn’t have a description yet.'}
               </p>
             </div>
-            {<Heatmap date={new Date()} category={category}></Heatmap>}
-            <p>
-              {getSummarisedActivities(
-                recentActivities ?? [],
-                category.unitType,
-              )}{' '}
-              {category.unit} this{' '}
-              {
-                ActivityCategoryRepeatTypePeriods[
-                  category.repeatType ?? 'DAILY'
-                ]
-              }
-            </p>
-            <p>
-              {calculateProgress(recentActivities ?? [], category).toFixed(0)} %
-              progress
-            </p>
+
+            <div className={classNames(styles.info)}>
+              <h2 className={classNames(styles.label)}>Recently</h2>
+              <p className={classNames(styles.value)}>
+                {getSummarisedActivities(
+                  recentActivities ?? [],
+                  category.unitType,
+                )}{' '}
+                {category.unit} this{' '}
+                {
+                  ActivityCategoryRepeatTypePeriods[
+                    category.repeatType ?? 'DAILY'
+                  ]
+                }
+              </p>
+            </div>
+
+            <div className={classNames(styles.info)}>
+              <h2 className={classNames(styles.label)}>Progress</h2>
+              <p className={classNames(styles.value)}>
+                {calculateProgress(recentActivities ?? [], category).toFixed(0)}{' '}
+                %
+              </p>
+            </div>
           </div>
         </div>
 
