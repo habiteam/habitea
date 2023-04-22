@@ -35,7 +35,7 @@ export default function ActivityDialog({
     ActivityCategory | undefined
   >(undefined);
   const [value, setValue] = useState<number>(1);
-  const [duration, setDuration] = useState<string>('00:00:00'); // TODO input for duration
+  const [duration, setDuration] = useState<string>('00:00:00');
   const [date, setDate] = useState<string>(
     getDateInputFormatFromDate(new Date()),
   );
@@ -55,7 +55,7 @@ export default function ActivityDialog({
       setDuration('00:00:00');
       setDate(getDateInputFormatFromDate(new Date()));
     }
-  }, [activity]);
+  }, [activity, openActivityModal]);
 
   useEffect(() => {
     setSelectedCategory(selectedCategoryValue);
