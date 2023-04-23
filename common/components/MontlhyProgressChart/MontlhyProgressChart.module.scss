@@ -1,3 +1,9 @@
+@import '../../../styles/mixins.module';
+
+.container {
+  @include scrollbar();
+}
+
 .chart {
   display: flex;
   gap: 24px;
@@ -32,10 +38,13 @@
       border-radius: 24px;
       padding: 8px;
       min-height: 48px;
-
       line-height: 1;
       display: grid;
       place-items: center;
+
+      span {
+        white-space: nowrap;
+      }
     }
   }
 }

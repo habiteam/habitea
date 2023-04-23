@@ -78,7 +78,7 @@ export default function MontlhyProgressChart(props: MontlhyProgressChartProps) {
   return (
     <>
       {monthlyProgress.length > 0 && (
-        <div>
+        <div className={classNames(styles.container)}>
           <h2>Monthly progress</h2>
           <div className={classNames(styles.chart)}>
             {monthlyProgress.map((progress) => (
@@ -91,7 +91,7 @@ export default function MontlhyProgressChart(props: MontlhyProgressChartProps) {
                     className={classNames(styles.day__bar)}
                     style={{ height: `${Math.min(progress.value, 100)}%` }}
                   >
-                    <span> {progress.value.toFixed(0)} </span>
+                    <span> {progress.value.toFixed(0)} %</span>
                   </div>
                 </div>
               </div>
