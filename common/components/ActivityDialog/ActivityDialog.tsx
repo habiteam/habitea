@@ -4,6 +4,8 @@ import DateInput from '@commonComponents/DateInput/DateInput';
 import DurationInput from '@commonComponents/DurationInput/DurationInput';
 import FullscreenDialog from '@commonComponents/FullscreenDialog/FullscreenDialog';
 import Input from '@commonComponents/Input/Input';
+import Stopwatch from '@commonComponents/Stopwatch/Stopwatch';
+import Tabs from '@commonComponents/Tabs/Tabs';
 import CategorySelector from '@components/CategorySelector/CategorySelector';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
@@ -33,10 +35,11 @@ export default function ActivityDialog({
     ActivityCategory | undefined
   >(undefined);
   const [value, setValue] = useState<number>(1);
-  const [duration, setDuration] = useState<string>('00:00:00'); // TODO input for duration
+  const [duration, setDuration] = useState<string>('00:00:00');
   const [date, setDate] = useState<string>(
     getDateInputFormatFromDate(new Date()),
   );
+  const [currentTab, setCurrentTab] = useState('Stopwatch');
   const addNotification = useAddNotification();
   const setReloader = useSetAtom(activityReloader);
 
@@ -52,7 +55,7 @@ export default function ActivityDialog({
       setDuration('00:00:00');
       setDate(getDateInputFormatFromDate(new Date()));
     }
-  }, [activity]);
+  }, [activity, openActivityModal]);
 
   useEffect(() => {
     setSelectedCategory(selectedCategoryValue);
@@ -119,16 +122,16 @@ export default function ActivityDialog({
         ></CategorySelector>
 
         {selectedCategory && (
-          <div
-            style={{
-              marginTop: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-            }}
-          >
+          <div>
             {selectedCategory.unitType === 'QUANTITY' ? (
-              <>
+              <div
+                style={{
+                  marginTop: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                }}
+              >
                 <Input
                   title="Value"
                   id="value"
@@ -141,19 +144,59 @@ export default function ActivityDialog({
                 <span>
                   of {selectedCategory?.goalValue} {selectedCategory?.unit}
                 </span>
-              </>
+              </div>
             ) : (
-              <>
-                <DurationInput
-                  id="duration"
-                  name="duration"
-                  title="Duration"
-                  value={duration}
-                  style={{ width: '200px' }}
-                  onChange={(e) => setDuration(e.target.value)}
-                ></DurationInput>
-                <span>of {selectedCategory?.duration}</span>
-              </>
+              <div
+                style={{
+                  marginTop: '16px',
+                }}
+              >
+                <Tabs
+                  tabs={[
+                    { key: 'Stopwatch', title: 'Stopwatch' },
+                    { key: 'Manual', title: 'Manual' },
+                  ]}
+                  activeTab={currentTab}
+                  setActiveTab={(key: string): void => {
+                    setCurrentTab(key);
+                  }}
+                ></Tabs>
+
+                {currentTab === 'Stopwatch' ? (
+                  <div
+                    style={{
+                      marginTop: '16px',
+                      maxWidth: '400px',
+                    }}
+                  >
+                    <Stopwatch
+                      value={duration}
+                      onChange={(stopwatchValue: string) => {
+                        setDuration(stopwatchValue);
+                      }}
+                    ></Stopwatch>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      marginTop: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                    }}
+                  >
+                    <DurationInput
+                      id="duration"
+                      name="duration"
+                      title="Duration"
+                      value={duration}
+                      style={{ width: '200px' }}
+                      onChange={(e) => setDuration(e.target.value)}
+                    ></DurationInput>
+                    <span>of {selectedCategory?.duration}</span>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         )}
