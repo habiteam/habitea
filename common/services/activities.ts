@@ -17,6 +17,7 @@ import {
   getDoc,
   getDocs,
   orderBy,
+  OrderByDirection,
   query,
   setDoc,
   Timestamp,
@@ -139,6 +140,31 @@ export class ActivitiesService {
       orderBy('activityDate', 'desc'),
     );
 
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((response) =>
+      Activity.fromFirestore(response),
+    );
+  }
+
+  static async getByCategoryForMonth(
+    category: ActivityCategory,
+    from: Date,
+    userId: string,
+    sort: OrderByDirection = 'desc',
+  ): Promise<Activity[]> {
+    const activitiesRef = collection(database, this.collectionName);
+    const categoryRef = doc(
+      database,
+      DatabaseCollection.ActivityCategories,
+      category.id,
+    );
+    const q = query(
+      activitiesRef,
+      where('createdBy', '==', userId),
+      where('categoryRef', '==', categoryRef),
+      ...getWheresForPeriod('MONTHLY', from),
+      orderBy('activityDate', sort),
+    );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
       Activity.fromFirestore(response),
