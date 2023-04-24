@@ -10,6 +10,10 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 ## Next
 
+### Added
+
+- monthly progress chart in catergory view
+
 ### Changed
 
 - updated the way activities are displayed in the timeline to be more compact
