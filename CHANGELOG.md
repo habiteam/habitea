@@ -13,6 +13,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 ### Added
 
 - monthly progress chart in catergory view
+- stopwatch for time-based activities
 
 ### Changed
 
