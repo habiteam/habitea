@@ -9,6 +9,11 @@ import { Days } from '@constants/dictionaries';
 import { getSecondsFromDuration } from '@utils/duration';
 import { activityReloader } from '@atoms/reloaders';
 import { useAddNotification } from '@utils/notifications';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  findIconDefinition,
+  IconName,
+} from '@fortawesome/fontawesome-svg-core';
 import styles from './Timeline.module.scss';
 
 interface DayCollection {
@@ -146,6 +151,10 @@ export default function Timeline() {
                     className={classNames(styles.activity, {
                       [styles['activity--bad']]:
                         activity.category?.goalType === 'MAX',
+                      [styles['activity--timed']]:
+                        activity.category?.unitType === 'TIME',
+                      [styles['activity--quantified']]:
+                        activity.category?.unitType !== 'TIME',
                     })}
                     style={{
                       top: `${((activityIndex * 48) % 240) + 48}px`,
@@ -163,7 +172,26 @@ export default function Timeline() {
                     key={activity.id}
                   >
                     <span style={{ position: 'sticky', left: '8px' }}>
-                      {activity.category?.name}
+                      {activity.category?.unitType === 'TIME' ? (
+                        <>
+                          <FontAwesomeIcon
+                            icon={findIconDefinition({
+                              prefix: 'fas',
+                              iconName: activity.category?.icon as IconName,
+                            })}
+                          ></FontAwesomeIcon>
+                          &nbsp;
+                          {activity.category?.name}
+                        </>
+                      ) : (
+                        <FontAwesomeIcon
+                          style={{ width: '100%' }}
+                          icon={findIconDefinition({
+                            prefix: 'fas',
+                            iconName: activity.category?.icon as IconName,
+                          })}
+                        ></FontAwesomeIcon>
+                      )}
                     </span>
                   </div>
                 ))}

@@ -4,11 +4,27 @@ All notable changes to this project will be documented in this file.
 
 This change log only documents changes that are relevant to the end user. Changes that are only relevant to developers are not documented here.
 
-Changes under the `Next` section reflect the unreleased changes that are currently in the `main` branch and will be released in the next version.
+Changes under the `Next` section reflect the unreleased changes that are currently in the `main` branch and are intended to be released in the next version.
 
 We **do not** use Semantic Versioning. In our scheme the third number is incremented for every release, while second number is incremented when we close a [milestone](https://github.com/habiteam/habitea/milestones). First number remains at 1, unless something crazy happens.
 
 ## Next
+
+### Added
+
+- monthly progress chart in catergory view
+- stopwatch for time-based activities
+
+### Changed
+
+- updated the way activities are displayed in the timeline to be more compact
+- made items in heatmap become highlighted while being viewed for better readability on mobile
+
+### Fixed
+
+- fixed category view main content section being misaligned on mobile
+
+## 1.0.6 - 2024-03-19
 
 ### Fixed
 

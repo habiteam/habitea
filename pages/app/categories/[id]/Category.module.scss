@@ -1,5 +1,6 @@
 @import '../../../../styles/colors.module.scss';
 @import '../../../../styles/mixins.module.scss';
+@import '../../../../styles/breakpoints.module.scss';
 
 .header {
   height: 80px;
@@ -57,8 +58,10 @@
 }
 
 .main {
-  padding: 16px 16px 16px 72px;
-
+  padding: 16px;
+  @media (min-width: $breakpoint-md) {
+    padding: 16px 16px 16px 72px;
+  }
   .info {
     .label {
       margin: 0px;
