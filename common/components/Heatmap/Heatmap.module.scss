@@ -27,6 +27,7 @@
 }
 .heatmap-container-container {
   @include scrollbar();
+  margin-bottom: 12px;
 }
 
 .item-wrapper {
