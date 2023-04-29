@@ -20,7 +20,7 @@ import { getActivityValue } from '@utils/activity-utils';
 import { useAddNotification } from '@utils/notifications';
 import getErrorMessage from '@utils/firebase-error';
 import { ActivityCategory } from '@schemas/activity-category';
-import Dropdown from '@commonComponents/Dropdown/DropdownMenu';
+import Dropdown from '@commonComponents/Dropdown/Dropdown';
 import styles from './Calendar.module.scss';
 
 export interface CalendarProps {
