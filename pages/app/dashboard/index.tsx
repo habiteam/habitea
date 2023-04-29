@@ -26,7 +26,7 @@ export default function Dashboard() {
     if (user) {
       const fetchData = async () => {
         // get categories
-        const categories = await ActivityCategoriesService.getActiveByUserId(
+        const categories = await ActivityCategoriesService.getByUserId(
           user?.uid as string,
         );
 
