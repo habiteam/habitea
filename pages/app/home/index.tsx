@@ -17,6 +17,7 @@ import { activityReloader } from '@atoms/reloaders';
 import { useAddNotification } from '@utils/notifications';
 import { activityAtom } from '@atoms/activity-dialog';
 import Button from '@commonComponents/Button/Button';
+import HabitSummary from '@components/HabitSummary/HabitSummary';
 import styles from './Home.module.scss';
 
 export default function Home() {
@@ -88,6 +89,9 @@ export default function Home() {
       </div>
 
       <div className={classNames(styles['blocks-container'])}>
+        <Block header="Your current progress">
+          <HabitSummary></HabitSummary>
+        </Block>
         <Block header={new Date().toISOString().split('T')[0]}>
           <Daily></Daily>
         </Block>
