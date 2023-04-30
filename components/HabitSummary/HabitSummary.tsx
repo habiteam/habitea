@@ -6,11 +6,8 @@ import {
   IconName,
 } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ActivityCategory } from '@schemas/activity-category';
 import { CategoryProgress } from '@schemas/category-progress';
-import { ActivitiesService } from '@services/activities';
 import { CategoryProgressService } from '@services/category-progress';
-import { getActivityValue } from '@utils/activity-utils';
 import { getCategoryGoalString } from '@utils/habits';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
@@ -53,7 +50,7 @@ export default function HabitSummary() {
     <div className={styles['container-container']}>
       <div className={styles.container}>
         {categoryProgresses &&
-          categoryProgresses.map((progress, index) => (
+          categoryProgresses.map((progress) => (
             <div
               key={progress.id}
               className={classNames(
