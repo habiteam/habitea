@@ -68,7 +68,7 @@ export default function Calendar(props: CalendarProps) {
       };
       fetchData();
     }
-  }, [currentDate]);
+  }, [currentDate, user, activityCategories]);
 
   // Group activities by day
   const activitiesByDay: Activity[][] = [];
