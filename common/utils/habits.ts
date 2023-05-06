@@ -4,6 +4,7 @@ import {
 } from '@constants/dictionaries';
 import { Activity } from '@schemas/activity';
 import { ActivityCategory } from '@schemas/activity-category';
+import { CategoryProgress } from '@schemas/category-progress';
 import {
   getDurationFromString,
   getSecondsFromDuration,
@@ -76,4 +77,14 @@ export function calculateProgress(
       : summariseActivities(activities ?? [], category?.unitType) /
         getSecondsFromDuration(category?.duration as string)) * 100
   );
+}
+
+export function getProgressValue(progress: CategoryProgress): string {
+  return progress.category.unitType === 'QUANTITY'
+    ? (100 * (progress.value / progress.category.goalValue)).toFixed(0)
+    : (
+        100 *
+        (getSecondsFromDuration(progress.duration) /
+          getSecondsFromDuration(progress.category.duration))
+      ).toFixed(0);
 }
