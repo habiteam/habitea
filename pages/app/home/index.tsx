@@ -92,7 +92,9 @@ export default function Home() {
         <Block header="Your current progress">
           <HabitSummary></HabitSummary>
         </Block>
-        <Block header={new Date().toISOString().split('T')[0]}>
+        <Block
+          header={`Activities today ${new Date().toISOString().split('T')[0]}`}
+        >
           <Daily></Daily>
         </Block>
         <Block header="Timeline">

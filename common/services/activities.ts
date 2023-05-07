@@ -48,6 +48,7 @@ export class ActivitiesService {
         // eslint-disable-next-line prefer-destructuring
         progress = response[0];
 
+        // update progress
         if (activity.id) {
           this.getById(activity.id).then((activityResponse) => {
             if (category.unitType === 'QUANTITY' && progress.value) {
@@ -79,6 +80,7 @@ export class ActivitiesService {
         };
       }
 
+      // check if goal is completed
       if (category.unitType === 'QUANTITY' && progress.value) {
         if (category.goalType === 'MIN') {
           progress.isGoalCompleted = progress.value >= category.goalValue;

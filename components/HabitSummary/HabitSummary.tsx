@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CategoryProgress } from '@schemas/category-progress';
 import { CategoryProgressService } from '@services/category-progress';
-import { getCategoryGoalString } from '@utils/habits';
+import { getCategoryGoalString, getProgressValue } from '@utils/habits';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
@@ -44,7 +44,7 @@ export default function HabitSummary() {
       }
     };
     fetchCategoryProgresses();
-  }, [reloader, user]);
+  }, [reloader, user, activityCategories]);
 
   return (
     <div className={styles['container-container']}>
@@ -58,12 +58,12 @@ export default function HabitSummary() {
                 {
                   [styles['item--bad']]:
                     progress.category.goalType === 'MAX' &&
-                    progress.value > progress.category.goalValue,
+                    !progress.isGoalCompleted,
                 },
                 {
                   [styles['item--good']]:
                     progress.category.goalType === 'MIN' &&
-                    progress.value >= progress.category.goalValue,
+                    progress.isGoalCompleted,
                 },
               )}
             >
@@ -85,11 +85,7 @@ export default function HabitSummary() {
                   width={48}
                 ></FontAwesomeIcon>
                 <div className={classNames(styles['activity-progress'])}>
-                  {(
-                    100 *
-                    (progress.value / progress.category.goalValue)
-                  ).toFixed(0)}
-                  %
+                  {getProgressValue(progress)}%
                 </div>
               </div>
             </div>
