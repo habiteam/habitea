@@ -22,6 +22,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 ### Fixed
 
 - fixed archived categories not appearing properly in calendar and journal
+- fixed activities not loading in calendar after refreshing page
 
 ## 1.0.7 - 2024-04-25
 
