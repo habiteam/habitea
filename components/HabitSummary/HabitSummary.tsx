@@ -47,8 +47,8 @@ export default function HabitSummary() {
   }, [reloader, user, activityCategories]);
 
   return (
-    <div className={styles['container-container']}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.summary}>
         {categoryProgresses &&
           categoryProgresses.map((progress) => (
             <div

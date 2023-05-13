@@ -5,6 +5,7 @@
   /* Width */
   ::-webkit-scrollbar {
     width: 8px;
+    height: 4px; // for horizontal scrollbar
   }
 
   /* Track */
@@ -37,4 +38,14 @@
   @media (min-width: $breakpoint-md) {
     padding-inline: 16px;
   }
+}
+
+@mixin activity-items() {
+  display: flex;
+  gap: 12px;
+  @media (min-width: $breakpoint-md) {
+    gap: 24px;
+  }
+  overflow: auto;
+  padding-block: 24px;
 }
