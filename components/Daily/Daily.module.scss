@@ -1,16 +1,9 @@
 @import '../../styles/mixins.module';
 
 .container {
-  display: flex;
-  justify-content: center;
+  @include scrollbar();
 }
 
 .dailies {
-  display: flex;
-  gap: 12px;
-  @media (min-width: $breakpoint-md) {
-    gap: 24px;
-  }
-  overflow: auto;
-  padding-block: 24px;
+  @include activity-items();
 }
