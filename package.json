@@ -1,6 +1,5 @@
 {
   "name": "habitea",
-  "version": "1.0.6",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -14,6 +14,11 @@ import {
   findIconDefinition,
   IconName,
 } from '@fortawesome/fontawesome-svg-core';
+import Dropdown from '@commonComponents/Dropdown/Dropdown';
+import { ActivityCategory } from '@schemas/activity-category';
+import { getActivityValue } from '@utils/activity-utils';
+import { getTimeFromDate } from '@utils/date';
+import { getDateStringFromTimestamp } from '@utils/time';
 import styles from './Timeline.module.scss';
 
 interface DayCollection {
@@ -29,6 +34,7 @@ export default function Timeline() {
   const reloader = useAtomValue(activityReloader);
   const addNotifcation = useAddNotification();
   const [currentTime, setCurrentTime] = useState<string>();
+  const [openActivity, setOpenActivity] = useState<string>('');
 
   function mapToDayCollection(activities: Activity[]): DayCollection[] {
     const activitiesWithCategory = activities.map((activity) => ({
@@ -148,6 +154,9 @@ export default function Timeline() {
                 {/* Activities */}
                 {day.activities.map((activity, activityIndex) => (
                   <div
+                    onClick={(): void => {
+                      setOpenActivity(activity.id);
+                    }}
                     className={classNames(styles.activity, {
                       [styles['activity--bad']]:
                         activity.category?.goalType === 'MAX',
@@ -171,6 +180,23 @@ export default function Timeline() {
                     }}
                     key={activity.id}
                   >
+                    <Dropdown
+                      isOpen={activity.id === openActivity}
+                      color="primary"
+                      onClose={(): void => {
+                        setOpenActivity('');
+                      }}
+                    >
+                      {activity.category?.name} -{' '}
+                      {getActivityValue(
+                        activity,
+                        activity.category as ActivityCategory,
+                      )}
+                      <br />
+                      {getDateStringFromTimestamp(activity.activityDate)}
+                      <br />
+                      {getTimeFromDate(activity.activityDate.toDate())}
+                    </Dropdown>
                     <span style={{ position: 'sticky', left: '8px' }}>
                       {activity.category?.unitType === 'TIME' ? (
                         <>

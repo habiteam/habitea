@@ -12,6 +12,22 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 ### Added
 
+- summary of each habit in Home view
+- added dropdowns to activities in timeline
+
+### Changed
+
+- adjusted monthly progress chart for better mobile experience
+
+### Fixed
+
+- fixed archived categories not appearing properly in calendar and journal
+- fixed activities not loading in calendar after refreshing page
+
+## 1.0.7 - 2024-04-25
+
+### Added
+
 - monthly progress chart in catergory view
 - stopwatch for time-based activities
 

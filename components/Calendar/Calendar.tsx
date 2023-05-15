@@ -20,7 +20,8 @@ import { getActivityValue } from '@utils/activity-utils';
 import { useAddNotification } from '@utils/notifications';
 import getErrorMessage from '@utils/firebase-error';
 import { ActivityCategory } from '@schemas/activity-category';
-import Dropdown from '@commonComponents/Dropdown/DropdownMenu';
+import Dropdown from '@commonComponents/Dropdown/Dropdown';
+import Dialog from '@commonComponents/Dialog/Dialog';
 import styles from './Calendar.module.scss';
 
 export interface CalendarProps {
@@ -32,7 +33,9 @@ export default function Calendar(props: CalendarProps) {
   const user = useAtomValue(userAtom);
   const [activities, setActivities] = useState<Activity[]>([]);
   const activityCategories = useAtomValue(categoriesAtom);
-  const [openActivity, setOpenActivity] = useState<string>('');
+  const [openedActivity, setOpenedActivity] = useState<Activity | null>(null);
+  const [isActivityDialogOpen, setIsActivityDialogOpen] =
+    useState<boolean>(false);
   const addNotifcation = useAddNotification();
 
   const loadPreviousMonth = () => {
@@ -68,7 +71,7 @@ export default function Calendar(props: CalendarProps) {
       };
       fetchData();
     }
-  }, [currentDate]);
+  }, [currentDate, user, activityCategories]);
 
   // Group activities by day
   const activitiesByDay: Activity[][] = [];
@@ -110,7 +113,8 @@ export default function Calendar(props: CalendarProps) {
             <React.Fragment key={activity.id}>
               <div
                 onClick={(): void => {
-                  setOpenActivity(activity.id);
+                  setOpenedActivity(activity);
+                  setIsActivityDialogOpen(true);
                 }}
                 className={classNames(styles['day-activity'], {
                   [styles['day-activity--good']]:
@@ -127,32 +131,6 @@ export default function Calendar(props: CalendarProps) {
                     })}
                   ></FontAwesomeIcon>
                 )}
-                <Dropdown
-                  isOpen={activity.id === openActivity}
-                  color="primary"
-                  onClose={(): void => {
-                    setOpenActivity('');
-                  }}
-                >
-                  {activity.category?.icon && (
-                    <FontAwesomeIcon
-                      icon={findIconDefinition({
-                        prefix: 'fas',
-                        iconName: activity.category?.icon,
-                      })}
-                      width={14}
-                    ></FontAwesomeIcon>
-                  )}
-                  {activity.category?.icon && <span>&nbsp;</span>}
-                  {getTimeFromDate(activity.activityDate.toDate())} - &nbsp;
-                  <span>
-                    {activity.category?.name}{' '}
-                    {getActivityValue(
-                      activity,
-                      activity.category as ActivityCategory,
-                    )}
-                  </span>
-                </Dropdown>
               </div>
             </React.Fragment>
           ))}
@@ -173,38 +151,77 @@ export default function Calendar(props: CalendarProps) {
   }
 
   return (
-    <div className={styles.calendar}>
-      <div className={styles.header}>
-        <div>
-          {Months[currentDate.getMonth()]}&nbsp;
-          {currentDate.getFullYear()}
+    <>
+      <div className={styles.calendar}>
+        <div className={styles.header}>
+          <div>
+            {Months[currentDate.getMonth()]}&nbsp;
+            {currentDate.getFullYear()}
+          </div>
+          <div className={styles.header__controls}>
+            <button
+              onClick={loadPreviousMonth}
+              className={styles.header__control}
+            >
+              &lt;
+            </button>
+            <button onClick={loadNextMonth} className={styles.header__control}>
+              &gt;
+            </button>
+          </div>
         </div>
-        <div className={styles.header__controls}>
-          <button
-            onClick={loadPreviousMonth}
-            className={styles.header__control}
-          >
-            &lt;
-          </button>
-          <button onClick={loadNextMonth} className={styles.header__control}>
-            &gt;
-          </button>
+        <div className={styles.body}>
+          <div className={styles.days}>
+            <div className={styles.weekday}>Mon</div>
+            <div className={styles.weekday}>Tue</div>
+            <div className={styles.weekday}>Wed</div>
+            <div className={styles.weekday}>Thu</div>
+            <div className={styles.weekday}>Fri</div>
+            <div className={styles.weekday}>Sat</div>
+            <div className={styles.weekday}>Sun</div>
+            {emptyDays.map((day) => day)}
+            {days.map((day) => day)}
+            {padDays.map((day) => day)}
+          </div>
         </div>
       </div>
-      <div className={styles.body}>
-        <div className={styles.days}>
-          <div className={styles.weekday}>Mon</div>
-          <div className={styles.weekday}>Tue</div>
-          <div className={styles.weekday}>Wed</div>
-          <div className={styles.weekday}>Thu</div>
-          <div className={styles.weekday}>Fri</div>
-          <div className={styles.weekday}>Sat</div>
-          <div className={styles.weekday}>Sun</div>
-          {emptyDays.map((day) => day)}
-          {days.map((day) => day)}
-          {padDays.map((day) => day)}
-        </div>
-      </div>
-    </div>
+
+      <Dialog
+        open={isActivityDialogOpen}
+        handleClose={(): void => {
+          setIsActivityDialogOpen(false);
+        }}
+      >
+        {openedActivity && (
+          <div className={classNames(styles['activity-dialog'])}>
+            <div className={classNames(styles['icon-container'])}>
+              {openedActivity?.category?.icon && (
+                <FontAwesomeIcon
+                  className={classNames(styles.icon)}
+                  icon={findIconDefinition({
+                    prefix: 'fas',
+                    iconName: openedActivity?.category?.icon,
+                  })}
+                  width={56}
+                ></FontAwesomeIcon>
+              )}
+            </div>
+
+            <div className={classNames(styles['info-container'])}>
+              <h2>{openedActivity?.category?.name}</h2>
+
+              <h3>{getTimeFromDate(openedActivity?.activityDate.toDate())}</h3>
+
+              <div>
+                {getActivityValue(
+                  openedActivity,
+                  openedActivity?.category as ActivityCategory,
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </Dialog>
+    </>
   );
 }

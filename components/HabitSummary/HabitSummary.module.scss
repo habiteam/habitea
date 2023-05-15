@@ -1,0 +1,54 @@
+@import '../../styles/mixins.module';
+
+.container {
+  @include scrollbar();
+}
+
+.summary {
+  @include activity-items();
+}
+
+.item {
+  padding: 10px 14px;
+  @media (min-width: $breakpoint-md) {
+    padding: 24px;
+  }
+  border-radius: 24px;
+  border: 1px solid var(--c-outline);
+  color: var(--c-secondary-text);
+  background-color: var(--c-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &--bad {
+    background-color: var(--c-bad);
+    border-color: var(--bad);
+  }
+
+  &--good {
+    background-color: var(--c-good);
+    border-color: var(--good);
+  }
+
+  .item-header {
+    .category-name {
+      font-size: 2rem;
+      display: block;
+    }
+  }
+
+  .item-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .activity-progress {
+      font-size: 2rem;
+    }
+  }
+
+  .item-icon {
+    font-size: 4.8rem;
+  }
+}
