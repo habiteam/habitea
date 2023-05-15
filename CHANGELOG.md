@@ -8,7 +8,7 @@ Changes under the `Next` section reflect the unreleased changes that are current
 
 We **do not** use Semantic Versioning. In our scheme the third number is incremented for every release, while second number is incremented when we close a [milestone](https://github.com/habiteam/habitea/milestones). First number remains at 1, unless something crazy happens.
 
-## Next
+## 1.0.8 - 2023-05-15
 
 ### Added
 
@@ -18,13 +18,14 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 ### Changed
 
 - adjusted monthly progress chart for better mobile experience
+- minor aesthetic adjustments in calendar
 
 ### Fixed
 
 - fixed archived categories not appearing properly in calendar and journal
 - fixed activities not loading in calendar after refreshing page
 
-## 1.0.7 - 2024-04-25
+## 1.0.7 - 2023-04-25
 
 ### Added
 
@@ -40,14 +41,14 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 
 - fixed category view main content section being misaligned on mobile
 
-## 1.0.6 - 2024-03-19
+## 1.0.6 - 2023-03-19
 
 ### Fixed
 
 - fixed leading zeros remaining in number inputs
 - fixed visual bugs in dashboard, like overflowing text and poorly aligned elements
 
-## 1.0.5 - 2024-03-10
+## 1.0.5 - 2023-03-10
 
 ### Added
 
@@ -58,7 +59,7 @@ We **do not** use Semantic Versioning. In our scheme the third number is increme
 - changed the way completed goals are colored in heatmap
 - minor aesthetic changes
 
-## 1.0.4 - 2024-02-24
+## 1.0.4 - 2023-02-24
 
 ### Changed
 
