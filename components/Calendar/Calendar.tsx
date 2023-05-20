@@ -20,7 +20,6 @@ import { getActivityValue } from '@utils/activity-utils';
 import { useAddNotification } from '@utils/notifications';
 import getErrorMessage from '@utils/firebase-error';
 import { ActivityCategory } from '@schemas/activity-category';
-import Dropdown from '@commonComponents/Dropdown/Dropdown';
 import Dialog from '@commonComponents/Dialog/Dialog';
 import styles from './Calendar.module.scss';
 
@@ -53,6 +52,7 @@ export default function Calendar(props: CalendarProps) {
           let fetchedActivities = await ActivitiesService.getForMonth(
             currentDate,
             user?.uid,
+            'asc',
           );
           // assign category to each activity
           fetchedActivities = fetchedActivities.map((activity) => ({

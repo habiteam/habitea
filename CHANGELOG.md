@@ -8,6 +8,12 @@ Changes under the `Next` section reflect the unreleased changes that are current
 
 We **do not** use Semantic Versioning. In our scheme the third number is incremented for every release, while second number is incremented when we close a [milestone](https://github.com/habiteam/habitea/milestones). First number remains at 1, unless something crazy happens.
 
+## Next
+
+### Changed
+
+- changed the order in which activities are displayed in calendar
+
 ## 1.0.8 - 2023-05-15
 
 ### Added

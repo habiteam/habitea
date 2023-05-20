@@ -66,11 +66,13 @@ export default function Timeline() {
   const fetchActivities = async () => {
     if (user && activityCategories) {
       try {
-        await ActivitiesService.getForLastSixDays(new Date(), user?.uid).then(
-          (response) => {
-            setDayCollection(mapToDayCollection(response));
-          },
-        );
+        await ActivitiesService.getForLastSixDays(
+          new Date(),
+          user?.uid,
+          'asc',
+        ).then((response) => {
+          setDayCollection(mapToDayCollection(response));
+        });
       } catch (error: any) {
         addNotifcation({ message: error.message, type: 'danger' });
       }

@@ -128,6 +128,7 @@ export class ActivitiesService {
   static async getByCategoryId(
     categoryId: string,
     userId: string,
+    sort: OrderByDirection = 'desc',
   ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const categoryRef = doc(
@@ -139,7 +140,7 @@ export class ActivitiesService {
       activitiesRef,
       where('createdBy', '==', userId),
       where('categoryRef', '==', categoryRef),
-      orderBy('activityDate', 'desc'),
+      orderBy('activityDate', sort),
     );
 
     const querySnapshot = await getDocs(q);
@@ -177,6 +178,7 @@ export class ActivitiesService {
     category: ActivityCategory,
     from: Date,
     userId: string,
+    sort: OrderByDirection = 'desc',
   ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const categoryRef = doc(
@@ -190,7 +192,7 @@ export class ActivitiesService {
       where('categoryRef', '==', categoryRef),
       where('activityDate', '>=', Timestamp.fromDate(getFirstDayOfYear(from))),
       where('activityDate', '<=', Timestamp.fromDate(getLastDayOfYear(from))),
-      orderBy('activityDate', 'desc'),
+      orderBy('activityDate', sort),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
@@ -202,6 +204,7 @@ export class ActivitiesService {
     category: ActivityCategory,
     from: Date,
     userId: string,
+    sort: OrderByDirection = 'desc',
   ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const categoryRef = doc(
@@ -214,7 +217,7 @@ export class ActivitiesService {
       where('createdBy', '==', userId),
       where('categoryRef', '==', categoryRef),
       ...getWheresForPeriod(category.repeatType, from),
-      orderBy('activityDate', 'desc'),
+      orderBy('activityDate', sort),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
@@ -222,13 +225,17 @@ export class ActivitiesService {
     );
   }
 
-  static async getForMonth(from: Date, userId: string): Promise<Activity[]> {
+  static async getForMonth(
+    from: Date,
+    userId: string,
+    sort: OrderByDirection = 'desc',
+  ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const q = query(
       activitiesRef,
       where('createdBy', '==', userId),
       ...getWheresForPeriod('MONTHLY', from),
-      orderBy('activityDate', 'desc'),
+      orderBy('activityDate', sort),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
@@ -236,13 +243,17 @@ export class ActivitiesService {
     );
   }
 
-  static async getForDate(from: Date, userId: string): Promise<Activity[]> {
+  static async getForDate(
+    from: Date,
+    userId: string,
+    sort: OrderByDirection = 'desc',
+  ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const q = query(
       activitiesRef,
       where('createdBy', '==', userId),
       ...getWheresForPeriod('DAILY', from),
-      orderBy('activityDate', 'asc'),
+      orderBy('activityDate', sort),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>
@@ -253,6 +264,7 @@ export class ActivitiesService {
   static async getForLastSixDays(
     from: Date,
     userId: string,
+    sort: OrderByDirection = 'desc',
   ): Promise<Activity[]> {
     const activitiesRef = collection(database, this.collectionName);
     const q = query(
@@ -264,7 +276,7 @@ export class ActivitiesService {
         '<=',
         Timestamp.fromDate(new Date(from.setHours(24, 0, 0))),
       ),
-      orderBy('activityDate', 'asc'),
+      orderBy('activityDate', sort),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((response) =>

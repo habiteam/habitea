@@ -22,7 +22,7 @@ export default function Daily() {
   const fetchActivities = async () => {
     if (user && activityCategories) {
       // fetch activities for today
-      await ActivitiesService.getForDate(new Date(), user?.uid)
+      await ActivitiesService.getForDate(new Date(), user?.uid, 'asc')
         .then((response) => {
           setActivities(
             response.map((activity) => {
