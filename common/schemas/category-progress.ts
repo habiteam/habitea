@@ -1,4 +1,8 @@
-import { DocumentReference, Timestamp } from 'firebase/firestore';
+import {
+  DocumentReference,
+  DocumentSnapshot,
+  Timestamp,
+} from 'firebase/firestore';
 import { ActivityCategory } from './activity-category';
 
 export class CategoryProgress {
@@ -38,17 +42,20 @@ export class CategoryProgress {
     this.createdBy = createdBy;
   }
 
-  static fromFirestore(snapshot: any): CategoryProgress {
+  static fromFirestore(snapshot: DocumentSnapshot): CategoryProgress {
     const data = snapshot.data();
-    return new CategoryProgress(
-      snapshot.id,
-      data.categoryRef,
-      data.category,
-      data.value,
-      data.duration,
-      data.activityDate,
-      data.isGoalCompleted,
-      data.createdBy,
-    );
+    if (data) {
+      return new CategoryProgress(
+        snapshot.id,
+        data.categoryRef,
+        data.category,
+        data.value,
+        data.duration,
+        data.activityDate,
+        data.isGoalCompleted,
+        data.createdBy,
+      );
+    }
+    throw new Error('Category Progress not found');
   }
 }

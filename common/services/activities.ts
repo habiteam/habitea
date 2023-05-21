@@ -8,6 +8,7 @@ import {
   getSixDaysAgo,
 } from '@utils/date';
 import { getSecondsFromDuration, toDurationString } from '@utils/duration';
+import { checkIfGoalCompleted } from '@utils/habits';
 import { getWheresForPeriod } from '@utils/time';
 import { generateUUID } from '@utils/uuid';
 import {
@@ -29,6 +30,13 @@ import { auth, database } from './firebase';
 export class ActivitiesService {
   static readonly collectionName = DatabaseCollection.Activities;
 
+  /**
+   * TODO: When changing category, update progress of old category
+   *
+   * @param activity
+   * @param category
+   * @returns
+   */
   static async update(
     activity: Partial<Activity>,
     category: ActivityCategory,
@@ -37,19 +45,17 @@ export class ActivitiesService {
       database,
       `${DatabaseCollection.ActivityCategories}/${category.id}`,
     );
-
+    // update category progress
     CategoryProgressService.getByCategoryForPeriod(
       category,
       activity.activityDate?.toDate() ?? new Date(),
     ).then((response) => {
       let progress: Partial<CategoryProgress> = {};
-
       if (response.length > 0) {
-        // eslint-disable-next-line prefer-destructuring
         progress = response[0];
-
-        // update progress
+        // update progress record if exists
         if (activity.id) {
+          // when editing activity, we need to subtract the previous value
           this.getById(activity.id).then((activityResponse) => {
             if (category.unitType === 'QUANTITY' && progress.value) {
               progress.value +=
@@ -71,6 +77,7 @@ export class ActivitiesService {
           );
         }
       } else {
+        // create new progress record if not exists
         progress = {
           categoryRef,
           category,
@@ -81,27 +88,12 @@ export class ActivitiesService {
       }
 
       // check if goal is completed
-      if (category.unitType === 'QUANTITY' && progress.value) {
-        if (category.goalType === 'MIN') {
-          progress.isGoalCompleted = progress.value >= category.goalValue;
-        } else if (category.goalType === 'MAX') {
-          progress.isGoalCompleted = progress.value <= category.goalValue;
-        }
-      } else if (category.unitType === 'TIME' && progress.duration) {
-        if (category.goalType === 'MIN') {
-          progress.isGoalCompleted =
-            getSecondsFromDuration(progress.duration) >=
-            getSecondsFromDuration(category.duration);
-        } else if (category.goalType === 'MAX') {
-          progress.isGoalCompleted =
-            getSecondsFromDuration(progress.duration) <=
-            getSecondsFromDuration(category.duration);
-        }
-      }
-
+      progress.isGoalCompleted = checkIfGoalCompleted(category, progress);
+      // save progress
       CategoryProgressService.update(progress);
     });
 
+    // update activity
     return setDoc(
       doc(database, this.collectionName, activity.id ?? generateUUID()),
       {
@@ -116,7 +108,39 @@ export class ActivitiesService {
   }
 
   static async deleteById(id: string): Promise<void> {
-    return deleteDoc(doc(database, this.collectionName, id));
+    // update category progress
+    const activity = await this.getById(id);
+    // delete activity after getting it so we can get the category and update the progress
+    deleteDoc(doc(database, this.collectionName, id));
+    const categorySnapshot = await getDoc(
+      doc(
+        database,
+        DatabaseCollection.ActivityCategories,
+        activity.categoryRef.id,
+      ),
+    );
+    const category = ActivityCategory.fromFirestore(categorySnapshot);
+    if (!category) return;
+    const response = await CategoryProgressService.getByCategoryForPeriod(
+      category,
+      activity.activityDate?.toDate() ?? new Date(),
+    );
+    let progress: Partial<CategoryProgress> = {};
+    if (response.length > 0) {
+      progress = response[0];
+      if (category.unitType === 'QUANTITY' && progress.value) {
+        progress.value -= activity.value as number;
+      } else if (category.unitType === 'TIME' && progress.duration) {
+        progress.duration = toDurationString(
+          getSecondsFromDuration(progress.duration) -
+            getSecondsFromDuration(activity.duration as string),
+        );
+      }
+      // check if goal is completed
+      progress.isGoalCompleted = checkIfGoalCompleted(category, progress);
+      // save progress
+      CategoryProgressService.update(progress);
+    }
   }
 
   static async getById(id: string): Promise<Activity> {

@@ -5,7 +5,7 @@ import {
   ActivityUnitType,
 } from '@constants/dictionaries';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-import { Timestamp } from 'firebase/firestore';
+import { DocumentData, DocumentSnapshot, Timestamp } from 'firebase/firestore';
 
 export class ActivityCategory {
   id: string;
@@ -68,24 +68,27 @@ export class ActivityCategory {
     this.pinned = pinned;
   }
 
-  static fromFirestore(snapshot: any): ActivityCategory {
+  static fromFirestore(snapshot: DocumentSnapshot): ActivityCategory {
     const data = snapshot.data();
-    return new ActivityCategory(
-      snapshot.id,
-      data.name,
-      data.icon,
-      data.description,
-      data.status,
-      data.goalValue,
-      data.goalType,
-      data.repeatType,
-      data.unit,
-      data.unitType,
-      data.duration,
-      data.createdDate,
-      data.createdBy,
-      data.pinned,
-    );
+    if (data) {
+      return new ActivityCategory(
+        snapshot.id,
+        data.name,
+        data.icon,
+        data.description,
+        data.status,
+        data.goalValue,
+        data.goalType,
+        data.repeatType,
+        data.unit,
+        data.unitType,
+        data.duration,
+        data.createdDate,
+        data.createdBy,
+        data.pinned,
+      );
+    }
+    throw new Error('Activity category not found');
   }
 }
 
