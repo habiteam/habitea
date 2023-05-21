@@ -108,9 +108,8 @@ export class ActivitiesService {
   }
 
   static async deleteById(id: string): Promise<void> {
-    // update category progress
     const activity = await this.getById(id);
-    // delete activity after getting it so we can get the category and update the progress
+    // delete activity after getting it's data so we can get the category and update the progress
     deleteDoc(doc(database, this.collectionName, id));
     const categorySnapshot = await getDoc(
       doc(
