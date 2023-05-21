@@ -5,7 +5,7 @@ import {
   ActivityUnitType,
 } from '@constants/dictionaries';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-import { DocumentData, DocumentSnapshot, Timestamp } from 'firebase/firestore';
+import { DocumentSnapshot, Timestamp } from 'firebase/firestore';
 
 export class ActivityCategory {
   id: string;
