@@ -88,3 +88,31 @@ export function getProgressValue(progress: CategoryProgress): string {
           getSecondsFromDuration(progress.category.duration))
       ).toFixed(0);
 }
+
+export function checkIfGoalCompleted(
+  category: ActivityCategory,
+  progress: Partial<CategoryProgress>,
+): boolean {
+  if (category.unitType === 'QUANTITY' && progress.value) {
+    if (category.goalType === 'MIN') {
+      return progress.value >= category.goalValue;
+    }
+    if (category.goalType === 'MAX') {
+      return progress.value <= category.goalValue;
+    }
+  } else if (category.unitType === 'TIME' && progress.duration) {
+    if (category.goalType === 'MIN') {
+      return (
+        getSecondsFromDuration(progress.duration) >=
+        getSecondsFromDuration(category.duration)
+      );
+    }
+    if (category.goalType === 'MAX') {
+      return (
+        getSecondsFromDuration(progress.duration) <=
+        getSecondsFromDuration(category.duration)
+      );
+    }
+  }
+  throw new Error('Error while checking if goal is completed');
+}

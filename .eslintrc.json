@@ -12,6 +12,7 @@
     "@typescript-eslint/no-unused-vars": "warn",
     "class-methods-use-this": "warn",
     "import/prefer-default-export": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "prefer-destructuring": "off"
   }
 }
